@@ -138,3 +138,4 @@ test("cryptography engine and algorithms verification", async (t) => {
     assert.equal(bf.find(c => c.decrypted.includes("HELLO"))?.shift, 3);
   });
 });
+
