@@ -455,7 +455,7 @@ export default function NativePage() {
       {"\n\n        "}
       <div className={"text-center mt-10 pt-8 border-t"}>
         {"\n            "}
-        <a href={"/algorithms/calculator/code"} className={"inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-10 rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 text-xl"}>
+        <a href={"/algorithms/calculator/code/"} className={"inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-10 rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 text-xl"}>
           {t("legacy.52503378a34cbc4e")}
         </a>
         {"\n            "}

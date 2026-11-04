@@ -1,11 +1,23 @@
 "use client";
 
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import katex from "katex";
 import renderMathInElement from "katex/contrib/auto-render";
 import { controllerLoaders } from "@/content/controllers";
 
 type LegacyScript = { src: string; code: string };
+
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
+function prefixUrl(url: string) {
+  if (!url) return url;
+  if (url.startsWith("http://") || url.startsWith("https://") || url.startsWith("//")) return url;
+  if (basePath && url.startsWith("/") && !url.startsWith(basePath)) {
+    return `${basePath}${url}`;
+  }
+  return url;
+}
 
 function autoRenderMath(root?: HTMLElement | null) {
   const target = root || document.querySelector<HTMLElement>(".native-page-content") || document.body;
@@ -27,6 +39,8 @@ function autoRenderMath(root?: HTMLElement | null) {
 }
 
 export function NativePageEffects({ children, scripts, stylesheets }: { children: React.ReactNode; scripts: LegacyScript[]; stylesheets: string[] }) {
+  const router = useRouter();
+
   useEffect(() => {
     (window as unknown as Window & { katex: typeof katex; renderMath: typeof autoRenderMath }).katex = katex;
     (window as unknown as Window & { katex: typeof katex; renderMath: typeof autoRenderMath }).renderMath = autoRenderMath;
@@ -34,7 +48,7 @@ export function NativePageEffects({ children, scripts, stylesheets }: { children
     const addedStyles = stylesheets.map((href) => {
       const link = document.createElement("link");
       link.rel = "stylesheet";
-      link.href = href;
+      link.href = prefixUrl(href);
       link.dataset.legacyStyle = "true";
       document.head.appendChild(link);
       return link;
@@ -46,14 +60,19 @@ export function NativePageEffects({ children, scripts, stylesheets }: { children
     const runScripts = async () => {
       for (const item of scripts) {
         if (cancelled) return;
-        if (item.src.startsWith("/legacy/assets/js/")) {
-          const name = item.src.split("/").pop() ?? "";
+        const rawSrc = item.src;
+        const normalizedSrc = (basePath && rawSrc.startsWith(basePath))
+          ? rawSrc.slice(basePath.length)
+          : rawSrc;
+
+        if (normalizedSrc.startsWith("/legacy/assets/js/")) {
+          const name = normalizedSrc.split("/").pop() ?? "";
           await controllerLoaders[name]?.();
           continue;
         }
         const script = document.createElement("script");
         if (item.src) {
-          script.src = item.src;
+          script.src = prefixUrl(item.src);
           script.async = false;
           await new Promise<void>((resolve) => {
             script.onload = () => resolve();
@@ -85,6 +104,16 @@ export function NativePageEffects({ children, scripts, stylesheets }: { children
       // Initial Math Rendering
       autoRenderMath();
 
+      // Ensure all anchor tags inside native-page-content respect basePath
+      document.querySelectorAll<HTMLAnchorElement>(".native-page-content a[href]").forEach((anchor) => {
+        const href = anchor.getAttribute("href");
+        if (href && href.startsWith("/") && !href.startsWith("//")) {
+          if (basePath && !href.startsWith(basePath)) {
+            anchor.setAttribute("href", `${basePath}${href}`);
+          }
+        }
+      });
+
       // Observe dynamic changes for LaTeX formulas
       const contentEl = document.querySelector<HTMLElement>(".native-page-content");
       if (contentEl) {
@@ -109,13 +138,42 @@ export function NativePageEffects({ children, scripts, stylesheets }: { children
       }
     };
     void runScripts();
+
+    const handleAnchorClick = (e: MouseEvent) => {
+      const target = (e.target as HTMLElement).closest("a");
+      if (!target) return;
+      const href = target.getAttribute("href");
+      if (!href) return;
+      if (
+        href.startsWith("http://") ||
+        href.startsWith("https://") ||
+        href.startsWith("//") ||
+        href.startsWith("#") ||
+        target.target === "_blank" ||
+        e.ctrlKey || e.metaKey || e.shiftKey || e.altKey
+      ) {
+        return;
+      }
+      if (href.startsWith("/")) {
+        e.preventDefault();
+        const route = basePath && href.startsWith(basePath)
+          ? href.slice(basePath.length) || "/"
+          : href;
+        router.push(route);
+      }
+    };
+
+    const container = document.querySelector<HTMLElement>(".native-page-content");
+    container?.addEventListener("click", handleAnchorClick);
+
     return () => {
       cancelled = true;
       if (observer) observer.disconnect();
+      container?.removeEventListener("click", handleAnchorClick);
       addedStyles.forEach((link) => link.remove());
-      document.querySelectorAll('script[src^="/legacy/assets/"]').forEach((script) => script.remove());
+      document.querySelectorAll('script[src*="/legacy/assets/"]').forEach((script) => script.remove());
     };
-  }, [scripts, stylesheets]);
+  }, [scripts, stylesheets, router]);
 
   return <div className="native-page-content">{children}</div>;
 }

@@ -221,7 +221,7 @@ export function CourseSidebar({
       {/* Cryptography Special Lab Banner Card */}
       <div className="my-3 px-1">
         <Link
-          href="/cryptography"
+          href="/cryptography/"
           onClick={onCloseMobileDrawer}
           className="group block p-2.5 rounded-xl border border-sky-500/20 bg-gradient-to-r from-sky-500/10 via-indigo-500/10 to-transparent hover:border-sky-500/40 hover:from-sky-500/15 hover:via-indigo-500/15 transition-all text-decoration-none"
         >
@@ -314,7 +314,7 @@ export function CourseSidebar({
                       return (
                         <div key={item.slug} className="sidebar-item-wrapper">
                           <Link
-                            href={`/algorithms/${item.slug}`}
+                            href={`/algorithms/${item.slug}/`}
                             onClick={onCloseMobileDrawer}
                             className={`sidebar-item-link ${isActive ? "sidebar-item-active" : ""}`}
                             aria-current={isActive ? "page" : undefined}
@@ -346,7 +346,7 @@ export function CourseSidebar({
                                 return (
                                   <Link
                                     key={sub.kind}
-                                    href={`/algorithms/${item.slug}${sub.suffix}`}
+                                    href={`/algorithms/${item.slug}${sub.suffix ? `${sub.suffix}/` : "/"}`}
                                     onClick={onCloseMobileDrawer}
                                     className={`sidebar-subtab-link ${
                                       isSubActive ? "sidebar-subtab-active" : ""
@@ -380,7 +380,7 @@ export function CourseSidebar({
       <div className="sidebar-bottom-bar">
         <div className="flex items-center justify-between text-[11px] text-[var(--muted)]">
           <Link
-            href="/algorithms"
+            href="/algorithms/"
             onClick={onCloseMobileDrawer}
             className="hover:text-[var(--indigo)] transition-colors font-medium"
           >

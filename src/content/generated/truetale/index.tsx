@@ -806,7 +806,7 @@ export default function NativePage() {
       {"\n\n    "}
       <div className={"text-center mt-10 mb-4"}>
         {"\n        "}
-        <a href={"/algorithms/truetale/simulation"} className={"inline-block px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-lg rounded-xl shadow-lg transition duration-200"}>
+        <a href={"/algorithms/truetale/simulation/"} className={"inline-block px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-lg rounded-xl shadow-lg transition duration-200"}>
           {"\n            "}
           <svg xmlns={"http://www.w3.org/2000/svg"} className={"h-6 w-6 inline ml-2 mb-1"} fill={"none"} viewBox={"0 0 24 24"} stroke={"currentColor"}>
             {"\n                "}

@@ -51,7 +51,7 @@ export function SiteShell({
             {algorithms.map((item) => (
               <Link
                 key={item.slug}
-                href={`/algorithms/${item.slug}`}
+                href={`/algorithms/${item.slug}/`}
                 aria-current={item.slug === algorithm.slug ? "page" : undefined}
               >
                 {en ? item.english : item.title}
@@ -95,9 +95,9 @@ export function SiteShell({
           <nav className="breadcrumbs" aria-label={en ? "Breadcrumb" : "مسار الصفحة"}>
             <Link href="/">{en ? "Home" : "الرئيسية"}</Link>
             <span aria-hidden="true">/</span>
-            <Link href="/algorithms">{en ? "Library" : "المكتبة"}</Link>
+            <Link href="/algorithms/">{en ? "Library" : "المكتبة"}</Link>
             <span aria-hidden="true">/</span>
-            <Link href={`/algorithms/${algorithm.slug}`}>
+            <Link href={`/algorithms/${algorithm.slug}/`}>
               {en ? algorithm.english : algorithm.title}
             </Link>
             <span aria-hidden="true">/</span>
@@ -122,7 +122,7 @@ export function SiteShell({
             ).map(([label, suffix]) => (
               <Link
                 key={label}
-                href={`/algorithms/${algorithm.slug}${suffix}`}
+                href={`/algorithms/${algorithm.slug}${suffix ? `${suffix}/` : "/"}`}
                 aria-current={pageKind === label ? "page" : undefined}
               >
                 <SiteIcon

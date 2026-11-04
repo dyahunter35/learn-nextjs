@@ -5,6 +5,7 @@ import { useLanguage } from "@/components/LanguageProvider";
 export function DeveloperCard() {
   const { language } = useLanguage();
   const en = language === "en";
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
   return (
     <section id="developer" className="developer-section" aria-label={en ? "Project Developer" : "مطور المشروع"}>
@@ -28,13 +29,13 @@ export function DeveloperCard() {
           <div className="shrink-0">
             <div className="relative">
               <img
-                src="/images/deyaa.png"
+                src={`${basePath}/images/deyaa.png`}
                 alt={en ? "Deyaa Albushra Mohamed" : "صورة المطور ضياء البشرى محمد"}
                 className="w-32 h-32 md:w-40 md:h-40 rounded-2xl object-cover object-top shadow-md border-4 border-[var(--surface)] ring-1 ring-[var(--line)]"
                 onError={(e) => {
                   const target = e.currentTarget;
                   if (target.src.indexOf("/image/") === -1) {
-                    target.src = "/image/deyaa.png";
+                    target.src = `${basePath}/image/deyaa.png`;
                   }
                 }}
               />

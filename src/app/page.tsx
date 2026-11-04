@@ -30,8 +30,8 @@ export default function HomePage() {
               <p>{en ? "Learn algorithms and data structures through clear explanations, interactive simulations, and code examples." : "تعلّم الخوارزميات وهياكل البيانات من خلال شرح واضح، محاكاة تفاعلية، وأمثلة كود تقدر ترجع لها في أي وقت."}</p>
               <div className="hero-actions">
                 <Link className="button-primary" href="#library">{en ? "Start learning" : "ابدأ التعلّم"} <span aria-hidden="true">←</span></Link>
-                <Link className="button-secondary" href="/algorithms">{en ? "Browse all topics" : "استعرض كل الموضوعات"}</Link>
-                <Link className="button-secondary border-sky-500/50 text-sky-400 bg-slate-900/40 hover:bg-slate-800" href="/cryptography">
+                <Link className="button-secondary" href="/algorithms/">{en ? "Browse all topics" : "استعرض كل الموضوعات"}</Link>
+                <Link className="button-secondary border-sky-500/50 text-sky-400 bg-slate-900/40 hover:bg-slate-800" href="/cryptography/">
                   {en ? "🔐 Cryptography Lab" : "🔐 مختبر التشفير ومسرح التاريخ"}
                 </Link>
               </div>

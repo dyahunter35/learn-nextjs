@@ -360,7 +360,7 @@ export default function NativePage() {
       {"\n\n        "}
       <div className={"text-center mt-8"}>
         {"\n            "}
-        <a href={"/algorithms/sorting/simulation"} className={"inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-10 rounded-xl text-xl shadow-lg transition duration-150 transform hover:scale-105"}>
+        <a href={"/algorithms/sorting/simulation/"} className={"inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-10 rounded-xl text-xl shadow-lg transition duration-150 transform hover:scale-105"}>
           {"\n                "}
           <svg xmlns={"http://www.w3.org/2000/svg"} className={"h-6 w-6 inline ml-2"} fill={"none"} viewBox={"0 0 24 24"} stroke={"currentColor"}>
             {"\n                    "}

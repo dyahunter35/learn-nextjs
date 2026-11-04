@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Algorithm } from "@/data/algorithms";
 import { useLanguage } from "@/components/LanguageProvider";
 
@@ -16,9 +17,9 @@ export function AlgorithmCard({ algorithm }: { algorithm: Algorithm }) {
       </div>
       <p>{summary}</p>
       <div className="card-links" aria-label={en ? `${algorithm.english} pages` : `صفحات ${algorithm.title}`}>
-        <a className="mini-link" href={`/algorithms/${algorithm.slug}`}>{en ? "Overview" : "الشرح"}</a>
-        <a className="mini-link" href={`/algorithms/${algorithm.slug}/simulation`}>{en ? "Try simulation" : "جرّب المحاكاة"}</a>
-        <a className="mini-link" href={`/algorithms/${algorithm.slug}/code`}>{en ? "Code" : "الكود"}</a>
+        <Link className="mini-link" href={`/algorithms/${algorithm.slug}/`}>{en ? "Overview" : "الشرح"}</Link>
+        <Link className="mini-link" href={`/algorithms/${algorithm.slug}/simulation/`}>{en ? "Try simulation" : "جرّب المحاكاة"}</Link>
+        <Link className="mini-link" href={`/algorithms/${algorithm.slug}/code/`}>{en ? "Code" : "الكود"}</Link>
       </div>
     </article>
   );

@@ -172,7 +172,7 @@ export default function NativePage() {
               {t("legacy.5f003ecf022404f0")}
             </p>
             {"\n          "}
-            <a href={"/algorithms/backtracking/simulation"} className={"inline-block mt-3 text-indigo-600 font-medium text-sm hover:text-indigo-800"}>
+            <a href={"/algorithms/backtracking/simulation/"} className={"inline-block mt-3 text-indigo-600 font-medium text-sm hover:text-indigo-800"}>
               {t("legacy.53baa6083f650bd0")}
             </a>
             {"\n        "}
@@ -382,7 +382,7 @@ export default function NativePage() {
       {"\n\n    "}
       <div className={"text-center my-10"}>
         {"\n      "}
-        <a href={"/algorithms/backtracking/simulation"} className={"inline-block gradient-head text-white px-8 py-4 rounded-xl text-lg font-bold shadow-lg hover:shadow-xl transition transform hover:-translate-y-0.5"}>
+        <a href={"/algorithms/backtracking/simulation/"} className={"inline-block gradient-head text-white px-8 py-4 rounded-xl text-lg font-bold shadow-lg hover:shadow-xl transition transform hover:-translate-y-0.5"}>
           {t("legacy.16ae75586b8a02f6")}
         </a>
         {"\n    "}

@@ -18,7 +18,7 @@ export function SiteHeader() {
         </Link>
         <nav className="primary-nav" aria-label="التنقل الرئيسي">
           <Link href="/">{en ? "Home" : "الرئيسية"}</Link>
-          <Link href="/algorithms">{en ? "Algorithm library" : "مكتبة الخوارزميات"}</Link>
+          <Link href="/algorithms/">{en ? "Algorithm library" : "مكتبة الخوارزميات"}</Link>
           <Link href="/#developer">{en ? "Developer" : "المطور"}</Link>
         </nav>
         <div className="header-actions">

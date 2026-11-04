@@ -2,7 +2,9 @@ import type { NextConfig } from "next";
 
 const isGithubActions = process.env.GITHUB_ACTIONS === "true";
 const repo = process.env.GITHUB_REPOSITORY ? process.env.GITHUB_REPOSITORY.split("/")[1] : "learn-nextjs";
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || (isGithubActions ? `/${repo}` : "");
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH !== undefined
+  ? process.env.NEXT_PUBLIC_BASE_PATH
+  : (isGithubActions ? `/${repo}` : "");
 
 const nextConfig: NextConfig = {
   output: "export",

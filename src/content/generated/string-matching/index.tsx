@@ -764,7 +764,7 @@ export default function NativePage() {
       {"\n\n        "}
       <div className={"text-center mt-12"}>
         {"\n            "}
-        <a href={"/algorithms/string-matching/simulation"} className={"inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-10 rounded-xl shadow-lg transition duration-300 transform hover:scale-105 text-xl"}>
+        <a href={"/algorithms/string-matching/simulation/"} className={"inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-10 rounded-xl shadow-lg transition duration-300 transform hover:scale-105 text-xl"}>
           {"\n                "}
           <svg xmlns={"http://www.w3.org/2000/svg"} className={"h-6 w-6 inline ml-2 mb-1"} fill={"none"} viewBox={"0 0 24 24"} stroke={"currentColor"}>
             {"\n                    "}

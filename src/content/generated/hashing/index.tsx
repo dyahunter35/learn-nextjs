@@ -233,7 +233,7 @@ export default function NativePage() {
       {"\n    "}
       <div className={"text-center py-8"}>
         {"\n      "}
-        <a href={"/algorithms/hashing/simulation"} className={"inline-flex items-center gap-2 bg-indigo-700 hover:bg-indigo-800 text-white font-bold px-8 py-4 rounded-xl shadow-lg transition-all transform hover:scale-105"}>
+        <a href={"/algorithms/hashing/simulation/"} className={"inline-flex items-center gap-2 bg-indigo-700 hover:bg-indigo-800 text-white font-bold px-8 py-4 rounded-xl shadow-lg transition-all transform hover:scale-105"}>
           {"\n        "}
           <svg className={"w-5 h-5"} fill={"none"} stroke={"currentColor"} viewBox={"0 0 24 24"}>
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"}></path>
@@ -242,7 +242,7 @@ export default function NativePage() {
           {t("legacy.7d91d62bef824acb")}
         </a>
         {"\n      "}
-        <a href={"/algorithms/hashing/code"} className={"inline-flex items-center gap-2 bg-indigo-700 hover:bg-indigo-800 text-white font-bold px-8 py-4 rounded-xl shadow-lg transition-all transform hover:scale-105"}>
+        <a href={"/algorithms/hashing/code/"} className={"inline-flex items-center gap-2 bg-indigo-700 hover:bg-indigo-800 text-white font-bold px-8 py-4 rounded-xl shadow-lg transition-all transform hover:scale-105"}>
           {"\n        "}
           <svg className={"w-5 h-5"} fill={"none"} stroke={"currentColor"} viewBox={"0 0 24 24"}>
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"}></path>

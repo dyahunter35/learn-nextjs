@@ -174,9 +174,9 @@ def page_html(slug, kind):
     html = re.sub(r"<footer\b[^>]*>[\s\S]*?</footer>", "", html, flags=re.I)
     html = re.sub(r"<script\b[^>]*>[\s\S]*?</script>", "", html, flags=re.I)
     html = re.sub(r"href=([\"'])(?:\.\./)+index\.html(?:\?[^\"']*)?\1", 'href="/"', html, flags=re.I)
-    html = re.sub(r"href=([\"'])(?:\.\./)*simulation\.html(?:\?[^\"']*)?\1", f'href="/algorithms/{slug}/simulation"', html, flags=re.I)
-    html = re.sub(r"href=([\"'])(?:\.\./)*code\.html(?:\?[^\"']*)?\1", f'href="/algorithms/{slug}/code"', html, flags=re.I)
-    html = re.sub(r"href=([\"'])(?:\.\./)*index\.html(?:\?[^\"']*)?\1", f'href="/algorithms/{slug}"', html, flags=re.I)
+    html = re.sub(r"href=([\"'])(?:\.\./)*simulation\.html(?:\?[^\"']*)?\1", f'href="/algorithms/{slug}/simulation/"', html, flags=re.I)
+    html = re.sub(r"href=([\"'])(?:\.\./)*code\.html(?:\?[^\"']*)?\1", f'href="/algorithms/{slug}/code/"', html, flags=re.I)
+    html = re.sub(r"href=([\"'])(?:\.\./)*index\.html(?:\?[^\"']*)?\1", f'href="/algorithms/{slug}/"', html, flags=re.I)
     parser = TreeParser()
     parser.feed(html)
     return body_class, parser.root["children"]
