@@ -116,8 +116,18 @@ export default function NativePage() {
         <div className={"bg-indigo-50 p-5 rounded-lg shadow-md mb-6 concept-card border-indigo-400"}>
           {"\n                "}
           <h3 className={"text-xl font-semibold text-indigo-800 mb-3"}>
-            {t("legacy.f06ee310f4d98120")}
+            {t("legacy.9b7f78d8badfc7e9")}
           </h3>
+          {"\n                "}
+          <p className={"text-gray-700 text-sm mb-3"}>
+            {t("legacy.736f0aca4db96e9f")}
+          </p>
+          {"\n                "}
+          <div className={"bg-white p-3 rounded-lg border border-indigo-200 text-center font-bold text-indigo-800 text-lg mb-3 overflow-x-auto"} dir={"ltr"}>
+            {"\n                    $$ \\text{if } \\text{dist}[u] + w(u, v) "}
+            {"<"}
+            {" \\text{dist}[v] \\implies \\text{dist}[v] = \\text{dist}[u] + w(u, v) $$\n                "}
+          </div>
           {"\n                "}
           <ol className={"list-decimal list-inside text-gray-700 space-y-2"}>
             {"\n                    "}
@@ -126,15 +136,11 @@ export default function NativePage() {
               <strong>
                 {t("legacy.376fd01c0f2aacc6")}
               </strong>
-              {t("legacy.010837c91f6b7bf5")}
-              <strong>
-                {t("legacy.97e705f0a77800ab")}
-              </strong>
-              {"."}
+              {t("legacy.e35de40fd0e35d30")}
             </li>
             {"\n                    "}
             <li>
-              {t("legacy.a60e953f8a95221f")}
+              {t("legacy.c030762fad2f858f")}
             </li>
             {"\n                    "}
             <li>
@@ -142,7 +148,7 @@ export default function NativePage() {
               <strong>
                 {t("legacy.3c30b913c5c4b58a")}
               </strong>
-              {t("legacy.28d23d6dbd986460")}
+              {t("legacy.cf7501dd49fa7734")}
             </li>
             {"\n                    "}
             <li>
@@ -150,11 +156,7 @@ export default function NativePage() {
             </li>
             {"\n                    "}
             <li>
-              {t("legacy.aef0405e69686c5b")}
-              <strong>
-                {t("legacy.9bab402084d6f661")}
-              </strong>
-              {t("legacy.74d2f8dbf059ec88")}
+              {t("legacy.a594d788d9910e3c")}
             </li>
             {"\n                    "}
             <li>
@@ -175,13 +177,12 @@ export default function NativePage() {
             {t("legacy.1b29b192688f3da3")}
           </h3>
           {"\n                "}
-          <p className={"text-gray-700"}>
-            {t("legacy.4886c729fd8190d7")}
-            <span className={"font-mono ltr-text bg-gray-200 p-1 rounded"}>
-              {"O((V + E) log V)"}
-            </span>
-            <br />
-            {t("legacy.e1654fc8a42e54a7")}
+          <div className={"text-xl text-center text-green-800 my-2"} dir={"ltr"}>
+            {"\n                    $$ O((|V| + |E|) \\log |V|) $$\n                "}
+          </div>
+          {"\n                "}
+          <p className={"text-gray-700 text-sm text-center"}>
+            {t("legacy.649ac68807c3a7f5")}
           </p>
           {"\n            "}
         </div>
@@ -236,75 +237,75 @@ export default function NativePage() {
               {"\n                        "}
               <line x1={"140"} y1={"160"} x2={"290"} y2={"220"} stroke={"#d1d5db"} strokeWidth={"2"}></line>
               {"\n\n                        "}
-              <text x={"210"} y={"38"} fill={"#374151"} fontSize={"11"} font-weight={"bold"} textAnchor={"middle"}>
+              <text x={"210"} y={"38"} fill={"#374151"} fontSize={"11"} fontWeight={"bold"} textAnchor={"middle"}>
                 {"4"}
               </text>
               {"\n                        "}
-              <text x={"110"} y={"38"} fill={"#374151"} fontSize={"11"} font-weight={"bold"} textAnchor={"middle"}>
+              <text x={"110"} y={"38"} fill={"#374151"} fontSize={"11"} fontWeight={"bold"} textAnchor={"middle"}>
                 {"2"}
               </text>
               {"\n                        "}
-              <text x={"160"} y={"68"} fill={"#374151"} fontSize={"11"} font-weight={"bold"} textAnchor={"middle"}>
+              <text x={"160"} y={"68"} fill={"#374151"} fontSize={"11"} fontWeight={"bold"} textAnchor={"middle"}>
                 {"1"}
               </text>
               {"\n                        "}
-              <text x={"45"} y={"125"} fill={"#374151"} fontSize={"11"} font-weight={"bold"} textAnchor={"middle"}>
+              <text x={"45"} y={"125"} fill={"#374151"} fontSize={"11"} fontWeight={"bold"} textAnchor={"middle"}>
                 {"5"}
               </text>
               {"\n                        "}
-              <text x={"260"} y={"68"} fill={"#374151"} fontSize={"11"} font-weight={"bold"} textAnchor={"middle"}>
+              <text x={"260"} y={"68"} fill={"#374151"} fontSize={"11"} fontWeight={"bold"} textAnchor={"middle"}>
                 {"8"}
               </text>
               {"\n                        "}
-              <text x={"270"} y={"130"} fill={"#374151"} fontSize={"11"} font-weight={"bold"} textAnchor={"middle"}>
+              <text x={"270"} y={"130"} fill={"#374151"} fontSize={"11"} fontWeight={"bold"} textAnchor={"middle"}>
                 {"10"}
               </text>
               {"\n                        "}
-              <text x={"175"} y={"170"} fill={"#374151"} fontSize={"11"} font-weight={"bold"} textAnchor={"middle"}>
+              <text x={"175"} y={"170"} fill={"#374151"} fontSize={"11"} fontWeight={"bold"} textAnchor={"middle"}>
                 {"2"}
               </text>
               {"\n                        "}
-              <text x={"270"} y={"200"} fill={"#374151"} fontSize={"11"} font-weight={"bold"} textAnchor={"middle"}>
+              <text x={"270"} y={"200"} fill={"#374151"} fontSize={"11"} fontWeight={"bold"} textAnchor={"middle"}>
                 {"3"}
               </text>
               {"\n                        "}
-              <text x={"215"} y={"205"} fill={"#374151"} fontSize={"11"} font-weight={"bold"} textAnchor={"middle"}>
+              <text x={"215"} y={"205"} fill={"#374151"} fontSize={"11"} fontWeight={"bold"} textAnchor={"middle"}>
                 {"6"}
               </text>
               {"\n\n                        "}
               <circle cx={"160"} cy={"20"} r={"18"} fill={"#e5e7eb"} stroke={"#9ca3af"} strokeWidth={"2"}></circle>
               {"\n                        "}
-              <text x={"160"} y={"25"} textAnchor={"middle"} fill={"#1f2937"} fontSize={"14"} font-weight={"bold"}>
+              <text x={"160"} y={"25"} textAnchor={"middle"} fill={"#1f2937"} fontSize={"14"} fontWeight={"bold"}>
                 {"A"}
               </text>
               {"\n                        "}
               <circle cx={"60"} cy={"75"} r={"18"} fill={"#e5e7eb"} stroke={"#9ca3af"} strokeWidth={"2"}></circle>
               {"\n                        "}
-              <text x={"60"} y={"80"} textAnchor={"middle"} fill={"#1f2937"} fontSize={"14"} font-weight={"bold"}>
+              <text x={"60"} y={"80"} textAnchor={"middle"} fill={"#1f2937"} fontSize={"14"} fontWeight={"bold"}>
                 {"B"}
               </text>
               {"\n                        "}
               <circle cx={"260"} cy={"75"} r={"18"} fill={"#e5e7eb"} stroke={"#9ca3af"} strokeWidth={"2"}></circle>
               {"\n                        "}
-              <text x={"260"} y={"80"} textAnchor={"middle"} fill={"#1f2937"} fontSize={"14"} font-weight={"bold"}>
+              <text x={"260"} y={"80"} textAnchor={"middle"} fill={"#1f2937"} fontSize={"14"} fontWeight={"bold"}>
                 {"C"}
               </text>
               {"\n                        "}
               <circle cx={"140"} cy={"160"} r={"18"} fill={"#e5e7eb"} stroke={"#9ca3af"} strokeWidth={"2"}></circle>
               {"\n                        "}
-              <text x={"140"} y={"165"} textAnchor={"middle"} fill={"#1f2937"} fontSize={"14"} font-weight={"bold"}>
+              <text x={"140"} y={"165"} textAnchor={"middle"} fill={"#1f2937"} fontSize={"14"} fontWeight={"bold"}>
                 {"D"}
               </text>
               {"\n                        "}
               <circle cx={"240"} cy={"170"} r={"18"} fill={"#e5e7eb"} stroke={"#9ca3af"} strokeWidth={"2"}></circle>
               {"\n                        "}
-              <text x={"240"} y={"175"} textAnchor={"middle"} fill={"#1f2937"} fontSize={"14"} font-weight={"bold"}>
+              <text x={"240"} y={"175"} textAnchor={"middle"} fill={"#1f2937"} fontSize={"14"} fontWeight={"bold"}>
                 {"E"}
               </text>
               {"\n                        "}
               <circle cx={"290"} cy={"220"} r={"18"} fill={"#e5e7eb"} stroke={"#9ca3af"} strokeWidth={"2"}></circle>
               {"\n                        "}
-              <text x={"290"} y={"225"} textAnchor={"middle"} fill={"#1f2937"} fontSize={"14"} font-weight={"bold"}>
+              <text x={"290"} y={"225"} textAnchor={"middle"} fill={"#1f2937"} fontSize={"14"} fontWeight={"bold"}>
                 {"F"}
               </text>
               {"\n                    "}

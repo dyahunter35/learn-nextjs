@@ -32,6 +32,26 @@ class NativeMarkupTests(unittest.TestCase):
                     _, nodes = GENERATOR.page_html(folder.name, kind)
                     self.assert_valid_tables(nodes)
 
+    def test_all_textareas_use_default_value_without_children(self):
+        for tsx_file in (ROOT / "src/content/generated").rglob("*.tsx"):
+            if tsx_file.name == "index.tsx":
+                continue
+            content = tsx_file.read_text(encoding="utf-8")
+            if "<textarea" in content:
+                # Should not have children between <textarea...> and </textarea>
+                self.assertNotRegex(
+                    content,
+                    r"<textarea[^>]*>[ \t\r\n]*\{t\([^\)]+\)\}[ \t\r\n]*</textarea>",
+                    f"{tsx_file} must not have children inside <textarea>; use defaultValue prop instead."
+                )
+
+    def test_all_options_do_not_use_selected_prop(self):
+        for tsx_file in (ROOT / "src/content/generated").rglob("*.tsx"):
+            if tsx_file.name == "index.tsx":
+                continue
+            content = tsx_file.read_text(encoding="utf-8")
+            self.assertNotIn("selected={true}", content, f"{tsx_file} must not have selected prop on <option>; use defaultValue on <select> instead.")
+
     def assert_valid_paragraphs(self, nodes):
         for node in nodes:
             if not isinstance(node, dict):

@@ -11,10 +11,13 @@ const BOX_W = 48;
 const BOX_GAP = 4;
 const BOX_STEP = BOX_W + BOX_GAP;
 window.onload = function () {
+  if (!document.getElementById("visualizationArea")) return;
   renderTextRowOnly();
   updateControls();
-  document.getElementById("statusMessage").textContent = translateLegacyRuntime("legacy.3fee18c507645216");
-  document.getElementById("resultDisplay").innerHTML = "";
+  const statusMsg = document.getElementById("statusMessage");
+  if (statusMsg) statusMsg.textContent = translateLegacyRuntime("legacy.3fee18c507645216");
+  const resultDisp = document.getElementById("resultDisplay");
+  if (resultDisp) resultDisp.innerHTML = "";
 };
 function getStepCount() {
   return simulationSteps.length;
@@ -528,6 +531,7 @@ function updateControls() {
   const prevBtn = document.getElementById("prevButton");
   const nextBtn = document.getElementById("nextButton");
   const startBtn = document.getElementById("startButton");
+  if (!startBtn || !nextBtn || !prevBtn) return;
   if (isFinished) {
     startBtn.disabled = true;
     nextBtn.disabled = true;

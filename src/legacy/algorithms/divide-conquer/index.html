@@ -140,13 +140,16 @@
                     من أشهر الأمثلة على استراتيجية فرق تسد. تقوم الخوارزمية بتقسيم المصفوفة إلى نصفين متساويين تقريباً، ثم ترتب كل نصف بشكل تكراري، وأخيراً تدمج النصفين المرتبين للحصول على مصفوفة مرتبة بالكامل.
                 </p>
                 <div class="bg-white p-4 rounded-lg shadow-sm mb-3">
-                    <p class="font-bold text-indigo-700 mb-2">خطوات الخوارزمية:</p>
-                    <ol class="list-decimal list-inside space-y-1 text-gray-700 text-sm">
-                        <li>إذا كان طول المصفوفة ≤ 1، فهي مرتبة — نعود بها.</li>
+                    <p class="font-bold text-indigo-700 mb-2">خطوات الخوارزمية ومعادلة التكرار (Recurrence):</p>
+                    <ol class="list-decimal list-inside space-y-1 text-gray-700 text-sm mb-3">
+                        <li>إذا كان طول المصفوفة ≤ 1، فهي مرتبة — نعود بها ($$ T(1) = O(1) $$).</li>
                         <li>نقسم المصفوفة إلى نصفين متساويين.</li>
-                        <li>نطبق الخوارزمية تكراريًا على كل نصف.</li>
-                        <li>ندمج النصفين المرتبين في مصفوفة واحدة مرتبة.</li>
+                        <li>نطبق الخوارزمية تكراريًا على كل نصف ($$ 2T(n/2) $$).</li>
+                        <li>ندمج النصفين المرتبين في مصفوفة واحدة مرتبة ($$ O(n) $$).</li>
                     </ol>
+                    <div class="p-2 bg-indigo-50 rounded border border-indigo-200 text-center font-bold text-indigo-800 text-sm overflow-x-auto" dir="ltr">
+                        $$ T(n) = 2T\left(\frac{n}{2}\right) + O(n) \implies O(n \log_2 n) $$
+                    </div>
                 </div>
                 <div class="bg-gray-900 text-green-300 p-4 rounded-lg font-mono text-sm rtl-code" dir="ltr">
                     <span class="text-purple-400">function</span> <span class="text-yellow-300">mergeSort</span>(arr) {<br>
@@ -239,31 +242,31 @@
                     <tbody>
                         <tr class="even:bg-gray-100">
                             <td class="p-3 border border-gray-300 font-bold">Merge Sort</td>
-                            <td class="p-3 border border-gray-300 ltr-text">O(n log n)</td>
-                            <td class="p-3 border border-gray-300 ltr-text">O(n log n)</td>
-                            <td class="p-3 border border-gray-300 ltr-text">O(n log n)</td>
-                            <td class="p-3 border border-gray-300 ltr-text">O(n)</td>
+                            <td class="p-3 border border-gray-300 ltr-text">$$ O(n \log_2 n) $$</td>
+                            <td class="p-3 border border-gray-300 ltr-text">$$ O(n \log_2 n) $$</td>
+                            <td class="p-3 border border-gray-300 ltr-text">$$ O(n \log_2 n) $$</td>
+                            <td class="p-3 border border-gray-300 ltr-text">$$ O(n) $$</td>
                         </tr>
                         <tr class="even:bg-gray-100">
                             <td class="p-3 border border-gray-300 font-bold">Quick Sort</td>
-                            <td class="p-3 border border-gray-300 ltr-text">O(n²)</td>
-                            <td class="p-3 border border-gray-300 ltr-text">O(n log n)</td>
-                            <td class="p-3 border border-gray-300 ltr-text">O(n log n)</td>
-                            <td class="p-3 border border-gray-300 ltr-text">O(log n)</td>
+                            <td class="p-3 border border-gray-300 ltr-text">$$ O(n^2) $$</td>
+                            <td class="p-3 border border-gray-300 ltr-text">$$ O(n \log_2 n) $$</td>
+                            <td class="p-3 border border-gray-300 ltr-text">$$ O(n \log_2 n) $$</td>
+                            <td class="p-3 border border-gray-300 ltr-text">$$ O(\log_2 n) $$</td>
                         </tr>
                         <tr class="even:bg-gray-100">
                             <td class="p-3 border border-gray-300 font-bold">Binary Search</td>
-                            <td class="p-3 border border-gray-300 ltr-text">O(log n)</td>
-                            <td class="p-3 border border-gray-300 ltr-text">O(log n)</td>
-                            <td class="p-3 border border-gray-300 ltr-text">O(1)</td>
-                            <td class="p-3 border border-gray-300 ltr-text">O(1)</td>
+                            <td class="p-3 border border-gray-300 ltr-text">$$ O(\log_2 n) $$</td>
+                            <td class="p-3 border border-gray-300 ltr-text">$$ O(\log_2 n) $$</td>
+                            <td class="p-3 border border-gray-300 ltr-text">$$ O(1) $$</td>
+                            <td class="p-3 border border-gray-300 ltr-text">$$ O(1) $$</td>
                         </tr>
                         <tr class="even:bg-gray-100">
                             <td class="p-3 border border-gray-300 font-bold">Strassen (الضرب)</td>
-                            <td class="p-3 border border-gray-300 ltr-text">O(n^2.81)</td>
-                            <td class="p-3 border border-gray-300 ltr-text">O(n^2.81)</td>
-                            <td class="p-3 border border-gray-300 ltr-text">O(n^2.81)</td>
-                            <td class="p-3 border border-gray-300 ltr-text">O(n²)</td>
+                            <td class="p-3 border border-gray-300 ltr-text">$$ O(n^{2.81}) $$</td>
+                            <td class="p-3 border border-gray-300 ltr-text">$$ O(n^{2.81}) $$</td>
+                            <td class="p-3 border border-gray-300 ltr-text">$$ O(n^{2.81}) $$</td>
+                            <td class="p-3 border border-gray-300 ltr-text">$$ O(n^2) $$</td>
                         </tr>
                     </tbody>
                 </table>

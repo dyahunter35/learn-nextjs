@@ -5,6 +5,7 @@ let simulationHistory = [];
 let isSortFinished = false;
 
 window.onload = function () {
+  if (!document.getElementById("arrayContainer") || !document.getElementById("algorithmSelect")) return;
   arrayContainer = document.getElementById("arrayContainer");
   stepsLog = document.getElementById("stepsLog");
   statusMessage = document.getElementById("statusMessage");
@@ -21,6 +22,7 @@ function renderArray({
   sortedIndices = new Set(),
   algorithm = "bubble",
 } = {}) {
+  if (!arrayContainer) return;
   arrayContainer.innerHTML = "";
 
   const maxValue = Math.max(...array, 1);
@@ -107,28 +109,37 @@ function renderArray({
 }
 
 function showMessage(message, type = "info") {
+  if (!statusMessage) return;
   statusMessage.textContent = message;
   statusMessage.className = "status-message " + type;
 }
 
 function updateControlButtons() {
-  document.getElementById("nextButton").disabled =
-    isSortFinished || currentStepIndex === simulationHistory.length - 1;
-  document.getElementById("prevButton").disabled = currentStepIndex <= 0;
-  document.getElementById("startButton").disabled = isSortFinished;
+  const nextBtn = document.getElementById("nextButton");
+  const prevBtn = document.getElementById("prevButton");
+  const startBtn = document.getElementById("startButton");
 
-  if (currentStepIndex === -1 && !isSortFinished) {
-    document.getElementById("startButton").textContent =
-      "▶ ابدأ / الخطوة الأولى";
-  } else if (isSortFinished) {
-    document.getElementById("startButton").textContent = "✓ انتهى الترتيب";
-    document.getElementById("nextButton").disabled = true;
-  } else {
-    document.getElementById("startButton").textContent = "▶ تم البدء";
+  if (nextBtn) {
+    nextBtn.disabled = isSortFinished || currentStepIndex === simulationHistory.length - 1;
+  }
+  if (prevBtn) {
+    prevBtn.disabled = currentStepIndex <= 0;
+  }
+  if (startBtn) {
+    startBtn.disabled = isSortFinished;
+    if (currentStepIndex === -1 && !isSortFinished) {
+      startBtn.textContent = "▶ ابدأ / الخطوة الأولى";
+    } else if (isSortFinished) {
+      startBtn.textContent = "✓ انتهى الترتيب";
+      if (nextBtn) nextBtn.disabled = true;
+    } else {
+      startBtn.textContent = "▶ تم البدء";
+    }
   }
 }
 
 function renderSortTable(steps, algorithm) {
+  if (!stepsLog) return;
   let headers = [];
   if (algorithm === "bubble") {
     headers = ["الدورة", "j", "arr[j]", "arr[j+1]", "القرار"];
@@ -246,9 +257,10 @@ function resetSort(shouldClearMessage = true) {
   currentStepIndex = -1;
   simulationHistory = [];
   isSortFinished = false;
-  stepsLog.innerHTML = "";
+  if (stepsLog) stepsLog.innerHTML = "";
 
-  const input = document.getElementById("arrayInput").value;
+  const inputEl = document.getElementById("arrayInput");
+  const input = inputEl ? inputEl.value : "";
   try {
     currentArray = input.split(",").map((n) => {
       const num = parseInt(n.trim());
@@ -259,15 +271,16 @@ function resetSort(shouldClearMessage = true) {
     currentArray = [50, 20, 80, 10, 60];
   }
 
-  nodeCountBadge.textContent = `${currentArray.length} عناصر`;
+  if (nodeCountBadge) nodeCountBadge.textContent = `${currentArray.length} عناصر`;
 
+  const algoSelect = document.getElementById("algorithmSelect");
   renderArray({
     array: currentArray,
     sortedIndices: new Set(),
-    algorithm: document.getElementById("algorithmSelect").value,
+    algorithm: algoSelect ? algoSelect.value : "bubble",
   });
 
-  if (shouldClearMessage) {
+  if (shouldClearMessage && statusMessage) {
     statusMessage.textContent = 'أدخل الأرقام واضغط على "ابدأ".';
     statusMessage.className = "status-message";
   }
@@ -284,7 +297,8 @@ function updateVisualization() {
 
     renderArray(step.arrayState);
 
-    const algorithm = document.getElementById("algorithmSelect").value;
+    const algoSelect = document.getElementById("algorithmSelect");
+    const algorithm = algoSelect ? algoSelect.value : "bubble";
     renderSortTable(
       simulationHistory
         .map((s) => s.logEntry)

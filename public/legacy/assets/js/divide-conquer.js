@@ -12,6 +12,7 @@ const OP_MERGE = 'merge';
 const OP_DONE = 'done';
 
 window.onload = function () {
+  if (!document.getElementById('arrayContainer') || !document.getElementById('treeContainer')) return;
   arrayContainer = document.getElementById('arrayContainer');
   stepsLog = document.getElementById('stepsLog');
   statusMessage = document.getElementById('statusMessage');

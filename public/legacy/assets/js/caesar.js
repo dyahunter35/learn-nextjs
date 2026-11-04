@@ -14,6 +14,7 @@ let autoPlayTimer = null;
 
 function renderAlphabetTable() {
   const container = document.getElementById("alphabetTableContainer");
+  if (!container) return;
   let tableHTML = `<table class="alphabet-table w-full text-sm"><thead>`;
 
   tableHTML += '<tr><th class="bg-indigo-600 text-white !sticky !top-0 z-10">الفهرس</th>';
@@ -73,6 +74,8 @@ function getCharIndex(char) {
 }
 
 window.onload = function () {
+  const container = document.getElementById("alphabetTableContainer");
+  if (!container) return;
   stepsLog = document.getElementById("stepsLog");
   statusMessage = document.getElementById("statusMessage");
   resultText = document.getElementById("resultText");
@@ -204,13 +207,15 @@ function resetCipher(shouldClearMessage = true) {
   simulationHistory = [];
   isCipherFinished = false;
   operationMode = "";
-  stepsLog.innerHTML = "";
-  resultText.textContent = "...";
-  resultText.className = "cipher-text text-gray-400 min-h-[40px] text-lg text-center py-4";
+  if (stepsLog) stepsLog.innerHTML = "";
+  if (resultText) {
+    resultText.textContent = "...";
+    resultText.className = "cipher-text text-gray-400 min-h-[40px] text-lg text-center py-4";
+  }
 
   renderAlphabetTable();
 
-  if (shouldClearMessage) {
+  if (shouldClearMessage && statusMessage) {
     statusMessage.textContent =
       'اضغط على زر "ابدأ التشفير" أو "ابدأ فك التشفير".';
     statusMessage.className = "text-center py-3 px-4 rounded-xl bg-gray-50 border border-gray-200 text-gray-500 text-sm font-medium";
@@ -244,31 +249,41 @@ function updateControlButtons() {
     }
   }
 
-  document.getElementById("encryptButton").disabled =
-    isStarted && operationMode === "encrypt" && !isCipherFinished;
-  document.getElementById("decryptButton").disabled =
-    isStarted && operationMode === "decrypt" && !isCipherFinished;
+  const encryptBtn = document.getElementById("encryptButton");
+  const decryptBtn = document.getElementById("decryptButton");
+  if (encryptBtn) {
+    encryptBtn.disabled = isStarted && operationMode === "encrypt" && !isCipherFinished;
+  }
+  if (decryptBtn) {
+    decryptBtn.disabled = isStarted && operationMode === "decrypt" && !isCipherFinished;
+  }
 
   if (isCipherFinished) {
-    document.getElementById("encryptButton").textContent = "إعادة تشفير";
-    document.getElementById("decryptButton").textContent =
-      "إعادة فك التشفير";
-    document.getElementById("encryptButton").disabled = false;
-    document.getElementById("decryptButton").disabled = false;
+    if (encryptBtn) {
+      encryptBtn.textContent = "إعادة تشفير";
+      encryptBtn.disabled = false;
+    }
+    if (decryptBtn) {
+      decryptBtn.textContent = "إعادة فك التشفير";
+      decryptBtn.disabled = false;
+    }
   } else if (isStarted) {
-    document.getElementById("encryptButton").textContent =
-      "التشفير قيد التقدم";
-    document.getElementById("decryptButton").textContent =
-      "فك التشفير قيد التقدم";
+    if (encryptBtn) encryptBtn.textContent = "التشفير قيد التقدم";
+    if (decryptBtn) decryptBtn.textContent = "فك التشفير قيد التقدم";
   } else {
-    document.getElementById("encryptButton").textContent =
-      "ابدأ التشفير (خطوة 1)";
-    document.getElementById("decryptButton").textContent =
-      "ابدأ فك التشفير (خطوة 1)";
+    if (encryptBtn) {
+      encryptBtn.textContent = "ابدأ التشفير (خطوة 1)";
+      encryptBtn.disabled = false;
+    }
+    if (decryptBtn) {
+      decryptBtn.textContent = "ابدأ فك التشفير (خطوة 1)";
+      decryptBtn.disabled = false;
+    }
   }
 }
 
 function showMessage(msg, isError) {
+  if (!statusMessage) return;
   statusMessage.textContent = msg;
   statusMessage.className = `text-center py-3 px-4 rounded-xl text-sm font-bold ${
     isError
@@ -363,7 +378,7 @@ function renderCipherTable(steps, mode) {
   }
 
   tableHTML += "</tbody></table>";
-  stepsLog.innerHTML = tableHTML;
+  if (stepsLog) stepsLog.innerHTML = tableHTML;
 }
 
 function cipherSimulator(text, key, mode) {

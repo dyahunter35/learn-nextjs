@@ -134,23 +134,23 @@
                 <div class="grid md:grid-cols-2 gap-4">
                     <div class="bg-white p-4 rounded-lg shadow border border-yellow-300">
                         <p class="font-bold text-yellow-700">التعقيد الزمني (Time Complexity)</p>
-                        <p class="text-2xl font-mono text-center mt-2 text-yellow-600">O(n)</p>
-                        <p class="text-sm text-gray-600 mt-1">حيث n هو عدد العناصر في المصفوفة.</p>
+                        <div class="text-2xl text-center mt-2 text-yellow-700" dir="ltr">$$ O(n) $$</div>
+                        <p class="text-sm text-gray-600 mt-1">حيث $$ n $$ هو عدد العناصر في المصفوفة.</p>
                     </div>
                     <div class="bg-white p-4 rounded-lg shadow border border-yellow-300">
                         <p class="font-bold text-yellow-700">أفضل حالة (Best Case)</p>
-                        <p class="text-lg text-center mt-2 text-green-600">O(1)</p>
+                        <div class="text-xl text-center mt-2 text-green-600" dir="ltr">$$ O(1) $$</div>
                         <p class="text-sm text-gray-600 mt-1">عندما يكون العنصر المطلوب في أول موقع (الفهرس 0).</p>
                     </div>
                     <div class="bg-white p-4 rounded-lg shadow border border-yellow-300">
                         <p class="font-bold text-yellow-700">أسوأ حالة (Worst Case)</p>
-                        <p class="text-lg text-center mt-2 text-red-600">O(n)</p>
+                        <div class="text-xl text-center mt-2 text-red-600" dir="ltr">$$ O(n) $$</div>
                         <p class="text-sm text-gray-600 mt-1">عندما يكون العنصر في آخر موقع أو غير موجود.</p>
                     </div>
                     <div class="bg-white p-4 rounded-lg shadow border border-yellow-300">
                         <p class="font-bold text-yellow-700">حالة متوسطة (Average Case)</p>
-                        <p class="text-lg text-center mt-2 text-amber-600">O(n)</p>
-                        <p class="text-sm text-gray-600 mt-1">في المتوسط، نحتاج للبحث في نصف المصفوفة.</p>
+                        <div class="text-xl text-center mt-2 text-amber-600" dir="ltr">$$ O(n) $$</div>
+                        <p class="text-sm text-gray-600 mt-1">في المتوسط، نحتاج للمرور على $$ \frac{n}{2} $$ من عناصر المصفوفة.</p>
                     </div>
                 </div>
             </div>
@@ -194,9 +194,12 @@
                 </div>
                 <div class="step-item">
                     <h3 class="text-xl font-semibold text-green-800">حساب المنتصف</h3>
-                    <p class="text-gray-700 mr-10">
-                        احسب منتصف المصفوفة: <span class="font-mono ltr-text bg-gray-200 p-1 rounded">mid = (low + high) / 2</span> (عادةً باستخدام قسمة صحيحة).
+                    <p class="text-gray-700 mr-10 mb-2">
+                        احسب موقع منتصف المصفوفة باستخدام قانون القسمة الصحيحة:
                     </p>
+                    <div class="mr-10 my-2 p-3 bg-white rounded-lg border border-green-200 text-center font-bold text-green-800 text-lg overflow-x-auto" dir="ltr">
+                        $$ \text{mid} = \left\lfloor \frac{\text{low} + \text{high}}{2} \right\rfloor $$
+                    </div>
                 </div>
                 <div class="step-item">
                     <h3 class="text-xl font-semibold text-green-800">المقارنة</h3>
@@ -228,22 +231,22 @@
                 <div class="grid md:grid-cols-2 gap-4">
                     <div class="bg-white p-4 rounded-lg shadow border border-yellow-300">
                         <p class="font-bold text-yellow-700">التعقيد الزمني (Time Complexity)</p>
-                        <p class="text-2xl font-mono text-center mt-2 text-green-600">O(log n)</p>
-                        <p class="text-sm text-gray-600 mt-1">log<sub>2</sub>(n) لأننا نقسم المصفوفة إلى نصفين في كل مرة.</p>
+                        <div class="text-2xl text-center mt-2 text-green-700" dir="ltr">$$ O(\log_2 n) $$</div>
+                        <p class="text-sm text-gray-600 mt-1">حيث نختزل فضاء البحث للنصف $$ \frac{n}{2^k} = 1 \implies k = \log_2 n $$ في كل خطوة.</p>
                     </div>
                     <div class="bg-white p-4 rounded-lg shadow border border-yellow-300">
                         <p class="font-bold text-yellow-700">أفضل حالة (Best Case)</p>
-                        <p class="text-lg text-center mt-2 text-green-600">O(1)</p>
+                        <div class="text-xl text-center mt-2 text-green-600" dir="ltr">$$ O(1) $$</div>
                         <p class="text-sm text-gray-600 mt-1">عندما يكون العنصر المطلوب في منتصف المصفوفة بالضبط.</p>
                     </div>
                     <div class="bg-white p-4 rounded-lg shadow border border-yellow-300">
                         <p class="font-bold text-yellow-700">أسوأ حالة (Worst Case)</p>
-                        <p class="text-lg text-center mt-2 text-red-600">O(log n)</p>
+                        <div class="text-xl text-center mt-2 text-red-600" dir="ltr">$$ O(\log_2 n) $$</div>
                         <p class="text-sm text-gray-600 mt-1">عندما يكون العنصر في أقصى طرف أو غير موجود.</p>
                     </div>
                     <div class="bg-white p-4 rounded-lg shadow border border-yellow-300">
                         <p class="font-bold text-yellow-700">المتطلب الأساسي</p>
-                        <p class="text-lg text-center mt-2 text-red-600">مصفوفة مرتبة</p>
+                        <p class="text-lg text-center mt-2 text-red-600 font-bold">مصفوفة مرتبة</p>
                         <p class="text-sm text-gray-600 mt-1">يجب أن تكون المصفوفة مرتبة ترتيباً تصاعدياً.</p>
                     </div>
                 </div>

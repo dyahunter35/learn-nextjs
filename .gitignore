@@ -1,8 +1,11 @@
 node_modules/
 .next/
 out/
+/public/offline-precache.json
 *.tsbuildinfo
 .DS_Store
 *.png
+!public/icons/
+!public/icons/*.png
 __pycache__/
 __pycache__/

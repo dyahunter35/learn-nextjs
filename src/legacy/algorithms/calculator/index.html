@@ -136,21 +136,30 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div class="bg-cyan-50 p-5 rounded-lg shadow-md border-cyan-400">
                     <h3 class="text-xl font-semibold text-cyan-800 mb-2">Sin (الجيب)</h3>
-                    <p class="text-gray-700">
-                        دالة الجيب تُحسب نسبة طول الضلع المقابل للزاوية إلى طول الوتر في المثلث قائم الزاوية. مثال: sin(90°) = 1
+                    <p class="text-gray-700 text-sm mb-2">
+                        نسبة طول الضلع المقابل إلى الوتر في المثلث قائم الزاوية:
                     </p>
+                    <div class="bg-white p-2 rounded border border-cyan-200 text-center font-bold text-cyan-800 overflow-x-auto" dir="ltr">
+                        $$ \sin(\theta) = \frac{\text{المقابل}}{\text{الوتر}}, \quad \sin(90^\circ) = 1 $$
+                    </div>
                 </div>
                 <div class="bg-teal-50 p-5 rounded-lg shadow-md border-teal-400">
                     <h3 class="text-xl font-semibold text-teal-800 mb-2">Cos (جيب التمام)</h3>
-                    <p class="text-gray-700">
-                        دالة جيب التمام تُحسب نسبة طول الضلع المجاور للزاوية إلى طول الوتر. مثال: cos(0°) = 1
+                    <p class="text-gray-700 text-sm mb-2">
+                        نسبة طول الضلع المجاور للزاوية إلى طول الوتر:
                     </p>
+                    <div class="bg-white p-2 rounded border border-teal-200 text-center font-bold text-teal-800 overflow-x-auto" dir="ltr">
+                        $$ \cos(\theta) = \frac{\text{المجاور}}{\text{الوتر}}, \quad \cos(0^\circ) = 1 $$
+                    </div>
                 </div>
                 <div class="bg-amber-50 p-5 rounded-lg shadow-md border-amber-400">
                     <h3 class="text-xl font-semibold text-amber-800 mb-2">Tan (الظل)</h3>
-                    <p class="text-gray-700">
-                        دالة الظل تُحسب نسبة طول الضلع المقابل للزاوية إلى طول الضلع المجاور. tan(θ) = sin(θ) / cos(θ)
+                    <p class="text-gray-700 text-sm mb-2">
+                        نسبة المقابل إلى المجاور (حاصل قسمة الجيب على جيب التمام):
                     </p>
+                    <div class="bg-white p-2 rounded border border-amber-200 text-center font-bold text-amber-800 overflow-x-auto" dir="ltr">
+                        $$ \tan(\theta) = \frac{\sin(\theta)}{\cos(\theta)} = \frac{\text{المقابل}}{\text{المجاور}} $$
+                    </div>
                 </div>
             </div>
         </section>
@@ -163,20 +172,26 @@
                 الدوال اللوغاريتمية (Logarithmic Functions)
             </h2>
             <p class="text-gray-700 leading-loose mb-4">
-                اللوغاريتمات هي العملية العكسية للأسس. تُستخدم في حل المعادلات الأسية وفي العديد من التطبيقات العلمية.
+                اللوغاريتمات هي العملية العكسية للرفع إلى الأسس:
             </p>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="bg-lime-50 p-5 rounded-lg shadow-md border-lime-400">
                     <h3 class="text-xl font-semibold text-lime-800 mb-2">Log (اللوغاريتم العشري)</h3>
-                    <p class="text-gray-700">
-                        اللوغاريتم العشري هو لوغاريتم للأساس 10. يُستخدم بكثرة في العلوم والهندسة. مثال: log(100) = 2 لأن 10² = 100
+                    <p class="text-gray-700 text-sm mb-2">
+                        لوغاريتم ذو الأساس 10 المستخدم في الحسابات العامة ومقاييس الديسيبل وريختر:
                     </p>
+                    <div class="bg-white p-2 rounded border border-lime-200 text-center font-bold text-lime-800 overflow-x-auto" dir="ltr">
+                        $$ \log_{10}(x) = y \iff 10^y = x, \quad \log_{10}(100) = 2 $$
+                    </div>
                 </div>
                 <div class="bg-green-50 p-5 rounded-lg shadow-md border-green-400">
                     <h3 class="text-xl font-semibold text-green-800 mb-2">Ln (اللوغاريتم الطبيعي)</h3>
-                    <p class="text-gray-700">
-                        اللوغاريتم الطبيعي هو لوغاريتم للأساس e (حيث e ≈ 2.71828). يُستخدم في التفاضل والتكامل والنمذجة الرياضية. مثال: ln(e) = 1
+                    <p class="text-gray-700 text-sm mb-2">
+                        لوغاريتم ذو الأساس الطبيعي النيبيري $$ e \approx 2.71828 $$ المستخدم في النمو والتفاضل:
                     </p>
+                    <div class="bg-white p-2 rounded border border-green-200 text-center font-bold text-green-800 overflow-x-auto" dir="ltr">
+                        $$ \ln(x) = \log_e(x), \quad \ln(e) = 1, \quad \ln(1) = 0 $$
+                    </div>
                 </div>
             </div>
         </section>

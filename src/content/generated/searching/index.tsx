@@ -181,12 +181,12 @@ export default function NativePage() {
                 {t("legacy.7387e694ef865d7b")}
               </p>
               {"\n                        "}
-              <p className={"text-2xl font-mono text-center mt-2 text-yellow-600"}>
-                {"O(n)"}
-              </p>
+              <div className={"text-2xl text-center mt-2 text-yellow-700"} dir={"ltr"}>
+                {"$$ O(n) $$"}
+              </div>
               {"\n                        "}
               <p className={"text-sm text-gray-600 mt-1"}>
-                {t("legacy.ab44d7d7779926c4")}
+                {t("legacy.fad1625cfa8ddec6")}
               </p>
               {"\n                    "}
             </div>
@@ -197,9 +197,9 @@ export default function NativePage() {
                 {t("legacy.2b43d4669f8029aa")}
               </p>
               {"\n                        "}
-              <p className={"text-lg text-center mt-2 text-green-600"}>
-                {"O(1)"}
-              </p>
+              <div className={"text-xl text-center mt-2 text-green-600"} dir={"ltr"}>
+                {"$$ O(1) $$"}
+              </div>
               {"\n                        "}
               <p className={"text-sm text-gray-600 mt-1"}>
                 {t("legacy.4b2967e64777f79d")}
@@ -213,9 +213,9 @@ export default function NativePage() {
                 {t("legacy.0c4395cfe7737401")}
               </p>
               {"\n                        "}
-              <p className={"text-lg text-center mt-2 text-red-600"}>
-                {"O(n)"}
-              </p>
+              <div className={"text-xl text-center mt-2 text-red-600"} dir={"ltr"}>
+                {"$$ O(n) $$"}
+              </div>
               {"\n                        "}
               <p className={"text-sm text-gray-600 mt-1"}>
                 {t("legacy.156faa65ca0ac238")}
@@ -229,12 +229,12 @@ export default function NativePage() {
                 {t("legacy.df5455f81d7483f1")}
               </p>
               {"\n                        "}
-              <p className={"text-lg text-center mt-2 text-amber-600"}>
-                {"O(n)"}
-              </p>
+              <div className={"text-xl text-center mt-2 text-amber-600"} dir={"ltr"}>
+                {"$$ O(n) $$"}
+              </div>
               {"\n                        "}
               <p className={"text-sm text-gray-600 mt-1"}>
-                {t("legacy.2156f0dd10d381ab")}
+                {t("legacy.540c612e3c51f9a0")}
               </p>
               {"\n                    "}
             </div>
@@ -327,13 +327,13 @@ export default function NativePage() {
               {t("legacy.4bb0286569c864f7")}
             </h3>
             {"\n                    "}
-            <p className={"text-gray-700 mr-10"}>
-              {t("legacy.d9c988063ce9f061")}
-              <span className={"font-mono ltr-text bg-gray-200 p-1 rounded"}>
-                {"mid = (low + high) / 2"}
-              </span>
-              {t("legacy.b32f9947d6710752")}
+            <p className={"text-gray-700 mr-10 mb-2"}>
+              {t("legacy.c741d12b80b7b3b8")}
             </p>
+            {"\n                    "}
+            <div className={"mr-10 my-2 p-3 bg-white rounded-lg border border-green-200 text-center font-bold text-green-800 text-lg overflow-x-auto"} dir={"ltr"}>
+              {"\n                        $$ \\text{mid} = \\left\\lfloor \\frac{\\text{low} + \\text{high}}{2} \\right\\rfloor $$\n                    "}
+            </div>
             {"\n                "}
           </div>
           {"\n                "}
@@ -445,16 +445,12 @@ export default function NativePage() {
                 {t("legacy.7387e694ef865d7b")}
               </p>
               {"\n                        "}
-              <p className={"text-2xl font-mono text-center mt-2 text-green-600"}>
-                {"O(log n)"}
-              </p>
+              <div className={"text-2xl text-center mt-2 text-green-700"} dir={"ltr"}>
+                {"$$ O(\\log_2 n) $$"}
+              </div>
               {"\n                        "}
               <p className={"text-sm text-gray-600 mt-1"}>
-                {"log"}
-                <sub>
-                  {"2"}
-                </sub>
-                {t("legacy.2e7537fc5bf960af")}
+                {t("legacy.d4adc1af5fdde29d")}
               </p>
               {"\n                    "}
             </div>
@@ -465,9 +461,9 @@ export default function NativePage() {
                 {t("legacy.2b43d4669f8029aa")}
               </p>
               {"\n                        "}
-              <p className={"text-lg text-center mt-2 text-green-600"}>
-                {"O(1)"}
-              </p>
+              <div className={"text-xl text-center mt-2 text-green-600"} dir={"ltr"}>
+                {"$$ O(1) $$"}
+              </div>
               {"\n                        "}
               <p className={"text-sm text-gray-600 mt-1"}>
                 {t("legacy.dc7c8341c721c75d")}
@@ -481,9 +477,9 @@ export default function NativePage() {
                 {t("legacy.0c4395cfe7737401")}
               </p>
               {"\n                        "}
-              <p className={"text-lg text-center mt-2 text-red-600"}>
-                {"O(log n)"}
-              </p>
+              <div className={"text-xl text-center mt-2 text-red-600"} dir={"ltr"}>
+                {"$$ O(\\log_2 n) $$"}
+              </div>
               {"\n                        "}
               <p className={"text-sm text-gray-600 mt-1"}>
                 {t("legacy.f85a98e20f3cb627")}
@@ -497,7 +493,7 @@ export default function NativePage() {
                 {t("legacy.4c8b739ef959b2d9")}
               </p>
               {"\n                        "}
-              <p className={"text-lg text-center mt-2 text-red-600"}>
+              <p className={"text-lg text-center mt-2 text-red-600 font-bold"}>
                 {t("legacy.5ad756432d610782")}
               </p>
               {"\n                        "}

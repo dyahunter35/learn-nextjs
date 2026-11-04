@@ -46,9 +46,7 @@ export default function NativePage() {
               {"\n            "}
             </div>
             {"\n            "}
-            <textarea id={"textInput"} rows={3} className={"w-full px-5 py-4 bg-gray-50 text-gray-900 border-2 border-gray-200 rounded-xl text-left text-lg char-display focus:ring-0 focus:border-indigo-400 transition-colors placeholder-gray-300"} placeholder={"Enter English text here, only lowercase letters will be counted. Example: huffman coding is efficient..."}>
-              {"\naabbbccdeeeeff"}
-            </textarea>
+            <textarea id={"textInput"} rows={3} className={"w-full px-5 py-4 bg-gray-50 text-gray-900 border-2 border-gray-200 rounded-xl text-left text-lg char-display focus:ring-0 focus:border-indigo-400 transition-colors placeholder-gray-300"} placeholder={"Enter English text here, only lowercase letters will be counted. Example: huffman coding is efficient..."} defaultValue={"aabbbccdeeeeff"}></textarea>
             {"\n          "}
           </div>
           {"\n\n          "}
@@ -246,8 +244,8 @@ export default function NativePage() {
                     {t("legacy.4ce04f4a15a08995")}
                   </p>
                   {"\n                  "}
-                  <div className={"bg-white p-3 rounded-lg border border-gray-200 char-display text-lg overflow-x-auto"}>
-                    {"\n                    $$ L_{avg} = \\sum_{i=1}^{n} (f_i \\times L_i) / N $$\n                  "}
+                  <div className={"bg-white p-3 rounded-lg border border-gray-200 char-display text-lg overflow-x-auto text-center"} dir={"ltr"}>
+                    {"\n                    $$ L_{avg} = \\frac{\\sum_{i=1}^{n} (f_i \\times L_i)}{N} $$\n                  "}
                   </div>
                   {"\n                  "}
                   <ul className={"text-xs list-disc list-inside space-y-1 text-gray-500"}>
@@ -265,7 +263,7 @@ export default function NativePage() {
                     </li>
                     {"\n                    "}
                     <li>
-                      {t("legacy.138238d02cd76bdf")}
+                      {t("legacy.a3fe366ada4c75e1")}
                     </li>
                     {"\n                  "}
                   </ul>
@@ -274,11 +272,9 @@ export default function NativePage() {
                     {t("legacy.aa617511225e9963")}
                   </p>
                   {"\n                  "}
-                  <p id={"calculationSteps"} className={"bg-white p-3 rounded-lg border border-gray-200 text-sm char-display overflow-x-auto"}></p>
-                  {"\n                  "}
-                  <p className={"text-sm bg-white p-3 rounded-lg border border-gray-200 char-display overflow-x-auto"}>
-                    {t("legacy.06b95e7264d9017f")}
-                  </p>
+                  <div id={"calculationSteps"} className={"bg-white p-3 rounded-lg border border-gray-200 text-sm char-display overflow-x-auto text-center"} dir={"ltr"}>
+                    {"\n                    $$ \\frac{1}{14} \\times \\left[ (4 \\times 2) + (3 \\times 2) + (2 \\times 3) + (2 \\times 3) + (2 \\times 3) + (1 \\times 3) \\right] = \\frac{35}{14} = 2.500 $$\n                  "}
+                  </div>
                   {"\n                  "}
                   <div className={"bg-gradient-to-l from-green-50 to-emerald-50 p-4 rounded-xl border border-green-200"}>
                     {"\n                    "}

@@ -483,6 +483,7 @@ function renderStepLog() {
 }
 
 function showMessage(msg, type) {
+  if (!statusMsg) return;
   statusMsg.textContent = msg;
   statusMsg.className = 'status-message ' + type;
 }
@@ -492,25 +493,29 @@ function updateButtons() {
   const nextBtn = document.getElementById('nextButton');
   const prevBtn = document.getElementById('prevButton');
 
-  nextBtn.disabled = isFinished || currentStep >= simulationHistory.length - 1;
-  prevBtn.disabled = currentStep <= 0;
+  if (nextBtn) nextBtn.disabled = isFinished || currentStep >= simulationHistory.length - 1;
+  if (prevBtn) prevBtn.disabled = currentStep <= 0;
 
-  if (currentStep === -1 && !isFinished) {
-    startBtn.textContent = '▶ ابدأ';
-    startBtn.disabled = false;
-  } else if (isFinished) {
-    startBtn.textContent = '✓ اكتمل';
-    startBtn.disabled = true;
-  } else {
-    startBtn.textContent = '▶ تم البدء';
-    startBtn.disabled = false;
+  if (startBtn) {
+    if (currentStep === -1 && !isFinished) {
+      startBtn.textContent = '▶ ابدأ';
+      startBtn.disabled = false;
+    } else if (isFinished) {
+      startBtn.textContent = '✓ اكتمل';
+      startBtn.disabled = true;
+    } else {
+      startBtn.textContent = '▶ تم البدء';
+      startBtn.disabled = false;
+    }
   }
 
   if (currentStep >= simulationHistory.length - 1 && simulationHistory.length > 0) {
     isFinished = true;
-    nextBtn.disabled = true;
-    startBtn.textContent = '✓ اكتمل';
-    startBtn.disabled = true;
+    if (nextBtn) nextBtn.disabled = true;
+    if (startBtn) {
+      startBtn.textContent = '✓ اكتمل';
+      startBtn.disabled = true;
+    }
   }
 }
 
@@ -595,18 +600,26 @@ function previousStep() {
 }
 
 function resetSimulation() {
+  const graphSvg = document.getElementById('graphSvg');
+  if (!graphSvg) return;
   simulationHistory = [];
   currentStep = -1;
   isFinished = false;
   updateUI();
-  statusMsg.textContent = 'اختر الخوارزمية، ثم اضغط "ابدأ".';
-  statusMsg.className = 'status-message';
-  celebrationSection.classList.add('hidden');
+  if (statusMsg) {
+    statusMsg.textContent = 'اختر الخوارزمية، ثم اضغط "ابدأ".';
+    statusMsg.className = 'status-message';
+  }
+  if (celebrationSection) {
+    celebrationSection.classList.add('hidden');
+  }
 }
 
-algorithmSelect.addEventListener('change', function() {
-  currentAlgorithm = algorithmSelect.value;
-  resetSimulation();
-});
+if (algorithmSelect) {
+  algorithmSelect.addEventListener('change', function() {
+    currentAlgorithm = algorithmSelect.value;
+    resetSimulation();
+  });
+}
 
 window.addEventListener('load', resetSimulation);

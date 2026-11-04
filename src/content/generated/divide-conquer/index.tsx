@@ -212,13 +212,13 @@ export default function NativePage() {
           <div className={"bg-white p-4 rounded-lg shadow-sm mb-3"}>
             {"\n                    "}
             <p className={"font-bold text-indigo-700 mb-2"}>
-              {t("legacy.78df25a7285668e7")}
+              {t("legacy.9dc64465d1b08715")}
             </p>
             {"\n                    "}
-            <ol className={"list-decimal list-inside space-y-1 text-gray-700 text-sm"}>
+            <ol className={"list-decimal list-inside space-y-1 text-gray-700 text-sm mb-3"}>
               {"\n                        "}
               <li>
-                {t("legacy.7f5a915cb988fa9e")}
+                {t("legacy.73d7dd7d092443e4")}
               </li>
               {"\n                        "}
               <li>
@@ -226,14 +226,18 @@ export default function NativePage() {
               </li>
               {"\n                        "}
               <li>
-                {t("legacy.b80a7eeedec52f6b")}
+                {t("legacy.dcc6ac9f09735b54")}
               </li>
               {"\n                        "}
               <li>
-                {t("legacy.7a6395567dc6a2eb")}
+                {t("legacy.ee076c4ed734689b")}
               </li>
               {"\n                    "}
             </ol>
+            {"\n                    "}
+            <div className={"p-2 bg-indigo-50 rounded border border-indigo-200 text-center font-bold text-indigo-800 text-sm overflow-x-auto"} dir={"ltr"}>
+              {"\n                        $$ T(n) = 2T\\left(\\frac{n}{2}\\right) + O(n) \\implies O(n \\log_2 n) $$\n                    "}
+            </div>
             {"\n                "}
           </div>
           {"\n                "}
@@ -510,16 +514,16 @@ export default function NativePage() {
                   {"Merge Sort"}
                 </td>
                 <td className={"p-3 border border-gray-300 ltr-text"}>
-                  {"O(n log n)"}
+                  {"$$ O(n \\log_2 n) $$"}
                 </td>
                 <td className={"p-3 border border-gray-300 ltr-text"}>
-                  {"O(n log n)"}
+                  {"$$ O(n \\log_2 n) $$"}
                 </td>
                 <td className={"p-3 border border-gray-300 ltr-text"}>
-                  {"O(n log n)"}
+                  {"$$ O(n \\log_2 n) $$"}
                 </td>
                 <td className={"p-3 border border-gray-300 ltr-text"}>
-                  {"O(n)"}
+                  {"$$ O(n) $$"}
                 </td>
               </tr>
               <tr className={"even:bg-gray-100"}>
@@ -527,16 +531,16 @@ export default function NativePage() {
                   {"Quick Sort"}
                 </td>
                 <td className={"p-3 border border-gray-300 ltr-text"}>
-                  {"O(n²)"}
+                  {"$$ O(n^2) $$"}
                 </td>
                 <td className={"p-3 border border-gray-300 ltr-text"}>
-                  {"O(n log n)"}
+                  {"$$ O(n \\log_2 n) $$"}
                 </td>
                 <td className={"p-3 border border-gray-300 ltr-text"}>
-                  {"O(n log n)"}
+                  {"$$ O(n \\log_2 n) $$"}
                 </td>
                 <td className={"p-3 border border-gray-300 ltr-text"}>
-                  {"O(log n)"}
+                  {"$$ O(\\log_2 n) $$"}
                 </td>
               </tr>
               <tr className={"even:bg-gray-100"}>
@@ -544,16 +548,16 @@ export default function NativePage() {
                   {"Binary Search"}
                 </td>
                 <td className={"p-3 border border-gray-300 ltr-text"}>
-                  {"O(log n)"}
+                  {"$$ O(\\log_2 n) $$"}
                 </td>
                 <td className={"p-3 border border-gray-300 ltr-text"}>
-                  {"O(log n)"}
+                  {"$$ O(\\log_2 n) $$"}
                 </td>
                 <td className={"p-3 border border-gray-300 ltr-text"}>
-                  {"O(1)"}
+                  {"$$ O(1) $$"}
                 </td>
                 <td className={"p-3 border border-gray-300 ltr-text"}>
-                  {"O(1)"}
+                  {"$$ O(1) $$"}
                 </td>
               </tr>
               <tr className={"even:bg-gray-100"}>
@@ -561,16 +565,16 @@ export default function NativePage() {
                   {t("legacy.d28c24138532a1b9")}
                 </td>
                 <td className={"p-3 border border-gray-300 ltr-text"}>
-                  {"O(n^2.81)"}
+                  {"$$ O(n^{2.81}) $$"}
                 </td>
                 <td className={"p-3 border border-gray-300 ltr-text"}>
-                  {"O(n^2.81)"}
+                  {"$$ O(n^{2.81}) $$"}
                 </td>
                 <td className={"p-3 border border-gray-300 ltr-text"}>
-                  {"O(n^2.81)"}
+                  {"$$ O(n^{2.81}) $$"}
                 </td>
                 <td className={"p-3 border border-gray-300 ltr-text"}>
-                  {"O(n²)"}
+                  {"$$ O(n^2) $$"}
                 </td>
               </tr>
             </tbody>

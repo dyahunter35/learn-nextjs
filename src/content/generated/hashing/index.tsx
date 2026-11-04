@@ -46,44 +46,68 @@ export default function NativePage() {
           {t("legacy.d5c14aa9ad9f8a4e")}
         </h2>
         {"\n      "}
-        <p className={"text-gray-700 leading-8 mb-3"}>
-          {t("legacy.84fa2c07d19cff6a")}
+        <p className={"text-gray-700 leading-8 mb-4"}>
+          {t("legacy.32ba3f54a86c84b6")}
         </p>
-        {"\n      "}
-        <ul className={"list-disc list-inside text-gray-700 leading-8 mr-4 mb-3 space-y-1"}>
+        {"\n\n      "}
+        <div className={"space-y-4 mb-4"}>
           {"\n        "}
-          <li>
-            <strong>
-              {"Modulo (mod):"}
-            </strong>
-            {" "}
-            <code className={"bg-gray-100 px-2 py-0.5 rounded text-indigo-700"}>
-              {"hash(key) = key % table_size"}
-            </code>
-            {t("legacy.3fee3aceb56d6ecc")}
-          </li>
-          {"\n        "}
-          <li>
-            <strong>
-              {t("legacy.a7b9765545668ca7")}
-            </strong>
-            {" "}
-            <code className={"bg-gray-100 px-2 py-0.5 rounded text-indigo-700"}>
-              {"hash(key) = floor(table_size * (key * A % 1))"}
-            </code>
-          </li>
-          {"\n        "}
-          <li>
-            <strong>
-              {t("legacy.d29c12296c8fc618")}
-            </strong>
-            {t("legacy.ef4d57fc5726caef")}
-          </li>
+          <div className={"p-4 bg-gray-50 rounded-xl border border-gray-200"}>
+            {"\n          "}
+            <h3 className={"font-bold text-indigo-900 mb-1"}>
+              {t("legacy.c093436cf4e918b2")}
+            </h3>
+            {"\n          "}
+            <p className={"text-gray-600 text-sm mb-2"}>
+              {t("legacy.5368caa36f65edf7")}
+            </p>
+            {"\n          "}
+            <div className={"text-lg bg-white p-3 rounded-lg border border-gray-200 text-center font-bold text-indigo-700 overflow-x-auto"} dir={"ltr"}>
+              {"\n            $$ h(k) = k \\bmod m $$\n          "}
+            </div>
+            {"\n        "}
+          </div>
+          {"\n\n        "}
+          <div className={"p-4 bg-gray-50 rounded-xl border border-gray-200"}>
+            {"\n          "}
+            <h3 className={"font-bold text-indigo-900 mb-1"}>
+              {t("legacy.71f5692c3966f3b3")}
+            </h3>
+            {"\n          "}
+            <p className={"text-gray-600 text-sm mb-2"}>
+              {t("legacy.e0869f8b3340357a")}
+              {"<"}
+              {" A "}
+              {"<"}
+              {t("legacy.48150028afd3b189")}
+            </p>
+            {"\n          "}
+            <div className={"text-lg bg-white p-3 rounded-lg border border-gray-200 text-center font-bold text-indigo-700 overflow-x-auto"} dir={"ltr"}>
+              {"\n            $$ h(k) = \\lfloor m \\cdot (k \\cdot A \\bmod 1) \\rfloor $$\n          "}
+            </div>
+            {"\n        "}
+          </div>
+          {"\n\n        "}
+          <div className={"p-4 bg-gray-50 rounded-xl border border-gray-200"}>
+            {"\n          "}
+            <h3 className={"font-bold text-indigo-900 mb-1"}>
+              {t("legacy.1c8d906c2c7c31ab")}
+            </h3>
+            {"\n          "}
+            <p className={"text-gray-600 text-sm mb-2"}>
+              {t("legacy.bbe92824637e437c")}
+            </p>
+            {"\n          "}
+            <div className={"text-lg bg-white p-3 rounded-lg border border-gray-200 text-center font-bold text-indigo-700 overflow-x-auto"} dir={"ltr"}>
+              {"\n            $$ \\alpha = \\frac{n}{m} $$\n          "}
+            </div>
+            {"\n        "}
+          </div>
           {"\n      "}
-        </ul>
-        {"\n      "}
+        </div>
+        {"\n\n      "}
         <p className={"text-gray-700 leading-8"}>
-          {t("legacy.2c4c5591a30226dc")}
+          {t("legacy.1659cc69e445c503")}
         </p>
         {"\n    "}
       </section>
@@ -97,8 +121,8 @@ export default function NativePage() {
           {t("legacy.07157886f1e9f166")}
         </h2>
         {"\n      "}
-        <p className={"text-gray-700 leading-8 mb-3"}>
-          {t("legacy.6eb078a1f376fdc3")}
+        <p className={"text-gray-700 leading-8 mb-4"}>
+          {t("legacy.ed87471fab71be4f")}
         </p>
         {"\n      "}
         <div className={"grid md:grid-cols-2 gap-4 mb-3"}>
@@ -106,11 +130,11 @@ export default function NativePage() {
           <div className={"bg-indigo-50 rounded-lg p-4 border border-indigo-100"}>
             {"\n          "}
             <h3 className={"font-bold text-indigo-800 mb-2"}>
-              {t("legacy.1aa64667ddc107d8")}
+              {t("legacy.664c587777c10304")}
             </h3>
             {"\n          "}
-            <p className={"text-gray-700 text-sm leading-7"}>
-              {t("legacy.4bfd93818ccecb00")}
+            <p className={"text-gray-700 text-sm leading-7 mb-2"}>
+              {t("legacy.a3bf689364d20341")}
             </p>
             {"\n        "}
           </div>
@@ -118,12 +142,37 @@ export default function NativePage() {
           <div className={"bg-indigo-50 rounded-lg p-4 border border-indigo-100"}>
             {"\n          "}
             <h3 className={"font-bold text-indigo-800 mb-2"}>
-              {t("legacy.b0d99929165cd452")}
+              {t("legacy.57617985a29f2f24")}
             </h3>
             {"\n          "}
-            <p className={"text-gray-700 text-sm leading-7"}>
-              {t("legacy.7f89d0640480a01e")}
+            <p className={"text-gray-700 text-sm leading-7 mb-2"}>
+              {t("legacy.f7912f9bfd9a48ff")}
             </p>
+            {"\n          "}
+            <ul className={"text-xs space-y-1.5 text-gray-700"}>
+              {"\n            "}
+              <li>
+                <strong>
+                  {t("legacy.72adc4233a3af122")}
+                </strong>
+                {" $$ h(k, i) = (h'(k) + i) \\bmod m $$"}
+              </li>
+              {"\n            "}
+              <li>
+                <strong>
+                  {t("legacy.5bf85ca4f2065487")}
+                </strong>
+                {" $$ h(k, i) = (h'(k) + c_1 i + c_2 i^2) \\bmod m $$"}
+              </li>
+              {"\n            "}
+              <li>
+                <strong>
+                  {t("legacy.46c30200e8e7e0db")}
+                </strong>
+                {" $$ h(k, i) = (h_1(k) + i \\cdot h_2(k)) \\bmod m $$"}
+              </li>
+              {"\n          "}
+            </ul>
             {"\n        "}
           </div>
           {"\n      "}

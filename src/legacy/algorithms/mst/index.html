@@ -65,11 +65,14 @@
                 <strong>الشجرة الممتدة الدنيا (Minimum Spanning Tree)</strong> هي شجرة جزئية من رسم بياني موزون غير موجه تربط جميع العقد معاً باستخدام <strong>أقل وزن إجمالي ممكن</strong> للحواف. تحتوي الشجرة الممتدة لرسم بياني مكون من <strong>V</strong> عقدة على <strong>V-1</strong> حافة بالضبط.
             </p>
             <p class="text-gray-700 leading-loose mb-4">
-                الهدف من MST هو إيجاد مجموعة من الحواف التي:
+                الهدف الرياضي من MST هو إيجاد شجرة جزئية $$ T = (V, E_T) $$ تحقق أصغر وزن ممكن:
             </p>
+            <div class="bg-white p-3 rounded-xl border border-indigo-200 text-center font-bold text-indigo-900 text-lg mb-4 overflow-x-auto" dir="ltr">
+                $$ \min_{E_T \subseteq E} \sum_{e \in E_T} w(e) \quad \text{بحيث } |E_T| = |V| - 1 \text{ و } T \text{ متصل وخالٍ من الدورات} $$
+            </div>
             <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4 mr-4">
                 <li>تربط جميع العقد معاً (تكون الشجرة ممتدة).</li>
-                <li>لا تحتوي على دورات (تكون شجرة).</li>
+                <li>لا تحتوي على دورات (تكون شجرة شجرية).</li>
                 <li>يكون مجموع أوزان الحواف أقل ما يمكن (تكون دنيا).</li>
             </ul>
             <div class="bg-indigo-50 p-5 rounded-lg shadow-md mb-6 concept-card border-indigo-400">
@@ -134,8 +137,11 @@
             </div>
             <div class="bg-gray-50 p-5 rounded-lg shadow-md border-gray-300">
                 <h3 class="text-xl font-semibold text-gray-800 mb-3">التعقيد الحسابي</h3>
-                <p class="text-gray-700">
-                    <span class="font-mono ltr-text bg-gray-200 p-1 rounded">O(E log E + E α(V))</span> حيث E عدد الحواف و V عدد العقد. تستخدم الخوارزمية بنية <strong>Union-Find</strong> (الاتحاد والبحث) للكشف عن الدورات بكفاءة.
+                <div class="text-lg text-center text-emerald-800 my-2" dir="ltr">
+                    $$ O(|E| \log |E| + |E| \cdot \alpha(|V|)) $$
+                </div>
+                <p class="text-gray-700 text-sm">
+                    حيث $$ |E| $$ عدد الحواف و $$ |V| $$ عدد العقد، و $$ \alpha $$ هي مقلوب دالة أكرمان (Inverse Ackermann) عبر بنية <strong>Union-Find</strong>.
                 </p>
             </div>
         </section>
@@ -162,9 +168,11 @@
             </div>
             <div class="bg-gray-50 p-5 rounded-lg shadow-md border-gray-300">
                 <h3 class="text-xl font-semibold text-gray-800 mb-3">التعقيد الحسابي</h3>
-                <p class="text-gray-700">
-                    باستخدام طابور أولوية (كومة ثنائية): <span class="font-mono ltr-text bg-gray-200 p-1 rounded">O(E log V)</span><br>
-                    باستخدام مصفوفة تجاور للرسوم البيانية الكثيفة: <span class="font-mono ltr-text bg-gray-200 p-1 rounded">O(V²)</span>
+                <div class="text-lg text-center text-amber-800 my-2" dir="ltr">
+                    $$ O(|E| \log |V|) $$
+                </div>
+                <p class="text-gray-700 text-sm">
+                    باستخدام طابور أولوية (كومة ثنائية)، أو $$ O(|V|^2) $$ باستخدام مصفوفة تجاور للرسوم البيانية الكثيفة.
                 </p>
             </div>
         </section>

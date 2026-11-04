@@ -14,7 +14,7 @@ ENGLISH_CATALOG = ROOT / "src/locales/en.json"
 ALL_ARABIC_TEXT = set()
 INVALID_PARAGRAPH_CHILDREN = {"address", "article", "aside", "blockquote", "div", "dl", "fieldset", "figure", "footer", "form", "h1", "h2", "h3", "h4", "h5", "h6", "header", "hr", "main", "nav", "ol", "p", "pre", "section", "table", "ul"}
 VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"}
-RENAMES = {"class": "className", "for": "htmlFor", "tabindex": "tabIndex", "colspan": "colSpan", "rowspan": "rowSpan", "maxlength": "maxLength", "readonly": "readOnly", "crossorigin": "crossOrigin", "inputmode": "inputMode", "autofocus": "autoFocus", "viewbox": "viewBox", "fill-rule": "fillRule", "clip-rule": "clipRule", "stroke-width": "strokeWidth", "stroke-linecap": "strokeLinecap", "stroke-linejoin": "strokeLinejoin", "stroke-dasharray": "strokeDasharray", "stroke-dashoffset": "strokeDashoffset", "font-family": "fontFamily", "font-size": "fontSize", "text-anchor": "textAnchor", "dominant-baseline": "dominantBaseline", "preserveaspectratio": "preserveAspectRatio", "xlink:href": "xlinkHref", "http-equiv": "httpEquiv"}
+RENAMES = {"class": "className", "for": "htmlFor", "tabindex": "tabIndex", "colspan": "colSpan", "rowspan": "rowSpan", "maxlength": "maxLength", "readonly": "readOnly", "crossorigin": "crossOrigin", "inputmode": "inputMode", "autofocus": "autoFocus", "viewbox": "viewBox", "fill-rule": "fillRule", "clip-rule": "clipRule", "stroke-width": "strokeWidth", "stroke-linecap": "strokeLinecap", "stroke-linejoin": "strokeLinejoin", "stroke-dasharray": "strokeDasharray", "stroke-dashoffset": "strokeDashoffset", "font-family": "fontFamily", "font-size": "fontSize", "font-weight": "fontWeight", "text-anchor": "textAnchor", "dominant-baseline": "dominantBaseline", "preserveaspectratio": "preserveAspectRatio", "xlink:href": "xlinkHref", "http-equiv": "httpEquiv"}
 
 class TreeParser(HTMLParser):
     def __init__(self):
@@ -78,12 +78,15 @@ def props_for(attrs, tag):
             props.append(("data-legacy-" + name[2:].lower(), value or ""))
             continue
         prop = RENAMES.get(name.lower(), name)
+        if isinstance(value, tuple) and len(value) == 2 and value[1] is True:
+            props.append((prop, value[0], True))
+            continue
         if tag in {"input", "textarea", "select"} and name.lower() == "value":
             prop = "defaultValue"
         if tag == "input" and name.lower() == "checked":
             prop = "defaultChecked"
         if tag == "option" and name.lower() == "selected":
-            prop = "selected"
+            continue
         if name.lower() == "style":
             props.append(("style", style_object(value or ""), True))
         elif value is None:
@@ -107,6 +110,27 @@ def jsx_expression(node, depth=0):
     tag = node["tag"]
     if tag == "p" and contains_block_content(node):
         tag = "div"
+
+    if tag == "textarea" and node["children"]:
+        text_content = "".join(child for child in node["children"] if isinstance(child, str)).strip()
+        node["children"] = []
+        if text_content and "defaultValue" not in node["attrs"] and "value" not in node["attrs"]:
+            if re.search(r"[\u0600-\u06ff]", text_content):
+                key = "legacy." + sha256(text_content.encode("utf-8")).hexdigest()[:16]
+                ALL_ARABIC_TEXT.add(text_content)
+                node["attrs"]["defaultValue"] = (f't({json.dumps(key)})', True)
+            else:
+                node["attrs"]["defaultValue"] = text_content
+
+    if tag == "select":
+        for child in node["children"]:
+            if isinstance(child, dict) and child.get("tag") == "option":
+                if "selected" in child.get("attrs", {}):
+                    val = child["attrs"].get("value")
+                    if val is not None and "defaultValue" not in node["attrs"]:
+                        node["attrs"]["defaultValue"] = val
+                    del child["attrs"]["selected"]
+
     props = []
     for key, value, *raw_value in props_for(node["attrs"], tag):
         is_raw = raw_value[0] if raw_value else False

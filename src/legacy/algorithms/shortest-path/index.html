@@ -88,22 +88,30 @@
                 تستخدم خوارزمية ديكسترا أسلوب <strong>الجشع (Greedy)</strong> لاختيار العقدة ذات أقل مسافة في كل خطوة. تحتفظ الخوارزمية بمصفوفة للمسافات، وطابور أولوية (Priority Queue) لتتبع العقد التي تنتظر المعالجة.
             </p>
             <div class="bg-indigo-50 p-5 rounded-lg shadow-md mb-6 concept-card border-indigo-400">
-                <h3 class="text-xl font-semibold text-indigo-800 mb-3">آلية العمل خطوة بخطوة</h3>
+                <h3 class="text-xl font-semibold text-indigo-800 mb-3">آلية العمل وقانون الاسترخاء (Edge Relaxation)</h3>
+                <p class="text-gray-700 text-sm mb-3">
+                    المعادلة الرياضية الأساسية لتحديث أقصر مسافة للعقدة $$ v $$ عبر العقدة المجاورة $$ u $$ بوزن حافة $$ w(u, v) $$:
+                </p>
+                <div class="bg-white p-3 rounded-lg border border-indigo-200 text-center font-bold text-indigo-800 text-lg mb-3 overflow-x-auto" dir="ltr">
+                    $$ \text{if } \text{dist}[u] + w(u, v) < \text{dist}[v] \implies \text{dist}[v] = \text{dist}[u] + w(u, v) $$
+                </div>
                 <ol class="list-decimal list-inside text-gray-700 space-y-2">
-                    <li>حدد عقدة البداية واجعل مسافتها <strong>صفراً</strong> وجميع العقد الأخرى <strong>مالانهاية</strong>.</li>
-                    <li>ضع عقدة البداية في طابور الأولوية.</li>
-                    <li>اسحب العقدة ذات <strong>أقل مسافة</strong> من طابور الأولوية — هذه هي العقدة الحالية.</li>
+                    <li>حدد عقدة البداية واجعل مسافتها <strong>صفراً</strong> ($$ \text{dist}[\text{start}] = 0 $$) وجميع العقد الأخرى $$ \infty $$.</li>
+                    <li>ضع عقدة البداية في طابور الأولوية (Min-Priority Queue).</li>
+                    <li>اسحب العقدة ذات <strong>أقل مسافة</strong> من طابور الأولوية — هذه هي العقدة الحالية $$ u $$.</li>
                     <li>إذا كانت العقدة قد زرت سابقاً، تجاهلها وانتقل للخطوة ٣.</li>
-                    <li>قم بتحديث مسافات الجيران غير المُزارة: إذا كانت المسافة الجديدة (مسافة العقدة الحالية + وزن الحافة) <strong>أقل</strong> من المسافة المسجلة، قم بتحديثها.</li>
+                    <li>قم بتحديث مسافات الجيران غير المُزارة وفق قانون الاسترخاء المذكور أعلاه.</li>
                     <li>أضف الجيران المحدثين إلى طابور الأولوية.</li>
                     <li>كرر الخطوات ٣–٦ حتى يصبح الطابور فارغاً.</li>
                 </ol>
             </div>
             <div class="bg-green-50 p-5 rounded-lg shadow-md border-green-400">
                 <h3 class="text-xl font-semibold text-green-800 mb-3">التعقيد الحسابي</h3>
-                <p class="text-gray-700">
-                    باستخدام طابور أولوية (كومة ثنائية): <span class="font-mono ltr-text bg-gray-200 p-1 rounded">O((V + E) log V)</span><br>
-                    حيث V عدد العقد و E عدد الحواف.
+                <div class="text-xl text-center text-green-800 my-2" dir="ltr">
+                    $$ O((|V| + |E|) \log |V|) $$
+                </div>
+                <p class="text-gray-700 text-sm text-center">
+                    حيث $$ |V| $$ يمثل عدد العقد (Vertices) و $$ |E| $$ يمثل عدد الحواف (Edges) باستخدام الكومة الثنائية (Binary Heap).
                 </p>
             </div>
         </section>

@@ -4,6 +4,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageToggle } from "@/components/LanguageToggle";
 import { useLanguage } from "@/components/LanguageProvider";
 import { SiteIcon } from "@/components/SiteIcon";
+import { InstallAppButton } from "@/components/InstallAppButton";
 
 export function SiteHeader() {
   const { language } = useLanguage();
@@ -22,6 +23,7 @@ export function SiteHeader() {
         <div className="header-actions">
           <LanguageToggle />
           <ThemeToggle />
+          <InstallAppButton />
         </div>
       </div>
     </header>

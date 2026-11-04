@@ -38,7 +38,11 @@ function deepCloneNodeList(nodes) {
 }
 
 function initializeHuffman() {
-  const textInput = document.getElementById("textInput").value;
+  const textInputEl = document.getElementById("textInput");
+  const stepControlsEl = document.getElementById("stepControls");
+  if (!textInputEl || !stepControlsEl) return;
+
+  const textInput = textInputEl.value;
   const frequencies = calculateFrequencies(textInput);
   const totalChars = Object.values(frequencies).reduce(
     (sum, freq) => sum + freq, 0
@@ -46,7 +50,7 @@ function initializeHuffman() {
 
   if (totalChars === 0) {
     displayMessage("الرجاء إدخال نص صالح يحتوي على أحرف إنجليزية.", "red");
-    document.getElementById("stepControls").classList.add("hidden");
+    stepControlsEl.classList.add("hidden");
     return;
   }
 
@@ -54,8 +58,9 @@ function initializeHuffman() {
   appState.stepHistory = buildStepHistory(frequencies);
   appState.currentStep = 0;
 
-  document.getElementById("finalCodesArea").classList.add("hidden");
-  document.getElementById("stepControls").classList.remove("hidden");
+  const finalCodesArea = document.getElementById("finalCodesArea");
+  if (finalCodesArea) finalCodesArea.classList.add("hidden");
+  stepControlsEl.classList.remove("hidden");
 
   nextStep();
   displayMessage('تم حساب التكرارات. اضغط "التالي" للمتابعة.', "green");
@@ -213,11 +218,17 @@ function updateUI() {
 
   if (!history) return;
 
-  document.getElementById("stepIndicator").textContent = `${appState.currentStep} / ${appState.stepHistory.length}`;
-  document.getElementById("stepTitle").textContent = history.title;
+  const stepIndicator = document.getElementById("stepIndicator");
+  if (stepIndicator) stepIndicator.textContent = `${appState.currentStep} / ${appState.stepHistory.length}`;
 
-  document.getElementById("prevBtn").disabled = appState.currentStep === 1;
-  document.getElementById("nextBtn").disabled = appState.currentStep === appState.stepHistory.length;
+  const stepTitle = document.getElementById("stepTitle");
+  if (stepTitle) stepTitle.textContent = history.title;
+
+  const prevBtn = document.getElementById("prevBtn");
+  if (prevBtn) prevBtn.disabled = appState.currentStep === 1;
+
+  const nextBtn = document.getElementById("nextBtn");
+  if (nextBtn) nextBtn.disabled = appState.currentStep === appState.stepHistory.length;
 
   displayCombinedTable(history);
 
@@ -227,16 +238,20 @@ function updateUI() {
     drawInitialNodes(history.nodes);
   }
 
-  if (history.isFinal) {
-    displayFinalMetrics();
-    document.getElementById("finalCodesArea").classList.remove("hidden");
-  } else {
-    document.getElementById("finalCodesArea").classList.add("hidden");
+  const finalCodesArea = document.getElementById("finalCodesArea");
+  if (finalCodesArea) {
+    if (history.isFinal) {
+      displayFinalMetrics();
+      finalCodesArea.classList.remove("hidden");
+    } else {
+      finalCodesArea.classList.add("hidden");
+    }
   }
 }
 
 function displayCombinedTable(history) {
   const tableBody = document.getElementById("combinedTableBody");
+  if (!tableBody) return;
   tableBody.innerHTML = "";
 
   let displayNodes = history.nodes;
@@ -273,17 +288,20 @@ function displayCombinedTable(history) {
 }
 
 function displayFinalMetrics() {
-  const initialNodes = appState.stepHistory[0].nodes;
+  const initialNodes = appState.stepHistory[0]?.nodes;
+  if (!initialNodes) return;
   const metrics = calculateMetrics(initialNodes);
 
-  document.getElementById("avgCodeLength").textContent = metrics.avgCodeLength.toFixed(3);
+  const avgEl = document.getElementById("avgCodeLength");
+  if (avgEl) avgEl.textContent = metrics.avgCodeLength.toFixed(3);
 
   const tableBody = document.getElementById("finalCodesTableBody");
+  if (!tableBody) return;
   tableBody.innerHTML = "";
 
   const sortedChars = initialNodes.sort((a, b) => b.freq - a.freq);
 
-  let calculationStepsHtml = `$$ \\frac{1}{${appState.totalChars.toLocaleString("ar-EG")}} \\times \\left[ `;
+  let calculationStepsHtml = `$$ \\frac{1}{${appState.totalChars}} \\times \\left[ `;
   let firstTerm = true;
 
   sortedChars.forEach((node) => {
@@ -306,13 +324,19 @@ function displayFinalMetrics() {
     if (!firstTerm) {
       calculationStepsHtml += " + ";
     }
-    calculationStepsHtml += `(${freq.toLocaleString("ar-EG")} \\times ${codeLength})`;
+    calculationStepsHtml += `(${freq} \\times ${codeLength})`;
     firstTerm = false;
   });
 
-  calculationStepsHtml += ` \\right] = \\frac{${metrics.totalBits.toLocaleString("ar-EG")}}{${appState.totalChars.toLocaleString("ar-EG")}} = ${metrics.avgCodeLength.toFixed(3)} \\text{ بت/حرف} $$`;
+  calculationStepsHtml += ` \\right] = \\frac{${metrics.totalBits}}{${appState.totalChars}} = ${metrics.avgCodeLength.toFixed(3)} $$`;
 
-  document.getElementById("calculationSteps").innerHTML = calculationStepsHtml;
+  const calcSteps = document.getElementById("calculationSteps");
+  if (calcSteps) {
+    calcSteps.innerHTML = calculationStepsHtml;
+    if (typeof window !== "undefined" && window.renderMath) {
+      window.renderMath(calcSteps);
+    }
+  }
 }
 
 function calculateMetrics(initialNodes) {

@@ -139,13 +139,20 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-3 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                 </svg>
-                مثال فيبوناتشي — مقارنة التعقيد
+                مثال فيبوناتشي — معادلة التكرار ومقارنة التعقيد
             </h2>
+
+            <div class="bg-indigo-50 p-5 rounded-xl border border-indigo-200 mb-6">
+                <h3 class="font-bold text-indigo-900 mb-2">معادلة متتالية فيبوناتشي الرياضية:</h3>
+                <div class="bg-white p-3 rounded-lg border border-indigo-200 text-center font-bold text-indigo-800 text-lg overflow-x-auto" dir="ltr">
+                    $$ F(n) = \begin{cases} 0 & \text{if } n = 0 \\ 1 & \text{if } n = 1 \\ F(n-1) + F(n-2) & \text{if } n \ge 2 \end{cases} $$
+                </div>
+            </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div class="bg-red-50 p-5 rounded-lg shadow-md border-red-400">
-                    <h3 class="text-xl font-semibold text-red-800 mb-2">بدون DP — عودية ساذجة (O(2ⁿ))</h3>
-                    <p class="text-gray-700 text-sm mb-2">استدعاءات متكررة تعيد حساب نفس القيم مئات المرات.</p>
+                    <h3 class="text-xl font-semibold text-red-800 mb-2">بدون DP — عودية ساذجة ($$ O(2^n) $$)</h3>
+                    <p class="text-gray-700 text-sm mb-2">استدعاءات متكررة تعيد حساب نفس القيم بشكل أسي مفرط:</p>
                     <div class="bg-white p-3 rounded-lg border border-red-200 font-mono text-sm ltr-text" dir="ltr">
                         fib(5) = fib(4) + fib(3)<br>
                         fib(4) = fib(3) + fib(2)<br>
@@ -154,8 +161,8 @@
                     </div>
                 </div>
                 <div class="bg-emerald-50 p-5 rounded-lg shadow-md border-emerald-400">
-                    <h3 class="text-xl font-semibold text-emerald-800 mb-2">مع DP — خطي (O(n))</h3>
-                    <p class="text-gray-700 text-sm mb-2">كل قيمة تحسب مرة واحدة فقط وتخزن.</p>
+                    <h3 class="text-xl font-semibold text-emerald-800 mb-2">مع DP — خطي ($$ O(n) $$)</h3>
+                    <p class="text-gray-700 text-sm mb-2">كل قيمة تحسب مرة واحدة فقط وتخزن في جدول:</p>
                     <div class="bg-white p-3 rounded-lg border border-emerald-200 font-mono text-sm ltr-text" dir="ltr">
                         dp[0] = 0<br>
                         dp[1] = 1<br>
@@ -176,16 +183,15 @@
                 مثال العملات المعدنية (Coin Change)
             </h2>
             <p class="text-gray-700 leading-loose mb-4">
-                مشكلة العملات المعدنية: لدينا عملات بقيم معينة (مثل ١، ٥، ١٠، ٢٥) ونريد معرفة أقل عدد من العملات لتكوين مبلغ معين. الحل باستخدام DP:
+                مشكلة العملات المعدنية: لدينا مجموعة فئات من العملات ونريد إيجاد أقل عدد من القطع لتكوين مبلغ معين $$ w $$.
             </p>
             <div class="bg-amber-50 p-5 rounded-lg shadow-md mb-6 concept-card border-amber-400">
-                <h3 class="text-xl font-semibold text-amber-800 mb-3">معادلة DP</h3>
-                <div class="bg-white p-4 rounded-lg border border-amber-200 font-mono text-sm ltr-text mb-2" dir="ltr">
-                    dp[0] = 0<br>
-                    dp[amount] = min(dp[amount - coin] + 1) لكل coin ≤ amount
+                <h3 class="text-xl font-semibold text-amber-800 mb-3">علاقة البرمجة الديناميكية التكرارية</h3>
+                <div class="bg-white p-4 rounded-lg border border-amber-200 text-center font-bold text-amber-900 text-lg mb-2 overflow-x-auto" dir="ltr">
+                    $$ \text{dp}[w] = \min_{c \in \text{Coins}, \, c \le w} \big\{ \text{dp}[w - c] + 1 \big\} \quad \text{حيث } \text{dp}[0] = 0 $$
                 </div>
-                <p class="text-gray-700 text-sm">
-                    مثال: عملات [١، ٣، ٤]، المبلغ ٦ ← الحل الأمثل = عملتان (٣ + ٣)
+                <p class="text-gray-700 text-sm mt-3">
+                    مثال: عند توفر العملات $$ [1, 3, 4] $$ للمبلغ $$ 6 $$ ← الحل الأمثل هو $$ \text{dp}[6] = 2 $$ (باستخدام قطعتين من فئة 3).
                 </p>
             </div>
         </section>

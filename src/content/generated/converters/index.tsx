@@ -50,29 +50,25 @@ export default function NativePage() {
             <span className={"font-bold text-green-700"}>
               {"10"}
             </span>
-            {t("legacy.639c0cb12a91aa88")}
+            {t("legacy.84642b6b4225703e")}
           </p>
           {"\n                "}
           <div className={"bg-white p-4 rounded-lg shadow-inner"}>
             {"\n                    "}
-            <p className={"text-gray-700"}>
+            <p className={"text-gray-700 font-semibold"}>
               <span className={"font-bold"}>
                 {t("legacy.03bf106531a9fdaf")}
               </span>
-              {t("legacy.92085a8f598eefdf")}
+              {t("legacy.28c21b357ee57dfe")}
               <span className={"mono-font text-lg text-green-700"}>
                 {"456"}
               </span>
-              {t("legacy.933b53e12e4788c9")}
+              {t("legacy.10787dd8eb987c2d")}
             </p>
             {"\n                    "}
-            <p className={"mono-font text-lg text-green-700 mt-2 text-center ltr-text"}>
-              {"4 × 10² + 5 × 10¹ + 6 × 10⁰"}
-            </p>
-            {"\n                    "}
-            <p className={"mono-font text-lg text-green-700 text-center ltr-text"}>
-              {"= 400 + 50 + 6 = 456"}
-            </p>
+            <div className={"text-lg text-green-700 mt-2 text-center overflow-x-auto"} dir={"ltr"}>
+              {"\n                        $$ (456)_{10} = (4 \\times 10^2) + (5 \\times 10^1) + (6 \\times 10^0) = 400 + 50 + 6 = 456 $$\n                    "}
+            </div>
             {"\n                "}
           </div>
           {"\n            "}
@@ -112,24 +108,20 @@ export default function NativePage() {
           {"\n                "}
           <div className={"bg-white p-4 rounded-lg shadow-inner"}>
             {"\n                    "}
-            <p className={"text-gray-700"}>
+            <p className={"text-gray-700 font-semibold"}>
               <span className={"font-bold"}>
                 {t("legacy.03bf106531a9fdaf")}
               </span>
-              {t("legacy.a034785c62512a71")}
+              {t("legacy.72686d37bdc961f5")}
               <span className={"mono-font text-lg text-blue-700"}>
                 {"1101"}
               </span>
-              {t("legacy.b80f19efc429d2cb")}
+              {t("legacy.7a97af5d217da12c")}
             </p>
             {"\n                    "}
-            <p className={"mono-font text-lg text-blue-700 mt-2 text-center ltr-text"}>
-              {"1 × 2³ + 1 × 2² + 0 × 2¹ + 1 × 2⁰"}
-            </p>
-            {"\n                    "}
-            <p className={"mono-font text-lg text-blue-700 text-center ltr-text"}>
-              {t("legacy.4830ae2c751b390d")}
-            </p>
+            <div className={"text-lg text-blue-700 mt-2 text-center overflow-x-auto"} dir={"ltr"}>
+              {"\n                        $$ (1101)_2 = (1 \\times 2^3) + (1 \\times 2^2) + (0 \\times 2^1) + (1 \\times 2^0) = 8 + 4 + 0 + 1 = (13)_{10} $$\n                    "}
+            </div>
             {"\n                "}
           </div>
           {"\n            "}
@@ -150,17 +142,21 @@ export default function NativePage() {
         </h2>
         {"\n            "}
         <p className={"text-gray-700 leading-loose mb-4"}>
-          {t("legacy.d4aab32340880649")}
+          {t("legacy.49c9df79e9a84b37")}
           <span className={"font-bold"}>
-            {t("legacy.917a73a450df44ae")}
+            {t("legacy.dbd5523a92f1e40d")}
           </span>
-          {t("legacy.ffc5bfba0e3d99f7")}
+          {":\n            "}
         </p>
+        {"\n            "}
+        <div className={"bg-white p-3 rounded-xl border border-amber-300 text-center font-bold text-amber-800 text-lg mb-4 overflow-x-auto"} dir={"ltr"}>
+          {"\n                $$ N_{10} = \\sum_{i=0}^{k-1} (d_i \\times b^i) = (d_{k-1} \\times b^{k-1}) + \\cdots + (d_1 \\times b^1) + (d_0 \\times b^0) $$\n            "}
+        </div>
         {"\n            "}
         <div className={"bg-amber-50 p-5 rounded-lg shadow-md concept-card border-amber-400"}>
           {"\n                "}
           <h3 className={"text-xl font-semibold text-amber-800 mb-3"}>
-            {t("legacy.7a214d2b2acc6bf1")}
+            {t("legacy.3b9f07a0be30ca16")}
           </h3>
           {"\n                "}
           <div className={"bg-white p-4 rounded-lg shadow-inner overflow-x-auto"}>
@@ -169,7 +165,7 @@ export default function NativePage() {
               <tbody>
                 <tr className={"border-b"}>
                   <td className={"p-2 font-bold"}>
-                    {t("legacy.eb31a9f861fd5109")}
+                    {t("legacy.0add79a2a209cc18")}
                   </td>
                   <td className={"p-2 mono-font ltr-text"}>
                     {"1"}
@@ -192,47 +188,47 @@ export default function NativePage() {
                 </tr>
                 <tr className={"border-b"}>
                   <td className={"p-2 font-bold"}>
-                    {t("legacy.f4acf266f48064fe")}
+                    {t("legacy.83c1ac5c4b4aa260")}
                   </td>
                   <td className={"p-2 mono-font ltr-text"}>
-                    {"2⁵"}
+                    {"2⁵ = 32"}
                   </td>
                   <td className={"p-2 mono-font ltr-text"}>
-                    {"2⁴"}
+                    {"2⁴ = 16"}
                   </td>
                   <td className={"p-2 mono-font ltr-text"}>
-                    {"2³"}
+                    {"2³ = 8"}
                   </td>
                   <td className={"p-2 mono-font ltr-text"}>
-                    {"2²"}
+                    {"2² = 4"}
                   </td>
                   <td className={"p-2 mono-font ltr-text"}>
-                    {"2¹"}
+                    {"2¹ = 2"}
                   </td>
                   <td className={"p-2 mono-font ltr-text"}>
-                    {"2⁰"}
+                    {"2⁰ = 1"}
                   </td>
                 </tr>
                 <tr>
                   <td className={"p-2 font-bold"}>
-                    {t("legacy.4c49efecd6cbd7c2")}
+                    {t("legacy.82fff398208d65b0")}
                   </td>
-                  <td className={"p-2 mono-font ltr-text"}>
+                  <td className={"p-2 mono-font ltr-text font-bold"}>
                     {"32"}
                   </td>
                   <td className={"p-2 mono-font ltr-text"}>
                     {"0"}
                   </td>
-                  <td className={"p-2 mono-font ltr-text"}>
+                  <td className={"p-2 mono-font ltr-text font-bold"}>
                     {"8"}
                   </td>
-                  <td className={"p-2 mono-font ltr-text"}>
+                  <td className={"p-2 mono-font ltr-text font-bold"}>
                     {"4"}
                   </td>
                   <td className={"p-2 mono-font ltr-text"}>
                     {"0"}
                   </td>
-                  <td className={"p-2 mono-font ltr-text"}>
+                  <td className={"p-2 mono-font ltr-text font-bold"}>
                     {"1"}
                   </td>
                 </tr>
@@ -241,9 +237,9 @@ export default function NativePage() {
             {"\n                "}
           </div>
           {"\n                "}
-          <p className={"mt-4 text-amber-800 font-bold text-lg text-center"}>
-            {"\n                    32 + 0 + 8 + 4 + 0 + 1 = 45₁₀\n                "}
-          </p>
+          <div className={"mt-4 text-amber-900 font-bold text-lg text-center overflow-x-auto"} dir={"ltr"}>
+            {"\n                    $$ (101101)_2 = 32 + 0 + 8 + 4 + 0 + 1 = (45)_{10} $$\n                "}
+          </div>
           {"\n            "}
         </div>
         {"\n        "}

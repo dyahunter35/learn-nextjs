@@ -72,16 +72,38 @@
         <span class="w-2 h-8 bg-indigo-600 rounded inline-block"></span>
         دوال التجزئة (Hash Functions)
       </h2>
-      <p class="text-gray-700 leading-8 mb-3">
-        دالة التجزئة هي دالة رياضية تأخذ مفتاحاً وتُرجع له فهرساً في جدول التجزئة. من أبسط دوال التجزئة وأكثرها شيوعاً:
+      <p class="text-gray-700 leading-8 mb-4">
+        دالة التجزئة هي دالة رياضية تأخذ مفتاحاً وتُرجع له فهرساً في جدول التجزئة. من أهم دوال التجزئة وأكثرها شيوعاً:
       </p>
-      <ul class="list-disc list-inside text-gray-700 leading-8 mr-4 mb-3 space-y-1">
-        <li><strong>Modulo (mod):</strong> <code class="bg-gray-100 px-2 py-0.5 rounded text-indigo-700">hash(key) = key % table_size</code> — الأكثر استخداماً للقيم الصحيحة.</li>
-        <li><strong>الضرب (Multiplication):</strong> <code class="bg-gray-100 px-2 py-0.5 rounded text-indigo-700">hash(key) = floor(table_size * (key * A % 1))</code></li>
-        <li><strong>المتعددة (Polynomial):</strong> للسلاسل النصية، تُحسب كمجموع مرجح لقيم الأحرف.</li>
-      </ul>
+
+      <div class="space-y-4 mb-4">
+        <div class="p-4 bg-gray-50 rounded-xl border border-gray-200">
+          <h3 class="font-bold text-indigo-900 mb-1">١. طريقة باقي القسمة (Division Method / Modulo):</h3>
+          <p class="text-gray-600 text-sm mb-2">الأكثر استخداماً مع الأعداد الصحيحة، حيث يمثل $$ m $$ حجم جدول التجزئة (يُفضل أن يكون عدداً أولياً):</p>
+          <div class="text-lg bg-white p-3 rounded-lg border border-gray-200 text-center font-bold text-indigo-700 overflow-x-auto" dir="ltr">
+            $$ h(k) = k \bmod m $$
+          </div>
+        </div>
+
+        <div class="p-4 bg-gray-50 rounded-xl border border-gray-200">
+          <h3 class="font-bold text-indigo-900 mb-1">٢. طريقة الضرب (Multiplication Method):</h3>
+          <p class="text-gray-600 text-sm mb-2">نضرب المفتاح في ثابت $$ A $$ (حيث $$ 0 < A < 1 $$ وعادةً يؤخذ مقلوب النسبة الذهبية $$ A \approx 0.618033 $$):</p>
+          <div class="text-lg bg-white p-3 rounded-lg border border-gray-200 text-center font-bold text-indigo-700 overflow-x-auto" dir="ltr">
+            $$ h(k) = \lfloor m \cdot (k \cdot A \bmod 1) \rfloor $$
+          </div>
+        </div>
+
+        <div class="p-4 bg-gray-50 rounded-xl border border-gray-200">
+          <h3 class="font-bold text-indigo-900 mb-1">٣. معامل التحميل (Load Factor):</h3>
+          <p class="text-gray-600 text-sm mb-2">مقياس لمدى امتلاء الجدول، حيث $$ n $$ هو عدد العناصر و $$ m $$ هو سعة الجدول:</p>
+          <div class="text-lg bg-white p-3 rounded-lg border border-gray-200 text-center font-bold text-indigo-700 overflow-x-auto" dir="ltr">
+            $$ \alpha = \frac{n}{m} $$
+          </div>
+        </div>
+      </div>
+
       <p class="text-gray-700 leading-8">
-        اختيار دالة تجزئة جيدة يُقلل من التصادمات ويُوزع المفاتيح بالتساوي عبر الجدول.
+        اختيار دالة تجزئة جيدة وحجم جدول مناسب يُقلل من التصادمات ويُوزع المفاتيح بالتساوي عبر الجدول.
       </p>
     </section>
 
@@ -91,17 +113,22 @@
         <span class="w-2 h-8 bg-indigo-600 rounded inline-block"></span>
         معالجة التصادمات (Collision Resolution)
       </h2>
-      <p class="text-gray-700 leading-8 mb-3">
-        يحدث التصادم (Collision) عندما يُعطي مفتاحان مختلفان نفس قيمة التجزئة (أي نفس فهرس الجدول). هناك عدة استراتيجيات لمعالجة ذلك:
+      <p class="text-gray-700 leading-8 mb-4">
+        يحدث التصادم (Collision) عندما يُعطي مفتاحان مختلفان نفس قيمة التجزئة ($$ h(k_1) = h(k_2) $$). أهم استراتيجيات المعالجة:
       </p>
       <div class="grid md:grid-cols-2 gap-4 mb-3">
         <div class="bg-indigo-50 rounded-lg p-4 border border-indigo-100">
-          <h3 class="font-bold text-indigo-800 mb-2">التسلسل (Chaining)</h3>
-          <p class="text-gray-700 text-sm leading-7">كل خلية في الجدول تحتوي على قائمة مرتبطة (Linked List). عند حدوث تصادم، يُضاف المفتاح الجديد إلى نهاية القائمة في نفس الخلية. هذه هي الطريقة المستخدمة في المحاكاة التفاعلية.</p>
+          <h3 class="font-bold text-indigo-800 mb-2">١. التسلسل المنفصل (Separate Chaining)</h3>
+          <p class="text-gray-700 text-sm leading-7 mb-2">كل خلية في الجدول تحتوي على رأس قائمة مرتبطة (Linked List). عند حدوث تصادم، يُضاف المفتاح الجديد إلى القائمة. البحث يتطلب في المتوسط $$ O(1 + \alpha) $$.</p>
         </div>
         <div class="bg-indigo-50 rounded-lg p-4 border border-indigo-100">
-          <h3 class="font-bold text-indigo-800 mb-2">العنونة المفتوحة (Open Addressing)</h3>
-          <p class="text-gray-700 text-sm leading-7">عند حدوث تصادم، يتم البحث عن خلية فارغة أخرى في الجدول باستخدام تقنيات مثل التحقيق الخطي (Linear Probing) أو التحقيق التربيعي (Quadratic Probing).</p>
+          <h3 class="font-bold text-indigo-800 mb-2">٢. العنونة المفتوحة (Open Addressing)</h3>
+          <p class="text-gray-700 text-sm leading-7 mb-2">تُخزن جميع العناصر مباشرة داخل خلايا الجدول. وعند التصادم، نبحث عن خلية فارغة بالتسلسل:</p>
+          <ul class="text-xs space-y-1.5 text-gray-700">
+            <li><strong>التحقيق الخطي:</strong> $$ h(k, i) = (h'(k) + i) \bmod m $$</li>
+            <li><strong>التحقيق التربيعي:</strong> $$ h(k, i) = (h'(k) + c_1 i + c_2 i^2) \bmod m $$</li>
+            <li><strong>التجزئة المزدوجة:</strong> $$ h(k, i) = (h_1(k) + i \cdot h_2(k)) \bmod m $$</li>
+          </ul>
         </div>
       </div>
     </section>
