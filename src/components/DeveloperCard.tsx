@@ -74,32 +74,12 @@ export function DeveloperCard() {
               <span className="developer-tech-pill">JavaScript</span>
               <span className="developer-tech-pill">React / Next.js</span>
               <span className="developer-tech-pill">HTML/CSS</span>
-              <a
-                href="https://deyaa.alsultansudan.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="developer-tech-pill font-extrabold !border-amber-400 !bg-amber-400 !text-slate-950 hover:!bg-amber-500 shadow-sm"
-              >
-                {en ? "Portfolio Website" : "الموقع الشخصي"}
-              </a>
             </div>
 
             {/* Contact Links */}
             <div className="pt-4 border-t border-[var(--line)] flex items-center justify-center md:justify-start gap-3">
               <a
-                href="https://www.linkedin.com/in/Deyaa-Albushra-Mohamed"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn Profile"
-                className="developer-social-btn linkedin"
-                title="LinkedIn"
-              >
-                <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM4 11h4v10H4zM6 4a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" />
-                </svg>
-              </a>
-              <a
-                href="https://github.com/hunter35"
+                href="https://github.com/dyahunter35/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub Profile"
@@ -111,15 +91,15 @@ export function DeveloperCard() {
                 </svg>
               </a>
               <a
-                href="https://deyaa.alsultansudan.com/"
+                href="https://www.linkedin.com/in/dyahunter35"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Website"
-                className="developer-social-btn website"
-                title="Personal Website"
+                aria-label="LinkedIn Profile"
+                className="developer-social-btn linkedin"
+                title="LinkedIn"
               >
-                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM4 11h4v10H4zM6 4a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" />
                 </svg>
               </a>
             </div>
