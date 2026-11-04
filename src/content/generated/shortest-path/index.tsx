@@ -116,8 +116,18 @@ export default function NativePage() {
         <div className={"bg-indigo-50 p-5 rounded-lg shadow-md mb-6 concept-card border-indigo-400"}>
           {"\n                "}
           <h3 className={"text-xl font-semibold text-indigo-800 mb-3"}>
-            {t("legacy.f06ee310f4d98120")}
+            {t("legacy.9b7f78d8badfc7e9")}
           </h3>
+          {"\n                "}
+          <p className={"text-gray-700 text-sm mb-3"}>
+            {t("legacy.736f0aca4db96e9f")}
+          </p>
+          {"\n                "}
+          <div className={"bg-white p-3 rounded-lg border border-indigo-200 text-center font-bold text-indigo-800 text-lg mb-3 overflow-x-auto"} dir={"ltr"}>
+            {"\n                    $$ \\text{if } \\text{dist}[u] + w(u, v) "}
+            {"<"}
+            {" \\text{dist}[v] \\implies \\text{dist}[v] = \\text{dist}[u] + w(u, v) $$\n                "}
+          </div>
           {"\n                "}
           <ol className={"list-decimal list-inside text-gray-700 space-y-2"}>
             {"\n                    "}
@@ -126,15 +136,11 @@ export default function NativePage() {
               <strong>
                 {t("legacy.376fd01c0f2aacc6")}
               </strong>
-              {t("legacy.010837c91f6b7bf5")}
-              <strong>
-                {t("legacy.97e705f0a77800ab")}
-              </strong>
-              {"."}
+              {t("legacy.e35de40fd0e35d30")}
             </li>
             {"\n                    "}
             <li>
-              {t("legacy.a60e953f8a95221f")}
+              {t("legacy.c030762fad2f858f")}
             </li>
             {"\n                    "}
             <li>
@@ -142,7 +148,7 @@ export default function NativePage() {
               <strong>
                 {t("legacy.3c30b913c5c4b58a")}
               </strong>
-              {t("legacy.28d23d6dbd986460")}
+              {t("legacy.cf7501dd49fa7734")}
             </li>
             {"\n                    "}
             <li>
@@ -150,11 +156,7 @@ export default function NativePage() {
             </li>
             {"\n                    "}
             <li>
-              {t("legacy.aef0405e69686c5b")}
-              <strong>
-                {t("legacy.9bab402084d6f661")}
-              </strong>
-              {t("legacy.74d2f8dbf059ec88")}
+              {t("legacy.a594d788d9910e3c")}
             </li>
             {"\n                    "}
             <li>
@@ -175,13 +177,12 @@ export default function NativePage() {
             {t("legacy.1b29b192688f3da3")}
           </h3>
           {"\n                "}
-          <p className={"text-gray-700"}>
-            {t("legacy.4886c729fd8190d7")}
-            <span className={"font-mono ltr-text bg-gray-200 p-1 rounded"}>
-              {"O((V + E) log V)"}
-            </span>
-            <br />
-            {t("legacy.e1654fc8a42e54a7")}
+          <div className={"text-xl text-center text-green-800 my-2"} dir={"ltr"}>
+            {"\n                    $$ O((|V| + |E|) \\log |V|) $$\n                "}
+          </div>
+          {"\n                "}
+          <p className={"text-gray-700 text-sm text-center"}>
+            {t("legacy.649ac68807c3a7f5")}
           </p>
           {"\n            "}
         </div>

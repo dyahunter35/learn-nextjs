@@ -199,45 +199,16 @@ export default function NativePage() {
             {t("legacy.86b543a5741e9f06")}
           </h3>
           {"\n                "}
-          <p className={"text-gray-700 mb-2"}>
-            {t("legacy.8ba58640c0a9692a")}
+          <p className={"text-gray-700 mb-3"}>
+            {t("legacy.1fa1c24cf965404f")}
           </p>
           {"\n                "}
-          <div className={"bg-white p-4 rounded-lg border border-indigo-200 font-mono text-sm mb-2 ltr-text"} dir={"ltr"}>
-            {"\n                    "}
-            <span className={"text-indigo-600 font-bold"}>
-              {"fact(n)"}
-            </span>
-            {" = n × fact(n-1)"}
-            <br />
-            {"\n                    "}
-            <span className={"text-indigo-600 font-bold"}>
-              {"fact(0)"}
-            </span>
-            {" = 1  "}
-            <span className={"text-gray-400"}>
-              {"// Base case"}
-            </span>
-            <br />
-            {"\n                    "}
-            <span className={"text-indigo-600 font-bold"}>
-              {"fact(1)"}
-            </span>
-            {" = 1  "}
-            <span className={"text-gray-400"}>
-              {"// Base case"}
-            </span>
-            <br />
-            <br />
-            {"\n                    "}
-            <span className={"text-green-600 font-bold"}>
-              {t("legacy.dbc09a043509fa55")}
-            </span>
-            {" = 5 × 4 × 3 × 2 × 1 = "}
-            <span className={"text-amber-600 font-bold"}>
-              {"120"}
-            </span>
-            {"\n                "}
+          <div className={"bg-white p-3 rounded-lg border border-indigo-200 text-center font-bold text-indigo-800 text-lg mb-3 overflow-x-auto"} dir={"ltr"}>
+            {"\n                    $$ n! = \\begin{cases} 1 & \\text{if } n \\le 1 \\\\ n \\times (n-1)! & \\text{if } n > 1 \\end{cases} $$\n                "}
+          </div>
+          {"\n                "}
+          <div className={"bg-white p-3 rounded-lg border border-indigo-100 text-center text-sm font-semibold text-gray-700 overflow-x-auto"} dir={"ltr"}>
+            {"\n                    $$ 5! = 5 \\times 4! = 5 \\times 4 \\times 3 \\times 2 \\times 1 = 120 $$\n                "}
           </div>
           {"\n            "}
         </div>
@@ -248,45 +219,16 @@ export default function NativePage() {
             {t("legacy.aa3daa2278518c17")}
           </h3>
           {"\n                "}
-          <p className={"text-gray-700 mb-2"}>
-            {t("legacy.bc6480ebe12545af")}
+          <p className={"text-gray-700 mb-3"}>
+            {t("legacy.81ae25643050ca70")}
           </p>
           {"\n                "}
-          <div className={"bg-white p-4 rounded-lg border border-teal-200 font-mono text-sm mb-2 ltr-text"} dir={"ltr"}>
-            {"\n                    "}
-            <span className={"text-teal-600 font-bold"}>
-              {"fib(n)"}
-            </span>
-            {" = fib(n-1) + fib(n-2)"}
-            <br />
-            {"\n                    "}
-            <span className={"text-teal-600 font-bold"}>
-              {"fib(0)"}
-            </span>
-            {" = 0  "}
-            <span className={"text-gray-400"}>
-              {"// Base case"}
-            </span>
-            <br />
-            {"\n                    "}
-            <span className={"text-teal-600 font-bold"}>
-              {"fib(1)"}
-            </span>
-            {" = 1  "}
-            <span className={"text-gray-400"}>
-              {"// Base case"}
-            </span>
-            <br />
-            <br />
-            {"\n                    "}
-            <span className={"text-green-600 font-bold"}>
-              {t("legacy.99e579cd847193fe")}
-            </span>
-            {" = 0, 1, 1, 2, 3, 5, 8 → fib(6) = "}
-            <span className={"text-amber-600 font-bold"}>
-              {"8"}
-            </span>
-            {"\n                "}
+          <div className={"bg-white p-3 rounded-lg border border-teal-200 text-center font-bold text-teal-800 text-lg mb-3 overflow-x-auto"} dir={"ltr"}>
+            {"\n                    $$ F(n) = \\begin{cases} 0 & \\text{if } n = 0 \\\\ 1 & \\text{if } n = 1 \\\\ F(n-1) + F(n-2) & \\text{if } n \\ge 2 \\end{cases} $$\n                "}
+          </div>
+          {"\n                "}
+          <div className={"bg-white p-3 rounded-lg border border-teal-100 text-center text-sm font-semibold text-gray-700 overflow-x-auto"} dir={"ltr"}>
+            {"\n                    $$ F(6) = F(5) + F(4) = 5 + 3 = 8 $$\n                "}
           </div>
           {"\n            "}
         </div>

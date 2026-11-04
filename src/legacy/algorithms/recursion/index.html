@@ -130,27 +130,27 @@
 
             <div class="bg-indigo-50 p-5 rounded-lg shadow-md mb-6 concept-card border-indigo-400">
                 <h3 class="text-xl font-semibold text-indigo-800 mb-3">١. مضروب العدد (Factorial)</h3>
-                <p class="text-gray-700 mb-2">
-                    مضروب العدد n (يرمز له n!) هو حاصل ضرب جميع الأعداد الصحيحة الموجبة من 1 إلى n.
+                <p class="text-gray-700 mb-3">
+                    مضروب العدد $$ n $$ (يرمز له $$ n! $$) يُعرّف عودياً كالتالي:
                 </p>
-                <div class="bg-white p-4 rounded-lg border border-indigo-200 font-mono text-sm mb-2 ltr-text" dir="ltr">
-                    <span class="text-indigo-600 font-bold">fact(n)</span> = n × fact(n-1)<br>
-                    <span class="text-indigo-600 font-bold">fact(0)</span> = 1  <span class="text-gray-400">// Base case</span><br>
-                    <span class="text-indigo-600 font-bold">fact(1)</span> = 1  <span class="text-gray-400">// Base case</span><br><br>
-                    <span class="text-green-600 font-bold">مثال: fact(5)</span> = 5 × 4 × 3 × 2 × 1 = <span class="text-amber-600 font-bold">120</span>
+                <div class="bg-white p-3 rounded-lg border border-indigo-200 text-center font-bold text-indigo-800 text-lg mb-3 overflow-x-auto" dir="ltr">
+                    $$ n! = \begin{cases} 1 & \text{if } n \le 1 \\ n \times (n-1)! & \text{if } n > 1 \end{cases} $$
+                </div>
+                <div class="bg-white p-3 rounded-lg border border-indigo-100 text-center text-sm font-semibold text-gray-700 overflow-x-auto" dir="ltr">
+                    $$ 5! = 5 \times 4! = 5 \times 4 \times 3 \times 2 \times 1 = 120 $$
                 </div>
             </div>
 
             <div class="bg-teal-50 p-5 rounded-lg shadow-md concept-card border-teal-400">
                 <h3 class="text-xl font-semibold text-teal-800 mb-3">٢. متتالية فيبوناتشي (Fibonacci)</h3>
-                <p class="text-gray-700 mb-2">
-                    متتالية فيبوناتشي هي سلسلة من الأعداد حيث كل عدد هو مجموع العددين السابقين له.
+                <p class="text-gray-700 mb-3">
+                    متتالية فيبوناتشي هي سلسلة من الأعداد حيث كل عدد هو مجموع العددين السابقين له:
                 </p>
-                <div class="bg-white p-4 rounded-lg border border-teal-200 font-mono text-sm mb-2 ltr-text" dir="ltr">
-                    <span class="text-teal-600 font-bold">fib(n)</span> = fib(n-1) + fib(n-2)<br>
-                    <span class="text-teal-600 font-bold">fib(0)</span> = 0  <span class="text-gray-400">// Base case</span><br>
-                    <span class="text-teal-600 font-bold">fib(1)</span> = 1  <span class="text-gray-400">// Base case</span><br><br>
-                    <span class="text-green-600 font-bold">مثال: fib(6)</span> = 0, 1, 1, 2, 3, 5, 8 → fib(6) = <span class="text-amber-600 font-bold">8</span>
+                <div class="bg-white p-3 rounded-lg border border-teal-200 text-center font-bold text-teal-800 text-lg mb-3 overflow-x-auto" dir="ltr">
+                    $$ F(n) = \begin{cases} 0 & \text{if } n = 0 \\ 1 & \text{if } n = 1 \\ F(n-1) + F(n-2) & \text{if } n \ge 2 \end{cases} $$
+                </div>
+                <div class="bg-white p-3 rounded-lg border border-teal-100 text-center text-sm font-semibold text-gray-700 overflow-x-auto" dir="ltr">
+                    $$ F(6) = F(5) + F(4) = 5 + 3 = 8 $$
                 </div>
             </div>
         </section>

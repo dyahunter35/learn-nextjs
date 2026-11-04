@@ -251,19 +251,31 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M12 6v6m0 0v6m0-6h6m-6 0H6"}></path>
             {"\n                "}
           </svg>
-          {t("legacy.faced266016c8401")}
+          {t("legacy.e7c35bc6b070c310")}
         </h2>
+        {"\n\n            "}
+        <div className={"bg-indigo-50 p-5 rounded-xl border border-indigo-200 mb-6"}>
+          {"\n                "}
+          <h3 className={"font-bold text-indigo-900 mb-2"}>
+            {t("legacy.2dec12402906cf45")}
+          </h3>
+          {"\n                "}
+          <div className={"bg-white p-3 rounded-lg border border-indigo-200 text-center font-bold text-indigo-800 text-lg overflow-x-auto"} dir={"ltr"}>
+            {"\n                    $$ F(n) = \\begin{cases} 0 & \\text{if } n = 0 \\\\ 1 & \\text{if } n = 1 \\\\ F(n-1) + F(n-2) & \\text{if } n \\ge 2 \\end{cases} $$\n                "}
+          </div>
+          {"\n            "}
+        </div>
         {"\n\n            "}
         <div className={"grid grid-cols-1 md:grid-cols-2 gap-4 mb-4"}>
           {"\n                "}
           <div className={"bg-red-50 p-5 rounded-lg shadow-md border-red-400"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-red-800 mb-2"}>
-              {t("legacy.a4b4621d50c5206b")}
+              {t("legacy.76ad7ebaf0bb406b")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700 text-sm mb-2"}>
-              {t("legacy.e91ad00d45d5f008")}
+              {t("legacy.85b78fa912d01138")}
             </p>
             {"\n                    "}
             <div className={"bg-white p-3 rounded-lg border border-red-200 font-mono text-sm ltr-text"} dir={"ltr"}>
@@ -285,11 +297,11 @@ export default function NativePage() {
           <div className={"bg-emerald-50 p-5 rounded-lg shadow-md border-emerald-400"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-emerald-800 mb-2"}>
-              {t("legacy.dfd6208522b76439")}
+              {t("legacy.6f1069e888baa283")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700 text-sm mb-2"}>
-              {t("legacy.9a8e29fe704f72ad")}
+              {t("legacy.2921e5147fbac954")}
             </p>
             {"\n                    "}
             <div className={"bg-white p-3 rounded-lg border border-emerald-200 font-mono text-sm ltr-text"} dir={"ltr"}>
@@ -325,23 +337,21 @@ export default function NativePage() {
         </h2>
         {"\n            "}
         <p className={"text-gray-700 leading-loose mb-4"}>
-          {t("legacy.ac5b80c4b689c59f")}
+          {t("legacy.adf9287ad139095a")}
         </p>
         {"\n            "}
         <div className={"bg-amber-50 p-5 rounded-lg shadow-md mb-6 concept-card border-amber-400"}>
           {"\n                "}
           <h3 className={"text-xl font-semibold text-amber-800 mb-3"}>
-            {t("legacy.4c62186d73560925")}
+            {t("legacy.1708cad131620668")}
           </h3>
           {"\n                "}
-          <div className={"bg-white p-4 rounded-lg border border-amber-200 font-mono text-sm ltr-text mb-2"} dir={"ltr"}>
-            {"\n                    dp[0] = 0"}
-            <br />
-            {t("legacy.feb2b5187bfacfd3")}
+          <div className={"bg-white p-4 rounded-lg border border-amber-200 text-center font-bold text-amber-900 text-lg mb-2 overflow-x-auto"} dir={"ltr"}>
+            {t("legacy.c876b584bea050bd")}
           </div>
           {"\n                "}
-          <p className={"text-gray-700 text-sm"}>
-            {t("legacy.032d6c89e761303b")}
+          <p className={"text-gray-700 text-sm mt-3"}>
+            {t("legacy.d740f51bb1937053")}
           </p>
           {"\n            "}
         </div>

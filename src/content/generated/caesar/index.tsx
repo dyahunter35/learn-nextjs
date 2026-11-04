@@ -334,8 +334,8 @@ export default function NativePage() {
             {t("legacy.156c7836fbee330f")}
           </p>
           {"\n                "}
-          <div className={"formula text-2xl bg-gray-100 p-4 rounded-lg shadow-inner overflow-x-auto text-center font-bold text-green-700"}>
-            {"\n                    Encrypt(x) = (x + Key) mod 28\n                "}
+          <div className={"formula text-2xl bg-gray-100 p-4 rounded-lg shadow-inner overflow-x-auto text-center font-bold text-green-700"} dir={"ltr"}>
+            {"\n                    $$ \\text{Encrypt}(x) = (x + \\text{Key} - 1) \\bmod 28 + 1 $$\n                "}
           </div>
           {"\n                "}
           <p className={"text-sm mt-3 text-green-600"}>
@@ -380,8 +380,8 @@ export default function NativePage() {
             {t("legacy.07b4178a7b809093")}
           </p>
           {"\n                "}
-          <div className={"formula text-2xl bg-gray-100 p-4 rounded-lg shadow-inner overflow-x-auto text-center font-bold text-purple-700"}>
-            {"\n                    Decrypt(x) = (x - Key) mod 28\n                "}
+          <div className={"formula text-2xl bg-gray-100 p-4 rounded-lg shadow-inner overflow-x-auto text-center font-bold text-purple-700"} dir={"ltr"}>
+            {"\n                    $$ \\text{Decrypt}(x) = (x - \\text{Key} - 1) \\bmod 28 + 1 $$\n                "}
           </div>
           {"\n                "}
           <p className={"text-sm mt-3 text-purple-600"}>

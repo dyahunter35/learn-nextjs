@@ -87,9 +87,15 @@
             </p>
 
             <div class="bg-green-50 p-5 rounded-lg shadow-md mb-6 concept-card border-green-400">
-                <h3 class="text-xl font-semibold text-green-800 mb-3">التعقيد الحسابي</h3>
-                <p class="text-gray-700">
-                    أسوأ حالة: <span class="font-mono ltr-text bg-gray-200 p-1 rounded">O(n²)</span> — أفضل حالة: <span class="font-mono ltr-text bg-gray-200 p-1 rounded">O(n)</span> (عندما تكون المصفوفة مرتبة أصلاً). متوسط الحالة: <span class="font-mono ltr-text bg-gray-200 p-1 rounded">O(n²)</span>. الخوارزمية بسيطة ولكنها غير فعالة للمصفوفات الكبيرة.
+                <h3 class="text-xl font-semibold text-green-800 mb-3">التعقيد الحسابي وعدد المقارنات</h3>
+                <p class="text-gray-700 mb-2">
+                    في أسوأ الحالات ومتوسطها، ينفذ الخوارزم مجموع مقارنات متناقص يعطى بالمتسلسلة الحسابية:
+                </p>
+                <div class="bg-white p-3 rounded-lg border border-green-200 text-center font-bold text-green-800 text-base mb-2 overflow-x-auto" dir="ltr">
+                    $$ \sum_{i=1}^{n-1} i = \frac{(n-1) \cdot n}{2} = \frac{n^2 - n}{2} \in O(n^2) $$
+                </div>
+                <p class="text-gray-700 text-sm">
+                    أسوأ حالة: $$ O(n^2) $$ — أفضل حالة (عندما تكون المصفوفة مرتبة أصلاً): $$ O(n) $$.
                 </p>
             </div>
 
@@ -196,23 +202,23 @@
                     <tbody>
                         <tr class="even:bg-gray-100">
                             <td class="p-3 border border-gray-300 font-bold">التعقيد (أسوأ حالة)</td>
-                            <td class="p-3 border border-gray-300 ltr-text">O(n²)</td>
-                            <td class="p-3 border border-gray-300 ltr-text">O(n²)</td>
+                            <td class="p-3 border border-gray-300 ltr-text">$$ O(n^2) $$</td>
+                            <td class="p-3 border border-gray-300 ltr-text">$$ O(n^2) $$</td>
                         </tr>
                         <tr class="even:bg-gray-100">
                             <td class="p-3 border border-gray-300 font-bold">التعقيد (أفضل حالة)</td>
-                            <td class="p-3 border border-gray-300 ltr-text">O(n)</td>
-                            <td class="p-3 border border-gray-300 ltr-text">O(n²)</td>
+                            <td class="p-3 border border-gray-300 ltr-text">$$ O(n) $$</td>
+                            <td class="p-3 border border-gray-300 ltr-text">$$ O(n^2) $$</td>
                         </tr>
                         <tr class="even:bg-gray-100">
                             <td class="p-3 border border-gray-300 font-bold">عدد التبديلات</td>
-                            <td class="p-3 border border-gray-300">كبير (O(n²))</td>
-                            <td class="p-3 border border-gray-300">قليل (O(n))</td>
+                            <td class="p-3 border border-gray-300">كبير ($$ O(n^2) $$)</td>
+                            <td class="p-3 border border-gray-300">قليل ($$ O(n) $$)</td>
                         </tr>
                         <tr class="even:bg-gray-100">
                             <td class="p-3 border border-gray-300 font-bold">عدد المقارنات</td>
-                            <td class="p-3 border border-gray-300 ltr-text">O(n²)</td>
-                            <td class="p-3 border border-gray-300 ltr-text">O(n²)</td>
+                            <td class="p-3 border border-gray-300 ltr-text">$$ O(n^2) $$</td>
+                            <td class="p-3 border border-gray-300 ltr-text">$$ O(n^2) $$</td>
                         </tr>
                         <tr class="even:bg-gray-100">
                             <td class="p-3 border border-gray-300 font-bold">الاستقرار (Stability)</td>

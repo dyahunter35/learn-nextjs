@@ -167,9 +167,13 @@ export default function NativePage() {
               {t("legacy.02067168583c68d6")}
             </h3>
             {"\n                    "}
-            <p className={"text-gray-700"}>
-              {t("legacy.29f67b663858a570")}
+            <p className={"text-gray-700 text-sm mb-2"}>
+              {t("legacy.da94b24f5359590e")}
             </p>
+            {"\n                    "}
+            <div className={"bg-white p-2 rounded border border-cyan-200 text-center font-bold text-cyan-800 overflow-x-auto"} dir={"ltr"}>
+              {t("legacy.a6448cea06c955e2")}
+            </div>
             {"\n                "}
           </div>
           {"\n                "}
@@ -179,9 +183,13 @@ export default function NativePage() {
               {t("legacy.993e35b28f88578a")}
             </h3>
             {"\n                    "}
-            <p className={"text-gray-700"}>
-              {t("legacy.bb8d3f3d3fb886e2")}
+            <p className={"text-gray-700 text-sm mb-2"}>
+              {t("legacy.b324bca01707b44a")}
             </p>
+            {"\n                    "}
+            <div className={"bg-white p-2 rounded border border-teal-200 text-center font-bold text-teal-800 overflow-x-auto"} dir={"ltr"}>
+              {t("legacy.2d372c9c63dc0724")}
+            </div>
             {"\n                "}
           </div>
           {"\n                "}
@@ -191,9 +199,13 @@ export default function NativePage() {
               {t("legacy.f49961f2105138f7")}
             </h3>
             {"\n                    "}
-            <p className={"text-gray-700"}>
-              {t("legacy.a6ac339e56867fa7")}
+            <p className={"text-gray-700 text-sm mb-2"}>
+              {t("legacy.33015b729c3001b7")}
             </p>
+            {"\n                    "}
+            <div className={"bg-white p-2 rounded border border-amber-200 text-center font-bold text-amber-800 overflow-x-auto"} dir={"ltr"}>
+              {t("legacy.e9878a27adc6630d")}
+            </div>
             {"\n                "}
           </div>
           {"\n            "}
@@ -214,7 +226,7 @@ export default function NativePage() {
         </h2>
         {"\n            "}
         <p className={"text-gray-700 leading-loose mb-4"}>
-          {t("legacy.edaee713ad274f8a")}
+          {t("legacy.f71227f75f914e1c")}
         </p>
         {"\n            "}
         <div className={"grid grid-cols-1 md:grid-cols-2 gap-4"}>
@@ -225,9 +237,13 @@ export default function NativePage() {
               {t("legacy.0cef83d22aaeb7cf")}
             </h3>
             {"\n                    "}
-            <p className={"text-gray-700"}>
-              {t("legacy.92cedcacf0325d4d")}
+            <p className={"text-gray-700 text-sm mb-2"}>
+              {t("legacy.b024a4b302c2a289")}
             </p>
+            {"\n                    "}
+            <div className={"bg-white p-2 rounded border border-lime-200 text-center font-bold text-lime-800 overflow-x-auto"} dir={"ltr"}>
+              {"\n                        $$ \\log_{10}(x) = y \\iff 10^y = x, \\quad \\log_{10}(100) = 2 $$\n                    "}
+            </div>
             {"\n                "}
           </div>
           {"\n                "}
@@ -237,9 +253,13 @@ export default function NativePage() {
               {t("legacy.87e3ab3c73334ffa")}
             </h3>
             {"\n                    "}
-            <p className={"text-gray-700"}>
-              {t("legacy.2d75268e4f8bfe2d")}
+            <p className={"text-gray-700 text-sm mb-2"}>
+              {t("legacy.713313951e3578b5")}
             </p>
+            {"\n                    "}
+            <div className={"bg-white p-2 rounded border border-green-200 text-center font-bold text-green-800 overflow-x-auto"} dir={"ltr"}>
+              {"\n                        $$ \\ln(x) = \\log_e(x), \\quad \\ln(e) = 1, \\quad \\ln(1) = 0 $$\n                    "}
+            </div>
             {"\n                "}
           </div>
           {"\n            "}

@@ -80,23 +80,19 @@ export default function NativePage() {
         <div className={"bg-green-50 p-5 rounded-lg shadow-md mb-6 concept-card border-green-400"}>
           {"\n                "}
           <h3 className={"text-xl font-semibold text-green-800 mb-3"}>
-            {t("legacy.1b29b192688f3da3")}
+            {t("legacy.0f2c9d12f82b0f22")}
           </h3>
           {"\n                "}
-          <p className={"text-gray-700"}>
-            {t("legacy.b0db58de11901bdd")}
-            <span className={"font-mono ltr-text bg-gray-200 p-1 rounded"}>
-              {"O(n²)"}
-            </span>
-            {t("legacy.88a988c4ae7f766b")}
-            <span className={"font-mono ltr-text bg-gray-200 p-1 rounded"}>
-              {"O(n)"}
-            </span>
-            {t("legacy.e93637bbf8bffb1e")}
-            <span className={"font-mono ltr-text bg-gray-200 p-1 rounded"}>
-              {"O(n²)"}
-            </span>
-            {t("legacy.c1f4a6753f77bc48")}
+          <p className={"text-gray-700 mb-2"}>
+            {t("legacy.e88e6d36ad334ae7")}
+          </p>
+          {"\n                "}
+          <div className={"bg-white p-3 rounded-lg border border-green-200 text-center font-bold text-green-800 text-base mb-2 overflow-x-auto"} dir={"ltr"}>
+            {"\n                    $$ \\sum_{i=1}^{n-1} i = \\frac{(n-1) \\cdot n}{2} = \\frac{n^2 - n}{2} \\in O(n^2) $$\n                "}
+          </div>
+          {"\n                "}
+          <p className={"text-gray-700 text-sm"}>
+            {t("legacy.78e2d954bbac656c")}
           </p>
           {"\n            "}
         </div>
@@ -283,10 +279,10 @@ export default function NativePage() {
                   {t("legacy.fbde134950d11b2d")}
                 </td>
                 <td className={"p-3 border border-gray-300 ltr-text"}>
-                  {"O(n²)"}
+                  {"$$ O(n^2) $$"}
                 </td>
                 <td className={"p-3 border border-gray-300 ltr-text"}>
-                  {"O(n²)"}
+                  {"$$ O(n^2) $$"}
                 </td>
               </tr>
               <tr className={"even:bg-gray-100"}>
@@ -294,10 +290,10 @@ export default function NativePage() {
                   {t("legacy.aaa2930ed156e108")}
                 </td>
                 <td className={"p-3 border border-gray-300 ltr-text"}>
-                  {"O(n)"}
+                  {"$$ O(n) $$"}
                 </td>
                 <td className={"p-3 border border-gray-300 ltr-text"}>
-                  {"O(n²)"}
+                  {"$$ O(n^2) $$"}
                 </td>
               </tr>
               <tr className={"even:bg-gray-100"}>
@@ -305,10 +301,10 @@ export default function NativePage() {
                   {t("legacy.ca8fe283f8bd6e3c")}
                 </td>
                 <td className={"p-3 border border-gray-300"}>
-                  {t("legacy.2aac95b35ecc5623")}
+                  {t("legacy.c972b60c09ad0889")}
                 </td>
                 <td className={"p-3 border border-gray-300"}>
-                  {t("legacy.2182be389b72799e")}
+                  {t("legacy.e6f6fec9574055e3")}
                 </td>
               </tr>
               <tr className={"even:bg-gray-100"}>
@@ -316,10 +312,10 @@ export default function NativePage() {
                   {t("legacy.dedd3f772d994b10")}
                 </td>
                 <td className={"p-3 border border-gray-300 ltr-text"}>
-                  {"O(n²)"}
+                  {"$$ O(n^2) $$"}
                 </td>
                 <td className={"p-3 border border-gray-300 ltr-text"}>
-                  {"O(n²)"}
+                  {"$$ O(n^2) $$"}
                 </td>
               </tr>
               <tr className={"even:bg-gray-100"}>

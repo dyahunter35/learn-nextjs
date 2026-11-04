@@ -8,12 +8,13 @@
   "scripts": {
     "dev": "next dev",
     "predev": "npm run generate:legacy-react && npm run generate:legacy-controllers && npm run translate:controller-strings && npm run build:legacy-css",
-    "build": "npm run generate:legacy-react && npm run generate:legacy-controllers && npm run translate:controller-strings && npm run build:legacy-css && next build --webpack",
-    "test": "npm run generate:legacy-react && npm run generate:legacy-controllers && npm run translate:controller-strings && npm run test:locales && npm run test:markup && npm run test:theme && npm run test:crypto",
+    "build": "npm run generate:legacy-react && npm run generate:legacy-controllers && npm run translate:controller-strings && npm run build:legacy-css && next build --webpack && node scripts/generate-offline-precache.mjs",
+    "test": "npm run generate:legacy-react && npm run generate:legacy-controllers && npm run translate:controller-strings && npm run test:locales && npm run test:markup && npm run test:theme && npm run test:crypto && npm run test:pwa",
     "test:locales": "node --test tests/locales.test.cjs",
     "test:markup": "python3 -m unittest discover -s tests -p 'test_*.py'",
     "test:theme": "node --test tests/theme-contrast.test.cjs",
     "test:crypto": "node --experimental-strip-types --test tests/cryptography.test.cjs",
+    "test:pwa": "node --test tests/pwa.test.cjs",
     "start": "next start",
     "lint": "eslint .",
     "build:legacy-css": "tailwindcss -i ./src/legacy/legacy-tailwind.css -o ./public/legacy/tailwind.css --minify",
@@ -22,14 +23,16 @@
     "translate:controller-strings": "node scripts/translate-controller-strings.cjs"
   },
   "dependencies": {
+    "@types/katex": "^0.16.8",
+    "katex": "^0.19.1",
     "next": "16.4.5",
     "react": "latest",
     "react-dom": "latest"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "latest",
     "@tailwindcss/cli": "latest",
     "@tailwindcss/postcss": "latest",
-    "@eslint/eslintrc": "latest",
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",

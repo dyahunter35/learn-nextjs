@@ -1,12 +1,36 @@
 "use client";
 
 import { useEffect } from "react";
+import katex from "katex";
+import renderMathInElement from "katex/contrib/auto-render";
 import { controllerLoaders } from "@/content/controllers";
 
 type LegacyScript = { src: string; code: string };
 
+function autoRenderMath(root?: HTMLElement | null) {
+  const target = root || document.querySelector<HTMLElement>(".native-page-content") || document.body;
+  if (!target) return;
+  try {
+    renderMathInElement(target, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "\\[", right: "\\]", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\(", right: "\\)", display: false },
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code", "option"],
+      throwOnError: false,
+    });
+  } catch {
+    // Graceful fallback if formula has special characters
+  }
+}
+
 export function NativePageEffects({ children, scripts, stylesheets }: { children: React.ReactNode; scripts: LegacyScript[]; stylesheets: string[] }) {
   useEffect(() => {
+    (window as unknown as Window & { katex: typeof katex; renderMath: typeof autoRenderMath }).katex = katex;
+    (window as unknown as Window & { katex: typeof katex; renderMath: typeof autoRenderMath }).renderMath = autoRenderMath;
+
     const addedStyles = stylesheets.map((href) => {
       const link = document.createElement("link");
       link.rel = "stylesheet";
@@ -17,6 +41,8 @@ export function NativePageEffects({ children, scripts, stylesheets }: { children
     });
 
     let cancelled = false;
+    let observer: MutationObserver | null = null;
+
     const runScripts = async () => {
       for (const item of scripts) {
         if (cancelled) return;
@@ -55,10 +81,37 @@ export function NativePageEffects({ children, scripts, stylesheets }: { children
       document.querySelectorAll(".code-block.active pre code").forEach((element) => highlighter?.highlightElement(element));
       document.dispatchEvent(new Event("DOMContentLoaded", { bubbles: true }));
       window.dispatchEvent(new Event("load"));
+
+      // Initial Math Rendering
+      autoRenderMath();
+
+      // Observe dynamic changes for LaTeX formulas
+      const contentEl = document.querySelector<HTMLElement>(".native-page-content");
+      if (contentEl) {
+        let timer: ReturnType<typeof setTimeout> | null = null;
+        observer = new MutationObserver((mutations) => {
+          let hasMath = false;
+          for (const m of mutations) {
+            if (m.type === "childList" || m.type === "characterData") {
+              const text = (m.target as HTMLElement).textContent || "";
+              if (text.includes("$") || text.includes("\\frac") || text.includes("\\sum")) {
+                hasMath = true;
+                break;
+              }
+            }
+          }
+          if (hasMath) {
+            if (timer) clearTimeout(timer);
+            timer = setTimeout(() => autoRenderMath(), 30);
+          }
+        });
+        observer.observe(contentEl, { childList: true, subtree: true, characterData: true });
+      }
     };
     void runScripts();
     return () => {
       cancelled = true;
+      if (observer) observer.disconnect();
       addedStyles.forEach((link) => link.remove());
       document.querySelectorAll('script[src^="/legacy/assets/"]').forEach((script) => script.remove());
     };

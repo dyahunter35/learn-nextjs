@@ -301,7 +301,7 @@ function displayFinalMetrics() {
 
   const sortedChars = initialNodes.sort((a, b) => b.freq - a.freq);
 
-  let calculationStepsHtml = `$$ \\frac{1}{${appState.totalChars.toLocaleString("ar-EG")}} \\times \\left[ `;
+  let calculationStepsHtml = `$$ \\frac{1}{${appState.totalChars}} \\times \\left[ `;
   let firstTerm = true;
 
   sortedChars.forEach((node) => {
@@ -324,14 +324,19 @@ function displayFinalMetrics() {
     if (!firstTerm) {
       calculationStepsHtml += " + ";
     }
-    calculationStepsHtml += `(${freq.toLocaleString("ar-EG")} \\times ${codeLength})`;
+    calculationStepsHtml += `(${freq} \\times ${codeLength})`;
     firstTerm = false;
   });
 
-  calculationStepsHtml += ` \\right] = \\frac{${metrics.totalBits.toLocaleString("ar-EG")}}{${appState.totalChars.toLocaleString("ar-EG")}} = ${metrics.avgCodeLength.toFixed(3)} \\text{ بت/حرف} $$`;
+  calculationStepsHtml += ` \\right] = \\frac{${metrics.totalBits}}{${appState.totalChars}} = ${metrics.avgCodeLength.toFixed(3)} $$`;
 
   const calcSteps = document.getElementById("calculationSteps");
-  if (calcSteps) calcSteps.innerHTML = calculationStepsHtml;
+  if (calcSteps) {
+    calcSteps.innerHTML = calculationStepsHtml;
+    if (typeof window !== "undefined" && window.renderMath) {
+      window.renderMath(calcSteps);
+    }
+  }
 }
 
 function calculateMetrics(initialNodes) {

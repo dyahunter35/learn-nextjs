@@ -64,8 +64,12 @@ export default function NativePage() {
         </p>
         {"\n            "}
         <p className={"text-gray-700 leading-loose mb-4"}>
-          {t("legacy.5009691384b0930e")}
+          {t("legacy.6d9cdc18a7ab3f25")}
         </p>
+        {"\n            "}
+        <div className={"bg-white p-3 rounded-xl border border-indigo-200 text-center font-bold text-indigo-900 text-lg mb-4 overflow-x-auto"} dir={"ltr"}>
+          {t("legacy.4e56ea41a326157a")}
+        </div>
         {"\n            "}
         <ul className={"list-disc list-inside text-gray-700 space-y-1 mb-4 mr-4"}>
           {"\n                "}
@@ -74,7 +78,7 @@ export default function NativePage() {
           </li>
           {"\n                "}
           <li>
-            {t("legacy.cedc114c4c0006a8")}
+            {t("legacy.f4dbbb0337a09a67")}
           </li>
           {"\n                "}
           <li>
@@ -269,16 +273,16 @@ export default function NativePage() {
             {t("legacy.1b29b192688f3da3")}
           </h3>
           {"\n                "}
-          <p className={"text-gray-700"}>
-            {"\n                    "}
-            <span className={"font-mono ltr-text bg-gray-200 p-1 rounded"}>
-              {"O(E log E + E α(V))"}
-            </span>
-            {t("legacy.0cd6951c01b73fca")}
+          <div className={"text-lg text-center text-emerald-800 my-2"} dir={"ltr"}>
+            {"\n                    $$ O(|E| \\log |E| + |E| \\cdot \\alpha(|V|)) $$\n                "}
+          </div>
+          {"\n                "}
+          <p className={"text-gray-700 text-sm"}>
+            {t("legacy.a17018012c268972")}
             <strong>
               {"Union-Find"}
             </strong>
-            {t("legacy.19a2b28dd8632d62")}
+            {".\n                "}
           </p>
           {"\n            "}
         </div>
@@ -355,17 +359,12 @@ export default function NativePage() {
             {t("legacy.1b29b192688f3da3")}
           </h3>
           {"\n                "}
-          <p className={"text-gray-700"}>
-            {t("legacy.4886c729fd8190d7")}
-            <span className={"font-mono ltr-text bg-gray-200 p-1 rounded"}>
-              {"O(E log V)"}
-            </span>
-            <br />
-            {t("legacy.2b496e2244aeee13")}
-            <span className={"font-mono ltr-text bg-gray-200 p-1 rounded"}>
-              {"O(V²)"}
-            </span>
-            {"\n                "}
+          <div className={"text-lg text-center text-amber-800 my-2"} dir={"ltr"}>
+            {"\n                    $$ O(|E| \\log |V|) $$\n                "}
+          </div>
+          {"\n                "}
+          <p className={"text-gray-700 text-sm"}>
+            {t("legacy.dbff64f194e8027b")}
           </p>
           {"\n            "}
         </div>
