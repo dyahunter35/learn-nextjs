@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شرح الآلة الحاسبة العلمية - المقرر</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../assets/css/calculator.css" />
+  <link rel="stylesheet" href="../../assets/css/design-system.css" />
+  <link rel="stylesheet" href="../../assets/css/dark-content.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+
+    
+    <nav class="site-nav">
+      <div class="site-nav-inner">
+        <div class="nav-main">
+          <a href="../../index.html" class="nav-logo">
+            <svg class="nav-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.663 17h4.673M12 3v1m6.364 1.636-.707.707M21 12h-1M4 12H3m3.343-5.657-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            <span>مقرر الحاسوب</span>
+          </a>
+          <div class="nav-links">
+                  <a href="../../index.html">الرئيسية</a>
+      <a href="simulation.html">المحاكاة</a>
+      <a href="code.html">الكود البرمجي</a>
+          </div>
+          <div class="nav-actions">
+            <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme"></button>
+            <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="nav-mobile" id="navMobile">
+                <a href="../../index.html">الرئيسية</a>
+      <a href="simulation.html">المحاكاة</a>
+        </div>
+        <div class="nav-breadcrumb">
+          <a href="../../index.html">الرئيسية</a><span class="sep">›</span><span class="current">الآلة الحاسبة</span>
+        </div>
+      </div>
+    </nav>
+    <script>function toggleMenu(){var m=document.getElementById("navMobile");if(m)m.classList.toggle("open")}</script>
+
+    
+
+    <div class="max-w-4xl mx-auto bg-white shadow-2xl rounded-xl mt-2 mb-12 p-8 md:p-10">
+        <header class="text-center mb-10 border-b border-gray-100 pb-6">
+            <span class="inline-block text-purple-500 font-bold text-sm tracking-widest uppercase mb-2">CALCULATOR</span>
+            <h1 class="text-4xl font-extrabold text-gray-900">
+                الآلة الحاسبة العلمية <span class="text-purple-600">(Scientific Calculator)</span>
+            </h1>
+            <p class="mt-2 text-lg text-gray-500">
+                آلة حاسبة علمية متكاملة مع واجهة تفاعلية
+            </p>
+        </header>
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-indigo-800 mb-6 border-b-2 border-indigo-200 pb-2 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-3 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                مقدمة عن الآلات الحاسبة العلمية
+            </h2>
+            <p class="text-gray-700 leading-loose mb-4">
+                الآلة الحاسبة العلمية هي أداة إلكترونية مصممة لإجراء العمليات الحسابية المتقدمة التي تتجاوز الجمع والطرح والضرب والقسمة. تدعم هذه الآلات الدوال المثلثية واللوغاريتمية والأسية، مما يجعلها أداة أساسية للطلاب والمهندسين والعلماء.
+            </p>
+            <div class="bg-indigo-50 p-5 rounded-lg shadow-md border-r-4 border-indigo-400">
+                <p class="text-indigo-800 font-semibold">
+                    تُستخدم الآلات الحاسبة العلمية في مجالات متعددة مثل الرياضيات، الفيزياء، الكيمياء، الهندسة، والعديد من التخصصات العلمية الأخرى.
+                </p>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-indigo-800 mb-6 border-b-2 border-indigo-200 pb-2 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-3 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+                العمليات الأساسية
+            </h2>
+            <p class="text-gray-700 leading-loose mb-4">
+                تشكل العمليات الحسابية الأساسية اللبنات الأولى لأي آلة حاسبة. إليك نظرة على كل عملية:
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-blue-50 p-5 rounded-lg shadow-md border-blue-400">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-2 flex items-center">
+                        <span class="ml-2 text-2xl font-bold text-blue-600">+</span>
+                        الجمع (Addition)
+                    </h3>
+                    <p class="text-gray-700">
+                        عملية الجمع هي أبسط العمليات الحسابية. تُستخدم لإضافة عددين أو أكثر للحصول على المجموع. مثال: 5 + 3 = 8
+                    </p>
+                </div>
+                <div class="bg-red-50 p-5 rounded-lg shadow-md border-red-400">
+                    <h3 class="text-xl font-semibold text-red-800 mb-2 flex items-center">
+                        <span class="ml-2 text-2xl font-bold text-red-600">-</span>
+                        الطرح (Subtraction)
+                    </h3>
+                    <p class="text-gray-700">
+                        عملية الطرح تُستخدم لإيجاد الفرق بين عددين. مثال: 10 - 4 = 6
+                    </p>
+                </div>
+                <div class="bg-amber-50 p-5 rounded-lg shadow-md border-amber-400">
+                    <h3 class="text-xl font-semibold text-amber-800 mb-2 flex items-center">
+                        <span class="ml-2 text-2xl font-bold text-amber-600">×</span>
+                        الضرب (Multiplication)
+                    </h3>
+                    <p class="text-gray-700">
+                        الضرب هو عملية حسابية تمثل الجمع المتكرر. مثال: 4 × 3 = 12
+                    </p>
+                </div>
+                <div class="bg-purple-50 p-5 rounded-lg shadow-md border-purple-400">
+                    <h3 class="text-xl font-semibold text-purple-800 mb-2 flex items-center">
+                        <span class="ml-2 text-2xl font-bold text-purple-600">÷</span>
+                        القسمة (Division)
+                    </h3>
+                    <p class="text-gray-700">
+                        القسمة هي عملية توزيع عدد على عدد آخر. مثال: 15 ÷ 3 = 5
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-indigo-800 mb-6 border-b-2 border-indigo-200 pb-2 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-3 text-rose-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+                الدوال المثلثية (Trigonometric Functions)
+            </h2>
+            <p class="text-gray-700 leading-loose mb-4">
+                الدوال المثلثية هي دوال رياضية تربط زوايا المثلث بأطوال أضلاعه. تستخدم بشكل واسع في الهندسة والفيزياء.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-cyan-50 p-5 rounded-lg shadow-md border-cyan-400">
+                    <h3 class="text-xl font-semibold text-cyan-800 mb-2">Sin (الجيب)</h3>
+                    <p class="text-gray-700">
+                        دالة الجيب تُحسب نسبة طول الضلع المقابل للزاوية إلى طول الوتر في المثلث قائم الزاوية. مثال: sin(90°) = 1
+                    </p>
+                </div>
+                <div class="bg-teal-50 p-5 rounded-lg shadow-md border-teal-400">
+                    <h3 class="text-xl font-semibold text-teal-800 mb-2">Cos (جيب التمام)</h3>
+                    <p class="text-gray-700">
+                        دالة جيب التمام تُحسب نسبة طول الضلع المجاور للزاوية إلى طول الوتر. مثال: cos(0°) = 1
+                    </p>
+                </div>
+                <div class="bg-amber-50 p-5 rounded-lg shadow-md border-amber-400">
+                    <h3 class="text-xl font-semibold text-amber-800 mb-2">Tan (الظل)</h3>
+                    <p class="text-gray-700">
+                        دالة الظل تُحسب نسبة طول الضلع المقابل للزاوية إلى طول الضلع المجاور. tan(θ) = sin(θ) / cos(θ)
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-indigo-800 mb-6 border-b-2 border-indigo-200 pb-2 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-3 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                الدوال اللوغاريتمية (Logarithmic Functions)
+            </h2>
+            <p class="text-gray-700 leading-loose mb-4">
+                اللوغاريتمات هي العملية العكسية للأسس. تُستخدم في حل المعادلات الأسية وفي العديد من التطبيقات العلمية.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-lime-50 p-5 rounded-lg shadow-md border-lime-400">
+                    <h3 class="text-xl font-semibold text-lime-800 mb-2">Log (اللوغاريتم العشري)</h3>
+                    <p class="text-gray-700">
+                        اللوغاريتم العشري هو لوغاريتم للأساس 10. يُستخدم بكثرة في العلوم والهندسة. مثال: log(100) = 2 لأن 10² = 100
+                    </p>
+                </div>
+                <div class="bg-green-50 p-5 rounded-lg shadow-md border-green-400">
+                    <h3 class="text-xl font-semibold text-green-800 mb-2">Ln (اللوغاريتم الطبيعي)</h3>
+                    <p class="text-gray-700">
+                        اللوغاريتم الطبيعي هو لوغاريتم للأساس e (حيث e ≈ 2.71828). يُستخدم في التفاضل والتكامل والنمذجة الرياضية. مثال: ln(e) = 1
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-indigo-800 mb-6 border-b-2 border-indigo-200 pb-2 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-3 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" />
+                </svg>
+                الجذر التربيعي والقوى
+            </h2>
+            <p class="text-gray-700 leading-loose mb-4">
+                عمليات الجذر التربيعي والقوى هي عمليات أساسية في الجبر والهندسة.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-orange-50 p-5 rounded-lg shadow-md border-orange-400">
+                    <h3 class="text-xl font-semibold text-orange-800 mb-2">√ (الجذر التربيعي)</h3>
+                    <p class="text-gray-700">
+                        الجذر التربيعي لعدد x هو العدد الذي إذا ضرب في نفسه يعطي x. مثال: √9 = 3 لأن 3 × 3 = 9
+                    </p>
+                </div>
+                <div class="bg-yellow-50 p-5 rounded-lg shadow-md border-yellow-400">
+                    <h3 class="text-xl font-semibold text-yellow-800 mb-2">x² (التربيع)</h3>
+                    <p class="text-gray-700">
+                        تربيع عدد يعني ضربه في نفسه. مثال: 5² = 5 × 5 = 25. وتوجد أيضاً عملية xʹ للأسس الأعلى.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-indigo-800 mb-6 border-b-2 border-indigo-200 pb-2 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-3 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                ترتيب العمليات الحسابية (الأسبقية)
+            </h2>
+            <p class="text-gray-700 leading-loose mb-4">
+                عند وجود عدة عمليات في تعبير رياضي واحد، يجب اتباع ترتيب معين يُعرف بقاعدة أسبقية العمليات الحسابية (PEMDAS/BODMAS):
+            </p>
+            <div class="bg-violet-50 p-5 rounded-lg shadow-md border-violet-400">
+                <ul class="space-y-2 mr-4">
+                    <li class="flex items-start">
+                        <span class="font-bold text-violet-800 ml-2">١.</span>
+                        <span><span class="font-bold">الأقواس</span> (Parentheses) - يتم حساب ما داخل الأقواس أولاً.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="font-bold text-violet-800 ml-2">٢.</span>
+                        <span><span class="font-bold">الأسس</span> (Exponents) - مثل التربيع والتكعيب.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="font-bold text-violet-800 ml-2">٣.</span>
+                        <span><span class="font-bold">الضرب والقسمة</span> (Multiplication & Division) - من اليسار إلى اليمين.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="font-bold text-violet-800 ml-2">٤.</span>
+                        <span><span class="font-bold">الجمع والطرح</span> (Addition & Subtraction) - من اليسار إلى اليمين.</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="mt-4 bg-gray-100 p-4 rounded-lg shadow-inner">
+                <p class="text-gray-700 font-mono text-center text-lg">
+                    3 + 5 × 2 = 3 + 10 = 13 &nbsp; (وليس 16، لأن الضرب له أسبقية أعلى)
+                </p>
+            </div>
+        </section>
+
+        <section class="mb-10">
+            <h2 class="text-3xl font-bold text-indigo-800 mb-6 border-b-2 border-indigo-200 pb-2 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-3 text-sky-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4" />
+                </svg>
+                كيفية استخدام الأقواس في التعبيرات الرياضية
+            </h2>
+            <p class="text-gray-700 leading-loose mb-4">
+                تُستخدم الأقواس لتحديد أولوية العمليات الحسابية وتجميع التعبيرات. يمكن استخدام الأقواس العادية () والأقواس المتداخلة للتعبيرات المعقدة.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-sky-50 p-5 rounded-lg shadow-md border-sky-400">
+                    <h3 class="text-xl font-semibold text-sky-800 mb-2">الأقواس العادية ()</h3>
+                    <p class="text-gray-700">
+                        تُستخدم لتحديد أي جزء من التعبير يجب حسابه أولاً. مثال: (2 + 3) × 4 = 5 × 4 = 20
+                    </p>
+                </div>
+                <div class="bg-blue-50 p-5 rounded-lg shadow-md border-blue-400">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-2">الأقواس المتداخلة</h3>
+                    <p class="text-gray-700">
+                        يمكن وضع أقواس داخل أقواس للتعبيرات المعقدة. يحسب الأقواس الداخلية أولاً. مثال: ((2 + 3) × (4 - 1)) = 5 × 3 = 15
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="text-center mt-10 pt-8 border-t">
+            <a href="../code.html" class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-10 rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 text-xl">
+                انتقل إلى الآلة الحاسبة التفاعلية
+            </a>
+            <p class="text-gray-500 mt-3 text-sm">
+                جرب بنفسك! استخدم الآلة الحاسبة التفاعلية لتطبيق ما تعلمته
+            </p>
+        </div>
+    </div>
+
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p class="text-gray-400 text-sm">
+                تم تصميم وتطوير هذه المحاكاة التفاعلية بواسطة <span class="text-amber-400 font-semibold">ضياء البشرى محمد</span> &copy; 2026
+            </p>
+        </div>
+    </footer>
+
+
+  <script src="../../assets/js/theme-toggle.js"></script>
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>دمج الترتيب (Merge Sort) - الكود البرمجي</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../../assets/css/code-tabs.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/atom-one-dark.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <link rel="stylesheet" href="../../assets/css/design-system.css" />
+  <link rel="stylesheet" href="../../assets/css/dark-content.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50 min-h-screen">
+  
+    <nav class="site-nav">
+      <div class="site-nav-inner">
+        <div class="nav-main">
+          <a href="../../index.html" class="nav-logo">
+            <svg class="nav-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.663 17h4.673M12 3v1m6.364 1.636-.707.707M21 12h-1M4 12H3m3.343-5.657-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            <span>مقرر الحاسوب</span>
+          </a>
+          <div class="nav-links">
+                  <a href="../../index.html">الرئيسية</a>
+      <a href="index.html">الشرح</a>
+      <a href="simulation.html">المحاكاة</a>
+          </div>
+          <div class="nav-actions">
+            <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme"></button>
+            <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="nav-mobile" id="navMobile">
+                <a href="../../index.html">الرئيسية</a>
+      <a href="index.html">الشرح</a>
+      <a href="simulation.html">المحاكاة</a>
+        </div>
+        <div class="nav-breadcrumb">
+          <a href="../../index.html">الرئيسية</a><span class="sep">›</span><a href="index.html">فرق تسد (Divide & Conquer)</a><span class="sep">›</span><span class="current">الكود البرمجي</span>
+        </div>
+      </div>
+    </nav>
+    <script>function toggleMenu(){var m=document.getElementById("navMobile");if(m)m.classList.toggle("open")}</script>
+
+  <div class="code-page">
+    <h1>دمج الترتيب (Merge Sort) — الكود البرمجي</h1>
+    <p class="subtitle">شرح مبسط مع أمثلة بلغات متعددة. يمكنك نسخ الكود واستخدامه.</p>
+
+    <div class="algorithm-code-description">
+      <strong>كيف تعمل:</strong> خوارزمية "فرق تسد" تقسم المصفوفة إلى نصفين متساويين، ترتب كل نصف بشكل منفصل، ثم تدمج النصفين في مصفوفة مرتبة واحدة. التعقيد الزمني: O(n log n).
+    </div>
+
+    <div class="lang-tabs">
+      <button class="lang-tab active" data-lang="cpp" onclick="switchLang('cpp')">C++</button>
+      <button class="lang-tab" data-lang="java" onclick="switchLang('java')">Java</button>
+      <button class="lang-tab" data-lang="js" onclick="switchLang('js')">JavaScript</button>
+      <button class="lang-tab" data-lang="php" onclick="switchLang('php')">PHP</button>
+    </div>
+
+    <div class="code-block active" id="code-cpp">
+      <button class="copy-btn" data-lang="cpp" onclick="copyCode('cpp')">نسخ</button>
+      <pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+void merge(vector&lt;int&gt;& arr, int left, int mid, int right) {
+    int n1 = mid - left + 1;
+    int n2 = right - mid;
+    vector&lt;int&gt; L(n1), R(n2);
+    for (int i = 0; i &lt; n1; i++) L[i] = arr[left + i];
+    for (int j = 0; j &lt; n2; j++) R[j] = arr[mid + 1 + j];
+    int i = 0, j = 0, k = left;
+    while (i &lt; n1 && j &lt; n2) {
+        if (L[i] &lt;= R[j]) arr[k++] = L[i++];
+        else arr[k++] = R[j++];
+    }
+    while (i &lt; n1) arr[k++] = L[i++];
+    while (j &lt; n2) arr[k++] = R[j++];
+}
+
+void mergeSort(vector&lt;int&gt;& arr, int left, int right) {
+    if (left &lt; right) {
+        int mid = left + (right - left) / 2;
+        mergeSort(arr, left, mid);
+        mergeSort(arr, mid + 1, right);
+        merge(arr, left, mid, right);
+    }
+}
+
+int main() {
+    vector&lt;int&gt; arr = {38, 27, 43, 3, 9, 82, 10};
+    cout &lt;&lt; "Original: ";
+    for (int x : arr) cout &lt;&lt; x &lt;&lt; " ";
+    cout &lt;&lt; endl;
+    mergeSort(arr, 0, arr.size() - 1);
+    cout &lt;&lt; "Sorted: ";
+    for (int x : arr) cout &lt;&lt; x &lt;&lt; " ";
+    cout &lt;&lt; endl;
+    return 0;
+}</code></pre>
+    </div>
+    <div class="code-block" id="code-java">
+      <button class="copy-btn" data-lang="java" onclick="copyCode('java')">نسخ</button>
+      <pre><code class="language-java">public class MergeSort {
+    public static void merge(int[] arr, int left, int mid, int right) {
+        int n1 = mid - left + 1;
+        int n2 = right - mid;
+        int[] L = new int[n1];
+        int[] R = new int[n2];
+        for (int i = 0; i &lt; n1; i++) L[i] = arr[left + i];
+        for (int j = 0; j &lt; n2; j++) R[j] = arr[mid + 1 + j];
+        int i = 0, j = 0, k = left;
+        while (i &lt; n1 && j &lt; n2) {
+            if (L[i] &lt;= R[j]) arr[k++] = L[i++];
+            else arr[k++] = R[j++];
+        }
+        while (i &lt; n1) arr[k++] = L[i++];
+        while (j &lt; n2) arr[k++] = R[j++];
+    }
+
+    public static void mergeSort(int[] arr, int left, int right) {
+        if (left &lt; right) {
+            int mid = left + (right - left) / 2;
+            mergeSort(arr, left, mid);
+            mergeSort(arr, mid + 1, right);
+            merge(arr, left, mid, right);
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {38, 27, 43, 3, 9, 82, 10};
+        System.out.print("Original: ");
+        for (int x : arr) System.out.print(x + " ");
+        System.out.println();
+        mergeSort(arr, 0, arr.length - 1);
+        System.out.print("Sorted: ");
+        for (int x : arr) System.out.print(x + " ");
+        System.out.println();
+    }
+}</code></pre>
+    </div>
+    <div class="code-block" id="code-js">
+      <button class="copy-btn" data-lang="js" onclick="copyCode('js')">نسخ</button>
+      <pre><code class="language-javascript">function merge(arr, left, mid, right) {
+    const n1 = mid - left + 1;
+    const n2 = right - mid;
+    const L = arr.slice(left, mid + 1);
+    const R = arr.slice(mid + 1, right + 1);
+    let i = 0, j = 0, k = left;
+    while (i &lt; n1 && j &lt; n2) {
+        if (L[i] &lt;= R[j]) arr[k++] = L[i++];
+        else arr[k++] = R[j++];
+    }
+    while (i &lt; n1) arr[k++] = L[i++];
+    while (j &lt; n2) arr[k++] = R[j++];
+}
+
+function mergeSort(arr, left, right) {
+    if (left &lt; right) {
+        const mid = Math.floor(left + (right - left) / 2);
+        mergeSort(arr, left, mid);
+        mergeSort(arr, mid + 1, right);
+        merge(arr, left, mid, right);
+    }
+}
+
+const arr = [38, 27, 43, 3, 9, 82, 10];
+console.log("Original:", arr.join(" "));
+mergeSort(arr, 0, arr.length - 1);
+console.log("Sorted:", arr.join(" "));</code></pre>
+    </div>
+    <div class="code-block" id="code-php">
+      <button class="copy-btn" data-lang="php" onclick="copyCode('php')">نسخ</button>
+      <pre><code class="language-php">&lt;?php
+function merge(&$arr, $left, $mid, $right) {
+    $n1 = $mid - $left + 1;
+    $n2 = $right - $mid;
+    $L = array_slice($arr, $left, $n1);
+    $R = array_slice($arr, $mid + 1, $n2);
+    $i = 0; $j = 0; $k = $left;
+    while ($i &lt; $n1 && $j &lt; $n2) {
+        if ($L[$i] &lt;= $R[$j]) $arr[$k++] = $L[$i++];
+        else $arr[$k++] = $R[$j++];
+    }
+    while ($i &lt; $n1) $arr[$k++] = $L[$i++];
+    while ($j &lt; $n2) $arr[$k++] = $R[$j++];
+}
+
+function mergeSort(&$arr, $left, $right) {
+    if ($left &lt; $right) {
+        $mid = intdiv($left + $right, 2);
+        mergeSort($arr, $left, $mid);
+        mergeSort($arr, $mid + 1, $right);
+        merge($arr, $left, $mid, $right);
+    }
+}
+
+function intdiv($a, $b) {
+    return intdiv_alt($a, $b);
+}
+
+function intdiv_alt($a, $b) {
+    return intdiv_php($a, $b);
+}
+
+function intdiv_php($a, $b) {
+    return intdiv_7($a, $b);
+}
+
+function intdiv_7($a, $b) {
+    return intdiv_53($a, $b);
+}
+
+function intdiv_53($a, $b) {
+    return intdiv_56($a, $b);
+}
+
+function intdiv_56($a, $b) {
+    $result = $a / $b;
+    if ($result &lt; 0 && $result != (int)$result) {
+        return (int)($result - 1);
+    }
+    return (int)$result;
+}
+
+$arr = [38, 27, 43, 3, 9, 82, 10];
+echo "Original: " . implode(" ", $arr) . "\n";
+mergeSort($arr, 0, count($arr) - 1);
+echo "Sorted: " . implode(" ", $arr) . "\n";
+?&gt;</code></pre>
+    </div>
+  </div>
+
+  <footer class="bg-gray-900 text-white py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p class="text-gray-400 text-sm">دمج الترتيب (Merge Sort) — أمثلة برمجية تفاعلية</p>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/code-tabs.js"></script>
+  <script src="../../assets/js/theme-toggle.js"></script>
+</body>
+</html>

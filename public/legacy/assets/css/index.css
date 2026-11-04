@@ -1,0 +1,160 @@
+html {
+  scroll-behavior: smooth;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap");
+
+body {
+  font-family: "Cairo", sans-serif;
+  background-color: #0f172a;
+  color: #1e293b;
+  margin: 0;
+  padding: 0;
+}
+
+/* ===== Three.js Container (خلفية ثابتة) ===== */
+#three-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+
+#three-container canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* ===== Hero Section ===== */
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding-top: 5rem;
+  padding-bottom: 3rem;
+}
+
+/* ===== Ensure content is above 3D background ===== */
+.main-nav {
+  position: fixed !important;
+  z-index: 50 !important;
+}
+
+.stats-bar,
+#sections,
+#tools,
+#extra-knowledge,
+#developer,
+footer {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== Main Cards ===== */
+.card-main {
+  border-radius: var(--radius-surface);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.card-main:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-surface);
+}
+
+/* ===== Coming Soon Cards ===== */
+.coming-soon-card {
+  border-radius: var(--radius-surface);
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+.coming-soon-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-surface);
+}
+
+/* ===== Stats Bar ===== */
+.stat-item {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.stat-item:nth-child(1) { animation-delay: 0.1s; }
+.stat-item:nth-child(2) { animation-delay: 0.2s; }
+.stat-item:nth-child(3) { animation-delay: 0.3s; }
+.stat-item:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== Scrollbar Styling ===== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1e293b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #6366f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #818cf8;
+}
+
+/* ===== Selection ===== */
+::selection {
+  background: #6366f1;
+  color: white;
+}
+
+/* ===== Smooth section transitions ===== */
+section {
+  transition: background-color 0.3s ease;
+}
+
+/* ===== Dark mode adjustments (for root page only) ===== */
+[data-theme="dark"] body {
+  background-color: #0a0e1a;
+}
+[data-theme="dark"] .stats-bar {
+  background: #111827 !important;
+  border-color: #1f2937 !important;
+}
+[data-theme="dark"] section#sections,
+[data-theme="dark"] section#tools,
+[data-theme="dark"] section#extra-knowledge,
+[data-theme="dark"] section#developer {
+  background: #0f172a !important;
+}
+[data-theme="dark"] .card-main {
+  background: #1e293b !important;
+}
+[data-theme="dark"] .card-main h3 {
+  color: #e2e8f0 !important;
+}
+[data-theme="dark"] .card-main p {
+  color: #94a3b8 !important;
+}
+[data-theme="dark"] .card-main div:is(.bg-indigo-50) {
+  background: rgba(99, 102, 241, 0.15) !important;
+}
+[data-theme="dark"] footer.bg-gray-900 {
+  background: #020617 !important;
+}

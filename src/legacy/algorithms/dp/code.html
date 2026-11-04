@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>البرمجة الديناميكية - الكود البرمجي</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../../assets/css/code-tabs.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/atom-one-dark.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <link rel="stylesheet" href="../../assets/css/design-system.css" />
+  <link rel="stylesheet" href="../../assets/css/dark-content.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50 min-h-screen">
+  
+    <nav class="site-nav">
+      <div class="site-nav-inner">
+        <div class="nav-main">
+          <a href="../../index.html" class="nav-logo">
+            <svg class="nav-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.663 17h4.673M12 3v1m6.364 1.636-.707.707M21 12h-1M4 12H3m3.343-5.657-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            <span>مقرر الحاسوب</span>
+          </a>
+          <div class="nav-links">
+                  <a href="../../index.html">الرئيسية</a>
+      <a href="index.html">الشرح</a>
+      <a href="simulation.html">المحاكاة</a>
+          </div>
+          <div class="nav-actions">
+            <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme"></button>
+            <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="nav-mobile" id="navMobile">
+                <a href="../../index.html">الرئيسية</a>
+      <a href="index.html">الشرح</a>
+      <a href="simulation.html">المحاكاة</a>
+        </div>
+        <div class="nav-breadcrumb">
+          <a href="../../index.html">الرئيسية</a><span class="sep">›</span><a href="index.html">البرمجة الديناميكية (DP)</a><span class="sep">›</span><span class="current">الكود البرمجي</span>
+        </div>
+      </div>
+    </nav>
+    <script>function toggleMenu(){var m=document.getElementById("navMobile");if(m)m.classList.toggle("open")}</script>
+
+  <div class="code-page">
+    <h1>البرمجة الديناميكية — الكود البرمجي</h1>
+    <p class="subtitle">شرح مبسط مع أمثلة بلغات متعددة. يمكنك نسخ الكود واستخدامه.</p>
+    
+    <div class="algorithm-code-description">
+      <strong>كيف تعمل:</strong> البرمجة الديناميكية (DP) تحل المسائل بتقسيمها إلى مسائل فرعية وتخزين نتائجها لتجنب إعادة الحساب. <strong>fibDP(n)</strong> تحسب فيبوناتشي تصاعدياً (bottom-up). <strong>minCoins(coins[], amount)</strong> تحسب أقل عدد من العملات لتكوين مبلغ معين باستخدام جدول DP.
+    </div>
+
+    <div class="lang-tabs">
+      <button class="lang-tab active" data-lang="cpp" onclick="switchLang('cpp')">C++</button>
+      <button class="lang-tab" data-lang="java" onclick="switchLang('java')">Java</button>
+      <button class="lang-tab" data-lang="js" onclick="switchLang('js')">JavaScript</button>
+      <button class="lang-tab" data-lang="php" onclick="switchLang('php')">PHP</button>
+    </div>
+    
+    <div class="code-block active" id="code-cpp">
+      <button class="copy-btn" data-lang="cpp" onclick="copyCode('cpp')">نسخ</button>
+      <pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+#include &lt;climits&gt;
+using namespace std;
+
+int fibDP(int n) {
+    if (n &lt;= 1) return n;
+    vector&lt;int&gt; dp(n + 1);
+    dp[0] = 0;
+    dp[1] = 1;
+    for (int i = 2; i &lt;= n; i++)
+        dp[i] = dp[i - 1] + dp[i - 2];
+    return dp[n];
+}
+
+int minCoins(vector&lt;int&gt;&amp; coins, int amount) {
+    vector&lt;int&gt; dp(amount + 1, INT_MAX);
+    dp[0] = 0;
+    for (int i = 1; i &lt;= amount; i++)
+        for (int coin : coins)
+            if (coin &lt;= i &amp;&amp; dp[i - coin] != INT_MAX)
+                dp[i] = min(dp[i], 1 + dp[i - coin]);
+    return dp[amount] == INT_MAX ? -1 : dp[amount];
+}
+
+int main() {
+    int n = 10;
+    cout &lt;&lt; "fibDP(" &lt;&lt; n &lt;&lt; ") = " &lt;&lt; fibDP(n) &lt;&lt; endl;
+
+    vector&lt;int&gt; coins = {1, 3, 4};
+    int amount = 6;
+    int result = minCoins(coins, amount);
+    cout &lt;&lt; "minCoins for amount " &lt;&lt; amount &lt;&lt; " = " &lt;&lt; result &lt;&lt; endl;
+    return 0;
+}</code></pre>
+    </div>
+    <div class="code-block" id="code-java">
+      <button class="copy-btn" data-lang="java" onclick="copyCode('java')">نسخ</button>
+      <pre><code class="language-java">import java.util.Arrays;
+
+public class DP {
+
+    public static int fibDP(int n) {
+        if (n &lt;= 1) return n;
+        int[] dp = new int[n + 1];
+        dp[0] = 0;
+        dp[1] = 1;
+        for (int i = 2; i &lt;= n; i++)
+            dp[i] = dp[i - 1] + dp[i - 2];
+        return dp[n];
+    }
+
+    public static int minCoins(int[] coins, int amount) {
+        int[] dp = new int[amount + 1];
+        Arrays.fill(dp, Integer.MAX_VALUE);
+        dp[0] = 0;
+        for (int i = 1; i &lt;= amount; i++)
+            for (int coin : coins)
+                if (coin &lt;= i &amp;&amp; dp[i - coin] != Integer.MAX_VALUE)
+                    dp[i] = Math.min(dp[i], 1 + dp[i - coin]);
+        return dp[amount] == Integer.MAX_VALUE ? -1 : dp[amount];
+    }
+
+    public static void main(String[] args) {
+        int n = 10;
+        System.out.println("fibDP(" + n + ") = " + fibDP(n));
+
+        int[] coins = {1, 3, 4};
+        int amount = 6;
+        int result = minCoins(coins, amount);
+        System.out.println("minCoins for amount " + amount + " = " + result);
+    }
+}</code></pre>
+    </div>
+    <div class="code-block" id="code-js">
+      <button class="copy-btn" data-lang="js" onclick="copyCode('js')">نسخ</button>
+      <pre><code class="language-javascript">function fibDP(n) {
+    if (n &lt;= 1) return n;
+    const dp = new Array(n + 1);
+    dp[0] = 0;
+    dp[1] = 1;
+    for (let i = 2; i &lt;= n; i++)
+        dp[i] = dp[i - 1] + dp[i - 2];
+    return dp[n];
+}
+
+function minCoins(coins, amount) {
+    const dp = new Array(amount + 1).fill(Infinity);
+    dp[0] = 0;
+    for (let i = 1; i &lt;= amount; i++)
+        for (const coin of coins)
+            if (coin &lt;= i &amp;&amp; dp[i - coin] !== Infinity)
+                dp[i] = Math.min(dp[i], 1 + dp[i - coin]);
+    return dp[amount] === Infinity ? -1 : dp[amount];
+}
+
+const n = 10;
+console.log("fibDP(" + n + ") = " + fibDP(n));
+
+const coins = [1, 3, 4];
+const amount = 6;
+const result = minCoins(coins, amount);
+console.log("minCoins for amount " + amount + " = " + result);</code></pre>
+    </div>
+    <div class="code-block" id="code-php">
+      <button class="copy-btn" data-lang="php" onclick="copyCode('php')">نسخ</button>
+      <pre><code class="language-php">&lt;?php
+
+function fibDP($n) {
+    if ($n &lt;= 1) return $n;
+    $dp = [0, 1];
+    for ($i = 2; $i &lt;= $n; $i++)
+        $dp[$i] = $dp[$i - 1] + $dp[$i - 2];
+    return $dp[$n];
+}
+
+function minCoins($coins, $amount) {
+    $dp = array_fill(0, $amount + 1, PHP_INT_MAX);
+    $dp[0] = 0;
+    for ($i = 1; $i &lt;= $amount; $i++)
+        foreach ($coins as $coin)
+            if ($coin &lt;= $i &amp;&amp; $dp[$i - $coin] != PHP_INT_MAX)
+                $dp[$i] = min($dp[$i], 1 + $dp[$i - $coin]);
+    return $dp[$amount] == PHP_INT_MAX ? -1 : $dp[$amount];
+}
+
+$n = 10;
+echo "fibDP($n) = " . fibDP($n) . "\n";
+
+$coins = [1, 3, 4];
+$amount = 6;
+$result = minCoins($coins, $amount);
+echo "minCoins for amount $amount = $result\n";
+
+?&gt;</code></pre>
+    </div>
+  </div>
+
+  <footer class="bg-gray-900 text-white py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p class="text-gray-400 text-sm">البرمجة الديناميكية — أمثلة برمجية تفاعلية</p>
+    </div>
+  </footer>
+  
+  <script src="../../assets/js/code-tabs.js"></script>
+  <script src="../../assets/js/theme-toggle.js"></script>
+</body>
+</html>

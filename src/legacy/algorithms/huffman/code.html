@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>ترميز هوفمان - الكود البرمجي</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../../assets/css/code-tabs.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/atom-one-dark.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <link rel="stylesheet" href="../../assets/css/design-system.css" />
+  <link rel="stylesheet" href="../../assets/css/dark-content.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50 min-h-screen">
+  
+    <nav class="site-nav">
+      <div class="site-nav-inner">
+        <div class="nav-main">
+          <a href="../../index.html" class="nav-logo">
+            <svg class="nav-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.663 17h4.673M12 3v1m6.364 1.636-.707.707M21 12h-1M4 12H3m3.343-5.657-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            <span>مقرر الحاسوب</span>
+          </a>
+          <div class="nav-links">
+                  <a href="../../index.html">الرئيسية</a>
+      <a href="index.html">الشرح</a>
+      <a href="simulation.html">المحاكاة</a>
+          </div>
+          <div class="nav-actions">
+            <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme"></button>
+            <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="nav-mobile" id="navMobile">
+                <a href="../../index.html">الرئيسية</a>
+      <a href="index.html">الشرح</a>
+      <a href="simulation.html">المحاكاة</a>
+        </div>
+        <div class="nav-breadcrumb">
+          <a href="../../index.html">الرئيسية</a><span class="sep">›</span><a href="index.html">خوارزمية هوفمان (Huffman)</a><span class="sep">›</span><span class="current">الكود البرمجي</span>
+        </div>
+      </div>
+    </nav>
+    <script>function toggleMenu(){var m=document.getElementById("navMobile");if(m)m.classList.toggle("open")}</script>
+
+  <div class="code-page">
+    <h1>ترميز هوفمان — الكود البرمجي</h1>
+    <p class="subtitle">شرح مبسط لخوارزمية ترميز هوفمان لضغط البيانات مع أمثلة برمجية بلغات متعددة. يمكنك نسخ الكود واستخدامه مباشرة.</p>
+    
+    <div class="algorithm-code-description">
+      <strong>كيف تعمل خوارزمية ترميز هوفمان:</strong><br/>
+      ترميز هوفمان هو خوارزمية ضغط بيانات تفقدية تستخدم لتقليل حجم البيانات عن طريق ترميز الأحرف الأكثر تكراراً بأكواد أقصر. تقوم الخوارزمية ببناء شجرة ثنائية حيث تكون الأحرف الأقل تكراراً في المستويات الأعمق (أكواد أطول)، والأحرف الأكثر تكراراً في المستويات الأعلى (أكواد أقصر). يتم استخدام هذه الشجرة لإنشاء أكواد ثنائية فريدة لكل حرف.
+    </div>
+
+    <div class="lang-tabs">
+      <button class="lang-tab active" data-lang="cpp" onclick="switchLang('cpp')">C++</button>
+      <button class="lang-tab" data-lang="java" onclick="switchLang('java')">Java</button>
+      <button class="lang-tab" data-lang="js" onclick="switchLang('js')">JavaScript</button>
+      <button class="lang-tab" data-lang="php" onclick="switchLang('php')">PHP</button>
+    </div>
+    
+    <div class="code-block active" id="code-cpp">
+      <button class="copy-btn" data-lang="cpp" onclick="copyCode('cpp')">نسخ</button>
+      <pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;queue&gt;
+#include &lt;unordered_map&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+struct Node {
+    char ch;
+    int freq;
+    Node *left, *right;
+    Node(char c, int f) : ch(c), freq(f), left(nullptr), right(nullptr) {}
+};
+
+struct Compare {
+    bool operator()(Node* a, Node* b) {
+        return a-&gt;freq &gt; b-&gt;freq;
+    }
+};
+
+void generateCodes(Node* root, string code, unordered_map&lt;char, string&gt;&amp; codes) {
+    if (!root) return;
+    if (!root-&gt;left && !root-&gt;right) {
+        codes[root-&gt;ch] = code;
+    }
+    generateCodes(root-&gt;left, code + "0", codes);
+    generateCodes(root-&gt;right, code + "1", codes);
+}
+
+string encode(const string&amp; text, unordered_map&lt;char, string&gt;&amp; codes) {
+    string result = "";
+    for (char ch : text) result += codes[ch];
+    return result;
+}
+
+string decode(Node* root, const string&amp; bits) {
+    string result = "";
+    Node* curr = root;
+    for (char b : bits) {
+        curr = (b == '0') ? curr-&gt;left : curr-&gt;right;
+        if (!curr-&gt;left && !curr-&gt;right) {
+            result += curr-&gt;ch;
+            curr = root;
+        }
+    }
+    return result;
+}
+
+int main() {
+    string text = "aabbbccdeeeeff";
+
+    unordered_map&lt;char, int&gt; freq;
+    for (char ch : text) freq[ch]++;
+
+    priority_queue&lt;Node*, vector&lt;Node*&gt;, Compare&gt; pq;
+    for (auto&amp; p : freq) pq.push(new Node(p.first, p.second));
+
+    while (pq.size() &gt; 1) {
+        Node* left = pq.top(); pq.pop();
+        Node* right = pq.top(); pq.pop();
+        Node* merged = new Node('\0', left-&gt;freq + right-&gt;freq);
+        merged-&gt;left = left;
+        merged-&gt;right = right;
+        pq.push(merged);
+    }
+
+    Node* root = pq.top();
+    unordered_map&lt;char, string&gt; codes;
+    generateCodes(root, "", codes);
+
+    cout &lt;&lt; "Huffman Codes:" &lt;&lt; endl;
+    for (auto&amp; p : codes) {
+        cout &lt;&lt; p.first &lt;&lt; ": " &lt;&lt; p.second &lt;&lt; endl;
+    }
+
+    string encoded = encode(text, codes);
+    string decoded = decode(root, encoded);
+
+    cout &lt;&lt; "\nOriginal: " &lt;&lt; text &lt;&lt; endl;
+    cout &lt;&lt; "Encoded: " &lt;&lt; encoded &lt;&lt; endl;
+    cout &lt;&lt; "Decoded: " &lt;&lt; decoded &lt;&lt; endl;
+
+    return 0;
+}</code></pre>
+    </div>
+    
+    <div class="code-block" id="code-java">
+      <button class="copy-btn" data-lang="java" onclick="copyCode('java')">نسخ</button>
+      <pre><code class="language-java">import java.util.*;
+
+class HuffmanNode implements Comparable&lt;HuffmanNode&gt; {
+    char ch;
+    int freq;
+    HuffmanNode left, right;
+
+    HuffmanNode(char ch, int freq) {
+        this.ch = ch;
+        this.freq = freq;
+    }
+
+    public int compareTo(HuffmanNode other) {
+        return this.freq - other.freq;
+    }
+}
+
+public class HuffmanCoding {
+
+    public static void generateCodes(HuffmanNode root, String code, Map&lt;Character, String&gt; codes) {
+        if (root == null) return;
+        if (root.left == null && root.right == null) {
+            codes.put(root.ch, code);
+        }
+        generateCodes(root.left, code + "0", codes);
+        generateCodes(root.right, code + "1", codes);
+    }
+
+    public static String encode(String text, Map&lt;Character, String&gt; codes) {
+        StringBuilder sb = new StringBuilder();
+        for (char ch : text.toCharArray()) sb.append(codes.get(ch));
+        return sb.toString();
+    }
+
+    public static String decode(HuffmanNode root, String bits) {
+        StringBuilder sb = new StringBuilder();
+        HuffmanNode curr = root;
+        for (char b : bits.toCharArray()) {
+            curr = (b == '0') ? curr.left : curr.right;
+            if (curr.left == null && curr.right == null) {
+                sb.append(curr.ch);
+                curr = root;
+            }
+        }
+        return sb.toString();
+    }
+
+    public static void main(String[] args) {
+        String text = "aabbbccdeeeeff";
+
+        Map&lt;Character, Integer&gt; freq = new HashMap&lt;&gt;();
+        for (char ch : text.toCharArray()) freq.put(ch, freq.getOrDefault(ch, 0) + 1);
+
+        PriorityQueue&lt;HuffmanNode&gt; pq = new PriorityQueue&lt;&gt;();
+        for (Map.Entry&lt;Character, Integer&gt; e : freq.entrySet()) {
+            pq.offer(new HuffmanNode(e.getKey(), e.getValue()));
+        }
+
+        while (pq.size() &gt; 1) {
+            HuffmanNode left = pq.poll();
+            HuffmanNode right = pq.poll();
+            HuffmanNode merged = new HuffmanNode('\0', left.freq + right.freq);
+            merged.left = left;
+            merged.right = right;
+            pq.offer(merged);
+        }
+
+        HuffmanNode root = pq.poll();
+        Map&lt;Character, String&gt; codes = new HashMap&lt;&gt;();
+        generateCodes(root, "", codes);
+
+        System.out.println("Huffman Codes:");
+        for (Map.Entry&lt;Character, String&gt; e : codes.entrySet()) {
+            System.out.println(e.getKey() + ": " + e.getValue());
+        }
+
+        String encoded = encode(text, codes);
+        String decoded = decode(root, encoded);
+
+        System.out.println("\nOriginal: " + text);
+        System.out.println("Encoded: " + encoded);
+        System.out.println("Decoded: " + decoded);
+    }
+}</code></pre>
+    </div>
+    
+    <div class="code-block" id="code-js">
+      <button class="copy-btn" data-lang="js" onclick="copyCode('js')">نسخ</button>
+      <pre><code class="language-javascript">class Node {
+    constructor(ch, freq) {
+        this.ch = ch;
+        this.freq = freq;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+function generateCodes(root, code, codes) {
+    if (!root) return;
+    if (!root.left && !root.right) {
+        codes[root.ch] = code;
+    }
+    generateCodes(root.left, code + "0", codes);
+    generateCodes(root.right, code + "1", codes);
+}
+
+function encode(text, codes) {
+    return text.split("").map(ch => codes[ch]).join("");
+}
+
+function decode(root, bits) {
+    let result = "";
+    let curr = root;
+    for (const b of bits) {
+        curr = b === "0" ? curr.left : curr.right;
+        if (!curr.left && !curr.right) {
+            result += curr.ch;
+            curr = root;
+        }
+    }
+    return result;
+}
+
+function buildHuffmanTree(text) {
+    const freq = {};
+    for (const ch of text) freq[ch] = (freq[ch] || 0) + 1;
+
+    const pq = Object.entries(freq).map(([ch, f]) => new Node(ch, f));
+    pq.sort((a, b) => a.freq - b.freq);
+
+    while (pq.length > 1) {
+        const left = pq.shift();
+        const right = pq.shift();
+        const merged = new Node("", left.freq + right.freq);
+        merged.left = left;
+        merged.right = right;
+        pq.push(merged);
+        pq.sort((a, b) => a.freq - b.freq);
+    }
+
+    return pq[0];
+}
+
+const text = "aabbbccdeeeeff";
+const root = buildHuffmanTree(text);
+const codes = {};
+generateCodes(root, "", codes);
+
+console.log("Huffman Codes:");
+for (const [ch, code] of Object.entries(codes)) {
+    console.log(ch + ": " + code);
+}
+
+const encoded = encode(text, codes);
+const decoded = decode(root, encoded);
+
+console.log("\nOriginal:", text);
+console.log("Encoded:", encoded);
+console.log("Decoded:", decoded);</code></pre>
+    </div>
+    
+    <div class="code-block" id="code-php">
+      <button class="copy-btn" data-lang="php" onclick="copyCode('php')">نسخ</button>
+      <pre><code class="language-php">&lt;?php
+
+class Node {
+    public $ch;
+    public $freq;
+    public $left;
+    public $right;
+
+    public function __construct($ch, $freq) {
+        $this-&gt;ch = $ch;
+        $this-&gt;freq = $freq;
+        $this-&gt;left = null;
+        $this-&gt;right = null;
+    }
+}
+
+function generateCodes($root, $code, &amp;$codes) {
+    if ($root === null) return;
+    if ($root-&gt;left === null && $root-&gt;right === null) {
+        $codes[$root-&gt;ch] = $code;
+    }
+    generateCodes($root-&gt;left, $code . "0", $codes);
+    generateCodes($root-&gt;right, $code . "1", $codes);
+}
+
+function encodeText($text, $codes) {
+    $result = "";
+    for ($i = 0; $i &lt; strlen($text); $i++) {
+        $result .= $codes[$text[$i]];
+    }
+    return $result;
+}
+
+function decodeText($root, $bits) {
+    $result = "";
+    $curr = $root;
+    for ($i = 0; $i &lt; strlen($bits); $i++) {
+        $curr = $bits[$i] === "0" ? $curr-&gt;left : $curr-&gt;right;
+        if ($curr-&gt;left === null && $curr-&gt;right === null) {
+            $result .= $curr-&gt;ch;
+            $curr = $root;
+        }
+    }
+    return $result;
+}
+
+function buildTree($text) {
+    $freq = [];
+    for ($i = 0; $i &lt; strlen($text); $i++) {
+        $ch = $text[$i];
+        if (!isset($freq[$ch])) $freq[$ch] = 0;
+        $freq[$ch]++;
+    }
+
+    $pq = [];
+    foreach ($freq as $ch =&gt; $f) {
+        $pq[] = new Node($ch, $f);
+    }
+
+    while (count($pq) &gt; 1) {
+        usort($pq, function($a, $b) { return $a-&gt;freq - $b-&gt;freq; });
+        $left = array_shift($pq);
+        $right = array_shift($pq);
+        $merged = new Node("", $left-&gt;freq + $right-&gt;freq);
+        $merged-&gt;left = $left;
+        $merged-&gt;right = $right;
+        $pq[] = $merged;
+    }
+
+    return $pq[0];
+}
+
+$text = "aabbbccdeeeeff";
+$root = buildTree($text);
+$codes = [];
+generateCodes($root, "", $codes);
+
+echo "Huffman Codes:\n";
+foreach ($codes as $ch =&gt; $code) {
+    echo "$ch: $code\n";
+}
+
+$encoded = encodeText($text, $codes);
+$decoded = decodeText($root, $encoded);
+
+echo "\nOriginal: $text\n";
+echo "Encoded: $encoded\n";
+echo "Decoded: $decoded\n";
+
+?&gt;</code></pre>
+    </div>
+  </div>
+
+  <footer class="bg-gray-900 text-white py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p class="text-gray-400 text-sm">ترميز هوفمان — أمثلة برمجية تفاعلية</p>
+    </div>
+  </footer>
+  
+  <script src="../../assets/js/code-tabs.js"></script>
+  <script src="../../assets/js/theme-toggle.js"></script>
+</body>
+</html>

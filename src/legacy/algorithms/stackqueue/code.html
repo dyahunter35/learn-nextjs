@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>المكدس والطابور - الكود البرمجي</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../../assets/css/code-tabs.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/atom-one-dark.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <link rel="stylesheet" href="../../assets/css/design-system.css" />
+  <link rel="stylesheet" href="../../assets/css/dark-content.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50 min-h-screen">
+  
+    <nav class="site-nav">
+      <div class="site-nav-inner">
+        <div class="nav-main">
+          <a href="../../index.html" class="nav-logo">
+            <svg class="nav-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.663 17h4.673M12 3v1m6.364 1.636-.707.707M21 12h-1M4 12H3m3.343-5.657-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            <span>مقرر الحاسوب</span>
+          </a>
+          <div class="nav-links">
+                  <a href="../../index.html">الرئيسية</a>
+      <a href="index.html">الشرح</a>
+      <a href="simulation.html">المحاكاة</a>
+          </div>
+          <div class="nav-actions">
+            <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme"></button>
+            <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="nav-mobile" id="navMobile">
+                <a href="../../index.html">الرئيسية</a>
+      <a href="index.html">الشرح</a>
+      <a href="simulation.html">المحاكاة</a>
+        </div>
+        <div class="nav-breadcrumb">
+          <a href="../../index.html">الرئيسية</a><span class="sep">›</span><a href="index.html">المكدس والطابور (Stack & Queue)</a><span class="sep">›</span><span class="current">الكود البرمجي</span>
+        </div>
+      </div>
+    </nav>
+    <script>function toggleMenu(){var m=document.getElementById("navMobile");if(m)m.classList.toggle("open")}</script>
+
+  <div class="code-page">
+    <h1>المكدس والطابور — الكود البرمجي</h1>
+    <p class="subtitle">شرح مبسط لهياكل بيانات المكدس والطابور مع أمثلة برمجية بلغات متعددة. يمكنك نسخ الكود واستخدامه مباشرة.</p>
+    
+    <div class="algorithm-code-description">
+      <strong>كيف تعمل هياكل البيانات:</strong><br/>
+      <strong>المكدس (Stack):</strong> هو هيكل بيانات يتبع مبدأ LIFO (Last In First Out) أي أن آخر عنصر تم إضافته هو أول عنصر يتم إزالته. العمليات الأساسية: push (إضافة إلى الأعلى)، pop (إزالة من الأعلى)، peek (مشاهدة العنصر العلوي).<br/><br/>
+      <strong>الطابور (Queue):</strong> هو هيكل بيانات يتبع مبدأ FIFO (First In First Out) أي أن أول عنصر تم إضافته هو أول عنصر يتم إزالته. العمليات الأساسية: enqueue (إضافة إلى النهاية)، dequeue (إزالة من البداية)، peek (مشاهدة العنصر الأول).
+    </div>
+
+    <div class="lang-tabs">
+      <button class="lang-tab active" data-lang="cpp" onclick="switchLang('cpp')">C++</button>
+      <button class="lang-tab" data-lang="java" onclick="switchLang('java')">Java</button>
+      <button class="lang-tab" data-lang="js" onclick="switchLang('js')">JavaScript</button>
+      <button class="lang-tab" data-lang="php" onclick="switchLang('php')">PHP</button>
+    </div>
+    
+    <div class="code-block active" id="code-cpp">
+      <button class="copy-btn" data-lang="cpp" onclick="copyCode('cpp')">نسخ</button>
+      <pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+class Stack {
+    vector&lt;int&gt; data;
+public:
+    void push(int val) { data.push_back(val); }
+
+    int pop() {
+        if (isEmpty()) throw runtime_error("Stack empty");
+        int val = data.back();
+        data.pop_back();
+        return val;
+    }
+
+    int peek() {
+        if (isEmpty()) throw runtime_error("Stack empty");
+        return data.back();
+    }
+
+    bool isEmpty() { return data.empty(); }
+
+    void display() {
+        cout &lt;&lt; "Stack (top to bottom): ";
+        for (int i = data.size() - 1; i &gt;= 0; i--) cout &lt;&lt; data[i] &lt;&lt; " ";
+        cout &lt;&lt; endl;
+    }
+};
+
+class Queue {
+    vector&lt;int&gt; data;
+public:
+    void enqueue(int val) { data.push_back(val); }
+
+    int dequeue() {
+        if (isEmpty()) throw runtime_error("Queue empty");
+        int val = data.front();
+        data.erase(data.begin());
+        return val;
+    }
+
+    int peek() {
+        if (isEmpty()) throw runtime_error("Queue empty");
+        return data.front();
+    }
+
+    bool isEmpty() { return data.empty(); }
+
+    void display() {
+        cout &lt;&lt; "Queue (front to back): ";
+        for (int x : data) cout &lt;&lt; x &lt;&lt; " ";
+        cout &lt;&lt; endl;
+    }
+};
+
+int main() {
+    cout &lt;&lt; "=== Stack Demo ===" &lt;&lt; endl;
+    Stack s;
+    s.push(10); s.push(20); s.push(30);
+    s.display();
+    cout &lt;&lt; "Popped: " &lt;&lt; s.pop() &lt;&lt; endl;
+    cout &lt;&lt; "Top: " &lt;&lt; s.peek() &lt;&lt; endl;
+    s.display();
+
+    cout &lt;&lt; "\n=== Queue Demo ===" &lt;&lt; endl;
+    Queue q;
+    q.enqueue(10); q.enqueue(20); q.enqueue(30);
+    q.display();
+    cout &lt;&lt; "Dequeued: " &lt;&lt; q.dequeue() &lt;&lt; endl;
+    cout &lt;&lt; "Front: " &lt;&lt; q.peek() &lt;&lt; endl;
+    q.display();
+
+    return 0;
+}</code></pre>
+    </div>
+    
+    <div class="code-block" id="code-java">
+      <button class="copy-btn" data-lang="java" onclick="copyCode('java')">نسخ</button>
+      <pre><code class="language-java">import java.util.LinkedList;
+
+class Stack {
+    private LinkedList&lt;Integer&gt; list = new LinkedList&lt;&gt;();
+
+    public void push(int val) { list.addLast(val); }
+
+    public int pop() {
+        if (isEmpty()) throw new RuntimeException("Stack empty");
+        return list.removeLast();
+    }
+
+    public int peek() {
+        if (isEmpty()) throw new RuntimeException("Stack empty");
+        return list.getLast();
+    }
+
+    public boolean isEmpty() { return list.isEmpty(); }
+
+    public void display() {
+        System.out.print("Stack (top to bottom): ");
+        for (int i = list.size() - 1; i &gt;= 0; i--) System.out.print(list.get(i) + " ");
+        System.out.println();
+    }
+}
+
+class Queue {
+    private LinkedList&lt;Integer&gt; list = new LinkedList&lt;&gt;();
+
+    public void enqueue(int val) { list.addLast(val); }
+
+    public int dequeue() {
+        if (isEmpty()) throw new RuntimeException("Queue empty");
+        return list.removeFirst();
+    }
+
+    public int peek() {
+        if (isEmpty()) throw new RuntimeException("Queue empty");
+        return list.getFirst();
+    }
+
+    public boolean isEmpty() { return list.isEmpty(); }
+
+    public void display() {
+        System.out.print("Queue (front to back): ");
+        for (int x : list) System.out.print(x + " ");
+        System.out.println();
+    }
+}
+
+public class StackQueueDemo {
+    public static void main(String[] args) {
+        System.out.println("=== Stack Demo ===");
+        Stack s = new Stack();
+        s.push(10); s.push(20); s.push(30);
+        s.display();
+        System.out.println("Popped: " + s.pop());
+        System.out.println("Top: " + s.peek());
+        s.display();
+
+        System.out.println("\n=== Queue Demo ===");
+        Queue q = new Queue();
+        q.enqueue(10); q.enqueue(20); q.enqueue(30);
+        q.display();
+        System.out.println("Dequeued: " + q.dequeue());
+        System.out.println("Front: " + q.peek());
+        q.display();
+    }
+}</code></pre>
+    </div>
+    
+    <div class="code-block" id="code-js">
+      <button class="copy-btn" data-lang="js" onclick="copyCode('js')">نسخ</button>
+      <pre><code class="language-javascript">class Stack {
+    constructor() { this.data = []; }
+    push(val) { this.data.push(val); }
+    pop() {
+        if (this.isEmpty()) throw new Error("Stack empty");
+        return this.data.pop();
+    }
+    peek() {
+        if (this.isEmpty()) throw new Error("Stack empty");
+        return this.data[this.data.length - 1];
+    }
+    isEmpty() { return this.data.length === 0; }
+    display() {
+        console.log("Stack (top to bottom):", [...this.data].reverse().join(" "));
+    }
+}
+
+class Queue {
+    constructor() { this.data = []; }
+    enqueue(val) { this.data.push(val); }
+    dequeue() {
+        if (this.isEmpty()) throw new Error("Queue empty");
+        return this.data.shift();
+    }
+    peek() {
+        if (this.isEmpty()) throw new Error("Queue empty");
+        return this.data[0];
+    }
+    isEmpty() { return this.data.length === 0; }
+    display() {
+        console.log("Queue (front to back):", this.data.join(" "));
+    }
+}
+
+console.log("=== Stack Demo ===");
+const s = new Stack();
+s.push(10); s.push(20); s.push(30);
+s.display();
+console.log("Popped:", s.pop());
+console.log("Top:", s.peek());
+s.display();
+
+console.log("\n=== Queue Demo ===");
+const q = new Queue();
+q.enqueue(10); q.enqueue(20); q.enqueue(30);
+q.display();
+console.log("Dequeued:", q.dequeue());
+console.log("Front:", q.peek());
+q.display();</code></pre>
+    </div>
+    
+    <div class="code-block" id="code-php">
+      <button class="copy-btn" data-lang="php" onclick="copyCode('php')">نسخ</button>
+      <pre><code class="language-php">&lt;?php
+
+class Stack {
+    private $data = [];
+
+    public function push($val) { array_push($this-&gt;data, $val); }
+
+    public function pop() {
+        if ($this-&gt;isEmpty()) throw new Exception("Stack empty");
+        return array_pop($this-&gt;data);
+    }
+
+    public function peek() {
+        if ($this-&gt;isEmpty()) throw new Exception("Stack empty");
+        return end($this-&gt;data);
+    }
+
+    public function isEmpty() { return empty($this-&gt;data); }
+
+    public function display() {
+        $reversed = array_reverse($this-&gt;data);
+        echo "Stack (top to bottom): " . implode(" ", $reversed) . "\n";
+    }
+}
+
+class Queue {
+    private $data = [];
+
+    public function enqueue($val) { array_push($this-&gt;data, $val); }
+
+    public function dequeue() {
+        if ($this-&gt;isEmpty()) throw new Exception("Queue empty");
+        return array_shift($this-&gt;data);
+    }
+
+    public function peek() {
+        if ($this-&gt;isEmpty()) throw new Exception("Queue empty");
+        return $this-&gt;data[0];
+    }
+
+    public function isEmpty() { return empty($this-&gt;data); }
+
+    public function display() {
+        echo "Queue (front to back): " . implode(" ", $this-&gt;data) . "\n";
+    }
+}
+
+echo "=== Stack Demo ===\n";
+$s = new Stack();
+$s-&gt;push(10); $s-&gt;push(20); $s-&gt;push(30);
+$s-&gt;display();
+echo "Popped: " . $s-&gt;pop() . "\n";
+echo "Top: " . $s-&gt;peek() . "\n";
+$s-&gt;display();
+
+echo "\n=== Queue Demo ===\n";
+$q = new Queue();
+$q-&gt;enqueue(10); $q-&gt;enqueue(20); $q-&gt;enqueue(30);
+$q-&gt;display();
+echo "Dequeued: " . $q-&gt;dequeue() . "\n";
+echo "Front: " . $q-&gt;peek() . "\n";
+$q-&gt;display();
+
+?&gt;</code></pre>
+    </div>
+  </div>
+
+  <footer class="bg-gray-900 text-white py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p class="text-gray-400 text-sm">المكدس والطابور — أمثلة برمجية تفاعلية</p>
+    </div>
+  </footer>
+  
+  <script src="../../assets/js/code-tabs.js"></script>
+  <script src="../../assets/js/theme-toggle.js"></script>
+</body>
+</html>

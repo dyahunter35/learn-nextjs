@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>محاكاة المكدس والطابور</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../assets/css/stackqueue.css" />
+    <link rel="stylesheet" href="../../assets/css/design-system.css" />
+    <link rel="stylesheet" href="../../assets/css/dark-content.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+  <body>
+    <!-- ===== الشريط العلوي ===== -->
+    
+    <nav class="site-nav">
+      <div class="site-nav-inner">
+        <div class="nav-main">
+          <a href="../../index.html" class="nav-logo">
+            <svg class="nav-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.663 17h4.673M12 3v1m6.364 1.636-.707.707M21 12h-1M4 12H3m3.343-5.657-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            <span>مقرر الحاسوب</span>
+          </a>
+          <div class="nav-links">
+                  <a href="../../index.html">الرئيسية</a>
+      <a href="index.html">الشرح</a>
+      <a href="code.html">الكود البرمجي</a>
+          </div>
+          <div class="nav-actions">
+            <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme"></button>
+            <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="nav-mobile" id="navMobile">
+                <a href="../../index.html">الرئيسية</a>
+      <a href="index.html">الشرح</a>
+        </div>
+        <div class="nav-breadcrumb">
+          <a href="../../index.html">الرئيسية</a><span class="sep">›</span><a href="index.html">المكدس والطابور (Stack & Queue)</a><span class="sep">›</span><span class="current">المحاكاة</span>
+        </div>
+      </div>
+    </nav>
+    <script>function toggleMenu(){var m=document.getElementById("navMobile");if(m)m.classList.toggle("open")}</script>
+
+    
+
+    <!-- ===== المحتوى الرئيسي ===== -->
+    <div class="min-h-screen bg-gradient-to-b from-slate-50 to-white py-8 md:py-12 px-4">
+      <div class="max-w-4xl mx-auto">
+
+        <!-- عنوان الصفحة -->
+        <div class="text-center mb-8">
+          <span class="inline-block text-indigo-500 font-bold text-sm tracking-widest uppercase mb-2">STACK & QUEUE</span>
+          <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900">محاكاة المكدس والطابور التفاعلية</h1>
+          <p class="text-gray-500 mt-2">اختر هيكل البيانات، أضف عناصر، وشاهد التفاعل في الوقت الحقيقي</p>
+        </div>
+
+        <!-- البطاقة الرئيسية -->
+        <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+
+          <!-- أزرار التبديل (Tabs) -->
+          <div class="p-6 md:p-8 border-b border-gray-100">
+            <div class="flex flex-wrap gap-3 justify-center">
+              <button class="tab-btn" data-mode="stack" onclick="setMode('stack')">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline ml-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                </svg>
+                المكدس (Stack)
+              </button>
+              <button class="tab-btn" data-mode="queue" onclick="setMode('queue')">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline ml-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+                الطابور (Queue)
+              </button>
+            </div>
+          </div>
+
+          <!-- العرض البصري -->
+          <div class="p-6 md:p-8 border-b border-gray-100">
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-lg font-bold text-gray-800">العرض البصري</h2>
+              <div class="flex items-center gap-2 text-sm text-gray-500">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+                <span>الحجم: <strong id="size-info">0 / 7</strong></span>
+              </div>
+            </div>
+
+            <div id="visual-container" class="structure-container">
+              <!-- يتم التعبئة عن طريق JS -->
+            </div>
+
+            <!-- حالة الفراغ (تظهر عند عدم وجود عناصر) -->
+            <div id="empty-state" class="empty-state py-10">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto mb-3 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+              </svg>
+              <p class="text-lg font-medium text-gray-500">الهيكل فارغ</p>
+              <p class="text-sm text-gray-400 mt-1">أضف عنصراً لبدء المحاكاة</p>
+            </div>
+          </div>
+
+          <!-- لوحة التحكم -->
+          <div class="p-6 md:p-8 border-b border-gray-100">
+            <h2 class="text-lg font-bold text-gray-800 mb-4">لوحة التحكم</h2>
+
+            <div class="flex flex-col sm:flex-row gap-4 mb-4">
+              <div class="flex-1">
+                <label for="value-input" class="block text-sm font-medium text-gray-600 mb-1.5">قيمة العنصر</label>
+                <input
+                  type="text"
+                  id="value-input"
+                  class="value-input"
+                  placeholder="أدخل قيمة..."
+                  autofocus
+                />
+              </div>
+              <div class="flex-1 flex flex-wrap items-end gap-2">
+                <button class="action-btn btn-push" id="action-primary" onclick="push()">
+                  <span id="action-primary-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                    </svg>
+                  </span>
+                  <span id="action-primary-text">Push (دفع)</span>
+                </button>
+                <button class="action-btn btn-pop" id="action-secondary" onclick="pop()">
+                  <span id="action-secondary-text">Pop (حذف)</span>
+                </button>
+                <button class="action-btn btn-clear" onclick="clearAll()">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                  </svg>
+                  مسح
+                </button>
+              </div>
+            </div>
+
+            <div class="text-xs text-gray-400">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 inline ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              اضغط Enter على لوحة المفاتيح للإضافة السريعة
+            </div>
+          </div>
+
+          <!-- سجل العمليات -->
+          <div class="p-6 md:p-8">
+            <div class="flex items-center justify-between mb-3">
+              <h2 class="text-lg font-bold text-gray-800">سجل العمليات</h2>
+              <button onclick="document.getElementById('log-list').innerHTML = ''" class="text-xs text-gray-400 hover:text-gray-600 transition">
+                مسح السجل
+              </button>
+            </div>
+            <div id="log-list" class="log-container">
+              <div class="log-entry info">مرحباً بك في محاكاة المكدس والطابور</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="../../assets/js/stackqueue.js"></script>
+    <script src="../../assets/js/theme-toggle.js"></script>
+</body>
+</html>

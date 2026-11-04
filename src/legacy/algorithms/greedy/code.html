@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>العملات المعدنية (Greedy Coin Change) - الكود البرمجي</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../../assets/css/code-tabs.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/atom-one-dark.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <link rel="stylesheet" href="../../assets/css/design-system.css" />
+  <link rel="stylesheet" href="../../assets/css/dark-content.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50 min-h-screen">
+  
+    <nav class="site-nav">
+      <div class="site-nav-inner">
+        <div class="nav-main">
+          <a href="../../index.html" class="nav-logo">
+            <svg class="nav-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.663 17h4.673M12 3v1m6.364 1.636-.707.707M21 12h-1M4 12H3m3.343-5.657-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            <span>مقرر الحاسوب</span>
+          </a>
+          <div class="nav-links">
+                  <a href="../../index.html">الرئيسية</a>
+      <a href="index.html">الشرح</a>
+      <a href="simulation.html">المحاكاة</a>
+          </div>
+          <div class="nav-actions">
+            <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme"></button>
+            <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="nav-mobile" id="navMobile">
+                <a href="../../index.html">الرئيسية</a>
+      <a href="index.html">الشرح</a>
+      <a href="simulation.html">المحاكاة</a>
+        </div>
+        <div class="nav-breadcrumb">
+          <a href="../../index.html">الرئيسية</a><span class="sep">›</span><a href="index.html">الخوارزميات الجشعة (Greedy)</a><span class="sep">›</span><span class="current">الكود البرمجي</span>
+        </div>
+      </div>
+    </nav>
+    <script>function toggleMenu(){var m=document.getElementById("navMobile");if(m)m.classList.toggle("open")}</script>
+
+  <div class="code-page">
+    <h1>العملات المعدنية (Greedy Coin Change) — الكود البرمجي</h1>
+    <p class="subtitle">شرح مبسط مع أمثلة بلغات متعددة. يمكنك نسخ الكود واستخدامه.</p>
+
+    <div class="algorithm-code-description">
+      <strong>كيف تعمل:</strong> خوارزمية جشعة لمشكلة صرف العملات. تختار دائمًا العملة الأكبر التي لا تتجاوز المبلغ المتبقي، وتكرر حتى يصفر المبلغ. تعمل بكفاءة مع أنظمة العملات القياسية. مثال: عملات سودانية [50, 20, 10, 5, 1] والمبلغ 87.
+    </div>
+
+    <div class="lang-tabs">
+      <button class="lang-tab active" data-lang="cpp" onclick="switchLang('cpp')">C++</button>
+      <button class="lang-tab" data-lang="java" onclick="switchLang('java')">Java</button>
+      <button class="lang-tab" data-lang="js" onclick="switchLang('js')">JavaScript</button>
+      <button class="lang-tab" data-lang="php" onclick="switchLang('php')">PHP</button>
+    </div>
+
+    <div class="code-block active" id="code-cpp">
+      <button class="copy-btn" data-lang="cpp" onclick="copyCode('cpp')">نسخ</button>
+      <pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+vector&lt;int&gt; minCoinsGreedy(vector&lt;int&gt; coins, int amount) {
+    sort(coins.rbegin(), coins.rend());
+    vector&lt;int&gt; result;
+    for (int coin : coins) {
+        while (amount &gt;= coin) {
+            amount -= coin;
+            result.push_back(coin);
+        }
+    }
+    return result;
+}
+
+int main() {
+    vector&lt;int&gt; coins = {50, 20, 10, 5, 1};
+    int amount = 87;
+    vector&lt;int&gt; result = minCoinsGreedy(coins, amount);
+    cout &lt;&lt; "Amount: " &lt;&lt; amount &lt;&lt; endl;
+    cout &lt;&lt; "Coins used: ";
+    for (int c : result) cout &lt;&lt; c &lt;&lt; " ";
+    cout &lt;&lt; endl;
+    cout &lt;&lt; "Total coins: " &lt;&lt; result.size() &lt;&lt; endl;
+    return 0;
+}</code></pre>
+    </div>
+    <div class="code-block" id="code-java">
+      <button class="copy-btn" data-lang="java" onclick="copyCode('java')">نسخ</button>
+      <pre><code class="language-java">import java.util.*;
+
+public class CoinChange {
+    public static List&lt;Integer&gt; minCoinsGreedy(Integer[] coinsArr, int amount) {
+        Arrays.sort(coinsArr, Collections.reverseOrder());
+        List&lt;Integer&gt; result = new ArrayList&lt;&gt;();
+        for (int coin : coinsArr) {
+            while (amount &gt;= coin) {
+                amount -= coin;
+                result.add(coin);
+            }
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        Integer[] coins = {50, 20, 10, 5, 1};
+        int amount = 87;
+        List&lt;Integer&gt; result = minCoinsGreedy(coins, amount);
+        System.out.println("Amount: " + amount);
+        System.out.print("Coins used: ");
+        for (int c : result) System.out.print(c + " ");
+        System.out.println();
+        System.out.println("Total coins: " + result.size());
+    }
+}</code></pre>
+    </div>
+    <div class="code-block" id="code-js">
+      <button class="copy-btn" data-lang="js" onclick="copyCode('js')">نسخ</button>
+      <pre><code class="language-javascript">function minCoinsGreedy(coins, amount) {
+    coins.sort((a, b) =&gt; b - a);
+    const result = [];
+    for (const coin of coins) {
+        while (amount &gt;= coin) {
+            amount -= coin;
+            result.push(coin);
+        }
+    }
+    return result;
+}
+
+const coins = [50, 20, 10, 5, 1];
+const amount = 87;
+const result = minCoinsGreedy(coins, amount);
+console.log("Amount:", amount);
+console.log("Coins used:", result.join(" "));
+console.log("Total coins:", result.length);</code></pre>
+    </div>
+    <div class="code-block" id="code-php">
+      <button class="copy-btn" data-lang="php" onclick="copyCode('php')">نسخ</button>
+      <pre><code class="language-php">&lt;?php
+function minCoinsGreedy($coins, $amount) {
+    rsort($coins);
+    $result = [];
+    foreach ($coins as $coin) {
+        while ($amount &gt;= $coin) {
+            $amount -= $coin;
+            $result[] = $coin;
+        }
+    }
+    return $result;
+}
+
+$coins = [50, 20, 10, 5, 1];
+$amount = 87;
+$result = minCoinsGreedy($coins, $amount);
+echo "Amount: $amount\n";
+echo "Coins used: " . implode(" ", $result) . "\n";
+echo "Total coins: " . count($result) . "\n";
+?&gt;</code></pre>
+    </div>
+  </div>
+
+  <footer class="bg-gray-900 text-white py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p class="text-gray-400 text-sm">العملات المعدنية (Greedy Coin Change) — أمثلة برمجية تفاعلية</p>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/code-tabs.js"></script>
+  <script src="../../assets/js/theme-toggle.js"></script>
+</body>
+</html>

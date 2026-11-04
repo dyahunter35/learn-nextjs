@@ -1,0 +1,312 @@
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap");
+body {
+  font-family: "Cairo", sans-serif;
+  background-color: #f3f4f6;
+}
+
+.mst-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+  border-radius: 1rem;
+  border: 2px dashed #e2e8f0;
+  padding: 1rem;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.mst-svg {
+  width: 100%;
+  height: auto;
+  max-width: 560px;
+}
+
+.mst-edge {
+  stroke: #d1d5db;
+  stroke-width: 2;
+  stroke-linecap: round;
+  transition: stroke 0.3s ease, stroke-width 0.3s ease;
+}
+
+.mst-edge-considering {
+  stroke: #fbbf24;
+  stroke-width: 3;
+  stroke-dasharray: 6, 3;
+  animation: mstDashMove 0.5s linear infinite;
+}
+
+.mst-edge-added {
+  stroke: #34d399;
+  stroke-width: 3;
+  filter: drop-shadow(0 0 4px rgba(52, 211, 153, 0.5));
+  animation: edgeAdd 0.5s ease-out;
+}
+
+.mst-edge-skipped {
+  stroke: #fca5a5;
+  stroke-width: 2;
+  stroke-dasharray: 4, 2;
+}
+
+.mst-edge-frontier {
+  stroke: #93c5fd;
+  stroke-width: 2.5;
+  stroke-dasharray: 5, 3;
+}
+
+.mst-edge-label-bg {
+  fill: white;
+  stroke: #d1d5db;
+  stroke-width: 1;
+}
+
+.mst-edge-label {
+  fill: #374151;
+  font-size: 12px;
+  font-weight: 700;
+  text-anchor: middle;
+  dominant-baseline: central;
+  pointer-events: none;
+  user-select: none;
+}
+
+.mst-node circle {
+  transition: fill 0.4s ease, stroke 0.4s ease, r 0.3s ease;
+}
+
+.mst-node text {
+  pointer-events: none;
+  user-select: none;
+}
+
+.mst-node-default circle {
+  fill: #e5e7eb;
+  stroke: #9ca3af;
+  stroke-width: 2.5;
+}
+
+.mst-node-in-tree circle {
+  fill: #6366f1;
+  stroke: #4f46e5;
+  stroke-width: 2.5;
+}
+
+.mst-node-current circle {
+  fill: #fbbf24;
+  stroke: #d97706;
+  stroke-width: 3;
+  filter: url(#glowCurrent);
+  animation: mstNodePulse 0.8s ease-in-out infinite;
+}
+
+.mst-node-label {
+  fill: #1f2937;
+  font-weight: 800;
+  text-anchor: middle;
+  dominant-baseline: central;
+  pointer-events: none;
+  user-select: none;
+}
+
+.mst-node-label-light {
+  fill: #ffffff;
+  font-weight: 800;
+  text-anchor: middle;
+  dominant-baseline: central;
+  pointer-events: none;
+  user-select: none;
+}
+
+.edge-list {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.edge-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.4rem 0.75rem;
+  border-bottom: 1px solid #f3f4f6;
+  font-size: 0.8rem;
+  transition: all 0.2s;
+}
+
+.edge-list-item:last-child {
+  border-bottom: none;
+}
+
+.edge-list-item.considering {
+  background: #fef3c7;
+  border-right: 3px solid #f59e0b;
+  font-weight: 700;
+}
+
+.edge-list-item.added {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.edge-list-item.skipped {
+  background: #fee2e2;
+  color: #991b1b;
+  text-decoration: line-through;
+}
+
+.edge-list-item.default {
+  color: #9ca3af;
+}
+
+.edge-list-item .edge-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  font-size: 0.65rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.info-panel {
+  background: white;
+  border-radius: 0.75rem;
+  border: 1px solid #e5e7eb;
+  padding: 1rem;
+}
+
+.status-message {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1rem;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  animation: mstStatusIn 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.status-message.info {
+  background: #eef2ff;
+  color: #4338ca;
+  border-right: 4px solid #6366f1;
+}
+
+.status-message.success {
+  background: #d1fae5;
+  color: #065f46;
+  border-right: 4px solid #10b981;
+}
+
+.status-message.considering {
+  background: #fef3c7;
+  color: #92400e;
+  border-right: 4px solid #f59e0b;
+}
+
+.status-message.skipped {
+  background: #fee2e2;
+  color: #991b1b;
+  border-right: 4px solid #ef4444;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #4b5563;
+}
+
+.legend-dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.legend-line {
+  width: 1.25rem;
+  height: 0;
+  border-top-width: 2px;
+  border-top-style: solid;
+  flex-shrink: 0;
+}
+
+.steps-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.75rem;
+}
+
+.steps-table th,
+.steps-table td {
+  border: 1px solid #e2e8f0;
+  padding: 5px 7px;
+  text-align: center;
+}
+
+.steps-table th {
+  background: linear-gradient(135deg, #4f46e5, #4338ca);
+  color: white;
+  font-weight: 700;
+  position: sticky;
+  top: 0;
+  font-size: 0.7rem;
+}
+
+.steps-table tr:nth-child(even) {
+  background-color: #f8fafc;
+}
+
+.steps-table tr.current-step {
+  background-color: #fef3c7 !important;
+}
+
+.steps-log-container {
+  max-height: 250px;
+  overflow-y: auto;
+  border: none;
+  background: transparent;
+}
+
+@keyframes edgeAdd {
+  0% { stroke-width: 1; }
+  50% { stroke-width: 5; }
+  100% { stroke-width: 3; }
+}
+
+@keyframes mstNodePulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+@keyframes mstDashMove {
+  to { stroke-dashoffset: -9; }
+}
+
+@keyframes mstStatusIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 640px) {
+  .mst-container {
+    padding: 0.5rem;
+  }
+  .mst-svg {
+    max-width: 100%;
+  }
+  .steps-table {
+    font-size: 0.65rem;
+  }
+  .steps-table th, .steps-table td {
+    padding: 3px 5px;
+  }
+}

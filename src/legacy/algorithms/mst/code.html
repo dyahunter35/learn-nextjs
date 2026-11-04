@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>MST - الكود البرمجي</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../../assets/css/code-tabs.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/atom-one-dark.min.css" />
+  <link rel="stylesheet" href="../../assets/css/design-system.css" />
+  <link rel="stylesheet" href="../../assets/css/dark-content.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50 min-h-screen">
+  
+    <nav class="site-nav">
+      <div class="site-nav-inner">
+        <div class="nav-main">
+          <a href="../../index.html" class="nav-logo">
+            <svg class="nav-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.663 17h4.673M12 3v1m6.364 1.636-.707.707M21 12h-1M4 12H3m3.343-5.657-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            <span>مقرر الحاسوب</span>
+          </a>
+          <div class="nav-links">
+                  <a href="../../index.html">الرئيسية</a>
+      <a href="index.html">الشرح</a>
+      <a href="simulation.html">المحاكاة</a>
+          </div>
+          <div class="nav-actions">
+            <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme"></button>
+            <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="nav-mobile" id="navMobile">
+                <a href="../../index.html">الرئيسية</a>
+      <a href="index.html">الشرح</a>
+      <a href="simulation.html">المحاكاة</a>
+        </div>
+        <div class="nav-breadcrumb">
+          <a href="../../index.html">الرئيسية</a><span class="sep">›</span><a href="index.html">الشجرة الممتدة الدنيا (MST)</a><span class="sep">›</span><span class="current">الكود البرمجي</span>
+        </div>
+      </div>
+    </nav>
+    <script>function toggleMenu(){var m=document.getElementById("navMobile");if(m)m.classList.toggle("open")}</script>
+
+  <div class="code-page">
+    <h1>الشجرة الممتدة الدنيا (MST) — الكود البرمجي</h1>
+    <p class="subtitle">خوارزميتا Kruskal و Prim لإيجاد أقل تكلفة لربط جميع نقاط الشبكة مع أمثلة بلغات متعددة.</p>
+
+    <div class="algorithm-code-description">
+      <strong>كيف تعمل Kruskal:</strong> ترتيب الحواف حسب الوزن، ثم إضافة كل حافة لا تشكل حلقة باستخدام Union-Find.
+      <br/><strong>كيف تعمل Prim:</strong> تبدأ من عقدة وتضيف الحافة الأقل وزناً التي تصل العقدة الممتدة بعقدة جديدة.
+    </div>
+
+    <div class="lang-tabs">
+      <button class="lang-tab active" data-lang="cpp" onclick="switchLang('cpp')">C++</button>
+      <button class="lang-tab" data-lang="java" onclick="switchLang('java')">Java</button>
+      <button class="lang-tab" data-lang="js" onclick="switchLang('js')">JavaScript</button>
+      <button class="lang-tab" data-lang="php" onclick="switchLang('php')">PHP</button>
+    </div>
+
+    <div class="code-block active" id="code-cpp">
+      <button class="copy-btn" data-lang="cpp" onclick="copyCode('cpp')">نسخ</button>
+      <pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+struct Edge {
+    int src, dest, weight;
+};
+
+struct Graph {
+    int V, E;
+    vector&lt;Edge&gt; edges;
+};
+
+struct Subset {
+    int parent, rank;
+};
+
+int find(Subset subsets[], int i) {
+    if (subsets[i].parent != i)
+        subsets[i].parent = find(subsets, subsets[i].parent);
+    return subsets[i].parent;
+}
+
+void unite(Subset subsets[], int x, int y) {
+    int rx = find(subsets, x), ry = find(subsets, y);
+    if (subsets[rx].rank < subsets[ry].rank)
+        subsets[rx].parent = ry;
+    else if (subsets[rx].rank > subsets[ry].rank)
+        subsets[ry].parent = rx;
+    else {
+        subsets[ry].parent = rx;
+        subsets[rx].rank++;
+    }
+}
+
+bool cmp(Edge a, Edge b) { return a.weight < b.weight; }
+
+void kruskalMST(Graph& graph) {
+    int V = graph.V;
+    sort(graph.edges.begin(), graph.edges.end(), cmp);
+    Subset* subsets = new Subset[V];
+    for (int v = 0; v < V; v++) {
+        subsets[v].parent = v;
+        subsets[v].rank = 0;
+    }
+    vector&lt;Edge&gt; result;
+    for (Edge e : graph.edges) {
+        int x = find(subsets, e.src);
+        int y = find(subsets, e.dest);
+        if (x != y) {
+            result.push_back(e);
+            unite(subsets, x, y);
+        }
+    }
+    cout << "MST edges:\n";
+    for (Edge e : result)
+        cout << e.src << " - " << e.dest << " : " << e.weight << "\n";
+    delete[] subsets;
+}
+
+int main() {
+    Graph g = {4, 5, {{0,1,10},{0,2,6},{0,3,5},{1,3,15},{2,3,4}}};
+    kruskalMST(g);
+    return 0;
+}</code></pre>
+    </div>
+
+    <div class="code-block" id="code-java">
+      <button class="copy-btn" data-lang="java" onclick="copyCode('java')">نسخ</button>
+      <pre><code class="language-java">import java.util.*;
+
+class Edge implements Comparable&lt;Edge&gt; {
+    int src, dest, weight;
+    public int compareTo(Edge e) { return this.weight - e.weight; }
+}
+
+class Subset {
+    int parent, rank;
+}
+
+public class KruskalMST {
+    int V, E;
+    Edge[] edges;
+
+    int find(Subset[] subsets, int i) {
+        if (subsets[i].parent != i)
+            subsets[i].parent = find(subsets, subsets[i].parent);
+        return subsets[i].parent;
+    }
+
+    void unite(Subset[] subsets, int x, int y) {
+        int rx = find(subsets, x), ry = find(subsets, y);
+        if (subsets[rx].rank < subsets[ry].rank)
+            subsets[rx].parent = ry;
+        else if (subsets[rx].rank > subsets[ry].rank)
+            subsets[ry].parent = rx;
+        else {
+            subsets[ry].parent = rx;
+            subsets[rx].rank++;
+        }
+    }
+
+    void kruskalMST() {
+        Arrays.sort(edges);
+        Subset[] subsets = new Subset[V];
+        for (int v = 0; v < V; v++) {
+            subsets[v] = new Subset();
+            subsets[v].parent = v;
+            subsets[v].rank = 0;
+        }
+        ArrayList&lt;Edge&gt; result = new ArrayList&lt;&gt;();
+        for (Edge e : edges) {
+            int x = find(subsets, e.src);
+            int y = find(subsets, e.dest);
+            if (x != y) {
+                result.add(e);
+                unite(subsets, x, y);
+            }
+        }
+        System.out.println("MST edges:");
+        for (Edge e : result)
+            System.out.println(e.src + " - " + e.dest + " : " + e.weight);
+    }
+
+    public static void main(String[] args) {
+        KruskalMST g = new KruskalMST();
+        g.V = 4; g.E = 5;
+        g.edges = new Edge[5];
+        int[][] data = {{0,1,10},{0,2,6},{0,3,5},{1,3,15},{2,3,4}};
+        for (int i = 0; i < 5; i++) {
+            g.edges[i] = new Edge();
+            g.edges[i].src = data[i][0];
+            g.edges[i].dest = data[i][1];
+            g.edges[i].weight = data[i][2];
+        }
+        g.kruskalMST();
+    }
+}</code></pre>
+    </div>
+
+    <div class="code-block" id="code-js">
+      <button class="copy-btn" data-lang="js" onclick="copyCode('js')">نسخ</button>
+      <pre><code class="language-javascript">class UnionFind {
+    constructor(n) {
+        this.parent = Array.from({length: n}, (_, i) => i);
+        this.rank = new Array(n).fill(0);
+    }
+    find(i) {
+        if (this.parent[i] !== i)
+            this.parent[i] = this.find(this.parent[i]);
+        return this.parent[i];
+    }
+    unite(x, y) {
+        const rx = this.find(x), ry = this.find(y);
+        if (rx === ry) return;
+        if (this.rank[rx] < this.rank[ry])
+            this.parent[rx] = ry;
+        else if (this.rank[rx] > this.rank[ry])
+            this.parent[ry] = rx;
+        else {
+            this.parent[ry] = rx;
+            this.rank[rx]++;
+        }
+    }
+}
+
+function kruskalMST(edges, V) {
+    edges.sort((a, b) => a.weight - b.weight);
+    const uf = new UnionFind(V);
+    const result = [];
+    for (const e of edges) {
+        if (uf.find(e.src) !== uf.find(e.dest)) {
+            result.push(e);
+            uf.unite(e.src, e.dest);
+        }
+    }
+    return result;
+}
+
+const edges = [
+    {src:0, dest:1, weight:10}, {src:0, dest:2, weight:6},
+    {src:0, dest:3, weight:5}, {src:1, dest:3, weight:15},
+    {src:2, dest:3, weight:4}
+];
+const mst = kruskalMST(edges, 4);
+console.log("MST edges:");
+mst.forEach(e => console.log(`${e.src} - ${e.dest} : ${e.weight}`));</code></pre>
+    </div>
+
+    <div class="code-block" id="code-php">
+      <button class="copy-btn" data-lang="php" onclick="copyCode('php')">نسخ</button>
+      <pre><code class="language-php"><?php
+class UnionFind {
+    private $parent, $rank;
+    public function __construct($n) {
+        $this->parent = range(0, $n - 1);
+        $this->rank = array_fill(0, $n, 0);
+    }
+    public function find($i) {
+        if ($this->parent[$i] !== $i)
+            $this->parent[$i] = $this->find($this->parent[$i]);
+        return $this->parent[$i];
+    }
+    public function unite($x, $y) {
+        $rx = $this->find($x);
+        $ry = $this->find($y);
+        if ($rx === $ry) return;
+        if ($this->rank[$rx] < $this->rank[$ry])
+            $this->parent[$rx] = $ry;
+        elseif ($this->rank[$rx] > $this->rank[$ry])
+            $this->parent[$ry] = $rx;
+        else {
+            $this->parent[$ry] = $rx;
+            $this->rank[$rx]++;
+        }
+    }
+}
+
+function kruskalMST(&$edges, $V) {
+    usort($edges, fn($a, $b) => $a['weight'] - $b['weight']);
+    $uf = new UnionFind($V);
+    $result = [];
+    foreach ($edges as $e) {
+        if ($uf->find($e['src']) !== $uf->find($e['dest'])) {
+            $result[] = $e;
+            $uf->unite($e['src'], $e['dest']);
+        }
+    }
+    return $result;
+}
+
+$edges = [
+    ['src'=>0,'dest'=>1,'weight'=>10], ['src'=>0,'dest'=>2,'weight'=>6],
+    ['src'=>0,'dest'=>3,'weight'=>5], ['src'=>1,'dest'=>3,'weight'=>15],
+    ['src'=>2,'dest'=>3,'weight'=>4]
+];
+$mst = kruskalMST($edges, 4);
+echo "MST edges:\n";
+foreach ($mst as $e)
+    echo "{$e['src']} - {$e['dest']} : {$e['weight']}\n";</code></pre>
+    </div>
+  </div>
+
+  <footer class="bg-gray-900 text-white py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p class="text-gray-400 text-sm">MST (Kruskal & Prim) — أمثلة برمجية تفاعلية</p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script src="../../assets/js/code-tabs.js"></script>
+  <script src="../../assets/js/theme-toggle.js"></script>
+</body>
+</html>

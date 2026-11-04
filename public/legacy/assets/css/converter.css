@@ -1,0 +1,62 @@
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=IBM+Plex+Mono&display=swap");
+body {
+  font-family: "Cairo", sans-serif;
+  background-color: #f7f7f7;
+}
+.container-card {
+  background-color: #ffffff;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1),
+    0 5px 10px -5px rgba(0, 0, 0, 0.04);
+  border: 1px solid #e5e7eb;
+}
+.table-header-dec {
+  background-color: #10b981;
+  color: white;
+}
+.table-header-bin {
+  background-color: #3b82f6;
+  color: white;
+}
+.highlight-cell {
+  background-color: #fef3c7;
+  font-weight: bold;
+}
+.mono-font {
+  font-family: "IBM Plex Mono", monospace;
+  direction: ltr;
+  font-weight: 700;
+}
+.step-button {
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  font-weight: 700;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+}
+.step-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+.step-button:not(:disabled):hover {
+  transform: translateY(-1px);
+}
+.past-step-row {
+  color: #4b5563;
+}
+.separator-row {
+  background-color: #6366f1;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+.conversion-box {
+  border: 2px solid #e5e7eb;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+}
+.conversion-box h2 {
+  margin-bottom: 1rem;
+}

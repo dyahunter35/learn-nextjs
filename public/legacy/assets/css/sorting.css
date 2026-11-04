@@ -1,0 +1,298 @@
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap");
+body {
+  font-family: "Cairo", sans-serif;
+  background-color: #f3f4f6;
+}
+
+.array-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  min-height: 220px;
+  padding: 1.5rem 0.5rem 2.5rem;
+  background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+  border-radius: 1rem;
+  border: 2px dashed #e2e8f0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  gap: 0;
+  position: relative;
+}
+
+.element-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  position: relative;
+  justify-content: flex-end;
+}
+
+.array-element {
+  min-width: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  font-weight: 800;
+  font-size: 0.85rem;
+  border-radius: 0.5rem 0.5rem 0 0;
+  position: relative;
+  flex-shrink: 0;
+  transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1), background 0.4s ease, opacity 0.4s ease, transform 0.3s ease;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+  color: white;
+  padding-top: 6px;
+  padding-bottom: 2px;
+}
+
+.array-element.default-bg {
+  background: linear-gradient(180deg, #6366f1, #4f46e5);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.array-element.comparing-bg {
+  background: linear-gradient(180deg, #fbbf24, #f59e0b);
+  color: #78350f;
+  box-shadow: 0 4px 12px rgba(251, 191, 36, 0.5);
+  animation: comparePulse 0.7s ease infinite;
+}
+
+.array-element.swapping-bg {
+  background: linear-gradient(180deg, #f87171, #ef4444);
+  color: white;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+  animation: swapShake 0.4s ease;
+}
+
+.array-element.sorted-bg {
+  background: linear-gradient(180deg, #34d399, #10b981);
+  color: white;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+  animation: sortedGlow 1.5s ease-in-out infinite;
+}
+
+.array-element.min-bg {
+  background: linear-gradient(180deg, #a78bfa, #9333ea);
+  box-shadow: 0 4px 12px rgba(147, 51, 234, 0.4);
+}
+
+.value-display {
+  font-size: 0.8rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.index-label {
+  position: absolute;
+  bottom: -22px;
+  font-size: 0.55rem;
+  font-weight: 700;
+  color: #64748b;
+  background: #f1f5f9;
+  padding: 1px 6px;
+  border-radius: 4px;
+  border: 1px solid #e2e8f0;
+}
+
+.marker-label {
+  font-size: 0.5rem;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 999px;
+  color: white;
+  white-space: nowrap;
+  animation: markerIn 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  z-index: 10;
+  position: absolute;
+  top: -18px;
+}
+
+.base-connector {
+  position: absolute;
+  bottom: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.connector-line {
+  width: 24px;
+  height: 2px;
+  background: linear-gradient(90deg, #94a3b8, #64748b);
+  position: relative;
+  border-radius: 2px;
+  animation: arrowPulse 2s ease-in-out infinite;
+}
+
+.connector-line::after {
+  content: '';
+  position: absolute;
+  left: -4px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 5px solid transparent;
+  border-left-color: #64748b;
+  border-right: none;
+}
+
+.connector-line.hidden {
+  opacity: 0;
+  animation: none;
+}
+
+.steps-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+.steps-table th,
+.steps-table td {
+  border: 1px solid #e2e8f0;
+  padding: 8px 10px;
+  text-align: center;
+}
+
+.steps-table th {
+  background: linear-gradient(135deg, #4f46e5, #4338ca);
+  color: white;
+  font-weight: 700;
+  position: sticky;
+  top: 0;
+  font-size: 0.78rem;
+}
+
+.steps-table tr:nth-child(even) {
+  background-color: #f8fafc;
+}
+
+.steps-table tr.current-step {
+  background-color: #fef3c7 !important;
+  animation: highlightRow 0.3s ease;
+}
+
+.steps-table td:last-child {
+  font-weight: 600;
+}
+
+.steps-log-container {
+  max-height: 260px;
+  overflow-y: auto;
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+.status-message {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  animation: statusIn 0.3s ease;
+  font-size: 0.95rem;
+}
+
+.status-message.info {
+  background: #eef2ff;
+  color: #4338ca;
+  border-right: 4px solid #6366f1;
+}
+
+.status-message.success {
+  background: #d1fae5;
+  color: #065f46;
+  border-right: 4px solid #10b981;
+}
+
+.status-message.error {
+  background: #fee2e2;
+  color: #991b1b;
+  border-right: 4px solid #ef4444;
+}
+
+@keyframes comparePulse {
+  0%, 100% { box-shadow: 0 4px 12px rgba(251, 191, 36, 0.4); }
+  50% { box-shadow: 0 8px 24px rgba(251, 191, 36, 0.7), inset 0 0 20px rgba(251, 191, 36, 0.15); }
+}
+
+@keyframes swapShake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  50% { transform: translateX(6px); }
+  75% { transform: translateX(-3px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes sortedGlow {
+  0%, 100% { box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3); }
+  50% { box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6); }
+}
+
+@keyframes nodeIn {
+  from { opacity: 0; transform: scaleY(0.3) translateY(20px); }
+  to { opacity: 1; transform: scaleY(1) translateY(0); }
+}
+
+@keyframes markerIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes statusIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes highlightRow {
+  from { background-color: transparent; }
+  to { background-color: #fef3c7; }
+}
+
+@keyframes arrowPulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-5px); }
+  80% { transform: translateX(5px); }
+}
+
+@keyframes flyIn {
+  from { opacity: 0; transform: translateY(-30px) scale(0.5); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (max-width: 640px) {
+  .array-element {
+    min-width: 28px;
+    font-size: 0.7rem;
+  }
+  .connector-line {
+    width: 14px;
+  }
+  .index-label {
+    font-size: 0.45rem;
+    bottom: -18px;
+  }
+  .marker-label {
+    font-size: 0.45rem;
+    padding: 1px 4px;
+    top: -16px;
+  }
+  .base-connector {
+    bottom: -24px;
+  }
+}

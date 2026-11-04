@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>التراجع (Backtracking) - شرح الخوارزمية</title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Arial, sans-serif; }
+    .section-card { background: white; border-radius: 14px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); padding: 28px; margin-bottom: 24px; transition: box-shadow 0.2s; }
+    .section-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+    .example-icon { font-size: 40px; }
+    .breadcrumb a { color: #6366f1; text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .gradient-head { background: linear-gradient(135deg, #312e81, #4338ca); }
+  </style>
+  <link rel="stylesheet" href="../../assets/css/design-system.css" />
+  <link rel="stylesheet" href="../../assets/css/dark-content.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+
+  
+    <nav class="site-nav">
+      <div class="site-nav-inner">
+        <div class="nav-main">
+          <a href="../../index.html" class="nav-logo">
+            <svg class="nav-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.663 17h4.673M12 3v1m6.364 1.636-.707.707M21 12h-1M4 12H3m3.343-5.657-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            <span>مقرر الحاسوب</span>
+          </a>
+          <div class="nav-links">
+                  <a href="../../index.html">الرئيسية</a>
+      <a href="simulation.html">المحاكاة</a>
+      <a href="code.html">الكود البرمجي</a>
+          </div>
+          <div class="nav-actions">
+            <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme"></button>
+            <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="nav-mobile" id="navMobile">
+                <a href="../../index.html">الرئيسية</a>
+      <a href="simulation.html">المحاكاة</a>
+        </div>
+        <div class="nav-breadcrumb">
+          <a href="../../index.html">الرئيسية</a><span class="sep">›</span><span class="current">التراجع (Backtracking)</span>
+        </div>
+      </div>
+    </nav>
+    <script>function toggleMenu(){var m=document.getElementById("navMobile");if(m)m.classList.toggle("open")}</script>
+
+  
+
+  <main class="container mx-auto px-4 py-8 max-w-4xl">
+
+    <div class="text-center mb-10">
+      <h1 class="text-4xl font-bold text-indigo-900 mb-3">التراجع <span class="text-indigo-500">(Backtracking)</span></h1>
+      <p class="text-gray-600 text-lg max-w-2xl mx-auto">خوارزمية ذكية لحل المشكلات من خلال تجربة الحلول بشكل تدريجي والتراجع عند الوصول إلى طريق مسدود</p>
+    </div>
+
+    <div class="section-card">
+      <h2 class="text-2xl font-bold text-indigo-800 mb-4 flex items-center gap-2">
+        <span class="text-3xl">💡</span> المفهوم
+      </h2>
+      <p class="text-gray-700 leading-8 mb-3">
+        <strong>التراجع (Backtracking)</strong> هو أسلوب لحل المشكلات يعتمد على البحث المنهجي في جميع الحلول الممكنة. 
+        تقوم الخوارزمية ببناء الحل بشكل تدريجي (خطوة بخطوة)، وعندما تكتشف أن المسار الحالي لا يؤدي إلى حل صحيح، 
+        <strong>تتراجع</strong> إلى الخطوة السابقة وتجرب مساراً آخر.
+      </p>
+      <p class="text-gray-700 leading-8">
+        يمكن تشبيه ذلك بمحاولة الخروج من متاهة: تسلك ممراً، وعندما تصل إلى طريق مسدود، تعود أدراجك إلى آخر مفترق وتجرب ممراً آخر.
+      </p>
+    </div>
+
+    <div class="section-card">
+      <h2 class="text-2xl font-bold text-indigo-800 mb-4 flex items-center gap-2">
+        <span class="text-3xl">⚙️</span> كيف يعمل؟
+      </h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div>
+          <ol class="space-y-3 text-gray-700 leading-8">
+            <li class="flex gap-3"><span class="bg-indigo-100 text-indigo-700 rounded-full w-7 h-7 flex items-center justify-center shrink-0 font-bold text-sm mt-1">١</span><span><strong>الاختيار:</strong> اختر خطوة مرشحة لبناء الحل (مثل وضع ملكة في مربع معين).</span></li>
+            <li class="flex gap-3"><span class="bg-indigo-100 text-indigo-700 rounded-full w-7 h-7 flex items-center justify-center shrink-0 font-bold text-sm mt-1">٢</span><span><strong>التحقق:</strong> تأكد أن الخطوة لا تنتهك قيود المشكلة.</span></li>
+            <li class="flex gap-3"><span class="bg-indigo-100 text-indigo-700 rounded-full w-7 h-7 flex items-center justify-center shrink-0 font-bold text-sm mt-1">٣</span><span><strong>التقدم:</strong> إذا كانت الخطوة صحيحة، أضفها إلى الحل وانتقل للخطوة التالية.</span></li>
+            <li class="flex gap-3"><span class="bg-indigo-100 text-indigo-700 rounded-full w-7 h-7 flex items-center justify-center shrink-0 font-bold text-sm mt-1">٤</span><span><strong>التراجع:</strong> إذا كانت الخطوة خاطئة أو وصلت إلى طريق مسدود، تراجع إلى الخطوة السابقة وجرب بديلاً.</span></li>
+          </ol>
+        </div>
+        <div class="bg-indigo-50 rounded-xl p-5 flex items-center justify-center">
+          <div class="text-center">
+            <div class="text-5xl mb-3">🔄</div>
+            <p class="text-gray-700 font-medium">"جرب، تحقق، تقدم، تراجع"</p>
+            <p class="text-gray-500 text-sm mt-1">هذا هو لب خوارزمية التراجع</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <h2 class="text-2xl font-bold text-indigo-800 mb-4 flex items-center gap-2">
+        <span class="text-3xl">📋</span> أمثلة تطبيقية
+      </h2>
+      <div class="grid md:grid-cols-3 gap-5">
+
+        <div class="border border-indigo-100 rounded-xl p-5 text-center hover:shadow-md transition">
+          <div class="example-icon mb-2">👑</div>
+          <h3 class="font-bold text-lg text-indigo-700 mb-2">مسألة N-Queens</h3>
+          <p class="text-gray-600 text-sm leading-7">وضع N من الملكات على رقعة N×N بحيث لا تعتدي أي ملكة على الأخرى. تستخدم الخوارزمية التراجع لتجربة وضع الملكات صفاً صفاً.</p>
+          <a href="simulation.html" class="inline-block mt-3 text-indigo-600 font-medium text-sm hover:text-indigo-800">جرب المحاكاة →</a>
+        </div>
+
+        <div class="border border-indigo-100 rounded-xl p-5 text-center hover:shadow-md transition">
+          <div class="example-icon mb-2">🧩</div>
+          <h3 class="font-bold text-lg text-indigo-700 mb-2">حل المتاهات</h3>
+          <p class="text-gray-600 text-sm leading-7">إيجاد مسار من البداية إلى النهاية في متاهة. تجرب الخوارزمية كل اتجاه وعند الوصول إلى طريق مسدود تتراجع.</p>
+        </div>
+
+        <div class="border border-indigo-100 rounded-xl p-5 text-center hover:shadow-md transition">
+          <div class="example-icon mb-2">🔢</div>
+          <h3 class="font-bold text-lg text-indigo-700 mb-2">حل Sudoku</h3>
+          <p class="text-gray-600 text-sm leading-7">ملء شبكة Sudoku بالأرقام من 1-9 مع تجربة الأرقام الممكنة والتراجع عند اكتشاف خطأ.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="section-card">
+      <h2 class="text-2xl font-bold text-indigo-800 mb-4 flex items-center gap-2">
+        <span class="text-3xl">⚡</span> الفرق بين التراجع والقوة العمياء
+      </h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-right border-collapse">
+          <thead>
+            <tr class="bg-indigo-100">
+              <th class="p-3 border border-indigo-200 font-bold">المقارنة</th>
+              <th class="p-3 border border-indigo-200 font-bold text-green-700">التراجع (Backtracking)</th>
+              <th class="p-3 border border-indigo-200 font-bold text-red-700">القوة العمياء (Brute Force)</th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-700">
+            <tr>
+              <td class="p-3 border border-gray-200 font-medium">الأسلوب</td>
+              <td class="p-3 border border-gray-200">يبني الحل تدريجياً ويتراجع عند الفشل</td>
+              <td class="p-3 border border-gray-200">يجرب جميع الاحتمالات دون تمييز</td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="p-3 border border-gray-200 font-medium">الكفاءة</td>
+              <td class="p-3 border border-gray-200">أسرع بكثير - يستبعد المسارات المستحيلة مبكراً</td>
+              <td class="p-3 border border-gray-200">بطيء - يجرب كل شيء حتى النهاية</td>
+            </tr>
+            <tr>
+              <td class="p-3 border border-gray-200 font-medium">الذاكرة</td>
+              <td class="p-3 border border-gray-200">أقل (يتتبع المسار الحالي فقط)</td>
+              <td class="p-3 border border-gray-200">أكثر (يخزن جميع الاحتمالات)</td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="p-3 border border-gray-200 font-medium">مثال (4-Queens)</td>
+              <td class="p-3 border border-gray-200">يختبر ~٢٥ احتمالاً فقط</td>
+              <td class="p-3 border border-gray-200">يختبر جميع الـ ٢٥٦ احتمالاً</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <h2 class="text-2xl font-bold text-indigo-800 mb-4 flex items-center gap-2">
+        <span class="text-3xl">🌐</span> التطبيقات
+      </h2>
+      <div class="grid sm:grid-cols-2 gap-4 text-gray-700 leading-8">
+        <div class="flex items-center gap-3 bg-gray-50 rounded-xl p-4">
+          <span class="text-2xl">👑</span>
+          <span>مسألة N-Queens و N-Knights</span>
+        </div>
+        <div class="flex items-center gap-3 bg-gray-50 rounded-xl p-4">
+          <span class="text-2xl">🧩</span>
+          <span>حل الألغاز مثل Sudoku و Crossword</span>
+        </div>
+        <div class="flex items-center gap-3 bg-gray-50 rounded-xl p-4">
+          <span class="text-2xl">📡</span>
+          <span>تلوين الخرائط (Graph Coloring)</span>
+        </div>
+        <div class="flex items-center gap-3 bg-gray-50 rounded-xl p-4">
+          <span class="text-2xl">🧳</span>
+          <span>مسألة حقيبة السفر (Knapsack)</span>
+        </div>
+        <div class="flex items-center gap-3 bg-gray-50 rounded-xl p-4">
+          <span class="text-2xl">🔗</span>
+          <span>إيجاد دورات هاميلتون (Hamiltonian Cycles)</span>
+        </div>
+        <div class="flex items-center gap-3 bg-gray-50 rounded-xl p-4">
+          <span class="text-2xl">📊</span>
+          <span>تحليل التركيبات والتوافيق</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center my-10">
+      <a href="simulation.html" class="inline-block gradient-head text-white px-8 py-4 rounded-xl text-lg font-bold shadow-lg hover:shadow-xl transition transform hover:-translate-y-0.5">
+        🚀 جرب محاكاة N-Queens التفاعلية
+      </a>
+    </div>
+
+  </main>
+
+  <footer class="gradient-head text-white py-8 mt-8">
+    <div class="container mx-auto px-4 text-center">
+      <p class="text-indigo-200 text-sm">منصة الخوارزميات - شرح تفاعلي لخوارزميات علوم الحاسوب</p>
+      <p class="text-indigo-300 text-xs mt-2">جميع الحقوق محفوظة © 2024</p>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/theme-toggle.js"></script>
+</body>
+</html>

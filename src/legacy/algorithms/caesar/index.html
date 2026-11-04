@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شرح خوارزمية تشفير قيصر (Caesar Cipher)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../assets/css/caesar.css" />
+  <link rel="stylesheet" href="../../assets/css/design-system.css" />
+  <link rel="stylesheet" href="../../assets/css/dark-content.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+
+    
+    <nav class="site-nav">
+      <div class="site-nav-inner">
+        <div class="nav-main">
+          <a href="../../index.html" class="nav-logo">
+            <svg class="nav-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.663 17h4.673M12 3v1m6.364 1.636-.707.707M21 12h-1M4 12H3m3.343-5.657-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            <span>مقرر الحاسوب</span>
+          </a>
+          <div class="nav-links">
+                  <a href="../../index.html">الرئيسية</a>
+      <a href="simulation.html">المحاكاة</a>
+      <a href="code.html">الكود البرمجي</a>
+          </div>
+          <div class="nav-actions">
+            <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme"></button>
+            <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="nav-mobile" id="navMobile">
+                <a href="../../index.html">الرئيسية</a>
+      <a href="simulation.html">المحاكاة</a>
+        </div>
+        <div class="nav-breadcrumb">
+          <a href="../../index.html">الرئيسية</a><span class="sep">›</span><span class="current">خوارزمية قيصر (Caesar)</span>
+        </div>
+      </div>
+    </nav>
+    <script>function toggleMenu(){var m=document.getElementById("navMobile");if(m)m.classList.toggle("open")}</script>
+
+    
+
+    <div class="max-w-4xl mx-auto bg-white shadow-2xl rounded-xl mt-8 mb-12 p-8 md:p-10">
+        <header class="text-center mb-10 border-b border-gray-100 pb-6">
+            <span class="inline-block text-green-500 font-bold text-sm tracking-widest uppercase mb-2">CAESAR CIPHER</span>
+            <h1 class="text-4xl font-extrabold text-gray-900">
+                خوارزمية يوليوس قيصر <span class="text-green-600">(Caesar Cipher)</span>
+            </h1>
+            <p class="mt-2 text-lg text-gray-500">
+                فهم آلية التشفير والتحليل: تشفير قيصر
+            </p>
+        </header>
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-indigo-800 mb-6 border-b-2 border-indigo-200 pb-2 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-3 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+                ما هو تشفير قيصر؟
+            </h2>
+            <p class="text-gray-700 leading-loose mb-4">
+                تشفير قيصر (Caesar Cipher) هو أحد أقدم وأبسط أساليب التشفير المعروفة في التاريخ. سُمي بهذا الاسم نسبةً إلى القائد الروماني يوليوس قيصر (Julius Caesar) الذي استخدمه للتواصل مع جنرالاته بشكل آمن.
+            </p>
+            <p class="text-gray-700 leading-loose mb-4">
+                تعتمد الفكرة على إزاحة (Shift) كل حرف في النص الأصلي بعدد ثابت من المواضع في الأبجدية، مما ينتج نصاً مشفراً لا يمكن قراءته إلا من قبل الشخص الذي يعرف قيمة الإزاحة (المفتاح).
+            </p>
+            <div class="bg-yellow-50 p-5 rounded-lg shadow-md border-r-4 border-yellow-400">
+                <p class="text-yellow-800 font-semibold">
+                    <span class="text-lg">🏛️</span> يُقال إن يوليوس قيصر كان يستخدم إزاحة بمقدار 3 أحرف (Key = 3) في مراسلاته العسكرية.
+                </p>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-indigo-800 mb-6 border-b-2 border-indigo-200 pb-2 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-3 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                كيفية عمله: شرح عملية الإزاحة
+            </h2>
+            <p class="text-gray-700 leading-loose mb-4">
+                تعتمد الفكرة على ترقيم الأحرف الأبجدية العربية (28 حرفاً) بأرقام من 1 إلى 28، ثم إزاحة رقم كل حرف بمقدار ثابت يسمى المفتاح (Key).
+            </p>
+            <div class="bg-blue-50 p-5 rounded-lg shadow-md mb-6">
+                <h3 class="text-xl font-semibold text-blue-800 mb-3">الأبجدية العربية (28 حرفاً)</h3>
+                <div class="overflow-x-auto">
+                    <table class="alphabet-table w-full text-center">
+                        <thead>
+                            <tr>
+                                <th class="bg-indigo-600 text-white">الفهرس</th>
+                                <th class="bg-indigo-600 text-white">الحرف</th>
+                                <th class="bg-indigo-600 text-white">الفهرس</th>
+                                <th class="bg-indigo-600 text-white">الحرف</th>
+                                <th class="bg-indigo-600 text-white">الفهرس</th>
+                                <th class="bg-indigo-600 text-white">الحرف</th>
+                                <th class="bg-indigo-600 text-white">الفهرس</th>
+                                <th class="bg-indigo-600 text-white">الحرف</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1</td><td>ا</td><td>8</td><td>د</td><td>15</td><td>ض</td><td>22</td><td>ك</td></tr>
+                            <tr><td>2</td><td>ب</td><td>9</td><td>ذ</td><td>16</td><td>ط</td><td>23</td><td>ل</td></tr>
+                            <tr><td>3</td><td>ت</td><td>10</td><td>ر</td><td>17</td><td>ظ</td><td>24</td><td>م</td></tr>
+                            <tr><td>4</td><td>ث</td><td>11</td><td>ز</td><td>18</td><td>ع</td><td>25</td><td>ن</td></tr>
+                            <tr><td>5</td><td>ج</td><td>12</td><td>س</td><td>19</td><td>غ</td><td>26</td><td>ه</td></tr>
+                            <tr><td>6</td><td>ح</td><td>13</td><td>ش</td><td>20</td><td>ف</td><td>27</td><td>و</td></tr>
+                            <tr><td>7</td><td>خ</td><td>14</td><td>ص</td><td>21</td><td>ق</td><td>28</td><td>ي</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <p class="text-gray-700 leading-loose">
+                عند تشفير رسالة، يتم استبدال كل حرف بالحرف الذي يليه بمقدار المفتاح في الأبجدية. مثلاً، إذا كان المفتاح = 3، فإن الحرف "أ" يُستبدل بالحرف "د"، والحرف "ب" يُستبدل بالحرف "هـ"، وهكذا.
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-indigo-800 mb-6 border-b-2 border-indigo-200 pb-2 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-3 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+                قانون التشفير (Encryption)
+            </h2>
+            <div class="bg-green-50 p-5 rounded-lg shadow-md border-green-400">
+                <p class="text-gray-700 mb-3 text-lg">
+                    يتم تشفير الحرف عن طريق إضافة قيمة المفتاح إلى رقم الحرف الأصلي، ثم أخذ باقي القسمة على 28:
+                </p>
+                <div class="formula text-2xl bg-gray-100 p-4 rounded-lg shadow-inner overflow-x-auto text-center font-bold text-green-700">
+                    Encrypt(x) = (x + Key) mod 28
+                </div>
+                <p class="text-sm mt-3 text-green-600">
+                    <span class="font-mono">x</span>: رقم الحرف الأصلي في الأبجدية (1-28).
+                    <br>
+                    <span class="font-mono">Key</span>: مفتاح الإزاحة (عدد صحيح بين 1 و 27).
+                    <br>
+                    <span class="font-mono">mod 28</span>: عملية modulo للحفاظ على النتيجة ضمن نطاق 1-28.
+                </p>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-indigo-800 mb-6 border-b-2 border-indigo-200 pb-2 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-3 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+                </svg>
+                قانون فك التشفير (Decryption)
+            </h2>
+            <div class="bg-purple-50 p-5 rounded-lg shadow-md border-purple-400">
+                <p class="text-gray-700 mb-3 text-lg">
+                    يتم فك التشفير بعكس العملية، وذلك بطرح قيمة المفتاح من رقم الحرف المشفر، ثم أخذ باقي القسمة على 28:
+                </p>
+                <div class="formula text-2xl bg-gray-100 p-4 rounded-lg shadow-inner overflow-x-auto text-center font-bold text-purple-700">
+                    Decrypt(x) = (x - Key) mod 28
+                </div>
+                <p class="text-sm mt-3 text-purple-600">
+                    <span class="font-mono">x</span>: رقم الحرف المشفر في الأبجدية (1-28).
+                    <br>
+                    <span class="font-mono">Key</span>: نفس المفتاح الذي استُخدم في التشفير.
+                    <br>
+                    <span class="font-mono">ملاحظة</span>: في حال كانت نتيجة الطرح سالبة، نضيف 28 للحصول على رقم موجب.
+                </p>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-indigo-800 mb-6 border-b-2 border-indigo-200 pb-2 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-3 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+                مثال توضيحي
+            </h2>
+            <p class="text-gray-700 leading-loose mb-4">
+                لنفترض أن المفتاح (Key) = 3، ونريد تشفير الكلمة <span class="font-bold text-indigo-700 cipher-text">مرحبا</span>:
+            </p>
+            <div class="overflow-x-auto mb-6">
+                <table class="steps-table w-full">
+                    <thead>
+                        <tr>
+                            <th>الحرف الأصلي</th>
+                            <th>رقمه (x)</th>
+                            <th>عملية التشفير</th>
+                            <th>الرقم الجديد</th>
+                            <th>الحرف المشفر</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td class="cipher-text text-xl">م</td><td>24</td><td>(24 + 3) mod 28 = 27</td><td>27</td><td class="cipher-text text-xl text-green-700 font-bold">و</td></tr>
+                        <tr><td class="cipher-text text-xl">ر</td><td>10</td><td>(10 + 3) mod 28 = 13</td><td>13</td><td class="cipher-text text-xl text-green-700 font-bold">ش</td></tr>
+                        <tr><td class="cipher-text text-xl">ح</td><td>6</td><td>(6 + 3) mod 28 = 9</td><td>9</td><td class="cipher-text text-xl text-green-700 font-bold">ذ</td></tr>
+                        <tr><td class="cipher-text text-xl">ب</td><td>2</td><td>(2 + 3) mod 28 = 5</td><td>5</td><td class="cipher-text text-xl text-green-700 font-bold">ج</td></tr>
+                        <tr><td class="cipher-text text-xl">ا</td><td>1</td><td>(1 + 3) mod 28 = 4</td><td>4</td><td class="cipher-text text-xl text-green-700 font-bold">ث</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="bg-teal-50 p-5 rounded-lg shadow-md border-r-4 border-teal-400">
+                <p class="text-teal-800 text-lg font-semibold">
+                    <span class="text-xl">🔐</span> النتيجة: كلمة <span class="cipher-text text-xl font-bold">مرحبا</span> تُصبح <span class="cipher-text text-xl font-bold text-teal-700">وشذجث</span> بعد التشفير بمفتاح 3.
+                </p>
+            </div>
+            <p class="text-gray-700 leading-loose mt-4">
+                وللتحقق من صحة العملية، يمكن تطبيق قانون فك التشفير على النص المشفر <span class="cipher-text font-bold">وشذجث</span> بنفس المفتاح (3) لاسترجاع النص الأصلي <span class="cipher-text font-bold">مرحبا</span>.
+            </p>
+        </section>
+
+        <section class="mb-10">
+            <h2 class="text-3xl font-bold text-indigo-800 mb-6 border-b-2 border-indigo-200 pb-2 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-3 text-rose-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+                مفهوم المفتاح (Key) وأهميته
+            </h2>
+            <p class="text-gray-700 leading-loose mb-4">
+                المفتاح (Key) هو الرقم السري الذي يحدد مقدار الإزاحة. يجب أن يتفق عليه كل من المُرسِل والمُستقبِل مسبقاً ليتمكن المُستقبِل من فك تشفير الرسالة بنجاح.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div class="bg-blue-50 p-5 rounded-lg shadow-md">
+                    <h3 class="text-lg font-bold text-blue-800 mb-2">أهمية المفتاح</h3>
+                    <ul class="list-disc list-inside space-y-1 text-gray-700">
+                        <li>بدون المفتاح الصحيح، لا يمكن فك تشفير الرسالة.</li>
+                        <li>كلما كان المفتاح معقداً، زادت صعوبة اختراق التشفير.</li>
+                        <li>يجب حفظ المفتاح بشكل آمن وعدم مشاركته مع أطراف غير موثوقة.</li>
+                    </ul>
+                </div>
+                <div class="bg-amber-50 p-5 rounded-lg shadow-md">
+                    <h3 class="text-lg font-bold text-amber-800 mb-2">نقاط الضعف</h3>
+                    <ul class="list-disc list-inside space-y-1 text-gray-700">
+                        <li>عدد المفاتيح المحتملة محدود (27 مفتاحاً فقط للأبجدية العربية).</li>
+                        <li>يمكن اختراق التشفير بسهولة باستخدام هجوم القوة العمياء (Brute Force Attack).</li>
+                        <li>تحليل التكرار (Frequency Analysis) يمكنه كسر التشفير بسهولة.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="bg-gradient-to-r from-indigo-50 to-purple-50 p-5 rounded-lg shadow-md border border-indigo-200">
+                <p class="text-indigo-800 font-semibold text-center">
+                    على الرغم من بساطته وضعفه أمام الهجمات الحديثة، يُعد تشفير قيصر نقطة انطلاق ممتازة لفهم مبادئ التشفير الأساسية.
+                </p>
+            </div>
+        </section>
+
+        <div class="text-center mt-10">
+            <a href="simulation.html" class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-10 rounded-lg shadow-xl transition duration-300 transform hover:scale-105 text-xl">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                انتقل إلى التطبيق التفاعلي
+            </a>
+        </div>
+    </div>
+
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p class="text-gray-400 text-sm">
+                تم تصميم وتطوير هذه المحاكاة التفاعلية بواسطة <span class="text-amber-400 font-semibold">ضياء البشرى محمد</span> &copy; 2026
+            </p>
+        </div>
+    </footer>
+  <script src="../../assets/js/theme-toggle.js"></script>
+</body>
+</html>

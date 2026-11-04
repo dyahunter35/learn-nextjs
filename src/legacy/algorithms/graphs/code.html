@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>الرسوم البيانية - الكود البرمجي</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../../assets/css/code-tabs.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/atom-one-dark.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <link rel="stylesheet" href="../../assets/css/design-system.css" />
+  <link rel="stylesheet" href="../../assets/css/dark-content.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50 min-h-screen">
+  
+    <nav class="site-nav">
+      <div class="site-nav-inner">
+        <div class="nav-main">
+          <a href="../../index.html" class="nav-logo">
+            <svg class="nav-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.663 17h4.673M12 3v1m6.364 1.636-.707.707M21 12h-1M4 12H3m3.343-5.657-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            <span>مقرر الحاسوب</span>
+          </a>
+          <div class="nav-links">
+                  <a href="../../index.html">الرئيسية</a>
+      <a href="index.html">الشرح</a>
+      <a href="simulation.html">المحاكاة</a>
+          </div>
+          <div class="nav-actions">
+            <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme"></button>
+            <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="nav-mobile" id="navMobile">
+                <a href="../../index.html">الرئيسية</a>
+      <a href="index.html">الشرح</a>
+      <a href="simulation.html">المحاكاة</a>
+        </div>
+        <div class="nav-breadcrumb">
+          <a href="../../index.html">الرئيسية</a><span class="sep">›</span><a href="index.html">الرسوم البيانية (Graphs)</a><span class="sep">›</span><span class="current">الكود البرمجي</span>
+        </div>
+      </div>
+    </nav>
+    <script>function toggleMenu(){var m=document.getElementById("navMobile");if(m)m.classList.toggle("open")}</script>
+
+  <div class="code-page">
+    <h1>الرسوم البيانية (BFS/DFS) — الكود البرمجي</h1>
+    <p class="subtitle">شرح مبسط مع أمثلة بلغات متعددة. يمكنك نسخ الكود واستخدامه.</p>
+    
+    <div class="algorithm-code-description">
+      <strong>كيف تعمل:</strong> تمثل Graph الرسم البياني باستخدام قائمة مجاورة (adjacency list). BFS (البحث بالعرض) يستخدم طابوراً (queue) لزيارة العقدة جاراً بعد جار. DFS (البحث بالعمق) يستخدم مكدساً (stack) أو استدعاء متكرراً للتعمق في المسار قبل العودة. المثال يستخدم 6 عقد A-F.
+    </div>
+
+    <div class="lang-tabs">
+      <button class="lang-tab active" data-lang="cpp" onclick="switchLang('cpp')">C++</button>
+      <button class="lang-tab" data-lang="java" onclick="switchLang('java')">Java</button>
+      <button class="lang-tab" data-lang="js" onclick="switchLang('js')">JavaScript</button>
+      <button class="lang-tab" data-lang="php" onclick="switchLang('php')">PHP</button>
+    </div>
+    
+    <div class="code-block active" id="code-cpp">
+      <button class="copy-btn" data-lang="cpp" onclick="copyCode('cpp')">نسخ</button>
+      <pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;queue&gt;
+#include &lt;stack&gt;
+#include &lt;map&gt;
+#include &lt;set&gt;
+using namespace std;
+
+class Graph {
+    map&lt;char, vector&lt;char&gt;&gt; adj;
+
+public:
+    void addEdge(char u, char v) {
+        adj[u].push_back(v);
+        adj[v].push_back(u);
+    }
+
+    void BFS(char start) {
+        set&lt;char&gt; visited;
+        queue&lt;char&gt; q;
+        visited.insert(start);
+        q.push(start);
+        while (!q.empty()) {
+            char cur = q.front(); q.pop();
+            cout &lt;&lt; cur &lt;&lt; " ";
+            for (char neighbor : adj[cur])
+                if (visited.find(neighbor) == visited.end()) {
+                    visited.insert(neighbor);
+                    q.push(neighbor);
+                }
+        }
+        cout &lt;&lt; endl;
+    }
+
+    void DFS(char start) {
+        set&lt;char&gt; visited;
+        stack&lt;char&gt; s;
+        s.push(start);
+        while (!s.empty()) {
+            char cur = s.top(); s.pop();
+            if (visited.find(cur) != visited.end()) continue;
+            visited.insert(cur);
+            cout &lt;&lt; cur &lt;&lt; " ";
+            for (char neighbor : adj[cur])
+                if (visited.find(neighbor) == visited.end())
+                    s.push(neighbor);
+        }
+        cout &lt;&lt; endl;
+    }
+};
+
+int main() {
+    Graph g;
+    g.addEdge('A', 'B');
+    g.addEdge('A', 'C');
+    g.addEdge('B', 'D');
+    g.addEdge('B', 'E');
+    g.addEdge('C', 'F');
+
+    cout &lt;&lt; "BFS from A: ";
+    g.BFS('A');
+    cout &lt;&lt; "DFS from A: ";
+    g.DFS('A');
+    return 0;
+}</code></pre>
+    </div>
+    <div class="code-block" id="code-java">
+      <button class="copy-btn" data-lang="java" onclick="copyCode('java')">نسخ</button>
+      <pre><code class="language-java">import java.util.*;
+
+class Graph {
+    private Map&lt;Character, List&lt;Character&gt;&gt; adj = new HashMap&lt;&gt;();
+
+    void addEdge(char u, char v) {
+        adj.computeIfAbsent(u, k -&gt; new ArrayList&lt;&gt;()).add(v);
+        adj.computeIfAbsent(v, k -&gt; new ArrayList&lt;&gt;()).add(u);
+    }
+
+    void BFS(char start) {
+        Set&lt;Character&gt; visited = new HashSet&lt;&gt;();
+        Queue&lt;Character&gt; q = new LinkedList&lt;&gt;();
+        visited.add(start);
+        q.offer(start);
+        while (!q.isEmpty()) {
+            char cur = q.poll();
+            System.out.print(cur + " ");
+            for (char n : adj.getOrDefault(cur, new ArrayList&lt;&gt;()))
+                if (!visited.contains(n)) {
+                    visited.add(n);
+                    q.offer(n);
+                }
+        }
+        System.out.println();
+    }
+
+    void DFS(char start) {
+        Set&lt;Character&gt; visited = new HashSet&lt;&gt;();
+        Stack&lt;Character&gt; s = new Stack&lt;&gt;();
+        s.push(start);
+        while (!s.isEmpty()) {
+            char cur = s.pop();
+            if (visited.contains(cur)) continue;
+            visited.add(cur);
+            System.out.print(cur + " ");
+            for (char n : adj.getOrDefault(cur, new ArrayList&lt;&gt;()))
+                if (!visited.contains(n))
+                    s.push(n);
+        }
+        System.out.println();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Graph g = new Graph();
+        g.addEdge('A', 'B');
+        g.addEdge('A', 'C');
+        g.addEdge('B', 'D');
+        g.addEdge('B', 'E');
+        g.addEdge('C', 'F');
+
+        System.out.print("BFS from A: ");
+        g.BFS('A');
+        System.out.print("DFS from A: ");
+        g.DFS('A');
+    }
+}</code></pre>
+    </div>
+    <div class="code-block" id="code-js">
+      <button class="copy-btn" data-lang="js" onclick="copyCode('js')">نسخ</button>
+      <pre><code class="language-javascript">class Graph {
+    constructor() {
+        this.adj = new Map();
+    }
+
+    addEdge(u, v) {
+        if (!this.adj.has(u)) this.adj.set(u, []);
+        if (!this.adj.has(v)) this.adj.set(v, []);
+        this.adj.get(u).push(v);
+        this.adj.get(v).push(u);
+    }
+
+    BFS(start) {
+        const visited = new Set();
+        const queue = [start];
+        visited.add(start);
+        while (queue.length &gt; 0) {
+            const cur = queue.shift();
+            process.stdout.write(cur + " ");
+            for (const neighbor of (this.adj.get(cur) || []))
+                if (!visited.has(neighbor)) {
+                    visited.add(neighbor);
+                    queue.push(neighbor);
+                }
+        }
+        console.log();
+    }
+
+    DFS(start) {
+        const visited = new Set();
+        const stack = [start];
+        while (stack.length &gt; 0) {
+            const cur = stack.pop();
+            if (visited.has(cur)) continue;
+            visited.add(cur);
+            process.stdout.write(cur + " ");
+            for (const neighbor of (this.adj.get(cur) || []))
+                if (!visited.has(neighbor))
+                    stack.push(neighbor);
+        }
+        console.log();
+    }
+}
+
+const g = new Graph();
+g.addEdge('A', 'B');
+g.addEdge('A', 'C');
+g.addEdge('B', 'D');
+g.addEdge('B', 'E');
+g.addEdge('C', 'F');
+
+process.stdout.write("BFS from A: ");
+g.BFS('A');
+process.stdout.write("DFS from A: ");
+g.DFS('A');</code></pre>
+    </div>
+    <div class="code-block" id="code-php">
+      <button class="copy-btn" data-lang="php" onclick="copyCode('php')">نسخ</button>
+      <pre><code class="language-php">&lt;?php
+
+class Graph {
+    private array $adj = [];
+
+    public function addEdge($u, $v) {
+        $this-&gt;adj[$u][] = $v;
+        $this-&gt;adj[$v][] = $u;
+    }
+
+    public function BFS($start) {
+        $visited = [$start =&gt; true];
+        $queue = [$start];
+        while (!empty($queue)) {
+            $cur = array_shift($queue);
+            echo $cur . " ";
+            foreach ($this-&gt;adj[$cur] ?? [] as $neighbor)
+                if (!isset($visited[$neighbor])) {
+                    $visited[$neighbor] = true;
+                    $queue[] = $neighbor;
+                }
+        }
+        echo "\n";
+    }
+
+    public function DFS($start) {
+        $visited = [];
+        $stack = [$start];
+        while (!empty($stack)) {
+            $cur = array_pop($stack);
+            if (isset($visited[$cur])) continue;
+            $visited[$cur] = true;
+            echo $cur . " ";
+            foreach ($this-&gt;adj[$cur] ?? [] as $neighbor)
+                if (!isset($visited[$neighbor]))
+                    $stack[] = $neighbor;
+        }
+        echo "\n";
+    }
+}
+
+$g = new Graph();
+$g-&gt;addEdge('A', 'B');
+$g-&gt;addEdge('A', 'C');
+$g-&gt;addEdge('B', 'D');
+$g-&gt;addEdge('B', 'E');
+$g-&gt;addEdge('C', 'F');
+
+echo "BFS from A: ";
+$g-&gt;BFS('A');
+echo "DFS from A: ";
+$g-&gt;DFS('A');
+
+?&gt;</code></pre>
+    </div>
+  </div>
+
+  <footer class="bg-gray-900 text-white py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p class="text-gray-400 text-sm">الرسوم البيانية (BFS/DFS) — أمثلة برمجية تفاعلية</p>
+    </div>
+  </footer>
+  
+  <script src="../../assets/js/code-tabs.js"></script>
+  <script src="../../assets/js/theme-toggle.js"></script>
+</body>
+</html>

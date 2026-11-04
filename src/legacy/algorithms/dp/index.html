@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شرح البرمجة الديناميكية (Dynamic Programming)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../assets/css/dp.css" />
+  <link rel="stylesheet" href="../../assets/css/design-system.css" />
+  <link rel="stylesheet" href="../../assets/css/dark-content.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+
+    
+    <nav class="site-nav">
+      <div class="site-nav-inner">
+        <div class="nav-main">
+          <a href="../../index.html" class="nav-logo">
+            <svg class="nav-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.663 17h4.673M12 3v1m6.364 1.636-.707.707M21 12h-1M4 12H3m3.343-5.657-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            <span>مقرر الحاسوب</span>
+          </a>
+          <div class="nav-links">
+                  <a href="../../index.html">الرئيسية</a>
+      <a href="simulation.html">المحاكاة</a>
+      <a href="code.html">الكود البرمجي</a>
+          </div>
+          <div class="nav-actions">
+            <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme"></button>
+            <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="nav-mobile" id="navMobile">
+                <a href="../../index.html">الرئيسية</a>
+      <a href="simulation.html">المحاكاة</a>
+        </div>
+        <div class="nav-breadcrumb">
+          <a href="../../index.html">الرئيسية</a><span class="sep">›</span><span class="current">البرمجة الديناميكية (DP)</span>
+        </div>
+      </div>
+    </nav>
+    <script>function toggleMenu(){var m=document.getElementById("navMobile");if(m)m.classList.toggle("open")}</script>
+
+    <div class="max-w-4xl mx-auto bg-white shadow-2xl rounded-xl overflow-hidden mt-8 mb-12 p-8 md:p-10">
+        <header class="text-center mb-10 border-b border-gray-100 pb-6">
+            <span class="inline-block text-indigo-500 font-bold text-sm tracking-widest uppercase mb-2">DYNAMIC PROGRAMMING</span>
+            <h1 class="text-4xl font-extrabold text-gray-900">
+                البرمجة الديناميكية <span class="text-indigo-600">(Dynamic Programming)</span>
+            </h1>
+            <p class="mt-2 text-lg text-gray-500">
+                تقنية حل المشكلات بتجزئتها إلى مشكلات فرعية وتخزين نتائجها لتجنب إعادة الحساب
+            </p>
+        </header>
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-indigo-800 mb-6 border-b-2 border-indigo-200 pb-2 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-3 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                </svg>
+                المفهوم
+            </h2>
+            <p class="text-gray-700 leading-loose mb-4">
+                البرمجة الديناميكية (Dynamic Programming) هي تقنية رياضية وخوارزمية تُستخدم لحل المشكلات المعقدة عن طريق تقسيمها إلى مشكلات فرعية أصغر، ثم تخزين نتائج هذه المشكلات الفرعية في جدول (Memoization) لتجنب إعادة حسابها عند الحاجة إليها مرة أخرى. هذا الأسلوب يحول التعقيد الزمني من أسي إلى خطي أو متعدد الحدود.
+            </p>
+            <div class="bg-purple-50 p-5 rounded-lg shadow-md mb-6 concept-card border-purple-400">
+                <h3 class="text-xl font-semibold text-purple-800 mb-3">مثال من الحياة اليومية</h3>
+                <p class="text-gray-700">
+                    تخيل أنك تريد حساب المسافة بين عدة مدن. بدلاً من إعادة حساب نفس المسافة في كل مرة تحتاجها، يمكنك إنشاء جدول يخزن المسافات بين كل زوج من المدن. عندما تحتاج إلى مسافة معينة، تنظر في الجدول بدلاً من إعادة الحساب. هذا بالضبط ما تفعله البرمجة الديناميكية — تخزين نتائج المشكلات الفرعية لحساب النتائج الأكبر بكفاءة.
+                </p>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-indigo-800 mb-6 border-b-2 border-indigo-200 pb-2 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-3 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                متى نستخدم البرمجة الديناميكية؟
+            </h2>
+            <p class="text-gray-700 leading-loose mb-4">
+                هناك شرطان أساسيان يجب توفرهما في المشكلة لاستخدام البرمجة الديناميكية:
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div class="bg-green-50 p-5 rounded-lg shadow-md border-green-400">
+                    <h3 class="text-xl font-semibold text-green-800 mb-2">١. البنية الفرعية المثلى (Optimal Substructure)</h3>
+                    <p class="text-gray-700 text-sm">يمكن حل المشكلة الكبيرة من خلال الجمع بين الحلول المثلى للمشكلات الفرعية. بمعنى أن الحل الأمثل للمشكلة يحتوي على الحلول المثلى للمشكلات الفرعية داخله.</p>
+                </div>
+                <div class="bg-blue-50 p-5 rounded-lg shadow-md border-blue-400">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-2">٢. المشكلات الفرعية المتداخلة (Overlapping Subproblems)</h3>
+                    <p class="text-gray-700 text-sm">المشكلة يمكن تقسيمها إلى مشكلات فرعية يتم تكرارها عدة مرات. عندها نقوم بتخزين نتائجها بدلاً من إعادة حسابها — وهذا هو جوهر البرمجة الديناميكية.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-indigo-800 mb-6 border-b-2 border-indigo-200 pb-2 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-3 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+                الطريقتان: Top-down vs Bottom-up
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div class="bg-cyan-50 p-5 rounded-lg shadow-md border-cyan-400">
+                    <h3 class="text-xl font-semibold text-cyan-800 mb-2">من الأعلى للأسفل (Top-down / Memoization)</h3>
+                    <p class="text-gray-700 text-sm mb-3">نبدأ بالمشكلة الأصلية ونقسمها بشكل عودي إلى مشكلات فرعية. نخزن نتائج المشكلات الفرعية في مصفوفة (Memo) ونسترجعها عند الحاجة.</p>
+                    <div class="bg-white p-3 rounded-lg border border-cyan-200 font-mono text-sm ltr-text" dir="ltr">
+                        <span class="text-cyan-600">function</span> fib(n, memo = {}) {<br>
+                        &nbsp;&nbsp;<span class="text-gray-500">// حالة أساسية</span><br>
+                        &nbsp;&nbsp;<span class="text-cyan-600">if</span> (n &lt;= 1) <span class="text-cyan-600">return</span> n;<br>
+                        &nbsp;&nbsp;<span class="text-gray-500">// إذا كان المحسوب موجودًا، استرجعه</span><br>
+                        &nbsp;&nbsp;<span class="text-cyan-600">if</span> (memo[n] !== <span class="text-cyan-600">undefined</span>) <span class="text-cyan-600">return</span> memo[n];<br>
+                        &nbsp;&nbsp;<span class="text-gray-500">// حساب القيمة وتخزينها</span><br>
+                        &nbsp;&nbsp;memo[n] = fib(n-1, memo) + fib(n-2, memo);<br>
+                        &nbsp;&nbsp;<span class="text-cyan-600">return</span> memo[n];<br>
+                        }
+                    </div>
+                </div>
+                <div class="bg-teal-50 p-5 rounded-lg shadow-md border-teal-400">
+                    <h3 class="text-xl font-semibold text-teal-800 mb-2">من الأسفل للأعلى (Bottom-up / Tabulation)</h3>
+                    <p class="text-gray-700 text-sm mb-3">نبدأ من أصغر المشكلات الفرعية (الحالات الأساسية) ونبني الحلول الأكبر تصاعديًا باستخدام جدول (Table).</p>
+                    <div class="bg-white p-3 rounded-lg border border-teal-200 font-mono text-sm ltr-text" dir="ltr">
+                        <span class="text-teal-600">function</span> fib(n) {<br>
+                        &nbsp;&nbsp;<span class="text-cyan-600">let</span> dp = [0, 1];<br>
+                        &nbsp;&nbsp;<span class="text-cyan-600">for</span> (<span class="text-cyan-600">let</span> i = 2; i &lt;= n; i++) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;dp[i] = dp[i-1] + dp[i-2];<br>
+                        &nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;<span class="text-cyan-600">return</span> dp[n];<br>
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-indigo-800 mb-6 border-b-2 border-indigo-200 pb-2 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-3 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                </svg>
+                مثال فيبوناتشي — مقارنة التعقيد
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div class="bg-red-50 p-5 rounded-lg shadow-md border-red-400">
+                    <h3 class="text-xl font-semibold text-red-800 mb-2">بدون DP — عودية ساذجة (O(2ⁿ))</h3>
+                    <p class="text-gray-700 text-sm mb-2">استدعاءات متكررة تعيد حساب نفس القيم مئات المرات.</p>
+                    <div class="bg-white p-3 rounded-lg border border-red-200 font-mono text-sm ltr-text" dir="ltr">
+                        fib(5) = fib(4) + fib(3)<br>
+                        fib(4) = fib(3) + fib(2)<br>
+                        fib(3) = fib(2) + fib(1)<br>
+                        <span class="text-red-500">→ يتم حساب fib(2) ثلاث مرات!</span>
+                    </div>
+                </div>
+                <div class="bg-emerald-50 p-5 rounded-lg shadow-md border-emerald-400">
+                    <h3 class="text-xl font-semibold text-emerald-800 mb-2">مع DP — خطي (O(n))</h3>
+                    <p class="text-gray-700 text-sm mb-2">كل قيمة تحسب مرة واحدة فقط وتخزن.</p>
+                    <div class="bg-white p-3 rounded-lg border border-emerald-200 font-mono text-sm ltr-text" dir="ltr">
+                        dp[0] = 0<br>
+                        dp[1] = 1<br>
+                        dp[2] = dp[1] + dp[0] = 1<br>
+                        dp[3] = dp[2] + dp[1] = 2<br>
+                        dp[4] = dp[3] + dp[2] = 3<br>
+                        dp[5] = dp[4] + dp[3] = 5
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-indigo-800 mb-6 border-b-2 border-indigo-200 pb-2 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-3 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                مثال العملات المعدنية (Coin Change)
+            </h2>
+            <p class="text-gray-700 leading-loose mb-4">
+                مشكلة العملات المعدنية: لدينا عملات بقيم معينة (مثل ١، ٥، ١٠، ٢٥) ونريد معرفة أقل عدد من العملات لتكوين مبلغ معين. الحل باستخدام DP:
+            </p>
+            <div class="bg-amber-50 p-5 rounded-lg shadow-md mb-6 concept-card border-amber-400">
+                <h3 class="text-xl font-semibold text-amber-800 mb-3">معادلة DP</h3>
+                <div class="bg-white p-4 rounded-lg border border-amber-200 font-mono text-sm ltr-text mb-2" dir="ltr">
+                    dp[0] = 0<br>
+                    dp[amount] = min(dp[amount - coin] + 1) لكل coin ≤ amount
+                </div>
+                <p class="text-gray-700 text-sm">
+                    مثال: عملات [١، ٣، ٤]، المبلغ ٦ ← الحل الأمثل = عملتان (٣ + ٣)
+                </p>
+            </div>
+        </section>
+
+        <section class="mb-10">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-gray-200 pb-2 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-3 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                مميزات وعيوب البرمجة الديناميكية
+            </h2>
+
+            <div class="overflow-x-auto">
+                <table class="w-full border-collapse bg-white shadow-md rounded-lg overflow-hidden">
+                    <thead>
+                        <tr class="bg-indigo-600 text-white">
+                            <th class="p-3 border border-indigo-500">المعيار</th>
+                            <th class="p-3 border border-indigo-500">الشرح</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="even:bg-gray-100">
+                            <td class="p-3 border border-gray-300 font-bold text-green-700">مميز</td>
+                            <td class="p-3 border border-gray-300">يقلل التعقيد الزمني بشكل كبير — من أسي O(2ⁿ) إلى خطي O(n) أو متعدد الحدود.</td>
+                        </tr>
+                        <tr class="even:bg-gray-100">
+                            <td class="p-3 border border-gray-300 font-bold text-green-700">مميز</td>
+                            <td class="p-3 border border-gray-300">يحل مشكلات معقدة يصعب حلها بالطرق التقليدية (مثل المسارات الأقصر، الحقيبة، التقطيع).</td>
+                        </tr>
+                        <tr class="even:bg-gray-100">
+                            <td class="p-3 border border-gray-300 font-bold text-green-700">مميز</td>
+                            <td class="p-3 border border-gray-300">يقدم حلاً منظمًا وواضحًا بخطوات متسلسلة يمكن تتبعها بسهولة.</td>
+                        </tr>
+                        <tr class="even:bg-gray-100">
+                            <td class="p-3 border border-gray-300 font-bold text-red-700">عيب</td>
+                            <td class="p-3 border border-gray-300">يستهلك ذاكرة إضافية لتخزين جدول DP (عادة O(n) أو O(n × m)).</td>
+                        </tr>
+                        <tr class="even:bg-gray-100">
+                            <td class="p-3 border border-gray-300 font-bold text-red-700">عيب</td>
+                            <td class="p-3 border border-gray-300">ليس كل المشكلات يمكن حلها باستخدام DP — تحتاج إلى توفر الشرطين الأساسيين.</td>
+                        </tr>
+                        <tr class="even:bg-gray-100">
+                            <td class="p-3 border border-gray-300 font-bold text-red-700">عيب</td>
+                            <td class="p-3 border border-gray-300">قد يكون تصميم معادلة DP صعبًا ويتطلب فهماً عميقاً للمشكلة.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <div class="text-center mt-8">
+            <a href="simulation.html" class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-10 rounded-xl text-xl shadow-lg transition duration-150 transform hover:scale-105">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                انتقل إلى المحاكاة التفاعلية
+            </a>
+        </div>
+    </div>
+
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p class="text-gray-400 text-sm">
+                تم تصميم وتطوير هذه المحاكاة التفاعلية بواسطة <span class="text-amber-400 font-semibold">ضياء البشرى محمد</span> &copy; 2026
+            </p>
+        </div>
+    </footer>
+
+    
+
+  <script src="../../assets/js/theme-toggle.js"></script>
+</body>
+</html>

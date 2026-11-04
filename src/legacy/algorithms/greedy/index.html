@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شرح الخوارزميات الجشعة (Greedy Algorithms)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../assets/css/greedy.css" />
+  <link rel="stylesheet" href="../../assets/css/design-system.css" />
+  <link rel="stylesheet" href="../../assets/css/dark-content.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+
+    
+    <nav class="site-nav">
+      <div class="site-nav-inner">
+        <div class="nav-main">
+          <a href="../../index.html" class="nav-logo">
+            <svg class="nav-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.663 17h4.673M12 3v1m6.364 1.636-.707.707M21 12h-1M4 12H3m3.343-5.657-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            <span>مقرر الحاسوب</span>
+          </a>
+          <div class="nav-links">
+                  <a href="../../index.html">الرئيسية</a>
+      <a href="simulation.html">المحاكاة</a>
+      <a href="code.html">الكود البرمجي</a>
+          </div>
+          <div class="nav-actions">
+            <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme"></button>
+            <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="nav-mobile" id="navMobile">
+                <a href="../../index.html">الرئيسية</a>
+      <a href="simulation.html">المحاكاة</a>
+        </div>
+        <div class="nav-breadcrumb">
+          <a href="../../index.html">الرئيسية</a><span class="sep">›</span><span class="current">الخوارزميات الجشعة (Greedy)</span>
+        </div>
+      </div>
+    </nav>
+    <script>function toggleMenu(){var m=document.getElementById("navMobile");if(m)m.classList.toggle("open")}</script>
+
+    
+
+    <div class="max-w-4xl mx-auto bg-white shadow-2xl rounded-xl overflow-hidden mt-8 mb-12 p-8 md:p-10">
+        <header class="text-center mb-10 border-b border-gray-100 pb-6">
+            <span class="inline-block text-indigo-500 font-bold text-sm tracking-widest uppercase mb-2">GREEDY ALGORITHMS</span>
+            <h1 class="text-4xl font-extrabold text-gray-900">
+                الخوارزميات الجشعة <span class="text-indigo-600">(Greedy Algorithms)</span>
+            </h1>
+            <p class="mt-2 text-lg text-gray-500">
+                استراتيجية حل أمثل محلي تأمل في الوصول إلى الحل الأمثل العام
+            </p>
+        </header>
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-indigo-800 mb-6 border-b-2 border-indigo-200 pb-2 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-3 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                </svg>
+                المفهوم
+            </h2>
+            <p class="text-gray-700 leading-loose mb-4">
+                الخوارزمية الجشعة (Greedy Algorithm) هي أسلوب لحل المشكلات يعتمد على اتخاذ الخيار الأفضل
+                في كل خطوة محلياً، على أمل أن يؤدي ذلك إلى الحل الأمثل العام. تختار الخوارزمية في كل مرحلة
+                الخيار الذي يبدو الأفضل في تلك اللحظة دون النظر إلى العواقب المستقبلية، تماماً مثل الشخص
+                الجشع الذي يأخذ أكبر قطعة متاحة فوراً.
+            </p>
+            <div class="bg-purple-50 p-5 rounded-lg shadow-md mb-6">
+                <h3 class="text-xl font-semibold text-purple-800 mb-3">مثال من الحياة اليومية</h3>
+                <p class="text-gray-700">
+                    تخيل أنك تريد دفع مبلغ ٧٧ جنيهاً باستخدام أكبر عدد قليل من العملات المعدنية.
+                    العملات المتاحة: ٥٠، ٢٠، ١٠، ٥، ١. الخوارزمية الجشعة ستأخذ عملة ٥٠ أولاً
+                    (لأنها الأكبر)، ثم ٢٠، ثم ٥، ثم ١، ثم ١ — فتستخدم ٥ عملات فقط. هذا هو الحل
+                    الأمثل! لكن ليس دائماً — أحياناً يفشل الأسلوب الجشع في إيجاد الحل الأفضل.
+                </p>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-indigo-800 mb-6 border-b-2 border-indigo-200 pb-2 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-3 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                متى نستخدم الخوارزميات الجشعة؟
+            </h2>
+            <p class="text-gray-700 leading-loose mb-4">
+                الخوارزميات الجشعة ليست مناسبة لكل المشكلات. هناك شرطان أساسيان:
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div class="bg-green-50 p-5 rounded-lg shadow-md border-green-400">
+                    <h3 class="text-xl font-semibold text-green-800 mb-2">١. الخاصية الاختيارية الجشعة (Greedy Choice Property)</h3>
+                    <p class="text-gray-700 text-sm">يمكن بناء الحل الأمثل العام من خلال سلسلة من الخيارات المثلى محلياً. بمعنى أن الاختيار الأفضل في الخطوة الحالية يؤدي إلى الحل الأمثل العام دون الحاجة إلى إعادة النظر فيه لاحقاً.</p>
+                </div>
+                <div class="bg-blue-50 p-5 rounded-lg shadow-md border-blue-400">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-2">٢. البنية الفرعية المثلى (Optimal Substructure)</h3>
+                    <p class="text-gray-700 text-sm">الحل الأمثل للمشكلة يحتوي داخله على الحلول المثلى للمشكلات الفرعية. هذا الشرط مشترك بين الخوارزميات الجشعة والبرمجة الديناميكية.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-indigo-800 mb-6 border-b-2 border-indigo-200 pb-2 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-3 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+                أمثلة على الخوارزميات الجشعة
+            </h2>
+
+            <div class="bg-blue-50 p-5 rounded-lg shadow-md mb-4">
+                <h3 class="text-xl font-semibold text-blue-800 mb-3">💰 مشكلة العملات المعدنية (Coin Change)</h3>
+                <p class="text-gray-700">
+                    لديك عملات معدنية بقيم محددة (مثلاً ١، ٥، ١٠، ٢٥). تريد دفع مبلغ معين
+                    باستخدام أقل عدد من العملات. الخوارزمية الجشعة تختار دائماً أكبر عملة ≤ المبلغ المتبقي.
+                    تعمل هذه الطريقة بشكل مثالي مع أنظمة العملات القياسية (مثل ١، ٥، ١٠، ٢٥)
+                    ولكنها قد تفشل مع أنظمة أخرى (مثل ١، ٣، ٤ — حيث مبلغ ٦ يحتاج ٣ عملات
+                    جشعاً بينما الحل الأمثل هو عملتان فقط).
+                </p>
+            </div>
+
+            <div class="bg-teal-50 p-5 rounded-lg shadow-md mb-4">
+                <h3 class="text-xl font-semibold text-teal-800 mb-3">📅 جدولة المواعيد (Activity Selection / Interval Scheduling)</h3>
+                <p class="text-gray-700">
+                    لديك مجموعة من الأنشطة، كل نشاط له وقت بدء ووقت انتهاء. تريد اختيار أكبر مجموعة
+                    من الأنشطة غير المتداخلة. الخوارزمية الجشعة تختار النشاط الذي ينتهي أولاً
+                    (أصغر وقت انتهاء)، ثم تحذف جميع الأنشطة المتداخلة معه، وتكرر العملية.
+                    هذه الخوارزمية تعطي الحل الأمثل دائماً لهذه المشكلة.
+                </p>
+            </div>
+
+            <div class="bg-amber-50 p-5 rounded-lg shadow-md">
+                <h3 class="text-xl font-semibold text-amber-800 mb-3">🎒 مشكلة حقيبة الظهر الكسرية (Fractional Knapsack)</h3>
+                <p class="text-gray-700">
+                    لديك حقيبة تتسع لوزن محدد، وعناصر كل منها له قيمة ووزن. يمكنك أخذ أجزاء كسرية
+                    من العناصر. الحل الجشع: اختر العناصر ذات أعلى قيمة لكل وحدة وزن أولاً.
+                    هذه الخوارزمية تعطي الحل الأمثل للمسألة الكسرية (على عكس مشكلة حقيبة الظهر
+                    المنفصلة 0-1 التي تتطلب DP).
+                </p>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-indigo-800 mb-6 border-b-2 border-indigo-200 pb-2 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-3 text-rose-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                </svg>
+                مقارنة مع البرمجة الديناميكية (DP)
+            </h2>
+            <div class="overflow-x-auto">
+                <table class="w-full text-right border-collapse">
+                    <thead>
+                        <tr class="bg-indigo-100">
+                            <th class="p-3 border border-indigo-200 font-bold text-indigo-800">الخاصية</th>
+                            <th class="p-3 border border-indigo-200 font-bold text-indigo-800">الخوارزمية الجشعة (Greedy)</th>
+                            <th class="p-3 border border-indigo-200 font-bold text-indigo-800">البرمجة الديناميكية (DP)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="bg-white">
+                            <td class="p-3 border border-gray-200 font-bold">الفكرة</td>
+                            <td class="p-3 border border-gray-200">اختيار الحل الأفضل محلياً في كل خطوة</td>
+                            <td class="p-3 border border-gray-200">تقسيم المشكلة وتخزين نتائج المشكلات الفرعية</td>
+                        </tr>
+                        <tr class="bg-gray-50">
+                            <td class="p-3 border border-gray-200 font-bold">التعقيد الزمني</td>
+                            <td class="p-3 border border-gray-200">أقل (غالباً O(n log n) أو O(n))</td>
+                            <td class="p-3 border border-gray-200">أعلى (غالباً O(n²) أو أكثر)</td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="p-3 border border-gray-200 font-bold">الذواكر</td>
+                            <td class="p-3 border border-gray-200">لا يحتاج ذاكرة إضافية (غالباً)</td>
+                            <td class="p-3 border border-gray-200">يحتاج جدول لتخزين النتائج</td>
+                        </tr>
+                        <tr class="bg-gray-50">
+                            <td class="p-3 border border-gray-200 font-bold">الحل الأمثل</td>
+                            <td class="p-3 border border-gray-200">ليس دائماً — يعتمد على المشكلة</td>
+                            <td class="p-3 border border-gray-200">دائماً — يضمن الحل الأمثل</td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="p-3 border border-gray-200 font-bold">الاستخدام</td>
+                            <td class="p-3 border border-gray-200">مشاكل بسيطة ذات بنية خاصة</td>
+                            <td class="p-3 border border-gray-200">مشاكل معقدة ذات مشكلات فرعية متداخلة</td>
+                        </tr>
+                        <tr class="bg-gray-50">
+                            <td class="p-3 border border-gray-200 font-bold">أمثلة</td>
+                            <td class="p-3 border border-gray-200">Coin Change (قياسي), جدولة المواعيد, Huffman Coding, Minimal Spanning Tree</td>
+                            <td class="p-3 border border-gray-200">Fibonacii, Coin Change (عام), 0/1 Knapsack, Edit Distance, Longest Common Subsequence</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="mb-8">
+            <h2 class="text-3xl font-bold text-indigo-800 mb-6 border-b-2 border-indigo-200 pb-2 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-3 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                المميزات والعيوب
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-green-50 p-5 rounded-lg shadow-md border-green-400">
+                    <h3 class="text-xl font-semibold text-green-800 mb-3">المميزات ✅</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>سهلة الفهم والتنفيذ — منطق بديهي</li>
+                        <li>سريعة — تعقيد زمني منخفض غالباً</li>
+                        <li>تستهلك ذاكرة قليلة — لا تحتاج جداول تخزين كبيرة</li>
+                        <li>مثالية لبعض المشكلات (جدولة المواعيد, Huffman, MST)</li>
+                        <li>حل تقريبي جيد للمشكلات المعقدة</li>
+                    </ul>
+                </div>
+                <div class="bg-red-50 p-5 rounded-lg shadow-md border-red-400">
+                    <h3 class="text-xl font-semibold text-red-800 mb-3">العيوب ❌</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>لا تضمن الحل الأمثل العام في كل المشكلات</li>
+                        <li>يصعب إثبات صحتها لبعض المشكلات</li>
+                        <li>تفشل في مشكلات مثل Knapsack 0-1</li>
+                        <li>تحتاج إثباتاً دقيقاً للخاصية الاختيارية الجشعة</li>
+                        <li>غير مناسبة للمشكلات التي تتطلب النظر إلى المستقبل</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="bg-indigo-900 text-white text-center py-6">
+        <p class="text-indigo-300 text-sm">مقرر الحاسوب — شرح الخوارزميات الجشعة (Greedy Algorithms)</p>
+        <p class="text-indigo-400 text-xs mt-1">جميع الحقوق محفوظة</p>
+    </footer>
+
+  <script src="../../assets/js/theme-toggle.js"></script>
+</body>
+</html>

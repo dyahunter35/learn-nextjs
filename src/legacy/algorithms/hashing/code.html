@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>التجزئة - الكود البرمجي</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../../assets/css/code-tabs.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/atom-one-dark.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <link rel="stylesheet" href="../../assets/css/design-system.css" />
+  <link rel="stylesheet" href="../../assets/css/dark-content.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50 min-h-screen">
+  
+    <nav class="site-nav">
+      <div class="site-nav-inner">
+        <div class="nav-main">
+          <a href="../../index.html" class="nav-logo">
+            <svg class="nav-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.663 17h4.673M12 3v1m6.364 1.636-.707.707M21 12h-1M4 12H3m3.343-5.657-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            <span>مقرر الحاسوب</span>
+          </a>
+          <div class="nav-links">
+                  <a href="../../index.html">الرئيسية</a>
+      <a href="index.html">الشرح</a>
+      <a href="simulation.html">المحاكاة</a>
+          </div>
+          <div class="nav-actions">
+            <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme"></button>
+            <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="nav-mobile" id="navMobile">
+                <a href="../../index.html">الرئيسية</a>
+      <a href="index.html">الشرح</a>
+      <a href="simulation.html">المحاكاة</a>
+        </div>
+        <div class="nav-breadcrumb">
+          <a href="../../index.html">الرئيسية</a><span class="sep">›</span><a href="index.html">التجزئة (Hashing)</a><span class="sep">›</span><span class="current">الكود البرمجي</span>
+        </div>
+      </div>
+    </nav>
+    <script>function toggleMenu(){var m=document.getElementById("navMobile");if(m)m.classList.toggle("open")}</script>
+
+  <div class="code-page">
+    <h1>التجزئة (Hashing) — الكود البرمجي</h1>
+    <p class="subtitle">شرح مبسط مع أمثلة بلغات متعددة. يمكنك نسخ الكود واستخدامه.</p>
+    
+    <div class="algorithm-code-description">
+      <strong>كيف تعمل:</strong> جدول التجزئة (Hash Table) يخزن البيانات باستخدام دالة تجزئة تحول المفتاح إلى فهرس في مصفوفة. تستخدم هذه الخوارزمية <strong>التسلسل (Chaining)</strong> لحل التصادمات — كل خلية تحتوي على قائمة مرتبطة (linked list) من العناصر التي تشترك في نفس قيمة التجزئة. دالة التجزئة: <strong>key % size</strong>.
+    </div>
+
+    <div class="lang-tabs">
+      <button class="lang-tab active" data-lang="cpp" onclick="switchLang('cpp')">C++</button>
+      <button class="lang-tab" data-lang="java" onclick="switchLang('java')">Java</button>
+      <button class="lang-tab" data-lang="js" onclick="switchLang('js')">JavaScript</button>
+      <button class="lang-tab" data-lang="php" onclick="switchLang('php')">PHP</button>
+    </div>
+    
+    <div class="code-block active" id="code-cpp">
+      <button class="copy-btn" data-lang="cpp" onclick="copyCode('cpp')">نسخ</button>
+      <pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;list&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+class HashTable {
+    int size;
+    vector&lt;list&lt;int&gt;&gt; table;
+
+    int hash(int key) {
+        return key % size;
+    }
+
+public:
+    HashTable(int s) : size(s) {
+        table.resize(size);
+    }
+
+    void insert(int key) {
+        int idx = hash(key);
+        table[idx].push_back(key);
+    }
+
+    bool search(int key) {
+        int idx = hash(key);
+        for (int x : table[idx])
+            if (x == key) return true;
+        return false;
+    }
+
+    void remove(int key) {
+        int idx = hash(key);
+        table[idx].remove(key);
+    }
+
+    void print() {
+        for (int i = 0; i &lt; size; i++) {
+            cout &lt;&lt; "[" &lt;&lt; i &lt;&lt; "]: ";
+            for (int x : table[i])
+                cout &lt;&lt; x &lt;&lt; " -&gt; ";
+            cout &lt;&lt; "null" &lt;&lt; endl;
+        }
+    }
+};
+
+int main() {
+    HashTable ht(7);
+    ht.insert(10);
+    ht.insert(20);
+    ht.insert(15);
+    ht.insert(7);
+
+    cout &lt;&lt; "Hash table (size=7):" &lt;&lt; endl;
+    ht.print();
+
+    int key = 15;
+    cout &lt;&lt; "Search " &lt;&lt; key &lt;&lt; ": "
+         &lt;&lt; (ht.search(key) ? "Found" : "Not found") &lt;&lt; endl;
+
+    ht.remove(15);
+    cout &lt;&lt; "After removing 15, search: "
+         &lt;&lt; (ht.search(15) ? "Found" : "Not found") &lt;&lt; endl;
+    return 0;
+}</code></pre>
+    </div>
+    <div class="code-block" id="code-java">
+      <button class="copy-btn" data-lang="java" onclick="copyCode('java')">نسخ</button>
+      <pre><code class="language-java">import java.util.LinkedList;
+
+class HashTable {
+    private int size;
+    private LinkedList&lt;Integer&gt;[] table;
+
+    @SuppressWarnings("unchecked")
+    public HashTable(int s) {
+        size = s;
+        table = new LinkedList[size];
+        for (int i = 0; i &lt; size; i++)
+            table[i] = new LinkedList&lt;&gt;();
+    }
+
+    private int hash(int key) {
+        return key % size;
+    }
+
+    public void insert(int key) {
+        int idx = hash(key);
+        table[idx].add(key);
+    }
+
+    public boolean search(int key) {
+        int idx = hash(key);
+        return table[idx].contains(key);
+    }
+
+    public void remove(int key) {
+        int idx = hash(key);
+        table[idx].remove(Integer.valueOf(key));
+    }
+
+    public void print() {
+        for (int i = 0; i &lt; size; i++) {
+            System.out.print("[" + i + "]: ");
+            for (int x : table[i])
+                System.out.print(x + " -&gt; ");
+            System.out.println("null");
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        HashTable ht = new HashTable(7);
+        ht.insert(10);
+        ht.insert(20);
+        ht.insert(15);
+        ht.insert(7);
+
+        System.out.println("Hash table (size=7):");
+        ht.print();
+
+        int key = 15;
+        System.out.println("Search " + key + ": " +
+            (ht.search(key) ? "Found" : "Not found"));
+
+        ht.remove(15);
+        System.out.println("After removing 15, search: " +
+            (ht.search(15) ? "Found" : "Not found"));
+    }
+}</code></pre>
+    </div>
+    <div class="code-block" id="code-js">
+      <button class="copy-btn" data-lang="js" onclick="copyCode('js')">نسخ</button>
+      <pre><code class="language-javascript">class HashTable {
+    constructor(size) {
+        this.size = size;
+        this.table = new Array(size).fill(null).map(() =&gt; []);
+    }
+
+    hash(key) {
+        return key % this.size;
+    }
+
+    insert(key) {
+        const idx = this.hash(key);
+        this.table[idx].push(key);
+    }
+
+    search(key) {
+        const idx = this.hash(key);
+        return this.table[idx].includes(key);
+    }
+
+    remove(key) {
+        const idx = this.hash(key);
+        this.table[idx] = this.table[idx].filter(x =&gt; x !== key);
+    }
+
+    print() {
+        for (let i = 0; i &lt; this.size; i++)
+            console.log(`[${i}]: ${this.table[i].join(" -&gt; ") || "null"}`);
+    }
+}
+
+const ht = new HashTable(7);
+ht.insert(10);
+ht.insert(20);
+ht.insert(15);
+ht.insert(7);
+
+console.log("Hash table (size=7):");
+ht.print();
+
+const key = 15;
+console.log("Search " + key + ": " + (ht.search(key) ? "Found" : "Not found"));
+
+ht.remove(15);
+console.log("After removing 15, search: " + (ht.search(15) ? "Found" : "Not found"));</code></pre>
+    </div>
+    <div class="code-block" id="code-php">
+      <button class="copy-btn" data-lang="php" onclick="copyCode('php')">نسخ</button>
+      <pre><code class="language-php">&lt;?php
+
+class HashTable {
+    private int $size;
+    private array $table;
+
+    public function __construct(int $size) {
+        $this-&gt;size = $size;
+        $this-&gt;table = array_fill(0, $size, []);
+    }
+
+    private function hash(int $key): int {
+        return $key % $this-&gt;size;
+    }
+
+    public function insert(int $key): void {
+        $idx = $this-&gt;hash($key);
+        $this-&gt;table[$idx][] = $key;
+    }
+
+    public function search(int $key): bool {
+        $idx = $this-&gt;hash($key);
+        return in_array($key, $this-&gt;table[$idx]);
+    }
+
+    public function remove(int $key): void {
+        $idx = $this-&gt;hash($key);
+        $this-&gt;table[$idx] = array_values(
+            array_filter($this-&gt;table[$idx], fn($x) =&gt; $x !== $key)
+        );
+    }
+
+    public function print(): void {
+        for ($i = 0; $i &lt; $this-&gt;size; $i++) {
+            $chain = empty($this-&gt;table[$i]) ? "null"
+                : implode(" -&gt; ", $this-&gt;table[$i]);
+            echo "[$i]: $chain\n";
+        }
+    }
+}
+
+$ht = new HashTable(7);
+$ht-&gt;insert(10);
+$ht-&gt;insert(20);
+$ht-&gt;insert(15);
+$ht-&gt;insert(7);
+
+echo "Hash table (size=7):\n";
+$ht-&gt;print();
+
+$key = 15;
+echo "Search $key: " . ($ht-&gt;search($key) ? "Found" : "Not found") . "\n";
+
+$ht-&gt;remove(15);
+echo "After removing 15, search: " . ($ht-&gt;search(15) ? "Found" : "Not found") . "\n";
+
+?&gt;</code></pre>
+    </div>
+  </div>
+
+  <footer class="bg-gray-900 text-white py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p class="text-gray-400 text-sm">التجزئة (Hashing) — أمثلة برمجية تفاعلية</p>
+    </div>
+  </footer>
+  
+  <script src="../../assets/js/code-tabs.js"></script>
+  <script src="../../assets/js/theme-toggle.js"></script>
+</body>
+</html>

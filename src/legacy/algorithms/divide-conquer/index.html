@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شرح خوارزميات فرق تسد (Divide & Conquer)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../assets/css/divide-conquer.css" />
+  <link rel="stylesheet" href="../../assets/css/design-system.css" />
+  <link rel="stylesheet" href="../../assets/css/dark-content.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+
+    
+    <nav class="site-nav">
+      <div class="site-nav-inner">
+        <div class="nav-main">
+          <a href="../../index.html" class="nav-logo">
+            <svg class="nav-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.663 17h4.673M12 3v1m6.364 1.636-.707.707M21 12h-1M4 12H3m3.343-5.657-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            <span>مقرر الحاسوب</span>
+          </a>
+          <div class="nav-links">
+                  <a href="../../index.html">الرئيسية</a>
+      <a href="simulation.html">المحاكاة</a>
+      <a href="code.html">الكود البرمجي</a>
+          </div>
+          <div class="nav-actions">
+            <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme"></button>
+            <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="nav-mobile" id="navMobile">
+                <a href="../../index.html">الرئيسية</a>
+      <a href="simulation.html">المحاكاة</a>
+        </div>
+        <div class="nav-breadcrumb">
+          <a href="../../index.html">الرئيسية</a><span class="sep">›</span><span class="current">فرق تسد (Divide & Conquer)</span>
+        </div>
+      </div>
+    </nav>
+    <script>function toggleMenu(){var m=document.getElementById("navMobile");if(m)m.classList.toggle("open")}</script>
+
+    <div class="max-w-4xl mx-auto bg-white shadow-2xl rounded-xl overflow-hidden mt-8 mb-12 p-8 md:p-10">
+        <header class="text-center mb-10 border-b border-gray-100 pb-6">
+            <span class="inline-block text-indigo-500 font-bold text-sm tracking-widest uppercase mb-2">DIVIDE & CONQUER</span>
+            <h1 class="text-4xl font-extrabold text-gray-900">
+                خوارزميات فرق تسد <span class="text-indigo-600">(Divide & Conquer)</span>
+            </h1>
+            <p class="mt-2 text-lg text-gray-500">
+                استراتيجية حل المشكلات: تقسيم — حل — دمج
+            </p>
+        </header>
+
+        <!-- المفهوم -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-indigo-800 mb-6 border-b-2 border-indigo-200 pb-2 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-3 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                </svg>
+                مفهوم خوارزميات فرق تسد
+            </h2>
+
+            <p class="text-gray-700 leading-loose mb-4">
+                <strong class="text-indigo-700">فرق تسد (Divide & Conquer)</strong> هي استراتيجية خوارزمية قوية تعتمد على فكرة بسيطة لكنها فعالة: تقسيم المشكلة الكبيرة إلى مشكلات فرعية أصغر، حل كل مشكلة فرعية بشكل مستقل، ثم دمج الحلول الفرعية للحصول على الحل النهائي. هذه الاستراتيجية هي أساس العديد من الخوارزميات الفعالة في علم الحاسوب.
+            </p>
+
+            <div class="bg-blue-50 p-5 rounded-lg shadow-md mb-6 concept-card border-blue-400">
+                <h3 class="text-xl font-semibold text-blue-800 mb-3">لماذا تعتبر قوية؟</h3>
+                <p class="text-gray-700">
+                    تكمن قوة هذه الاستراتيجية في قدرتها على تحويل المشكلات المعقدة إلى مشكلات بسيطة يمكن حلها بسهولة. باستخدام هذه الطريقة، يمكننا تصميم خوارزميات ذات تعقيد زمني منخفض مثل <span class="font-mono ltr-text bg-gray-200 p-1 rounded">O(n log n)</span> بدلاً من <span class="font-mono ltr-text bg-gray-200 p-1 rounded">O(n²)</span>، مما يجعلها مثالية للتعامل مع كميات كبيرة من البيانات.
+                </p>
+            </div>
+        </section>
+
+        <!-- الخطوات -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-indigo-800 mb-6 border-b-2 border-indigo-200 pb-2 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-3 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                الخطوات الأساسية لخوارزميات فرق تسد
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <div class="bg-indigo-50 p-5 rounded-xl shadow-md border-t-4 border-indigo-500">
+                    <div class="text-3xl font-bold text-indigo-600 mb-2">١</div>
+                    <h3 class="text-xl font-bold text-indigo-800 mb-2">التقسيم (Divide)</h3>
+                    <p class="text-gray-700 text-sm leading-relaxed">
+                        تقسم المشكلة الأصلية إلى مشكلات فرعية أصغر حجماً. تكون هذه المشكلات الفرعية مستقلة ومتشابهة في هيكلها للمشكلة الأصلية. يستمر التقسيم حتى تصبح المشكلات الفرعية بسيطة بما يكفي لحلها مباشرة.
+                    </p>
+                </div>
+                <div class="bg-amber-50 p-5 rounded-xl shadow-md border-t-4 border-amber-500">
+                    <div class="text-3xl font-bold text-amber-600 mb-2">٢</div>
+                    <h3 class="text-xl font-bold text-amber-800 mb-2">الحل (Conquer)</h3>
+                    <p class="text-gray-700 text-sm leading-relaxed">
+                        يتم حل كل مشكلة فرعية بشكل منفصل. إذا كانت المشكلة الفرعية صغيرة بما يكفي، يتم حلها مباشرة باستخدام طريقة بسيطة (هذه تسمى الحالة الأساسية). أما إذا كانت أكبر، فيتم تطبيق نفس الاستراتيجية عليها بشكل تكراري.
+                    </p>
+                </div>
+                <div class="bg-green-50 p-5 rounded-xl shadow-md border-t-4 border-emerald-500">
+                    <div class="text-3xl font-bold text-emerald-600 mb-2">٣</div>
+                    <h3 class="text-xl font-bold text-emerald-800 mb-2">الدمج (Combine)</h3>
+                    <p class="text-gray-700 text-sm leading-relaxed">
+                        تُدمج حلول المشكلات الفرعية معاً للحصول على حل المشكلة الأصلية. تختلف طريقة الدمج حسب نوع الخوارزمية — في ترتيب الدمج نقوم بدمج مصفوفتين مرتبتين، بينما في البحث الثنائي لا توجد حاجة لخطوة دمج.
+                    </p>
+                </div>
+            </div>
+
+            <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+                <h3 class="text-xl font-bold text-gray-800 mb-3">مخطط توضيحي لعملية فرق تسد</h3>
+                <div class="flex items-center justify-center gap-2 md:gap-4 text-sm flex-wrap">
+                    <div class="bg-indigo-100 text-indigo-800 font-bold px-4 py-3 rounded-lg">مشكلة كبيرة</div>
+                    <span class="text-2xl text-gray-400">←</span>
+                    <div class="flex gap-2">
+                        <div class="bg-amber-100 text-amber-800 font-bold px-3 py-3 rounded-lg">مشكلة فرعية ١</div>
+                        <div class="bg-amber-100 text-amber-800 font-bold px-3 py-3 rounded-lg">مشكلة فرعية ٢</div>
+                        <div class="bg-amber-100 text-amber-800 font-bold px-3 py-3 rounded-lg">مشكلة فرعية ٣</div>
+                    </div>
+                    <span class="text-2xl text-gray-400">←</span>
+                    <div class="bg-green-100 text-green-800 font-bold px-4 py-3 rounded-lg">حل كامل</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- الأمثلة -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-indigo-800 mb-6 border-b-2 border-indigo-200 pb-2 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-3 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+                أمثلة على خوارزميات فرق تسد
+            </h2>
+
+            <!-- Merge Sort -->
+            <div class="bg-gradient-to-l from-indigo-50 to-blue-50 p-6 rounded-xl shadow-md mb-6 border-r-4 border-indigo-500">
+                <h3 class="text-2xl font-bold text-gray-800 mb-3">١. ترتيب الدمج (Merge Sort)</h3>
+                <p class="text-gray-700 leading-loose mb-3">
+                    من أشهر الأمثلة على استراتيجية فرق تسد. تقوم الخوارزمية بتقسيم المصفوفة إلى نصفين متساويين تقريباً، ثم ترتب كل نصف بشكل تكراري، وأخيراً تدمج النصفين المرتبين للحصول على مصفوفة مرتبة بالكامل.
+                </p>
+                <div class="bg-white p-4 rounded-lg shadow-sm mb-3">
+                    <p class="font-bold text-indigo-700 mb-2">خطوات الخوارزمية:</p>
+                    <ol class="list-decimal list-inside space-y-1 text-gray-700 text-sm">
+                        <li>إذا كان طول المصفوفة ≤ 1، فهي مرتبة — نعود بها.</li>
+                        <li>نقسم المصفوفة إلى نصفين متساويين.</li>
+                        <li>نطبق الخوارزمية تكراريًا على كل نصف.</li>
+                        <li>ندمج النصفين المرتبين في مصفوفة واحدة مرتبة.</li>
+                    </ol>
+                </div>
+                <div class="bg-gray-900 text-green-300 p-4 rounded-lg font-mono text-sm rtl-code" dir="ltr">
+                    <span class="text-purple-400">function</span> <span class="text-yellow-300">mergeSort</span>(arr) {<br>
+                    &nbsp;&nbsp;<span class="text-gray-400">if</span> (arr.length ≤ 1) <span class="text-gray-400">return</span> arr;<br>
+                    &nbsp;&nbsp;<span class="text-purple-400">const</span> mid = Math.floor(arr.length / 2);<br>
+                    &nbsp;&nbsp;<span class="text-purple-400">const</span> left = arr.slice(0, mid);<br>
+                    &nbsp;&nbsp;<span class="text-purple-400">const</span> right = arr.slice(mid);<br>
+                    &nbsp;&nbsp;<span class="text-gray-400">return</span> merge(mergeSort(left), mergeSort(right));<br>
+                    }
+                </div>
+            </div>
+
+            <!-- Quick Sort -->
+            <div class="bg-gradient-to-l from-amber-50 to-orange-50 p-6 rounded-xl shadow-md mb-6 border-r-4 border-amber-500">
+                <h3 class="text-2xl font-bold text-gray-800 mb-3">٢. الترتيب السريع (Quick Sort)</h3>
+                <p class="text-gray-700 leading-loose mb-3">
+                    خوارزمية ترتيب سريعة وفعالة تستخدم أيضاً استراتيجية فرق تسد. تختار الخوارزمية عنصراً محورياً (pivot) ثم تقسم المصفوفة إلى عناصر أصغر من المحور وعناصر أكبر منه، ثم ترتب كل قسم تكراريًا.
+                </p>
+                <div class="bg-white p-4 rounded-lg shadow-sm mb-3">
+                    <p class="font-bold text-amber-700 mb-2">خطوات الخوارزمية:</p>
+                    <ol class="list-decimal list-inside space-y-1 text-gray-700 text-sm">
+                        <li>نختار عنصراً محورياً (عادةً آخر عنصر أو أول عنصر).</li>
+                        <li>نقسم المصفوفة حول المحور: الأصغر على اليسار، الأكبر على اليمين.</li>
+                        <li>نطبق الخوارزمية تكراريًا على القسمين الأيمن والأيسر.</li>
+                        <li>ليست هناك حاجة لخطوة دمج — المصفوفة تُرتّب في المكان (in-place).</li>
+                    </ol>
+                </div>
+                <div class="bg-gray-900 text-green-300 p-4 rounded-lg font-mono text-sm" dir="ltr">
+                    <span class="text-purple-400">function</span> <span class="text-yellow-300">quickSort</span>(arr, low, high) {<br>
+                    &nbsp;&nbsp;<span class="text-gray-400">if</span> (low &lt; high) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">const</span> pi = partition(arr, low, high);<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;quickSort(arr, low, pi - 1);<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;quickSort(arr, pi + 1, high);<br>
+                    &nbsp;&nbsp;}<br>
+                    }
+                </div>
+            </div>
+
+            <!-- Binary Search -->
+            <div class="bg-gradient-to-l from-green-50 to-emerald-50 p-6 rounded-xl shadow-md mb-6 border-r-4 border-emerald-500">
+                <h3 class="text-2xl font-bold text-gray-800 mb-3">٣. البحث الثنائي (Binary Search)</h3>
+                <p class="text-gray-700 leading-loose mb-3">
+                    خوارزمية فعالة للبحث في مصفوفة مرتبة. تقوم بتقسيم المصفوفة إلى نصفين في كل خطوة، ثم تبحث في النصف الذي يحتمل وجود العنصر المطلوب فيه. هذا يقلل مساحة البحث إلى النصف في كل خطوة.
+                </p>
+                <div class="bg-white p-4 rounded-lg shadow-sm mb-3">
+                    <p class="font-bold text-green-700 mb-2">خطوات الخوارزمية:</p>
+                    <ol class="list-decimal list-inside space-y-1 text-gray-700 text-sm">
+                        <li>نحدد العنصر الأوسط في المصفوفة المرتبة.</li>
+                        <li>إذا كان العنصر الأوسط هو المطلوب — نعيد موقعه.</li>
+                        <li>إذا كان المطلوب أصغر — نبحث في النصف الأيسر.</li>
+                        <li>إذا كان المطلوب أكبر — نبحث في النصف الأيمن.</li>
+                        <li>نكرر حتى نجد العنصر أو يصبح نطاق البحث فارغاً.</li>
+                    </ol>
+                </div>
+                <div class="bg-gray-900 text-green-300 p-4 rounded-lg font-mono text-sm" dir="ltr">
+                    <span class="text-purple-400">function</span> <span class="text-yellow-300">binarySearch</span>(arr, target) {<br>
+                    &nbsp;&nbsp;<span class="text-purple-400">let</span> left = 0, right = arr.length - 1;<br>
+                    &nbsp;&nbsp;<span class="text-gray-400">while</span> (left ≤ right) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">const</span> mid = Math.floor((left + right) / 2);<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-gray-400">if</span> (arr[mid] === target) <span class="text-gray-400">return</span> mid;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-gray-400">if</span> (arr[mid] &lt; target) left = mid + 1;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-gray-400">else</span> right = mid - 1;<br>
+                    &nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;<span class="text-gray-400">return</span> -1;<br>
+                    }
+                </div>
+            </div>
+        </section>
+
+        <!-- تحليل التعقيد -->
+        <section class="mb-10">
+            <h2 class="text-3xl font-bold text-indigo-800 mb-6 border-b-2 border-indigo-200 pb-2 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-3 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+                تحليل التعقيد الحسابي
+            </h2>
+
+            <div class="overflow-x-auto">
+                <table class="w-full border-collapse bg-white shadow-md rounded-lg overflow-hidden">
+                    <thead>
+                        <tr class="bg-indigo-600 text-white">
+                            <th class="p-3 border border-indigo-500">الخوارزمية</th>
+                            <th class="p-3 border border-indigo-500">أسوأ حالة</th>
+                            <th class="p-3 border border-indigo-500">متوسط الحالة</th>
+                            <th class="p-3 border border-indigo-500">أفضل حالة</th>
+                            <th class="p-3 border border-indigo-500">المساحة</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="even:bg-gray-100">
+                            <td class="p-3 border border-gray-300 font-bold">Merge Sort</td>
+                            <td class="p-3 border border-gray-300 ltr-text">O(n log n)</td>
+                            <td class="p-3 border border-gray-300 ltr-text">O(n log n)</td>
+                            <td class="p-3 border border-gray-300 ltr-text">O(n log n)</td>
+                            <td class="p-3 border border-gray-300 ltr-text">O(n)</td>
+                        </tr>
+                        <tr class="even:bg-gray-100">
+                            <td class="p-3 border border-gray-300 font-bold">Quick Sort</td>
+                            <td class="p-3 border border-gray-300 ltr-text">O(n²)</td>
+                            <td class="p-3 border border-gray-300 ltr-text">O(n log n)</td>
+                            <td class="p-3 border border-gray-300 ltr-text">O(n log n)</td>
+                            <td class="p-3 border border-gray-300 ltr-text">O(log n)</td>
+                        </tr>
+                        <tr class="even:bg-gray-100">
+                            <td class="p-3 border border-gray-300 font-bold">Binary Search</td>
+                            <td class="p-3 border border-gray-300 ltr-text">O(log n)</td>
+                            <td class="p-3 border border-gray-300 ltr-text">O(log n)</td>
+                            <td class="p-3 border border-gray-300 ltr-text">O(1)</td>
+                            <td class="p-3 border border-gray-300 ltr-text">O(1)</td>
+                        </tr>
+                        <tr class="even:bg-gray-100">
+                            <td class="p-3 border border-gray-300 font-bold">Strassen (الضرب)</td>
+                            <td class="p-3 border border-gray-300 ltr-text">O(n^2.81)</td>
+                            <td class="p-3 border border-gray-300 ltr-text">O(n^2.81)</td>
+                            <td class="p-3 border border-gray-300 ltr-text">O(n^2.81)</td>
+                            <td class="p-3 border border-gray-300 ltr-text">O(n²)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="bg-yellow-50 p-5 rounded-lg shadow-md mt-6 border-r-4 border-yellow-400">
+                <h3 class="text-xl font-semibold text-yellow-800 mb-2">ملاحظة مهمة</h3>
+                <p class="text-gray-700 text-sm">
+                    النجاح الأساسي لاستراتيجية فرق تسد هو في تقليل التعقيد الزمني من <span class="font-mono ltr-text bg-gray-200 p-1 rounded">O(n²)</span> إلى <span class="font-mono ltr-text bg-gray-200 p-1 rounded">O(n log n)</span> في العديد من الحالات. هذا التحسن الهائل يجعل الخوارزميات مثل Merge Sort قادرة على ترتيب ملايين العناصر بكفاءة عالية. مفتاح النجاح هو اختيار طريقة التقسيم المناسبة وطريقة الدمج الفعالة.
+                </p>
+            </div>
+        </section>
+
+        <div class="text-center mt-8">
+            <a href="simulation.html" class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-10 rounded-xl text-xl shadow-lg transition duration-150 transform hover:scale-105">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                انتقل إلى المحاكاة التفاعلية لـ Merge Sort
+            </a>
+        </div>
+    </div>
+
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p class="text-gray-400 text-sm">
+                تم تصميم وتطوير هذه المحاكاة التفاعلية بواسطة <span class="text-amber-400 font-semibold">ضياء البشرى محمد</span> &copy; 2026
+            </p>
+        </div>
+    </footer>
+
+    
+
+  <script src="../../assets/js/theme-toggle.js"></script>
+</body>
+</html>

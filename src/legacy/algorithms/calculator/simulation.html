@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>آلة حاسبة علمية</title>
+    <!-- تضمين Tailwind CSS القياسي (الاعتماد على الفئات الافتراضية) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../assets/css/calculator.css" />
+    <link rel="stylesheet" href="../../assets/css/design-system.css" />
+    <link rel="stylesheet" href="../../assets/css/dark-content.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+  <body class="min-h-screen bg-gradient-to-b from-slate-50 to-white" style="font-family: 'Cairo', sans-serif;">
+    
+    <nav class="site-nav">
+      <div class="site-nav-inner">
+        <div class="nav-main">
+          <a href="../../index.html" class="nav-logo">
+            <svg class="nav-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.663 17h4.673M12 3v1m6.364 1.636-.707.707M21 12h-1M4 12H3m3.343-5.657-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            <span>مقرر الحاسوب</span>
+          </a>
+          <div class="nav-links">
+                  <a href="../../index.html">الرئيسية</a>
+      <a href="index.html">الشرح</a>
+      <a href="code.html">الكود البرمجي</a>
+          </div>
+          <div class="nav-actions">
+            <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme"></button>
+            <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="nav-mobile" id="navMobile">
+                <a href="../../index.html">الرئيسية</a>
+      <a href="index.html">الشرح</a>
+        </div>
+        <div class="nav-breadcrumb">
+          <a href="../../index.html">الرئيسية</a><span class="sep">›</span><a href="index.html">الآلة الحاسبة</a><span class="sep">›</span><span class="current">المحاكاة</span>
+        </div>
+      </div>
+    </nav>
+    <script>function toggleMenu(){var m=document.getElementById("navMobile");if(m)m.classList.toggle("open")}</script>
+
+    
+
+    <div class="py-8 md:py-12 px-4">
+      <div class="max-w-lg mx-auto">
+
+        <!-- عنوان الصفحة -->
+        <div class="text-center mb-8">
+          <span class="inline-block text-purple-500 font-bold text-sm tracking-widest uppercase mb-2">SCIENTIFIC CALCULATOR</span>
+          <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900">آلة حاسبة علمية متكاملة</h1>
+          <p class="text-gray-500 mt-2">حسابات علمية متقدمة مع واجهة سهلة ومباشرة</p>
+        </div>
+
+        <!-- الآلة الحاسبة -->
+        <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden p-4">
+          <div class="rounded-xl overflow-hidden bg-gray-200 border border-gray-300">
+            <!-- شاشة العرض -->
+            <div class="bg-slate-800 text-white p-6 pt-8">
+              <div id="previous-operand" class="text-left text-lg text-gray-400 h-6 overflow-hidden"></div>
+              <div id="current-operand" class="text-left text-5xl font-bold break-all leading-tight h-16 transition-all duration-100">0</div>
+            </div>
+
+            <!-- أزرار الآلة الحاسبة - 5 أعمدة -->
+            <div class="grid grid-cols-5 gap-1.5 p-3">
+
+              <!-- الصف 1: الدوال المثلثية الأساسية -->
+              <button class="text-sm font-semibold p-3 rounded-xl bg-scientific hover:bg-scientific-hover text-white calc-button" data-function="sin">sin</button>
+              <button class="text-sm font-semibold p-3 rounded-xl bg-scientific hover:bg-scientific-hover text-white calc-button" data-function="cos">cos</button>
+              <button class="text-sm font-semibold p-3 rounded-xl bg-scientific hover:bg-scientific-hover text-white calc-button" data-function="tan">tan</button>
+              <button class="text-sm font-semibold p-3 rounded-xl bg-scientific hover:bg-scientific-hover text-white calc-button" data-function="log">log</button>
+              <button class="text-sm font-semibold p-3 rounded-xl bg-scientific hover:bg-scientific-hover text-white calc-button" data-function="ln">ln</button>
+
+              <!-- الصف 2: الدوال الزائدية -->
+              <button class="text-xs font-semibold p-3 rounded-xl bg-scientific hover:bg-scientific-hover text-white calc-button" data-function="sinh">sinh</button>
+              <button class="text-xs font-semibold p-3 rounded-xl bg-scientific hover:bg-scientific-hover text-white calc-button" data-function="cosh">cosh</button>
+              <button class="text-xs font-semibold p-3 rounded-xl bg-scientific hover:bg-scientific-hover text-white calc-button" data-function="tanh">tanh</button>
+              <button class="text-xs font-semibold p-3 rounded-xl bg-scientific hover:bg-scientific-hover text-white calc-button" data-function="log2">log₂</button>
+              <button class="text-xs font-semibold p-3 rounded-xl bg-scientific hover:bg-scientific-hover text-white calc-button" data-function="exp10">10ˣ</button>
+
+              <!-- الصف 3: الدوال العكسية والأسية -->
+              <button class="text-xs font-semibold p-3 rounded-xl bg-scientific hover:bg-scientific-hover text-white calc-button" data-function="asin">sin⁻¹</button>
+              <button class="text-xs font-semibold p-3 rounded-xl bg-scientific hover:bg-scientific-hover text-white calc-button" data-function="acos">cos⁻¹</button>
+              <button class="text-xs font-semibold p-3 rounded-xl bg-scientific hover:bg-scientific-hover text-white calc-button" data-function="atan">tan⁻¹</button>
+              <button class="text-xs font-semibold p-3 rounded-xl bg-scientific hover:bg-scientific-hover text-white calc-button" data-function="exp">eˣ</button>
+              <button class="text-xs font-semibold p-3 rounded-xl bg-scientific hover:bg-scientific-hover text-white calc-button" data-function="twopow">2ˣ</button>
+
+              <!-- الصف 4: الجذر والنسبة والمسح -->
+              <button class="text-sm font-semibold p-3 rounded-xl bg-scientific hover:bg-scientific-hover text-white calc-button" data-function="sqrt">√</button>
+              <button class="text-sm font-semibold p-3 rounded-xl bg-red-600 hover:bg-red-700 text-white calc-button" data-operation="clear">AC</button>
+              <button class="text-sm font-semibold p-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white calc-button" data-operation="delete">DEL</button>
+              <button class="text-sm font-semibold p-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white calc-button" data-function="%">%</button>
+              <button class="text-sm font-semibold p-3 rounded-xl bg-amber-600 hover:bg-amber-700 text-white calc-button" data-operation="÷">÷</button>
+
+              <!-- الصف 5: المكعب والأرقام -->
+              <button class="text-sm font-semibold p-3 rounded-xl bg-scientific hover:bg-scientific-hover text-white calc-button" data-function="cube">x³</button>
+              <button class="text-xl font-bold p-3 rounded-xl bg-white hover:bg-gray-200 text-gray-900 calc-button" data-number="7">7</button>
+              <button class="text-xl font-bold p-3 rounded-xl bg-white hover:bg-gray-200 text-gray-900 calc-button" data-number="8">8</button>
+              <button class="text-xl font-bold p-3 rounded-xl bg-white hover:bg-gray-200 text-gray-900 calc-button" data-number="9">9</button>
+              <button class="text-sm font-semibold p-3 rounded-xl bg-amber-600 hover:bg-amber-700 text-white calc-button" data-operation="×">×</button>
+
+              <!-- الصف 6: الجذر التكعيبي والأرقام -->
+              <button class="text-sm font-semibold p-3 rounded-xl bg-scientific hover:bg-scientific-hover text-white calc-button" data-function="cuberoot">∛</button>
+              <button class="text-xl font-bold p-3 rounded-xl bg-white hover:bg-gray-200 text-gray-900 calc-button" data-number="4">4</button>
+              <button class="text-xl font-bold p-3 rounded-xl bg-white hover:bg-gray-200 text-gray-900 calc-button" data-number="5">5</button>
+              <button class="text-xl font-bold p-3 rounded-xl bg-white hover:bg-gray-200 text-gray-900 calc-button" data-number="6">6</button>
+              <button class="text-sm font-semibold p-3 rounded-xl bg-amber-600 hover:bg-amber-700 text-white calc-button" data-operation="-">-</button>
+
+              <!-- الصف 7: المضروب والثابت e والأرقام -->
+              <button class="text-sm font-semibold p-3 rounded-xl bg-scientific hover:bg-scientific-hover text-white calc-button" data-function="factorial">x!</button>
+              <button class="text-xl font-bold p-3 rounded-xl bg-white hover:bg-gray-200 text-gray-900 calc-button" data-number="1">1</button>
+              <button class="text-xl font-bold p-3 rounded-xl bg-white hover:bg-gray-200 text-gray-900 calc-button" data-number="2">2</button>
+              <button class="text-xl font-bold p-3 rounded-xl bg-white hover:bg-gray-200 text-gray-900 calc-button" data-number="3">3</button>
+              <button class="text-sm font-semibold p-3 rounded-xl bg-amber-600 hover:bg-amber-700 text-white calc-button" data-operation="+">+</button>
+
+              <!-- الصف 8: الثابت e، القيمة المطلقة، الأس الثاني، الأس y، الفاصلة -->
+              <button class="text-sm font-semibold p-3 rounded-xl bg-scientific hover:bg-scientific-hover text-white calc-button" data-function="euler">e</button>
+              <button class="text-sm font-semibold p-3 rounded-xl bg-scientific hover:bg-scientific-hover text-white calc-button" data-function="abs">|x|</button>
+              <button class="text-sm font-semibold p-3 rounded-xl bg-scientific hover:bg-scientific-hover text-white calc-button" data-function="square">x²</button>
+              <button class="text-sm font-semibold p-3 rounded-xl bg-scientific hover:bg-scientific-hover text-white calc-button" data-function="power">xʸ</button>
+              <button class="text-xl font-bold p-3 rounded-xl bg-white hover:bg-gray-200 text-gray-900 calc-button" data-number=".">.</button>
+
+              <!-- الصف 9: مقلوب، π، الإشارة، الصفر، يساوي -->
+              <button class="text-sm font-semibold p-3 rounded-xl bg-scientific hover:bg-scientific-hover text-white calc-button" data-function="reciprocal">1/x</button>
+              <button class="text-sm font-semibold p-3 rounded-xl bg-scientific hover:bg-scientific-hover text-white calc-button" data-function="pi">π</button>
+              <button class="text-sm font-semibold p-3 rounded-xl bg-scientific hover:bg-scientific-hover text-white calc-button" data-function="sign">+/−</button>
+              <button class="text-xl font-bold p-3 rounded-xl bg-white hover:bg-gray-200 text-gray-900 calc-button" data-number="0">0</button>
+              <button class="text-sm font-semibold p-3 rounded-xl bg-gradient-to-l from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white calc-button shadow-lg shadow-red-200" data-operation="=">=</button>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <script src="../../assets/js/calculator.js"></script>
+    <script src="../../assets/js/theme-toggle.js"></script>
+</body>
+</html>

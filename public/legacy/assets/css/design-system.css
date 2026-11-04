@@ -1,0 +1,274 @@
+:root {
+  --color-canvas: #fdfcfc;
+  --color-ink: #201d1d;
+  --color-ink-deep: #0f0000;
+  --color-body: #424245;
+  --color-mute: #646262;
+  --color-stone: #6e6e73;
+  --color-ash: #9a9898;
+  --color-surface-soft: #f8f7f7;
+  --color-surface-card: #f1eeee;
+  --color-surface-dark: #201d1d;
+  --color-hairline: rgba(15, 0, 0, 0.12);
+  --color-hairline-strong: #646262;
+  --color-accent: #007aff;
+  --color-accent-hover: #0056b3;
+  --color-on-dark: #fdfcfc;
+  --color-on-dark-mute: #9a9898;
+  --font-interface: "Cairo", sans-serif;
+  --font-code: "JetBrains Mono", monospace;
+  --radius-control: 6px;
+  --radius-surface: 12px;
+  --shadow-surface: 0 8px 24px rgba(15, 23, 42, 0.08);
+}
+
+/* Shared foundation: keep each page's existing colors, align its type and components. */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 76px;
+}
+body {
+  font-family: var(--font-interface);
+  line-height: 1.7;
+}
+button, input, select, textarea {
+  font: inherit;
+}
+button, a, input, select, textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+button:focus-visible, a:focus-visible,
+input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+input, select, textarea {
+  border-radius: var(--radius-control);
+}
+pre, code, .font-mono, .mono-font {
+  font-family: var(--font-code);
+}
+img, canvas, svg, video {
+  max-width: 100%;
+}
+[data-theme="dark"] {
+  --color-canvas: #161616;
+  --color-ink: #e8e8e8;
+  --color-ink-deep: #ffffff;
+  --color-body: #b0b0b0;
+  --color-mute: #888888;
+  --color-stone: #6e6e73;
+  --color-ash: #555555;
+  --color-surface-soft: #1e1e1e;
+  --color-surface-card: #262626;
+  --color-surface-dark: #0d0d0d;
+  --color-hairline: rgba(255, 255, 255, 0.1);
+  --color-hairline-strong: #555555;
+  --color-accent: #4da6ff;
+  --color-accent-hover: #80bfff;
+  --color-on-dark: #e8e8e8;
+  --color-on-dark-mute: #666666;
+}
+
+/* ===== Navbar (shared across all pages) ===== */
+.site-nav {
+  background: var(--color-canvas);
+  border-bottom: 1px solid var(--color-hairline);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  transition: background 0.2s;
+}
+.site-nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.nav-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  gap: 16px;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-ink);
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+.nav-logo:hover {
+  color: var(--color-accent);
+}
+.nav-logo-svg {
+  width: 22px;
+  height: 22px;
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.nav-links a {
+  color: var(--color-mute);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  padding: 6px 14px;
+  border-radius: 4px;
+  transition: color 0.15s, background 0.15s;
+  white-space: nowrap;
+}
+.nav-links a:hover {
+  color: var(--color-ink);
+  background: var(--color-surface-soft);
+}
+.nav-links a.active {
+  color: var(--color-ink);
+  background: var(--color-surface-card);
+}
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius-control);
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--color-mute);
+  font-size: 16px;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  line-height: 1;
+  padding: 0;
+}
+.theme-toggle:hover {
+  color: var(--color-ink);
+  border-color: var(--color-hairline-strong);
+  background: var(--color-surface-soft);
+}
+.nav-breadcrumb {
+  padding: 8px 0 12px;
+  font-size: 13px;
+  color: var(--color-stone);
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-wrap: wrap;
+}
+.nav-breadcrumb a {
+  color: var(--color-mute);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.nav-breadcrumb a:hover {
+  color: var(--color-ink);
+}
+.nav-breadcrumb .sep {
+  color: var(--color-ash);
+  margin: 0 4px;
+  user-select: none;
+}
+.nav-breadcrumb .current {
+  color: var(--color-body);
+  font-weight: 500;
+}
+.nav-hamburger {
+  display: none;
+  background: none;
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius-control);
+  width: 34px;
+  height: 34px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--color-mute);
+  transition: color 0.15s, border-color 0.15s;
+  padding: 0;
+}
+.nav-hamburger:hover {
+  color: var(--color-ink);
+  border-color: var(--color-hairline-strong);
+}
+.nav-mobile {
+  display: none;
+  padding: 0 0 12px;
+}
+.nav-mobile.open {
+  display: block;
+}
+.nav-mobile a {
+  display: block;
+  padding: 10px 12px;
+  color: var(--color-mute);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: 4px;
+  transition: color 0.15s, background 0.15s;
+}
+.nav-mobile a:hover {
+  color: var(--color-ink);
+  background: var(--color-surface-soft);
+}
+.nav-mobile a.active {
+  color: var(--color-ink);
+  background: var(--color-surface-card);
+}
+
+/* Reused surfaces share one radius and elevation; their original fills remain intact. */
+.concept-card,
+.container-card,
+.code-algo-info,
+.algorithm-code-description,
+.conversion-box,
+.bg-white.rounded-xl.shadow-sm,
+.bg-white.rounded-xl.shadow-md,
+.bg-white.rounded-2xl.shadow-xl,
+.max-w-4xl.bg-white {
+  border-radius: var(--radius-surface);
+}
+.concept-card,
+.container-card,
+.bg-white.rounded-xl.shadow-sm,
+.bg-white.rounded-xl.shadow-md,
+.bg-white.rounded-2xl.shadow-xl,
+.max-w-4xl.bg-white {
+  box-shadow: var(--shadow-surface);
+}
+.card-main, .coming-soon-card {
+  border-radius: var(--radius-surface);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+.card-main:hover, .coming-soon-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-surface);
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+  .nav-hamburger {
+    display: flex;
+  }
+  .site-nav-inner {
+    padding: 0 16px;
+  }
+  html { scroll-padding-top: 64px; }
+  .nav-main { min-height: 56px; }
+}

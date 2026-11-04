@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>القائمة المترابطة - الكود البرمجي</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../../assets/css/code-tabs.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/atom-one-dark.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <link rel="stylesheet" href="../../assets/css/design-system.css" />
+  <link rel="stylesheet" href="../../assets/css/dark-content.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50 min-h-screen">
+  
+    <nav class="site-nav">
+      <div class="site-nav-inner">
+        <div class="nav-main">
+          <a href="../../index.html" class="nav-logo">
+            <svg class="nav-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.663 17h4.673M12 3v1m6.364 1.636-.707.707M21 12h-1M4 12H3m3.343-5.657-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            <span>مقرر الحاسوب</span>
+          </a>
+          <div class="nav-links">
+                  <a href="../../index.html">الرئيسية</a>
+      <a href="index.html">الشرح</a>
+      <a href="simulation.html">المحاكاة</a>
+          </div>
+          <div class="nav-actions">
+            <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme"></button>
+            <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="nav-mobile" id="navMobile">
+                <a href="../../index.html">الرئيسية</a>
+      <a href="index.html">الشرح</a>
+      <a href="simulation.html">المحاكاة</a>
+        </div>
+        <div class="nav-breadcrumb">
+          <a href="../../index.html">الرئيسية</a><span class="sep">›</span><a href="index.html">القوائم المترابطة (Linked List)</a><span class="sep">›</span><span class="current">الكود البرمجي</span>
+        </div>
+      </div>
+    </nav>
+    <script>function toggleMenu(){var m=document.getElementById("navMobile");if(m)m.classList.toggle("open")}</script>
+
+  <div class="code-page">
+    <h1>القائمة المترابطة — الكود البرمجي</h1>
+    <p class="subtitle">شرح مبسط لهيكل بيانات القائمة المترابطة مع أمثلة برمجية بلغات متعددة. يمكنك نسخ الكود واستخدامه مباشرة.</p>
+    
+    <div class="algorithm-code-description">
+      <strong>كيف تعمل القائمة المترابطة (Linked List):</strong><br/>
+      القائمة المترابطة هي هيكل بيانات خطي حيث يتم ترتيب العناصر (المسماة "عقد") بشكل متسلسل، وكل عقدة تحتوي على قيمة ومؤشر (رابط) إلى العقدة التالية. على عكس المصفوفات، يمكن إدراج وحذف العناصر بسهولة دون الحاجة إلى إعادة ترتيب العناصر الأخرى. العمليات الأساسية: إدراج عقدة، حذف عقدة، البحث عن قيمة، وعرض القائمة.
+    </div>
+
+    <div class="lang-tabs">
+      <button class="lang-tab active" data-lang="cpp" onclick="switchLang('cpp')">C++</button>
+      <button class="lang-tab" data-lang="java" onclick="switchLang('java')">Java</button>
+      <button class="lang-tab" data-lang="js" onclick="switchLang('js')">JavaScript</button>
+      <button class="lang-tab" data-lang="php" onclick="switchLang('php')">PHP</button>
+    </div>
+    
+    <div class="code-block active" id="code-cpp">
+      <button class="copy-btn" data-lang="cpp" onclick="copyCode('cpp')">نسخ</button>
+      <pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+class Node {
+public:
+    int data;
+    Node* next;
+    Node(int val) : data(val), next(nullptr) {}
+};
+
+class LinkedList {
+    Node* head;
+
+public:
+    LinkedList() : head(nullptr) {}
+
+    void insertAtHead(int val) {
+        Node* newNode = new Node(val);
+        newNode-&gt;next = head;
+        head = newNode;
+    }
+
+    void insertAtTail(int val) {
+        Node* newNode = new Node(val);
+        if (!head) { head = newNode; return; }
+        Node* temp = head;
+        while (temp-&gt;next) temp = temp-&gt;next;
+        temp-&gt;next = newNode;
+    }
+
+    void deleteValue(int val) {
+        if (!head) return;
+        if (head-&gt;data == val) {
+            Node* temp = head;
+            head = head-&gt;next;
+            delete temp;
+            return;
+        }
+        Node* curr = head;
+        while (curr-&gt;next && curr-&gt;next-&gt;data != val)
+            curr = curr-&gt;next;
+        if (curr-&gt;next) {
+            Node* temp = curr-&gt;next;
+            curr-&gt;next = temp-&gt;next;
+            delete temp;
+        }
+    }
+
+    bool search(int val) {
+        Node* temp = head;
+        while (temp) {
+            if (temp-&gt;data == val) return true;
+            temp = temp-&gt;next;
+        }
+        return false;
+    }
+
+    void display() {
+        Node* temp = head;
+        while (temp) {
+            cout &lt;&lt; temp-&gt;data &lt;&lt; " -&gt; ";
+            temp = temp-&gt;next;
+        }
+        cout &lt;&lt; "NULL" &lt;&lt; endl;
+    }
+};
+
+int main() {
+    LinkedList list;
+
+    list.insertAtHead(30);
+    list.insertAtHead(20);
+    list.insertAtHead(10);
+    list.insertAtTail(40);
+
+    cout &lt;&lt; "Linked List: ";
+    list.display();
+
+    cout &lt;&lt; "Search 20: " &lt;&lt; (list.search(20) ? "Found" : "Not Found") &lt;&lt; endl;
+    cout &lt;&lt; "Search 99: " &lt;&lt; (list.search(99) ? "Found" : "Not Found") &lt;&lt; endl;
+
+    list.deleteValue(20);
+    cout &lt;&lt; "After deleting 20: ";
+    list.display();
+
+    return 0;
+}</code></pre>
+    </div>
+    
+    <div class="code-block" id="code-java">
+      <button class="copy-btn" data-lang="java" onclick="copyCode('java')">نسخ</button>
+      <pre><code class="language-java">class Node {
+    int data;
+    Node next;
+    Node(int data) { this.data = data; this.next = null; }
+}
+
+class LinkedList {
+    Node head;
+
+    public void insertAtHead(int val) {
+        Node newNode = new Node(val);
+        newNode.next = head;
+        head = newNode;
+    }
+
+    public void insertAtTail(int val) {
+        Node newNode = new Node(val);
+        if (head == null) { head = newNode; return; }
+        Node temp = head;
+        while (temp.next != null) temp = temp.next;
+        temp.next = newNode;
+    }
+
+    public void deleteValue(int val) {
+        if (head == null) return;
+        if (head.data == val) { head = head.next; return; }
+        Node curr = head;
+        while (curr.next != null && curr.next.data != val)
+            curr = curr.next;
+        if (curr.next != null) curr.next = curr.next.next;
+    }
+
+    public boolean search(int val) {
+        Node temp = head;
+        while (temp != null) {
+            if (temp.data == val) return true;
+            temp = temp.next;
+        }
+        return false;
+    }
+
+    public void display() {
+        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.data + " -> ");
+            temp = temp.next;
+        }
+        System.out.println("NULL");
+    }
+}
+
+public class LinkedListDemo {
+    public static void main(String[] args) {
+        LinkedList list = new LinkedList();
+
+        list.insertAtHead(30);
+        list.insertAtHead(20);
+        list.insertAtHead(10);
+        list.insertAtTail(40);
+
+        System.out.print("Linked List: ");
+        list.display();
+
+        System.out.println("Search 20: " + (list.search(20) ? "Found" : "Not Found"));
+        System.out.println("Search 99: " + (list.search(99) ? "Found" : "Not Found"));
+
+        list.deleteValue(20);
+        System.out.print("After deleting 20: ");
+        list.display();
+    }
+}</code></pre>
+    </div>
+    
+    <div class="code-block" id="code-js">
+      <button class="copy-btn" data-lang="js" onclick="copyCode('js')">نسخ</button>
+      <pre><code class="language-javascript">class Node {
+    constructor(data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+class LinkedList {
+    constructor() { this.head = null; }
+
+    insertAtHead(val) {
+        const newNode = new Node(val);
+        newNode.next = this.head;
+        this.head = newNode;
+    }
+
+    insertAtTail(val) {
+        const newNode = new Node(val);
+        if (!this.head) { this.head = newNode; return; }
+        let temp = this.head;
+        while (temp.next) temp = temp.next;
+        temp.next = newNode;
+    }
+
+    deleteValue(val) {
+        if (!this.head) return;
+        if (this.head.data === val) { this.head = this.head.next; return; }
+        let curr = this.head;
+        while (curr.next && curr.next.data !== val) curr = curr.next;
+        if (curr.next) curr.next = curr.next.next;
+    }
+
+    search(val) {
+        let temp = this.head;
+        while (temp) {
+            if (temp.data === val) return true;
+            temp = temp.next;
+        }
+        return false;
+    }
+
+    display() {
+        let temp = this.head;
+        let result = "";
+        while (temp) {
+            result += temp.data + " -> ";
+            temp = temp.next;
+        }
+        console.log(result + "NULL");
+    }
+}
+
+const list = new LinkedList();
+list.insertAtHead(30);
+list.insertAtHead(20);
+list.insertAtHead(10);
+list.insertAtTail(40);
+
+console.log("Linked List:");
+list.display();
+
+console.log("Search 20:", list.search(20) ? "Found" : "Not Found");
+console.log("Search 99:", list.search(99) ? "Found" : "Not Found");
+
+list.deleteValue(20);
+console.log("After deleting 20:");
+list.display();</code></pre>
+    </div>
+    
+    <div class="code-block" id="code-php">
+      <button class="copy-btn" data-lang="php" onclick="copyCode('php')">نسخ</button>
+      <pre><code class="language-php">&lt;?php
+
+class Node {
+    public $data;
+    public $next;
+    public function __construct($data) {
+        $this-&gt;data = $data;
+        $this-&gt;next = null;
+    }
+}
+
+class LinkedList {
+    private $head;
+
+    public function __construct() { $this-&gt;head = null; }
+
+    public function insertAtHead($val) {
+        $newNode = new Node($val);
+        $newNode-&gt;next = $this-&gt;head;
+        $this-&gt;head = $newNode;
+    }
+
+    public function insertAtTail($val) {
+        $newNode = new Node($val);
+        if ($this-&gt;head === null) {
+            $this-&gt;head = $newNode;
+            return;
+        }
+        $temp = $this-&gt;head;
+        while ($temp-&gt;next !== null) $temp = $temp-&gt;next;
+        $temp-&gt;next = $newNode;
+    }
+
+    public function deleteValue($val) {
+        if ($this-&gt;head === null) return;
+        if ($this-&gt;head-&gt;data == $val) {
+            $this-&gt;head = $this-&gt;head-&gt;next;
+            return;
+        }
+        $curr = $this-&gt;head;
+        while ($curr-&gt;next !== null && $curr-&gt;next-&gt;data != $val)
+            $curr = $curr-&gt;next;
+        if ($curr-&gt;next !== null) $curr-&gt;next = $curr-&gt;next-&gt;next;
+    }
+
+    public function search($val) {
+        $temp = $this-&gt;head;
+        while ($temp !== null) {
+            if ($temp-&gt;data == $val) return true;
+            $temp = $temp-&gt;next;
+        }
+        return false;
+    }
+
+    public function display() {
+        $temp = $this-&gt;head;
+        while ($temp !== null) {
+            echo $temp-&gt;data . " -&gt; ";
+            $temp = $temp-&gt;next;
+        }
+        echo "NULL\n";
+    }
+}
+
+$list = new LinkedList();
+$list-&gt;insertAtHead(30);
+$list-&gt;insertAtHead(20);
+$list-&gt;insertAtHead(10);
+$list-&gt;insertAtTail(40);
+
+echo "Linked List: ";
+$list-&gt;display();
+
+echo "Search 20: " . ($list-&gt;search(20) ? "Found" : "Not Found") . "\n";
+echo "Search 99: " . ($list-&gt;search(99) ? "Found" : "Not Found") . "\n";
+
+$list-&gt;deleteValue(20);
+echo "After deleting 20: ";
+$list-&gt;display();
+
+?&gt;</code></pre>
+    </div>
+  </div>
+
+  <footer class="bg-gray-900 text-white py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p class="text-gray-400 text-sm">القائمة المترابطة — أمثلة برمجية تفاعلية</p>
+    </div>
+  </footer>
+  
+  <script src="../../assets/js/code-tabs.js"></script>
+  <script src="../../assets/js/theme-toggle.js"></script>
+</body>
+</html>

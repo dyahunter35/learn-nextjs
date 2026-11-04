@@ -1,0 +1,307 @@
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap");
+body {
+  font-family: "Cairo", sans-serif;
+  background-color: #f3f4f6;
+}
+
+.sp-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+  border-radius: 1rem;
+  border: 2px dashed #e2e8f0;
+  padding: 1rem;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.sp-svg {
+  width: 100%;
+  height: auto;
+  max-width: 560px;
+}
+
+.sp-edge {
+  stroke: #d1d5db;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  transition: stroke 0.3s ease, stroke-width 0.3s ease;
+}
+
+.sp-edge-relaxed {
+  stroke: #fbbf24;
+  stroke-width: 3;
+  stroke-dasharray: 6, 3;
+  animation: spDashMove 0.5s linear infinite;
+}
+
+.sp-edge-path {
+  stroke: #34d399;
+  stroke-width: 3;
+}
+
+.sp-edge-label-bg {
+  fill: white;
+  stroke: #d1d5db;
+  stroke-width: 1;
+}
+
+.sp-edge-label {
+  fill: #374151;
+  font-size: 12px;
+  font-weight: 700;
+  text-anchor: middle;
+  dominant-baseline: central;
+  pointer-events: none;
+  user-select: none;
+}
+
+.sp-node circle {
+  transition: fill 0.4s ease, stroke 0.4s ease, r 0.3s ease;
+}
+
+.sp-node text {
+  pointer-events: none;
+  user-select: none;
+}
+
+.sp-node-unvisited circle {
+  fill: #e5e7eb;
+  stroke: #9ca3af;
+  stroke-width: 2.5;
+}
+
+.sp-node-frontier circle {
+  fill: #fbbf24;
+  stroke: #d97706;
+  stroke-width: 2.5;
+  animation: spFrontierPulse 0.8s ease-in-out infinite;
+}
+
+.sp-node-visited circle {
+  fill: #6366f1;
+  stroke: #4f46e5;
+  stroke-width: 2.5;
+}
+
+.sp-node-current circle {
+  fill: #34d399;
+  stroke: #059669;
+  stroke-width: 3;
+  filter: url(#glowCurrent);
+  animation: spCurrentGlow 1s ease-in-out infinite;
+}
+
+.sp-node-label {
+  fill: #1f2937;
+  font-weight: 800;
+  text-anchor: middle;
+  dominant-baseline: central;
+  pointer-events: none;
+  user-select: none;
+}
+
+.sp-node-label-light {
+  fill: #ffffff;
+  font-weight: 800;
+  text-anchor: middle;
+  dominant-baseline: central;
+  pointer-events: none;
+  user-select: none;
+}
+
+.sp-dist-label {
+  fill: #4b5563;
+  font-size: 11px;
+  font-weight: 700;
+  text-anchor: middle;
+  pointer-events: none;
+  user-select: none;
+}
+
+.sp-dist-label-inf {
+  fill: #d1d5db;
+  font-size: 16px;
+  font-weight: 700;
+  text-anchor: middle;
+  pointer-events: none;
+  user-select: none;
+}
+
+@keyframes spCurrentGlow {
+  0%, 100% { r: 21; }
+  50% { r: 25; }
+}
+
+@keyframes spFrontierPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+@keyframes spDashMove {
+  to { stroke-dashoffset: -9; }
+}
+
+.info-panel {
+  background: white;
+  border-radius: 0.75rem;
+  border: 1px solid #e5e7eb;
+  padding: 1rem;
+}
+
+.distance-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.distance-table th,
+.distance-table td {
+  border: 1px solid #e2e8f0;
+  padding: 8px 10px;
+  text-align: center;
+}
+
+.distance-table th {
+  background: linear-gradient(135deg, #4f46e5, #4338ca);
+  color: white;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+.distance-table tr:nth-child(even) {
+  background-color: #f8fafc;
+}
+
+.distance-table tr.current-source td {
+  background-color: #eef2ff !important;
+  font-weight: 700;
+}
+
+.steps-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.75rem;
+}
+
+.steps-table th,
+.steps-table td {
+  border: 1px solid #e2e8f0;
+  padding: 5px 7px;
+  text-align: center;
+}
+
+.steps-table th {
+  background: linear-gradient(135deg, #4f46e5, #4338ca);
+  color: white;
+  font-weight: 700;
+  position: sticky;
+  top: 0;
+  font-size: 0.7rem;
+}
+
+.steps-table tr:nth-child(even) {
+  background-color: #f8fafc;
+}
+
+.steps-table tr.current-step {
+  background-color: #fef3c7 !important;
+}
+
+.steps-log-container {
+  max-height: 250px;
+  overflow-y: auto;
+  border: none;
+  background: transparent;
+}
+
+.status-message {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1rem;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  animation: statusIn 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.status-message.info {
+  background: #eef2ff;
+  color: #4338ca;
+  border-right: 4px solid #6366f1;
+}
+
+.status-message.success {
+  background: #d1fae5;
+  color: #065f46;
+  border-right: 4px solid #10b981;
+}
+
+.status-message.error {
+  background: #fee2e2;
+  color: #991b1b;
+  border-right: 4px solid #ef4444;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #4b5563;
+}
+
+.legend-dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.final-path-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem;
+  background: #f8fafc;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.final-path-item:hover {
+  background: #eef2ff;
+  border-color: #6366f1;
+  transform: translateX(-2px);
+}
+
+.final-path-item.active {
+  background: #d1fae5;
+  border-color: #34d399;
+}
+
+@keyframes statusIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 640px) {
+  .sp-container {
+    padding: 0.5rem;
+  }
+  .sp-svg {
+    max-width: 100%;
+  }
+  .distance-table, .steps-table {
+    font-size: 0.65rem;
+  }
+  .distance-table th, .distance-table td,
+  .steps-table th, .steps-table td {
+    padding: 3px 5px;
+  }
+}

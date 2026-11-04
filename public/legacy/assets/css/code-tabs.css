@@ -1,0 +1,135 @@
+.code-page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+.code-page h1 {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+}
+.code-page .subtitle {
+  color: #64748b;
+  margin-bottom: 1.5rem;
+  line-height: 1.7;
+}
+.lang-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid #e2e8f0;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+.lang-tab {
+  padding: 0.75rem 1.5rem;
+  font-weight: 700;
+  font-size: 0.875rem;
+  border: none;
+  background: transparent;
+  color: #94a3b8;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  border-radius: 0;
+}
+.lang-tab:hover {
+  color: #6366f1;
+  background: #f1f5f9;
+}
+.lang-tab.active {
+  color: #6366f1;
+}
+.lang-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #6366f1;
+}
+.code-block {
+  display: none;
+  position: relative;
+  direction: ltr;
+  text-align: left;
+}
+.code-block.active {
+  display: block;
+}
+.code-block pre {
+  background: #1e293b;
+  color: #e2e8f0;
+  padding: 1.5rem;
+  border-radius: 12px;
+  overflow-x: auto;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  font-size: 0.85rem;
+  line-height: 1.65;
+  border: 1px solid #334155;
+  margin: 0;
+}
+.copy-btn {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: #334155;
+  color: #94a3b8;
+  border: 1px solid #475569;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.copy-btn:hover {
+  background: #475569;
+  color: #e2e8f0;
+}
+.copy-btn.copied {
+  background: #059669;
+  color: white;
+  border-color: #059669;
+}
+.code-algo-info {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.code-algo-info span {
+  font-size: 0.85rem;
+  color: #475569;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.code-algo-info .badge {
+  display: inline-block;
+  background: #e0e7ff;
+  color: #4338ca;
+  font-weight: 700;
+  font-size: 0.7rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+}
+.algorithm-code-description {
+  background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+  border: 1px solid #bbf7d0;
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  color: #166534;
+  line-height: 1.7;
+}
+.algorithm-code-description strong {
+  color: #15803d;
+}

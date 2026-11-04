@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>الآلة الحاسبة - الكود البرمجي</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../../assets/css/code-tabs.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/atom-one-dark.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <link rel="stylesheet" href="../../assets/css/design-system.css" />
+  <link rel="stylesheet" href="../../assets/css/dark-content.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50 min-h-screen">
+  
+    <nav class="site-nav">
+      <div class="site-nav-inner">
+        <div class="nav-main">
+          <a href="../../index.html" class="nav-logo">
+            <svg class="nav-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.663 17h4.673M12 3v1m6.364 1.636-.707.707M21 12h-1M4 12H3m3.343-5.657-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            <span>مقرر الحاسوب</span>
+          </a>
+          <div class="nav-links">
+                  <a href="../../index.html">الرئيسية</a>
+      <a href="index.html">الشرح</a>
+      <a href="simulation.html">المحاكاة</a>
+          </div>
+          <div class="nav-actions">
+            <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme"></button>
+            <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="nav-mobile" id="navMobile">
+                <a href="../../index.html">الرئيسية</a>
+      <a href="index.html">الشرح</a>
+      <a href="simulation.html">المحاكاة</a>
+        </div>
+        <div class="nav-breadcrumb">
+          <a href="../../index.html">الرئيسية</a><span class="sep">›</span><a href="index.html">الآلة الحاسبة</a><span class="sep">›</span><span class="current">الكود البرمجي</span>
+        </div>
+      </div>
+    </nav>
+    <script>function toggleMenu(){var m=document.getElementById("navMobile");if(m)m.classList.toggle("open")}</script>
+
+  <div class="code-page">
+    <h1>الآلة الحاسبة العلمية — الكود البرمجي</h1>
+    <p class="subtitle">شرح مبسط مع أمثلة بلغات متعددة. يمكنك نسخ الكود واستخدامه.</p>
+    
+    <div class="algorithm-code-description">
+      <strong>كيف تعمل:</strong> توفر هذه الدوال عمليات حسابية أساسية وعلمية: <strong>add</strong>, <strong>subtract</strong>, <strong>multiply</strong>, <strong>divide</strong>, <strong>power</strong>, <strong>sqrt</strong>, <strong>factorial</strong>. ودالة <strong>evaluate(expression)</strong> تقوم بتحليل وتقييم تعبير رياضي بسيط (مثل "3 + 5 * 2").
+    </div>
+
+    <div class="lang-tabs">
+      <button class="lang-tab active" data-lang="cpp" onclick="switchLang('cpp')">C++</button>
+      <button class="lang-tab" data-lang="java" onclick="switchLang('java')">Java</button>
+      <button class="lang-tab" data-lang="js" onclick="switchLang('js')">JavaScript</button>
+      <button class="lang-tab" data-lang="php" onclick="switchLang('php')">PHP</button>
+    </div>
+    
+    <div class="code-block active" id="code-cpp">
+      <button class="copy-btn" data-lang="cpp" onclick="copyCode('cpp')">نسخ</button>
+      <pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;cmath&gt;
+#include &lt;sstream&gt;
+#include &lt;stack&gt;
+#include &lt;cctype&gt;
+using namespace std;
+
+double add(double a, double b) { return a + b; }
+double subtract(double a, double b) { return a - b; }
+double multiply(double a, double b) { return a * b; }
+double divide(double a, double b) { return b != 0 ? a / b : 0; }
+double power(double a, double b) { return pow(a, b); }
+double sqrt(double a) { return a >= 0 ? std::sqrt(a) : 0; }
+
+long long factorial(int n) {
+    if (n &lt;= 1) return 1;
+    return n * factorial(n - 1);
+}
+
+int precedence(char op) {
+    if (op == '+' || op == '-') return 1;
+    if (op == '*' || op == '/') return 2;
+    return 0;
+}
+
+double applyOp(double a, double b, char op) {
+    switch (op) {
+        case '+': return add(a, b);
+        case '-': return subtract(a, b);
+        case '*': return multiply(a, b);
+        case '/': return divide(a, b);
+        default: return 0;
+    }
+}
+
+double evaluate(string expr) {
+    stack&lt;double&gt; values;
+    stack&lt;char&gt; ops;
+    for (int i = 0; i &lt; expr.length(); i++) {
+        if (isspace(expr[i])) continue;
+        if (isdigit(expr[i])) {
+            double val = 0;
+            while (i &lt; expr.length() &amp;&amp; isdigit(expr[i])) {
+                val = val * 10 + (expr[i] - '0');
+                i++;
+            }
+            values.push(val);
+            i--;
+        } else if (expr[i] == '(') {
+            ops.push(expr[i]);
+        } else if (expr[i] == ')') {
+            while (!ops.empty() &amp;&amp; ops.top() != '(') {
+                double b = values.top(); values.pop();
+                double a = values.top(); values.pop();
+                values.push(applyOp(a, b, ops.top()));
+                ops.pop();
+            }
+            ops.pop();
+        } else {
+            while (!ops.empty() &amp;&amp; precedence(ops.top()) >= precedence(expr[i])) {
+                double b = values.top(); values.pop();
+                double a = values.top(); values.pop();
+                values.push(applyOp(a, b, ops.top()));
+                ops.pop();
+            }
+            ops.push(expr[i]);
+        }
+    }
+    while (!ops.empty()) {
+        double b = values.top(); values.pop();
+        double a = values.top(); values.pop();
+        values.push(applyOp(a, b, ops.top()));
+        ops.pop();
+    }
+    return values.top();
+}
+
+int main() {
+    cout &lt;&lt; "add(3, 4) = " &lt;&lt; add(3, 4) &lt;&lt; endl;
+    cout &lt;&lt; "multiply(5, 6) = " &lt;&lt; multiply(5, 6) &lt;&lt; endl;
+    cout &lt;&lt; "power(2, 10) = " &lt;&lt; power(2, 10) &lt;&lt; endl;
+    cout &lt;&lt; "sqrt(144) = " &lt;&lt; sqrt(144) &lt;&lt; endl;
+    cout &lt;&lt; "factorial(5) = " &lt;&lt; factorial(5) &lt;&lt; endl;
+    cout &lt;&lt; "evaluate(\"3 + 5 * 2\") = " &lt;&lt; evaluate("3 + 5 * 2") &lt;&lt; endl;
+    cout &lt;&lt; "evaluate(\"(3 + 5) * 2\") = " &lt;&lt; evaluate("(3 + 5) * 2") &lt;&lt; endl;
+    return 0;
+}</code></pre>
+    </div>
+    <div class="code-block" id="code-java">
+      <button class="copy-btn" data-lang="java" onclick="copyCode('java')">نسخ</button>
+      <pre><code class="language-java">import java.util.Stack;
+
+public class Calculator {
+
+    public static double add(double a, double b) { return a + b; }
+    public static double subtract(double a, double b) { return a - b; }
+    public static double multiply(double a, double b) { return a * b; }
+    public static double divide(double a, double b) { return b != 0 ? a / b : 0; }
+    public static double power(double a, double b) { return Math.pow(a, b); }
+    public static double sqrt(double a) { return a >= 0 ? Math.sqrt(a) : 0; }
+
+    public static long factorial(int n) {
+        if (n &lt;= 1) return 1;
+        return n * factorial(n - 1);
+    }
+
+    private static int precedence(char op) {
+        switch (op) {
+            case '+': case '-': return 1;
+            case '*': case '/': return 2;
+            default: return 0;
+        }
+    }
+
+    private static double applyOp(double a, double b, char op) {
+        switch (op) {
+            case '+': return add(a, b);
+            case '-': return subtract(a, b);
+            case '*': return multiply(a, b);
+            case '/': return divide(a, b);
+            default: return 0;
+        }
+    }
+
+    public static double evaluate(String expr) {
+        Stack&lt;Double&gt; values = new Stack&lt;&gt;();
+        Stack&lt;Character&gt; ops = new Stack&lt;&gt;();
+        for (int i = 0; i &lt; expr.length(); i++) {
+            char c = expr.charAt(i);
+            if (Character.isWhitespace(c)) continue;
+            if (Character.isDigit(c)) {
+                double val = 0;
+                while (i &lt; expr.length() &amp;&amp; Character.isDigit(expr.charAt(i))) {
+                    val = val * 10 + (expr.charAt(i) - '0');
+                    i++;
+                }
+                values.push(val);
+                i--;
+            } else if (c == '(') {
+                ops.push(c);
+            } else if (c == ')') {
+                while (ops.peek() != '(') {
+                    double b = values.pop();
+                    double a = values.pop();
+                    values.push(applyOp(a, b, ops.pop()));
+                }
+                ops.pop();
+            } else {
+                while (!ops.isEmpty() &amp;&amp; precedence(ops.peek()) >= precedence(c)) {
+                    double b = values.pop();
+                    double a = values.pop();
+                    values.push(applyOp(a, b, ops.pop()));
+                }
+                ops.push(c);
+            }
+        }
+        while (!ops.isEmpty()) {
+            double b = values.pop();
+            double a = values.pop();
+            values.push(applyOp(a, b, ops.pop()));
+        }
+        return values.pop();
+    }
+
+    public static void main(String[] args) {
+        System.out.println("add(3, 4) = " + add(3, 4));
+        System.out.println("multiply(5, 6) = " + multiply(5, 6));
+        System.out.println("power(2, 10) = " + power(2, 10));
+        System.out.println("sqrt(144) = " + sqrt(144));
+        System.out.println("factorial(5) = " + factorial(5));
+        System.out.println("evaluate(\"3 + 5 * 2\") = " + evaluate("3 + 5 * 2"));
+        System.out.println("evaluate(\"(3 + 5) * 2\") = " + evaluate("(3 + 5) * 2"));
+    }
+}</code></pre>
+    </div>
+    <div class="code-block" id="code-js">
+      <button class="copy-btn" data-lang="js" onclick="copyCode('js')">نسخ</button>
+      <pre><code class="language-javascript">function add(a, b) { return a + b; }
+function subtract(a, b) { return a - b; }
+function multiply(a, b) { return a * b; }
+function divide(a, b) { return b !== 0 ? a / b : 0; }
+function power(a, b) { return Math.pow(a, b); }
+function sqrt(a) { return a >= 0 ? Math.sqrt(a) : 0; }
+
+function factorial(n) {
+    if (n &lt;= 1) return 1;
+    return n * factorial(n - 1);
+}
+
+function precedence(op) {
+    if (op === '+' || op === '-') return 1;
+    if (op === '*' || op === '/') return 2;
+    return 0;
+}
+
+function applyOp(a, b, op) {
+    switch (op) {
+        case '+': return add(a, b);
+        case '-': return subtract(a, b);
+        case '*': return multiply(a, b);
+        case '/': return divide(a, b);
+        default: return 0;
+    }
+}
+
+function evaluate(expr) {
+    const values = [];
+    const ops = [];
+    for (let i = 0; i &lt; expr.length; i++) {
+        const c = expr[i];
+        if (c === ' ') continue;
+        if (c >= '0' &amp;&amp; c &lt;= '9') {
+            let val = 0;
+            while (i &lt; expr.length &amp;&amp; expr[i] >= '0' &amp;&amp; expr[i] &lt;= '9') {
+                val = val * 10 + parseInt(expr[i]);
+                i++;
+            }
+            values.push(val);
+            i--;
+        } else if (c === '(') {
+            ops.push(c);
+        } else if (c === ')') {
+            while (ops.length &gt; 0 &amp;&amp; ops[ops.length - 1] !== '(') {
+                const b = values.pop();
+                const a = values.pop();
+                values.push(applyOp(a, b, ops.pop()));
+            }
+            ops.pop();
+        } else {
+            while (ops.length &gt; 0 &amp;&amp; precedence(ops[ops.length - 1]) >= precedence(c)) {
+                const b = values.pop();
+                const a = values.pop();
+                values.push(applyOp(a, b, ops.pop()));
+            }
+            ops.push(c);
+        }
+    }
+    while (ops.length &gt; 0) {
+        const b = values.pop();
+        const a = values.pop();
+        values.push(applyOp(a, b, ops.pop()));
+    }
+    return values[0];
+}
+
+console.log("add(3, 4) = " + add(3, 4));
+console.log("multiply(5, 6) = " + multiply(5, 6));
+console.log("power(2, 10) = " + power(2, 10));
+console.log("sqrt(144) = " + sqrt(144));
+console.log("factorial(5) = " + factorial(5));
+console.log('evaluate("3 + 5 * 2") = ' + evaluate("3 + 5 * 2"));
+console.log('evaluate("(3 + 5) * 2") = ' + evaluate("(3 + 5) * 2"));</code></pre>
+    </div>
+    <div class="code-block" id="code-php">
+      <button class="copy-btn" data-lang="php" onclick="copyCode('php')">نسخ</button>
+      <pre><code class="language-php">&lt;?php
+
+function add($a, $b) { return $a + $b; }
+function subtract($a, $b) { return $a - $b; }
+function multiply($a, $b) { return $a * $b; }
+function divide($a, $b) { return $b != 0 ? $a / $b : 0; }
+function power($a, $b) { return pow($a, $b); }
+function sqrt_($a) { return $a >= 0 ? sqrt($a) : 0; }
+
+function factorial($n) {
+    if ($n &lt;= 1) return 1;
+    return $n * factorial($n - 1);
+}
+
+function precedence($op) {
+    if ($op == '+' || $op == '-') return 1;
+    if ($op == '*' || $op == '/') return 2;
+    return 0;
+}
+
+function applyOp($a, $b, $op) {
+    switch ($op) {
+        case '+': return add($a, $b);
+        case '-': return subtract($a, $b);
+        case '*': return multiply($a, $b);
+        case '/': return divide($a, $b);
+        default: return 0;
+    }
+}
+
+function evaluate($expr) {
+    $values = [];
+    $ops = [];
+    $len = strlen($expr);
+    for ($i = 0; $i &lt; $len; $i++) {
+        $c = $expr[$i];
+        if ($c == ' ') continue;
+        if (ctype_digit($c)) {
+            $val = 0;
+            while ($i &lt; $len &amp;&amp; ctype_digit($expr[$i])) {
+                $val = $val * 10 + intval($expr[$i]);
+                $i++;
+            }
+            $values[] = $val;
+            $i--;
+        } elseif ($c == '(') {
+            $ops[] = $c;
+        } elseif ($c == ')') {
+            while (end($ops) != '(') {
+                $b = array_pop($values);
+                $a = array_pop($values);
+                $values[] = applyOp($a, $b, array_pop($ops));
+            }
+            array_pop($ops);
+        } else {
+            while (!empty($ops) &amp;&amp; precedence(end($ops)) >= precedence($c)) {
+                $b = array_pop($values);
+                $a = array_pop($values);
+                $values[] = applyOp($a, $b, array_pop($ops));
+            }
+            $ops[] = $c;
+        }
+    }
+    while (!empty($ops)) {
+        $b = array_pop($values);
+        $a = array_pop($values);
+        $values[] = applyOp($a, $b, array_pop($ops));
+    }
+    return $values[0];
+}
+
+echo "add(3, 4) = " . add(3, 4) . "\n";
+echo "multiply(5, 6) = " . multiply(5, 6) . "\n";
+echo "power(2, 10) = " . power(2, 10) . "\n";
+echo "sqrt(144) = " . sqrt_(144) . "\n";
+echo "factorial(5) = " . factorial(5) . "\n";
+echo 'evaluate("3 + 5 * 2") = ' . evaluate("3 + 5 * 2") . "\n";
+echo 'evaluate("(3 + 5) * 2") = ' . evaluate("(3 + 5) * 2") . "\n";
+
+?&gt;</code></pre>
+    </div>
+  </div>
+
+  <footer class="bg-gray-900 text-white py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p class="text-gray-400 text-sm">الآلة الحاسبة العلمية — أمثلة برمجية تفاعلية</p>
+    </div>
+  </footer>
+  
+  <script src="../../assets/js/code-tabs.js"></script>
+  <script src="../../assets/js/theme-toggle.js"></script>
+</body>
+</html>

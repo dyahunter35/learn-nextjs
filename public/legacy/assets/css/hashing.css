@@ -1,0 +1,499 @@
+/* ========== RTL Base ========== */
+body {
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  direction: rtl;
+}
+
+/* ========== Hash Table ========== */
+.hash-table {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px;
+  background: #f8fafc;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+}
+
+.hash-bucket {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 56px;
+  padding: 4px 0;
+}
+
+.hash-bucket-index {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e0e7ff;
+  color: #3730a3;
+  font-weight: 700;
+  font-size: 0.8rem;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.hash-bucket-label {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-left: 4px;
+  margin-right: 4px;
+  flex-shrink: 0;
+}
+
+.hash-bucket-chain {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+  min-height: 48px;
+  flex: 1;
+  padding: 4px 8px;
+  border-radius: 10px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  min-width: 0;
+  position: relative;
+  transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+.hash-bucket-chain.bucket-highlight {
+  background: #fef3c7;
+  border-color: #f59e0b;
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
+}
+
+.hash-bucket-chain.bucket-found {
+  background: #d1fae5;
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
+}
+
+/* ========== Nodes ========== */
+.hash-node {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  padding: 0 12px;
+  font-weight: 700;
+  font-size: 1rem;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.hash-node-empty {
+  border: 2px dashed #d1d5db;
+  background: #f9fafb;
+  color: #d1d5db;
+  width: 44px;
+  padding: 0;
+}
+
+.hash-node-occupied {
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  color: white;
+  border-color: #4f46e5;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+  animation: nodeIn 0.4s ease-out;
+}
+
+.hash-node-active {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: #1e293b;
+  border-color: #f59e0b;
+  box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.35);
+  animation: pulse 0.8s ease-in-out infinite;
+}
+
+.hash-node-found {
+  background: linear-gradient(135deg, #34d399, #10b981);
+  color: white;
+  border-color: #10b981;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+  animation: foundPop 0.5s ease-out;
+}
+
+.hash-node-deleting {
+  background: linear-gradient(135deg, #f87171, #ef4444);
+  color: white;
+  border-color: #ef4444;
+  animation: nodeOut 0.4s ease-in forwards;
+}
+
+/* ========== Arrows ========== */
+.hash-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #9ca3af;
+  width: 24px;
+  height: 24px;
+}
+
+.hash-arrow svg {
+  transform: rotate(180deg);
+}
+
+/* ========== Formula Display ========== */
+.hash-formula {
+  background: #1e1b4b;
+  color: #e0e7ff;
+  font-family: 'Courier New', monospace;
+  font-size: 1.1rem;
+  padding: 12px 20px;
+  border-radius: 10px;
+  text-align: center;
+  direction: ltr;
+  display: inline-block;
+  min-width: 200px;
+  letter-spacing: 0.5px;
+}
+
+/* ========== Step Log ========== */
+.step-log {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.875rem;
+}
+
+.step-log th {
+  background: #312e81;
+  color: white;
+  padding: 10px 14px;
+  text-align: center;
+  font-weight: 600;
+  border-bottom: 2px solid #1e1b4b;
+}
+
+.step-log th:first-child {
+  border-radius: 0 8px 0 0;
+}
+
+.step-log th:last-child {
+  border-radius: 8px 0 0 0;
+}
+
+.step-log td {
+  padding: 8px 14px;
+  text-align: center;
+  border-bottom: 1px solid #e5e7eb;
+  transition: background 0.2s;
+}
+
+.step-log tr:last-child td {
+  border-bottom: none;
+}
+
+.step-log tr:hover td {
+  background: #eef2ff;
+}
+
+.step-log .step-insert {
+  border-right: 4px solid #6366f1;
+}
+
+.step-log .step-search {
+  border-right: 4px solid #f59e0b;
+}
+
+.step-log .step-delete {
+  border-right: 4px solid #ef4444;
+}
+
+/* ========== Buttons ========== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  color: white;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-warning {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: #1e293b;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+}
+
+.btn-warning:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.4);
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #f87171, #ef4444);
+  color: white;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+}
+
+.btn-danger:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(239, 68, 68, 0.4);
+}
+
+.btn-outline {
+  background: transparent;
+  color: #4b5563;
+  border: 2px solid #d1d5db;
+}
+
+.btn-outline:hover:not(:disabled) {
+  border-color: #9ca3af;
+  background: #f9fafb;
+}
+
+.btn-sm {
+  padding: 6px 14px;
+  font-size: 0.8rem;
+}
+
+/* ========== Status Badge ========== */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.status-badge-success {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.status-badge-error {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.status-badge-info {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.status-badge-waiting {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+/* ========== Key Display ========== */
+.key-display {
+  background: #1e1b4b;
+  color: #e0e7ff;
+  font-size: 1.5rem;
+  font-weight: 900;
+  font-family: 'Courier New', monospace;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  direction: ltr;
+}
+
+/* ========== Animation Keyframes ========== */
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+@keyframes foundPop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+@keyframes nodeIn {
+  from { opacity: 0; transform: translateY(-10px) scale(0.8); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes nodeOut {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(0.5); }
+}
+
+@keyframes flyToTable {
+  0% { opacity: 1; transform: translate(0, 0) scale(1); }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; transform: translate(var(--fly-x), var(--fly-y)) scale(0.6); }
+}
+
+/* ========== Hash Bucket States ========== */
+.hash-bucket-chain.bucket-deleting {
+  background: #fee2e2;
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+}
+
+/* ========== Hash Function Selector ========== */
+.hash-selector {
+  background: #f3f4f6;
+  border: 2px solid #d1d5db;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-weight: 600;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.hash-selector:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+/* ========== Input ========== */
+.input-number {
+  border: 2px solid #d1d5db;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-align: center;
+  width: 120px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  direction: ltr;
+}
+
+.input-number:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 768px) {
+  .hash-table {
+    gap: 6px;
+    padding: 12px;
+  }
+
+  .hash-bucket {
+    gap: 4px;
+  }
+
+  .hash-bucket-index {
+    width: 28px;
+    height: 28px;
+    font-size: 0.7rem;
+  }
+
+  .hash-node {
+    min-width: 36px;
+    height: 36px;
+    font-size: 0.85rem;
+    padding: 0 8px;
+    border-radius: 8px;
+  }
+
+  .hash-node-empty {
+    width: 36px;
+  }
+
+  .hash-bucket-chain {
+    min-height: 40px;
+    padding: 2px 6px;
+    gap: 2px;
+  }
+
+  .hash-formula {
+    font-size: 0.9rem;
+    padding: 10px 14px;
+  }
+
+  .step-log {
+    font-size: 0.75rem;
+  }
+
+  .step-log th,
+  .step-log td {
+    padding: 6px 8px;
+  }
+
+  .key-display {
+    width: 48px;
+    height: 48px;
+    font-size: 1.2rem;
+  }
+
+  .hash-selector {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+  }
+
+  .btn {
+    font-size: 0.8rem;
+    padding: 8px 14px;
+  }
+
+  .hash-arrow {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hash-bucket-label {
+    display: none;
+  }
+
+  .hash-bucket-index {
+    width: 24px;
+    height: 24px;
+    font-size: 0.65rem;
+  }
+
+  .hash-node {
+    min-width: 30px;
+    height: 30px;
+    font-size: 0.75rem;
+    padding: 0 6px;
+  }
+
+  .hash-node-empty {
+    width: 30px;
+  }
+}

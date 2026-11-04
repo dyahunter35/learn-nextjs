@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شرح خوارزميات البحث - Sequential & Binary Search</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../assets/css/searching.css" />
+  <link rel="stylesheet" href="../../assets/css/design-system.css" />
+  <link rel="stylesheet" href="../../assets/css/dark-content.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+
+    
+    <nav class="site-nav">
+      <div class="site-nav-inner">
+        <div class="nav-main">
+          <a href="../../index.html" class="nav-logo">
+            <svg class="nav-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.663 17h4.673M12 3v1m6.364 1.636-.707.707M21 12h-1M4 12H3m3.343-5.657-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            <span>مقرر الحاسوب</span>
+          </a>
+          <div class="nav-links">
+                  <a href="../../index.html">الرئيسية</a>
+      <a href="simulation.html">المحاكاة</a>
+      <a href="code.html">الكود البرمجي</a>
+          </div>
+          <div class="nav-actions">
+            <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme"></button>
+            <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="nav-mobile" id="navMobile">
+                <a href="../../index.html">الرئيسية</a>
+      <a href="simulation.html">المحاكاة</a>
+        </div>
+        <div class="nav-breadcrumb">
+          <a href="../../index.html">الرئيسية</a><span class="sep">›</span><span class="current">خوارزميات البحث (Searching)</span>
+        </div>
+      </div>
+    </nav>
+    <script>function toggleMenu(){var m=document.getElementById("navMobile");if(m)m.classList.toggle("open")}</script>
+
+    
+
+    <div class="max-w-4xl mx-auto bg-white shadow-2xl rounded-xl mt-8 mb-12 p-8 md:p-10">
+        <header class="text-center mb-10 border-b border-gray-100 pb-6">
+            <span class="inline-block text-blue-500 font-bold text-sm tracking-widest uppercase mb-2">SEARCHING</span>
+            <h1 class="text-4xl font-extrabold text-gray-900">
+                خوارزميات البحث <span class="text-blue-600">(Searching Algorithms)</span>
+            </h1>
+            <p class="mt-2 text-lg text-gray-500">
+                فهم آلية البحث في البيانات: الخطي والثنائي
+            </p>
+        </header>
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-indigo-800 mb-6 border-b-2 border-indigo-200 pb-2 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-3 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                مفهوم خوارزميات البحث
+            </h2>
+            <p class="text-gray-700 leading-loose mb-4">
+                خوارزميات البحث هي مجموعة من العمليات المنطقية التي تهدف إلى إيجاد عنصر معين (قيمة مستهدفة) داخل مجموعة من البيانات (مصفوفة). تُستخدم هذه الخوارزميات في كل تطبيقات الحاسوب تقريباً، بدءاً من محركات البحث على الإنترنت وصولاً إلى قواعد البيانات.
+            </p>
+            <div class="bg-indigo-50 p-5 rounded-lg shadow-md concept-card border-indigo-400">
+                <h3 class="text-xl font-semibold text-indigo-800 mb-3">لماذا نحتاج إلى خوارزميات بحث مختلفة؟</h3>
+                <p class="text-gray-700">
+                    تختلف خوارزميات البحث في سرعتها وكفاءتها حسب حجم البيانات وطريقة تنظيمها. بعضها يعمل على أي مصفوفة بغض النظر عن ترتيبها، بينما يحتاج البعض الآخر إلى مصفوفة مرتبة مسبقاً ولكنه أسرع بكثير في النتائج.
+                </p>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-indigo-800 mb-6 border-b-2 border-indigo-200 pb-2 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-3 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+                أولاً: البحث المتتالي (Sequential / Linear Search)
+            </h2>
+
+            <div class="bg-blue-50 p-5 rounded-lg shadow-md mb-6 concept-card border-blue-400">
+                <h3 class="text-xl font-semibold text-blue-800 mb-3">كيف يعمل؟</h3>
+                <p class="text-gray-700 leading-loose">
+                    البحث المتتالي هو أبسط أنواع البحث. يقوم بمقارنة القيمة المستهدفة مع كل عنصر من عناصر المصفوفة واحداً تلو الآخر، بدءاً من العنصر الأول وحتى النهاية. إذا تم العثور على تطابق، يعيد الخوارزمية موقع العنصر (الفهرس). إذا انتهت المصفوفة دون تطابق، فهذا يعني أن العنصر غير موجود.
+                </p>
+            </div>
+
+            <h3 class="text-2xl font-semibold text-blue-700 mb-4 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                خطوات الخوارزمية
+            </h3>
+
+            <div class="list-none p-0">
+                <div class="step-item">
+                    <h3 class="text-xl font-semibold text-blue-800">البدء من العنصر الأول</h3>
+                    <p class="text-gray-700 mr-10">
+                        ابدأ من الفهرس <span class="font-mono ltr-text bg-gray-200 p-1 rounded">0</span> (أول عنصر في المصفوفة).
+                    </p>
+                </div>
+                <div class="step-item">
+                    <h3 class="text-xl font-semibold text-blue-800">المقارنة</h3>
+                    <p class="text-gray-700 mr-10">
+                        قارن العنصر الحالي مع القيمة المستهدفة. إذا تطابقا، تم العثور على العنصر ونعيد الفهرس الحالي.
+                    </p>
+                </div>
+                <div class="step-item">
+                    <h3 class="text-xl font-semibold text-blue-800">الانتقال إلى العنصر التالي</h3>
+                    <p class="text-gray-700 mr-10">
+                        إذا لم يتطابق العنصر، انتقل إلى العنصر التالي في المصفوفة (زيادة الفهرس بمقدار 1).
+                    </p>
+                </div>
+                <div class="step-item">
+                    <h3 class="text-xl font-semibold text-blue-800">التكرار</h3>
+                    <p class="text-gray-700 mr-10">
+                        كرر الخطوتين 2 و 3 حتى تجد العنصر أو تصل إلى نهاية المصفوفة.
+                    </p>
+                </div>
+                <div class="step-item">
+                    <h3 class="text-xl font-semibold text-blue-800">عدم العثور على العنصر</h3>
+                    <p class="text-gray-700 mr-10">
+                        إذا وصلت إلى نهاية المصفوفة دون إيجاد تطابق، قم بإرجاع قيمة تدل على عدم وجود العنصر (عادة <span class="font-mono ltr-text bg-gray-200 p-1 rounded">-1</span>).
+                    </p>
+                </div>
+            </div>
+
+            <div class="bg-yellow-50 p-5 rounded-lg shadow-md mt-6 border-yellow-400">
+                <h3 class="text-xl font-semibold text-yellow-800 mb-3">تحليل التعقيد (Complexity Analysis)</h3>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-white p-4 rounded-lg shadow border border-yellow-300">
+                        <p class="font-bold text-yellow-700">التعقيد الزمني (Time Complexity)</p>
+                        <p class="text-2xl font-mono text-center mt-2 text-yellow-600">O(n)</p>
+                        <p class="text-sm text-gray-600 mt-1">حيث n هو عدد العناصر في المصفوفة.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow border border-yellow-300">
+                        <p class="font-bold text-yellow-700">أفضل حالة (Best Case)</p>
+                        <p class="text-lg text-center mt-2 text-green-600">O(1)</p>
+                        <p class="text-sm text-gray-600 mt-1">عندما يكون العنصر المطلوب في أول موقع (الفهرس 0).</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow border border-yellow-300">
+                        <p class="font-bold text-yellow-700">أسوأ حالة (Worst Case)</p>
+                        <p class="text-lg text-center mt-2 text-red-600">O(n)</p>
+                        <p class="text-sm text-gray-600 mt-1">عندما يكون العنصر في آخر موقع أو غير موجود.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow border border-yellow-300">
+                        <p class="font-bold text-yellow-700">حالة متوسطة (Average Case)</p>
+                        <p class="text-lg text-center mt-2 text-amber-600">O(n)</p>
+                        <p class="text-sm text-gray-600 mt-1">في المتوسط، نحتاج للبحث في نصف المصفوفة.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-indigo-800 mb-6 border-b-2 border-indigo-200 pb-2 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-3 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                </svg>
+                ثانياً: البحث الثنائي (Binary Search)
+            </h2>
+
+            <div class="bg-red-50 p-5 rounded-lg shadow-md mb-6 concept-card border-red-400">
+                <h3 class="text-xl font-semibold text-red-800 mb-3">شرط أساسي: مصفوفة مرتبة</h3>
+                <p class="text-gray-700 leading-loose">
+                    <span class="font-bold">لا يعمل البحث الثنائي إلا على مصفوفة مرتبة ترتيباً تصاعدياً</span> (أو تنازلياً). إذا كانت المصفوفة غير مرتبة، يجب ترتيبها أولاً قبل تطبيق البحث الثنائي. هذا هو الفرق الجوهري بينه وبين البحث المتتالي.
+                </p>
+            </div>
+
+            <div class="bg-green-50 p-5 rounded-lg shadow-md mb-6 concept-card border-green-400">
+                <h3 class="text-xl font-semibold text-green-800 mb-3">كيف يعمل؟</h3>
+                <p class="text-gray-700 leading-loose">
+                    يعتمد البحث الثنائي على مبدأ "فرّق تسد" (Divide and Conquer). يقوم بتقسيم المصفوفة المرتبة إلى نصفين في كل خطوة، ومقارنة القيمة المستهدفة مع العنصر الموجود في منتصف المصفوفة. بناءً على المقارنة، يقرر تجاهل نصف المصفوفة بالكامل والاستمرار في النصف الآخر، مما يقلل مساحة البحث بشكل كبير في كل خطوة.
+                </p>
+            </div>
+
+            <h3 class="text-2xl font-semibold text-green-700 mb-4 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                خطوات الخوارزمية
+            </h3>
+
+            <div class="list-none p-0">
+                <div class="step-item">
+                    <h3 class="text-xl font-semibold text-green-800">تحديد الحدود</h3>
+                    <p class="text-gray-700 mr-10">
+                        حدد مؤشرين: <span class="font-mono ltr-text bg-gray-200 p-1 rounded">low</span> في بداية المصفوفة (الفهرس 0) و <span class="font-mono ltr-text bg-gray-200 p-1 rounded">high</span> في نهايتها (الفهرس <span class="font-mono ltr-text bg-gray-200 p-1 rounded">n-1</span>).
+                    </p>
+                </div>
+                <div class="step-item">
+                    <h3 class="text-xl font-semibold text-green-800">حساب المنتصف</h3>
+                    <p class="text-gray-700 mr-10">
+                        احسب منتصف المصفوفة: <span class="font-mono ltr-text bg-gray-200 p-1 rounded">mid = (low + high) / 2</span> (عادةً باستخدام قسمة صحيحة).
+                    </p>
+                </div>
+                <div class="step-item">
+                    <h3 class="text-xl font-semibold text-green-800">المقارنة</h3>
+                    <p class="text-gray-700 mr-10">
+                        قارن العنصر في المنتصف <span class="font-mono ltr-text bg-gray-200 p-1 rounded">arr[mid]</span> مع القيمة المستهدفة:
+                    </p>
+                    <ul class="list-disc list-inside mr-14 mt-2 space-y-1 text-gray-700">
+                        <li>إذا تطابقا (<span class="font-mono ltr-text bg-gray-200 p-1 rounded">arr[mid] == target</span>) ← تم العثور على العنصر، أعد <span class="font-mono ltr-text bg-gray-200 p-1 rounded">mid</span>.</li>
+                        <li>إذا كان الهدف أكبر (<span class="font-mono ltr-text bg-gray-200 p-1 rounded">arr[mid] &lt; target</span>) ← ابحث في النصف الأيمن (<span class="font-mono ltr-text bg-gray-200 p-1 rounded">low = mid + 1</span>).</li>
+                        <li>إذا كان الهدف أصغر (<span class="font-mono ltr-text bg-gray-200 p-1 rounded">arr[mid] &gt; target</span>) ← ابحث في النصف الأيسر (<span class="font-mono ltr-text bg-gray-200 p-1 rounded">high = mid - 1</span>).</li>
+                    </ul>
+                </div>
+                <div class="step-item">
+                    <h3 class="text-xl font-semibold text-green-800">التكرار</h3>
+                    <p class="text-gray-700 mr-10">
+                        كرر الخطوتين 2 و 3 طالما أن <span class="font-mono ltr-text bg-gray-200 p-1 rounded">low &lt;= high</span>. في كل مرة يتقلص نطاق البحث إلى النصف.
+                    </p>
+                </div>
+                <div class="step-item">
+                    <h3 class="text-xl font-semibold text-green-800">عدم العثور على العنصر</h3>
+                    <p class="text-gray-700 mr-10">
+                        إذا أصبح <span class="font-mono ltr-text bg-gray-200 p-1 rounded">low &gt; high</span> دون إيجاد تطابق، قم بإرجاع <span class="font-mono ltr-text bg-gray-200 p-1 rounded">-1</span> (العنصر غير موجود).
+                    </p>
+                </div>
+            </div>
+
+            <div class="bg-yellow-50 p-5 rounded-lg shadow-md mt-6 border-yellow-400">
+                <h3 class="text-xl font-semibold text-yellow-800 mb-3">تحليل التعقيد (Complexity Analysis)</h3>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-white p-4 rounded-lg shadow border border-yellow-300">
+                        <p class="font-bold text-yellow-700">التعقيد الزمني (Time Complexity)</p>
+                        <p class="text-2xl font-mono text-center mt-2 text-green-600">O(log n)</p>
+                        <p class="text-sm text-gray-600 mt-1">log<sub>2</sub>(n) لأننا نقسم المصفوفة إلى نصفين في كل مرة.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow border border-yellow-300">
+                        <p class="font-bold text-yellow-700">أفضل حالة (Best Case)</p>
+                        <p class="text-lg text-center mt-2 text-green-600">O(1)</p>
+                        <p class="text-sm text-gray-600 mt-1">عندما يكون العنصر المطلوب في منتصف المصفوفة بالضبط.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow border border-yellow-300">
+                        <p class="font-bold text-yellow-700">أسوأ حالة (Worst Case)</p>
+                        <p class="text-lg text-center mt-2 text-red-600">O(log n)</p>
+                        <p class="text-sm text-gray-600 mt-1">عندما يكون العنصر في أقصى طرف أو غير موجود.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow border border-yellow-300">
+                        <p class="font-bold text-yellow-700">المتطلب الأساسي</p>
+                        <p class="text-lg text-center mt-2 text-red-600">مصفوفة مرتبة</p>
+                        <p class="text-sm text-gray-600 mt-1">يجب أن تكون المصفوفة مرتبة ترتيباً تصاعدياً.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-10">
+            <h2 class="text-3xl font-bold text-indigo-800 mb-6 border-b-2 border-indigo-200 pb-2 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-3 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+                مقارنة بين خوارزميتي البحث
+            </h2>
+
+            <div class="overflow-x-auto">
+                <table class="w-full border-collapse bg-white shadow-md rounded-lg overflow-hidden">
+                    <thead>
+                        <tr class="bg-indigo-700 text-white">
+                            <th class="p-4 text-right border-b-2 border-indigo-800">المعيار</th>
+                            <th class="p-4 text-right border-b-2 border-indigo-800">البحث المتتالي (Linear)</th>
+                            <th class="p-4 text-right border-b-2 border-indigo-800">البحث الثنائي (Binary)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr class="hover:bg-gray-50">
+                            <td class="p-4 font-semibold text-gray-800">التعقيد الزمني</td>
+                            <td class="p-4">
+                                <span class="inline-block bg-amber-100 text-amber-800 px-3 py-1 rounded-full font-mono">O(n)</span>
+                            </td>
+                            <td class="p-4">
+                                <span class="inline-block bg-green-100 text-green-800 px-3 py-1 rounded-full font-mono">O(log n)</span>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="p-4 font-semibold text-gray-800">ترتيب المصفوفة</td>
+                            <td class="p-4">غير مطلوب (يعمل على أي مصفوفة)</td>
+                            <td class="p-4">مطلوب (مصفوفة مرتبة تصاعدياً)</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="p-4 font-semibold text-gray-800">طريقة العمل</td>
+                            <td class="p-4">مسح تسلسلي من البداية للنهاية</td>
+                            <td class="p-4">تقسيم المصفوفة إلى نصفين في كل خطوة</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="p-4 font-semibold text-gray-800">الأداء مع البيانات الكبيرة</td>
+                            <td class="p-4">ضعيف (يزداد الوقت خطياً)</td>
+                            <td class="p-4">ممتاز (يزداد الوقت لوغاريتمياً)</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="p-4 font-semibold text-gray-800">سهولة التطبيق</td>
+                            <td class="p-4">بسيط جداً</td>
+                            <td class="p-4">متوسط (أكثر تعقيداً)</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="p-4 font-semibold text-gray-800">الاستخدام الأمثل</td>
+                            <td class="p-4">المصفوفات الصغيرة أو غير المرتبة</td>
+                            <td class="p-4">المصفوفات الكبيرة والمرتبة</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <div class="text-center mt-12">
+            <a href="simulation.html" class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-10 rounded-xl shadow-lg transition duration-300 transform hover:scale-105 text-xl">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline ml-2 mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                انتقل إلى المحاكاة التفاعلية
+            </a>
+        </div>
+    </div>
+
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p class="text-gray-400 text-sm">
+                تم تصميم وتطوير هذه المحاكاة التفاعلية بواسطة <span class="text-amber-400 font-semibold">ضياء البشرى محمد</span> &copy; 2026
+            </p>
+        </div>
+    </footer>
+
+
+
+  <script src="../../assets/js/theme-toggle.js"></script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap");
+
+body {
+  font-family: "Cairo", sans-serif;
+  background-color: #f8fafc;
+  color: #1e293b;
+}
+
+/* ===== Operator Buttons ===== */
+.operator-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  border-width: 1.5px;
+  border-style: solid;
+  border-radius: 0.75rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  user-select: none;
+  line-height: 1;
+}
+
+.operator-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.operator-btn:active {
+  transform: translateY(0);
+}
+
+/* ===== Generate Button ===== */
+#generate-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.875rem 2rem;
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  color: white;
+  font-weight: 700;
+  font-size: 1.05rem;
+  border: none;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+#generate-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.45);
+}
+
+#generate-btn:active {
+  transform: translateY(0);
+}
+
+/* ===== Table Styling ===== */
+#result-table th,
+#result-table td {
+  padding: 0.75rem 1rem;
+  border: 1px solid #e2e8f0;
+  text-align: center;
+}
+
+#result-table th {
+  background: #f1f5f9;
+  color: #4f46e5;
+  font-weight: 700;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+#result-table td {
+  font-family: "Cairo", monospace;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+#result-table tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+#result-table tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+#result-table tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+#result-table tbody tr:nth-child(even):hover {
+  background-color: #f1f5f9;
+}
+
+/* ===== Expression Input ===== */
+#expression-input {
+  direction: ltr;
+  font-family: "Cairo", monospace;
+}
+
+#expression-input:focus {
+  outline: none;
+}
+
+/* ===== Message Area Animations ===== */
+#message-area:not(.hidden) {
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== Table Header Special ===== */
+#result-table th:last-child {
+  background: #4f46e5;
+  color: white;
+}
+
+/* ===== Result Cell Animations ===== */
+#table-body td:last-child {
+  font-size: 1.15rem;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 640px) {
+  #generate-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .operator-btn {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.95rem;
+  }
+}

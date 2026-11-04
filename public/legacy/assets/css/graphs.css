@@ -1,0 +1,273 @@
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap");
+body {
+  font-family: "Cairo", sans-serif;
+  background-color: #f3f4f6;
+}
+
+.graph-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+  border-radius: 1rem;
+  border: 2px dashed #e2e8f0;
+  padding: 1rem;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.graph-svg {
+  width: 100%;
+  height: auto;
+  max-width: 560px;
+}
+
+.graph-edge {
+  stroke: #d1d5db;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  transition: stroke 0.3s ease, stroke-width 0.3s ease;
+}
+
+.graph-edge-active {
+  stroke: #f59e0b;
+  stroke-width: 3.5;
+  stroke-dasharray: 8, 5;
+  animation: dashMove 0.5s linear infinite;
+}
+
+.graph-edge-visited {
+  stroke: #6366f1;
+  stroke-width: 2.5;
+  opacity: 0.6;
+}
+
+.graph-node circle {
+  transition: fill 0.4s ease, stroke 0.4s ease, r 0.3s ease;
+}
+
+.graph-node text {
+  pointer-events: none;
+  user-select: none;
+}
+
+.graph-node-unvisited circle {
+  fill: #e5e7eb;
+  stroke: #9ca3af;
+  stroke-width: 2.5;
+}
+
+.graph-node-discovered circle {
+  fill: #fbbf24;
+  stroke: #d97706;
+  stroke-width: 2.5;
+  animation: discoveredPulse 0.8s ease-in-out infinite;
+}
+
+.graph-node-visited circle {
+  fill: #6366f1;
+  stroke: #4f46e5;
+  stroke-width: 2.5;
+}
+
+.graph-node-current circle {
+  fill: #34d399;
+  stroke: #059669;
+  stroke-width: 3;
+  animation: currentPulse 1s ease-in-out infinite;
+}
+
+@keyframes currentPulse {
+  0%, 100% { r: 21; }
+  50% { r: 25; }
+}
+
+@keyframes discoveredPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+@keyframes dashMove {
+  to { stroke-dashoffset: -13; }
+}
+
+.info-panel {
+  background: white;
+  border-radius: 0.75rem;
+  border: 1px solid #e5e7eb;
+  padding: 1rem;
+}
+
+.queue-visual {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+  min-height: 2.5rem;
+  padding: 0.25rem;
+}
+
+.queue-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.5rem;
+  font-weight: 800;
+  font-size: 0.85rem;
+  color: white;
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  box-shadow: 0 2px 6px rgba(99, 102, 241, 0.3);
+  animation: queueIn 0.25s ease;
+  position: relative;
+}
+
+.queue-item::after {
+  content: '';
+  position: absolute;
+  left: -0.3rem;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 5px solid transparent;
+  border-right-color: #6366f1;
+  border-left: none;
+}
+
+.queue-item:last-child::after {
+  display: none;
+}
+
+.queue-empty {
+  color: #9ca3af;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.steps-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+}
+
+.steps-table th,
+.steps-table td {
+  border: 1px solid #e2e8f0;
+  padding: 6px 8px;
+  text-align: center;
+}
+
+.steps-table th {
+  background: linear-gradient(135deg, #4f46e5, #4338ca);
+  color: white;
+  font-weight: 700;
+  position: sticky;
+  top: 0;
+  font-size: 0.72rem;
+}
+
+.steps-table tr:nth-child(even) {
+  background-color: #f8fafc;
+}
+
+.steps-table tr.current-step {
+  background-color: #fef3c7 !important;
+}
+
+.steps-log-container {
+  max-height: 220px;
+  overflow-y: auto;
+  border: none;
+  background: transparent;
+}
+
+.status-message {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1rem;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  animation: statusIn 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.status-message.info {
+  background: #eef2ff;
+  color: #4338ca;
+  border-right: 4px solid #6366f1;
+}
+
+.status-message.success {
+  background: #d1fae5;
+  color: #065f46;
+  border-right: 4px solid #10b981;
+}
+
+.status-message.error {
+  background: #fee2e2;
+  color: #991b1b;
+  border-right: 4px solid #ef4444;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #4b5563;
+}
+
+.legend-dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.visited-order {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  direction: ltr;
+}
+
+.visited-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  font-weight: 800;
+  font-size: 0.7rem;
+  color: white;
+  background: #6366f1;
+}
+
+@keyframes queueIn {
+  from { opacity: 0; transform: scale(0.5); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes statusIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 640px) {
+  .graph-container {
+    padding: 0.5rem;
+  }
+  .graph-svg {
+    max-width: 100%;
+  }
+  .queue-item {
+    width: 1.75rem;
+    height: 1.75rem;
+    font-size: 0.7rem;
+  }
+}

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>أقصر مسار (Dijkstra) - الكود البرمجي</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../../assets/css/code-tabs.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/atom-one-dark.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <link rel="stylesheet" href="../../assets/css/design-system.css" />
+  <link rel="stylesheet" href="../../assets/css/dark-content.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50 min-h-screen">
+  
+    <nav class="site-nav">
+      <div class="site-nav-inner">
+        <div class="nav-main">
+          <a href="../../index.html" class="nav-logo">
+            <svg class="nav-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.663 17h4.673M12 3v1m6.364 1.636-.707.707M21 12h-1M4 12H3m3.343-5.657-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            <span>مقرر الحاسوب</span>
+          </a>
+          <div class="nav-links">
+                  <a href="../../index.html">الرئيسية</a>
+      <a href="index.html">الشرح</a>
+      <a href="simulation.html">المحاكاة</a>
+          </div>
+          <div class="nav-actions">
+            <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme"></button>
+            <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="nav-mobile" id="navMobile">
+                <a href="../../index.html">الرئيسية</a>
+      <a href="index.html">الشرح</a>
+      <a href="simulation.html">المحاكاة</a>
+        </div>
+        <div class="nav-breadcrumb">
+          <a href="../../index.html">الرئيسية</a><span class="sep">›</span><a href="index.html">أقصر مسار (Shortest Path)</a><span class="sep">›</span><span class="current">الكود البرمجي</span>
+        </div>
+      </div>
+    </nav>
+    <script>function toggleMenu(){var m=document.getElementById("navMobile");if(m)m.classList.toggle("open")}</script>
+
+  <div class="code-page">
+    <h1>أقصر مسار (Dijkstra) — الكود البرمجي</h1>
+    <p class="subtitle">شرح مبسط مع أمثلة بلغات متعددة. يمكنك نسخ الكود واستخدامه.</p>
+
+    <div class="algorithm-code-description">
+      <strong>كيف تعمل:</strong> خوارزمية Dijkstra لإيجاد أقصر مسار من عقدة بداية إلى جميع العقد الأخرى في رسم بياني موزون بحواف غير سالبة. تستخدم طابور أولوية لاختيار العقدة ذات أقل مسافة. مثال: 6 عقد (A-F) بحواف موزونة.
+    </div>
+
+    <div class="lang-tabs">
+      <button class="lang-tab active" data-lang="cpp" onclick="switchLang('cpp')">C++</button>
+      <button class="lang-tab" data-lang="java" onclick="switchLang('java')">Java</button>
+      <button class="lang-tab" data-lang="js" onclick="switchLang('js')">JavaScript</button>
+      <button class="lang-tab" data-lang="php" onclick="switchLang('php')">PHP</button>
+    </div>
+
+    <div class="code-block active" id="code-cpp">
+      <button class="copy-btn" data-lang="cpp" onclick="copyCode('cpp')">نسخ</button>
+      <pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;queue&gt;
+#include &lt;climits&gt;
+using namespace std;
+
+class Graph {
+    int V;
+    vector&lt;vector&lt;pair&lt;int,int&gt;&gt;&gt; adj;
+public:
+    Graph(int v) : V(v), adj(v) {}
+    void addEdge(int u, int v, int w) {
+        adj[u].push_back({v, w});
+        adj[v].push_back({u, w});
+    }
+    void dijkstra(int start) {
+        vector&lt;int&gt; dist(V, INT_MAX);
+        vector&lt;int&gt; parent(V, -1);
+        priority_queue&lt;pair&lt;int,int&gt;, vector&lt;pair&lt;int,int&gt;&gt;, greater&lt;&gt;&gt; pq;
+        dist[start] = 0;
+        pq.push({0, start});
+        while (!pq.empty()) {
+            int u = pq.top().second;
+            pq.pop();
+            for (auto& [v, w] : adj[u]) {
+                if (dist[u] + w &lt; dist[v]) {
+                    dist[v] = dist[u] + w;
+                    parent[v] = u;
+                    pq.push({dist[v], v});
+                }
+            }
+        }
+        cout &lt;&lt; "Distances from " &lt;&lt; (char)('A' + start) &lt;&lt; ":\n";
+        for (int i = 0; i &lt; V; i++) {
+            cout &lt;&lt; (char)('A' + i) &lt;&lt; ": " &lt;&lt; dist[i] &lt;&lt; "  Path: ";
+            vector&lt;int&gt; path;
+            for (int v = i; v != -1; v = parent[v])
+                path.push_back(v);
+            for (int j = path.size()-1; j &gt;= 0; j--)
+                cout &lt;&lt; (char)('A' + path[j]) &lt;&lt; (j ? " -&gt; " : "");
+            cout &lt;&lt; endl;
+        }
+    }
+};
+
+int main() {
+    Graph g(6);
+    g.addEdge(0, 1, 7);  // A-B
+    g.addEdge(0, 2, 9);  // A-C
+    g.addEdge(0, 5, 14); // A-F
+    g.addEdge(1, 2, 10); // B-C
+    g.addEdge(1, 3, 15); // B-D
+    g.addEdge(2, 3, 11); // C-D
+    g.addEdge(2, 5, 2);  // C-F
+    g.addEdge(3, 4, 6);  // D-E
+    g.addEdge(4, 5, 9);  // E-F
+    g.dijkstra(0);
+    return 0;
+}</code></pre>
+    </div>
+    <div class="code-block" id="code-java">
+      <button class="copy-btn" data-lang="java" onclick="copyCode('java')">نسخ</button>
+      <pre><code class="language-java">import java.util.*;
+
+public class Dijkstra {
+    static class Edge {
+        int dest, weight;
+        Edge(int d, int w) { dest = d; weight = w; }
+    }
+
+    static class Graph {
+        int V;
+        List&lt;List&lt;Edge&gt;&gt; adj;
+        Graph(int v) {
+            V = v;
+            adj = new ArrayList&lt;&gt;();
+            for (int i = 0; i &lt; v; i++) adj.add(new ArrayList&lt;&gt;());
+        }
+        void addEdge(int u, int v, int w) {
+            adj.get(u).add(new Edge(v, w));
+            adj.get(v).add(new Edge(u, w));
+        }
+        void dijkstra(int start) {
+            int[] dist = new int[V];
+            int[] parent = new int[V];
+            Arrays.fill(dist, Integer.MAX_VALUE);
+            Arrays.fill(parent, -1);
+            PriorityQueue&lt;int[]&gt; pq = new PriorityQueue&lt;&gt;((a,b) -&gt; a[1] - b[1]);
+            dist[start] = 0;
+            pq.offer(new int[]{start, 0});
+            while (!pq.isEmpty()) {
+                int u = pq.poll()[0];
+                for (Edge e : adj.get(u)) {
+                    if (dist[u] + e.weight &lt; dist[e.dest]) {
+                        dist[e.dest] = dist[u] + e.weight;
+                        parent[e.dest] = u;
+                        pq.offer(new int[]{e.dest, dist[e.dest]});
+                    }
+                }
+            }
+            System.out.println("Distances from " + (char)('A' + start) + ":");
+            for (int i = 0; i &lt; V; i++) {
+                System.out.print((char)('A' + i) + ": " + dist[i] + "  Path: ");
+                List&lt;Integer&gt; path = new ArrayList&lt;&gt;();
+                for (int v = i; v != -1; v = parent[v]) path.add(v);
+                Collections.reverse(path);
+                for (int j = 0; j &lt; path.size(); j++) {
+                    System.out.print((char)('A' + path.get(j)));
+                    if (j &lt; path.size()-1) System.out.print(" -&gt; ");
+                }
+                System.out.println();
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Graph g = new Graph(6);
+        g.addEdge(0, 1, 7);  // A-B
+        g.addEdge(0, 2, 9);  // A-C
+        g.addEdge(0, 5, 14); // A-F
+        g.addEdge(1, 2, 10); // B-C
+        g.addEdge(1, 3, 15); // B-D
+        g.addEdge(2, 3, 11); // C-D
+        g.addEdge(2, 5, 2);  // C-F
+        g.addEdge(3, 4, 6);  // D-E
+        g.addEdge(4, 5, 9);  // E-F
+        g.dijkstra(0);
+    }
+}</code></pre>
+    </div>
+    <div class="code-block" id="code-js">
+      <button class="copy-btn" data-lang="js" onclick="copyCode('js')">نسخ</button>
+      <pre><code class="language-javascript">class PriorityQueue {
+    constructor() { this.heap = []; }
+    enqueue(v, p) {
+        this.heap.push({v, p});
+        this.heap.sort((a,b) =&gt; a.p - b.p);
+    }
+    dequeue() { return this.heap.shift(); }
+    isEmpty() { return this.heap.length === 0; }
+}
+
+class Graph {
+    constructor(v) {
+        this.V = v;
+        this.adj = Array.from({length: v}, () =&gt; []);
+    }
+    addEdge(u, v, w) {
+        this.adj[u].push({to: v, w});
+        this.adj[v].push({to: u, w});
+    }
+    dijkstra(start) {
+        const dist = new Array(this.V).fill(Infinity);
+        const parent = new Array(this.V).fill(-1);
+        const pq = new PriorityQueue();
+        dist[start] = 0;
+        pq.enqueue(start, 0);
+        while (!pq.isEmpty()) {
+            const {v: u} = pq.dequeue();
+            for (const {to: v, w} of this.adj[u]) {
+                if (dist[u] + w &lt; dist[v]) {
+                    dist[v] = dist[u] + w;
+                    parent[v] = u;
+                    pq.enqueue(v, dist[v]);
+                }
+            }
+        }
+        console.log("Distances from " + String.fromCharCode(65 + start) + ":");
+        for (let i = 0; i &lt; this.V; i++) {
+            let path = [];
+            for (let v = i; v !== -1; v = parent[v]) path.push(v);
+            path.reverse();
+            console.log(String.fromCharCode(65 + i) + ": " + dist[i] +
+                "  Path: " + path.map(x =&gt; String.fromCharCode(65 + x)).join(" -&gt; "));
+        }
+    }
+}
+
+const g = new Graph(6);
+g.addEdge(0, 1, 7);
+g.addEdge(0, 2, 9);
+g.addEdge(0, 5, 14);
+g.addEdge(1, 2, 10);
+g.addEdge(1, 3, 15);
+g.addEdge(2, 3, 11);
+g.addEdge(2, 5, 2);
+g.addEdge(3, 4, 6);
+g.addEdge(4, 5, 9);
+g.dijkstra(0);</code></pre>
+    </div>
+    <div class="code-block" id="code-php">
+      <button class="copy-btn" data-lang="php" onclick="copyCode('php')">نسخ</button>
+      <pre><code class="language-php">&lt;?php
+class Graph {
+    private $V;
+    private $adj;
+
+    public function __construct($v) {
+        $this->V = $v;
+        $this->adj = array_fill(0, $v, []);
+    }
+
+    public function addEdge($u, $v, $w) {
+        $this->adj[$u][] = ['to' =&gt; $v, 'w' =&gt; $w];
+        $this->adj[$v][] = ['to' =&gt; $u, 'w' =&gt; $w];
+    }
+
+    public function dijkstra($start) {
+        $dist = array_fill(0, $this->V, PHP_INT_MAX);
+        $parent = array_fill(0, $this->V, -1);
+        $pq = new SplPriorityQueue();
+        $pq->setExtractFlags(SplPriorityQueue::EXTR_DATA);
+        $dist[$start] = 0;
+        $pq->insert($start, 0);
+        while (!$pq->isEmpty()) {
+            $u = $pq->extract();
+            foreach ($this->adj[$u] as $edge) {
+                $v = $edge['to'];
+                $w = $edge['w'];
+                if ($dist[$u] + $w &lt; $dist[$v]) {
+                    $dist[$v] = $dist[$u] + $w;
+                    $parent[$v] = $u;
+                    $pq->insert($v, -$dist[$v]);
+                }
+            }
+        }
+        echo "Distances from " . chr(65 + $start) . ":\n";
+        for ($i = 0; $i &lt; $this->V; $i++) {
+            $path = [];
+            for ($v = $i; $v != -1; $v = $parent[$v]) $path[] = $v;
+            $path = array_reverse($path);
+            $pathStr = implode(" -&gt; ", array_map(function($x) { return chr(65 + $x); }, $path));
+            echo chr(65 + $i) . ": " . $dist[$i] . "  Path: " . $pathStr . "\n";
+        }
+    }
+}
+
+$g = new Graph(6);
+$g->addEdge(0, 1, 7);
+$g->addEdge(0, 2, 9);
+$g->addEdge(0, 5, 14);
+$g->addEdge(1, 2, 10);
+$g->addEdge(1, 3, 15);
+$g->addEdge(2, 3, 11);
+$g->addEdge(2, 5, 2);
+$g->addEdge(3, 4, 6);
+$g->addEdge(4, 5, 9);
+$g->dijkstra(0);
+?&gt;</code></pre>
+    </div>
+  </div>
+
+  <footer class="bg-gray-900 text-white py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p class="text-gray-400 text-sm">أقصر مسار (Dijkstra) — أمثلة برمجية تفاعلية</p>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/code-tabs.js"></script>
+  <script src="../../assets/js/theme-toggle.js"></script>
+</body>
+</html>

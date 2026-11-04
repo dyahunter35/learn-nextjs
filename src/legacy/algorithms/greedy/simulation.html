@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>محاكاة بصرية تفاعلية — الخوارزميات الجشعة</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../assets/css/greedy.css" />
+  <link rel="stylesheet" href="../../assets/css/design-system.css" />
+  <link rel="stylesheet" href="../../assets/css/dark-content.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+
+    
+    <nav class="site-nav">
+      <div class="site-nav-inner">
+        <div class="nav-main">
+          <a href="../../index.html" class="nav-logo">
+            <svg class="nav-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.663 17h4.673M12 3v1m6.364 1.636-.707.707M21 12h-1M4 12H3m3.343-5.657-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            <span>مقرر الحاسوب</span>
+          </a>
+          <div class="nav-links">
+                  <a href="../../index.html">الرئيسية</a>
+      <a href="index.html">الشرح</a>
+      <a href="code.html">الكود البرمجي</a>
+          </div>
+          <div class="nav-actions">
+            <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme"></button>
+            <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="nav-mobile" id="navMobile">
+                <a href="../../index.html">الرئيسية</a>
+      <a href="index.html">الشرح</a>
+        </div>
+        <div class="nav-breadcrumb">
+          <a href="../../index.html">الرئيسية</a><span class="sep">›</span><a href="index.html">الخوارزميات الجشعة (Greedy)</a><span class="sep">›</span><span class="current">المحاكاة</span>
+        </div>
+      </div>
+    </nav>
+    <script>function toggleMenu(){var m=document.getElementById("navMobile");if(m)m.classList.toggle("open")}</script>
+
+    
+
+    <div class="max-w-7xl mx-auto py-8 md:py-12 px-4">
+
+        <div class="text-center mb-8">
+            <span class="inline-block text-indigo-500 font-bold text-sm tracking-widest uppercase mb-2">GREEDY ALGORITHM SIMULATION</span>
+            <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900">محاكاة بصرية تفاعلية — مشكلة العملات المعدنية</h1>
+            <p class="text-gray-500 mt-2">شاهد كيف تعمل الخوارزمية الجشعة خطوة بخطوة</p>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+
+            <!-- Controls -->
+            <div class="p-6 md:p-8 border-b border-gray-100">
+                <div class="flex items-center gap-2 mb-5">
+                    <div class="w-3 h-3 bg-indigo-500 rounded-full animate-pulse"></div>
+                    <h2 class="text-lg font-bold text-gray-800">إعدادات المحاكاة</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                    <div>
+                        <label for="coinSystem" class="block text-sm font-bold text-gray-700 mb-2">نظام العملات:</label>
+                        <select id="coinSystem" class="gradient-select" onchange="selectCoinSystem()">
+                            <option value="sudanese">🇸🇩 عملات سودانية (1,5,10,20,50)</option>
+                            <option value="us">🇺🇸 عملات أمريكية (1,5,10,25)</option>
+                            <option value="custom">⚙️ عملات مخصصة</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="amountInput" class="block text-sm font-bold text-gray-700 mb-2">المبلغ المستهدف (1 - 200):</label>
+                        <input type="number" id="amountInput" class="num-input" value="77" min="1" max="200" step="1" />
+                    </div>
+                    <div class="flex items-end">
+                        <button id="startBtn" class="greedy-btn btn-success w-full justify-center" onclick="startSimulation()">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            ابدأ
+                        </button>
+                    </div>
+                </div>
+
+                <div id="customCoinsGroup" style="display:none;" class="mb-3">
+                    <label for="customCoins" class="block text-sm font-bold text-gray-700 mb-2">أدخل العملات المخصصة (مفصولة بفواصل):</label>
+                    <input type="text" id="customCoins" class="num-input text-left" dir="ltr" value="1,3,4" placeholder="مثال: 1,3,4" />
+                    <p class="text-xs text-gray-400 mt-1">💡 جرّب 1,3,4 مع المبلغ 6 — سترى فشل الخوارزمية الجشعة!</p>
+                </div>
+
+                <div class="flex flex-wrap gap-3 mt-4">
+                    <button id="nextBtn" class="greedy-btn btn-primary" disabled onclick="nextStep()">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+                        الخطوة التالية
+                    </button>
+                    <button id="prevBtn" class="greedy-btn btn-secondary" disabled onclick="previousStep()">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 17l-5-5m0 0l5-5m-5 5h12" /></svg>
+                        الخطوة السابقة
+                    </button>
+                    <button id="resetBtn" class="greedy-btn btn-warning" disabled onclick="resetSimulation()">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+                        إعادة الضبط
+                    </button>
+                </div>
+            </div>
+
+            <!-- Visualization -->
+            <div id="visualization" class="px-6 md:px-8 py-6">
+
+                <!-- Available Coins -->
+                <div class="mb-6">
+                    <h3 class="text-sm font-bold text-gray-600 mb-3">العملات المتاحة:</h3>
+                    <div id="coinDisplay" class="flex flex-wrap gap-4 justify-center">
+                        <div class="coin-box coin-available">50</div>
+                        <div class="coin-box coin-available">20</div>
+                        <div class="coin-box coin-available">10</div>
+                        <div class="coin-box coin-available">5</div>
+                        <div class="coin-box coin-available">1</div>
+                    </div>
+                </div>
+
+                <!-- Target Amount -->
+                <div class="mb-6">
+                    <div class="target-display mx-auto" style="max-width:280px;">
+                        <div class="target-label">المبلغ المستهدف</div>
+                        <div id="targetDisplay" class="target-amount">77</div>
+                    </div>
+                </div>
+
+                <!-- Selected Coins Area -->
+                <div class="mb-6">
+                    <h3 class="text-sm font-bold text-gray-600 mb-3">العملات المختارة:</h3>
+                    <div id="selectedArea" class="selected-area">
+                        <span class="text-gray-400 font-medium">لم يتم اختيار أي عملات بعد</span>
+                    </div>
+                </div>
+
+                <!-- Status Message -->
+                <div id="statusMessage" class="status-message mb-6">
+                    اضغط "ابدأ" لبدء محاكاة جديدة
+                </div>
+
+                <!-- Final Result -->
+                <div id="finalResult" class="mb-6"></div>
+
+            </div>
+
+            <!-- Info Panel -->
+            <div class="border-t border-gray-100 bg-gray-50 p-6 md:p-8">
+                <div class="flex items-center gap-2 mb-4">
+                    <div class="w-3 h-3 bg-amber-500 rounded-full animate-pulse"></div>
+                    <h2 class="text-lg font-bold text-gray-800">سجل الخطوات</h2>
+                </div>
+                <div class="step-log">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>الخطوة</th>
+                                <th>العملة</th>
+                                <th>الإجراء</th>
+                                <th>المبلغ المتبقي</th>
+                                <th>العملات المختارة</th>
+                            </tr>
+                        </thead>
+                        <tbody id="stepLogBody">
+                            <tr><td colspan="5" class="text-gray-400 py-4 text-center">لم تبدأ المحاكاة بعد</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="bg-indigo-900 text-white text-center py-6 mt-8">
+        <p class="text-indigo-300 text-sm">مقرر الحاسوب — محاكاة الخوارزميات الجشعة</p>
+        <p class="text-indigo-400 text-xs mt-1">جميع الحقوق محفوظة</p>
+    </footer>
+
+    <script src="../../assets/js/greedy.js"></script>
+  <script src="../../assets/js/theme-toggle.js"></script>
+</body>
+</html>

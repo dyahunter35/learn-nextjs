@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شرح القوائم المترابطة (Linked Lists)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../assets/css/linkedlist.css" />
+  <link rel="stylesheet" href="../../assets/css/design-system.css" />
+  <link rel="stylesheet" href="../../assets/css/dark-content.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+
+    
+    <nav class="site-nav">
+      <div class="site-nav-inner">
+        <div class="nav-main">
+          <a href="../../index.html" class="nav-logo">
+            <svg class="nav-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.663 17h4.673M12 3v1m6.364 1.636-.707.707M21 12h-1M4 12H3m3.343-5.657-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            <span>مقرر الحاسوب</span>
+          </a>
+          <div class="nav-links">
+                  <a href="../../index.html">الرئيسية</a>
+      <a href="simulation.html">المحاكاة</a>
+      <a href="code.html">الكود البرمجي</a>
+          </div>
+          <div class="nav-actions">
+            <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme"></button>
+            <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="nav-mobile" id="navMobile">
+                <a href="../../index.html">الرئيسية</a>
+      <a href="simulation.html">المحاكاة</a>
+        </div>
+        <div class="nav-breadcrumb">
+          <a href="../../index.html">الرئيسية</a><span class="sep">›</span><span class="current">القوائم المترابطة (Linked List)</span>
+        </div>
+      </div>
+    </nav>
+    <script>function toggleMenu(){var m=document.getElementById("navMobile");if(m)m.classList.toggle("open")}</script>
+
+    
+
+    <div class="max-w-4xl mx-auto bg-white shadow-2xl rounded-2xl overflow-hidden mt-8 mb-12 p-8 md:p-10 border border-gray-100">
+
+        <header class="text-center mb-10 border-b border-gray-100 pb-6">
+            <span class="inline-block text-indigo-500 font-bold text-sm tracking-widest uppercase mb-2">DATA STRUCTURES</span>
+            <h1 class="text-4xl font-extrabold text-gray-900">
+                القوائم المترابطة <span class="text-orange-600">(Linked Lists)</span>
+            </h1>
+            <p class="mt-2 text-lg text-gray-500">
+                بنية ديناميكية للبيانات تربط العناصر عبر مؤشرات متسلسلة
+            </p>
+        </header>
+
+        <!-- المقدمة -->
+        <section class="mb-14">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+                <span class="w-10 h-10 bg-orange-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                    </svg>
+                </span>
+                ما هي القائمة المترابطة؟
+            </h2>
+
+            <div class="bg-gradient-to-l from-orange-50 to-amber-50 rounded-2xl p-6 md:p-8 mb-6 border border-orange-100">
+                <p class="text-gray-700 leading-loose mb-4">
+                    <strong class="text-orange-700">القائمة المترابطة (Linked List)</strong> هي بنية بيانات خطية تتكون من مجموعة من <strong class="text-orange-600">العُقد (Nodes)</strong>،
+                    حيث تحتوي كل عقدة على <strong class="text-orange-600">قيمة (Value)</strong> و <strong class="text-orange-600">مؤشر (Pointer)</strong> يشير إلى العقدة التالية في القائمة.
+                    على عكس المصفوفات (Arrays)، لا تحتاج القوائم المترابطة إلى مساحة متصلة في الذاكرة.
+                </p>
+
+                <div class="flex items-center gap-3 bg-white rounded-xl p-4 border border-orange-100">
+                    <span class="text-3xl">🚂</span>
+                    <p class="text-gray-600 text-sm">
+                        <strong class="text-orange-700">تشبيه:</strong> تخيل قطاراً — كل عربة (node) تحتوي على ركاب (value) ومربوطة بالعربة التي تليها (pointer). يمكنك إضافة أو إزالة أي عربة بسهولة.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- أنواع القوائم -->
+        <section class="mb-14">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+                <span class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </span>
+                أنواع القوائم المترابطة
+            </h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+                <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="w-9 h-9 bg-orange-100 rounded-lg flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101" />
+                            </svg>
+                        </span>
+                        <h4 class="text-lg font-bold text-gray-800">أحادية الارتباط</h4>
+                    </div>
+                    <p class="text-gray-600 text-sm">Singly Linked — كل عقدة تشير إلى العقدة التالية فقط. اجتياز باتجاه واحد.</p>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="w-9 h-9 bg-purple-100 rounded-lg flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                            </svg>
+                        </span>
+                        <h4 class="text-lg font-bold text-gray-800">ثنائية الارتباط</h4>
+                    </div>
+                    <p class="text-gray-600 text-sm">Doubly Linked — كل عقدة تشير إلى التالية والسابقة. اجتياز باتجاهين.</p>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="w-9 h-9 bg-emerald-100 rounded-lg flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                            </svg>
+                        </span>
+                        <h4 class="text-lg font-bold text-gray-800">دائرية</h4>
+                    </div>
+                    <p class="text-gray-600 text-sm">Circular — آخر عقدة تشير إلى أول عقدة. اجتياز دوري مستمر.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- العمليات الأساسية -->
+        <section class="mb-14">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+                <span class="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                    </svg>
+                </span>
+                العمليات الأساسية
+            </h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+                    <div class="flex items-center gap-3 mb-2">
+                        <span class="w-9 h-9 bg-green-100 rounded-lg flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                            </svg>
+                        </span>
+                        <h4 class="text-lg font-bold text-gray-800">Insert (إدراج)</h4>
+                    </div>
+                    <p class="text-gray-600 text-sm">إضافة عقدة جديدة في المقدمة (Head) أو النهاية (Tail) أو بين عقدتين.</p>
+                    <div class="mt-2 bg-gray-50 rounded-lg p-2 text-xs font-mono text-gray-700 border border-gray-100">list.insertHead(5) ← إضافة 5 في المقدمة</div>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+                    <div class="flex items-center gap-3 mb-2">
+                        <span class="w-9 h-9 bg-red-100 rounded-lg flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
+                            </svg>
+                        </span>
+                        <h4 class="text-lg font-bold text-gray-800">Delete (حذف)</h4>
+                    </div>
+                    <p class="text-gray-600 text-sm">إزالة عقدة من المقدمة أو النهاية أو حسب القيمة.</p>
+                    <div class="mt-2 bg-gray-50 rounded-lg p-2 text-xs font-mono text-gray-700 border border-gray-100">list.delete(10) ← حذف العقدة التي قيمتها 10</div>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+                    <div class="flex items-center gap-3 mb-2">
+                        <span class="w-9 h-9 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </span>
+                        <h4 class="text-lg font-bold text-gray-800">Search (بحث)</h4>
+                    </div>
+                    <p class="text-gray-600 text-sm">البحث عن عقدة بقيمة معينة والوصول إليها.</p>
+                    <div class="mt-2 bg-gray-50 rounded-lg p-2 text-xs font-mono text-gray-700 border border-gray-100">list.search(10) ← إرجاع العقدة التي قيمتها 10</div>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+                    <div class="flex items-center gap-3 mb-2">
+                        <span class="w-9 h-9 bg-amber-100 rounded-lg flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </span>
+                        <h4 class="text-lg font-bold text-gray-800">Traverse (اجتياز)</h4>
+                    </div>
+                    <p class="text-gray-600 text-sm">المرور على جميع العقد من البداية إلى النهاية.</p>
+                    <div class="mt-2 bg-gray-50 rounded-lg p-2 text-xs font-mono text-gray-700 border border-gray-100">for each node in list → print(node)</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- تمثيل بصري -->
+        <section class="mb-14">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+                <span class="w-10 h-10 bg-orange-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7" />
+                    </svg>
+                </span>
+                تمثيل القائمة المترابطة
+            </h2>
+
+            <div class="bg-gray-50 rounded-xl p-6 border border-gray-200 mb-6 overflow-x-auto">
+                <div class="flex items-center justify-center gap-0 min-w-max py-4">
+                    <div class="flex items-center">
+                        <div class="relative flex flex-col items-center mx-1">
+                            <div class="w-20 h-16 bg-orange-500 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-md">10</div>
+                            <span class="text-[0.6rem] font-bold text-orange-600 mt-1 bg-orange-50 px-2 rounded-full">Head</span>
+                        </div>
+                        <div class="flex items-center mx-0">
+                            <div class="w-10 h-1 bg-gray-400 relative">
+                                <span class="absolute -top-5 left-1/2 -translate-x-1/2 text-[0.55rem] font-bold text-gray-500 whitespace-nowrap">next</span>
+                            </div>
+                            <div class="border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-r-gray-400 -mr-[1px]"></div>
+                        </div>
+                        <div class="relative flex flex-col items-center mx-1">
+                            <div class="w-20 h-16 bg-orange-400 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-md">20</div>
+                        </div>
+                        <div class="flex items-center mx-0">
+                            <div class="w-10 h-1 bg-gray-400 relative">
+                                <span class="absolute -top-5 left-1/2 -translate-x-1/2 text-[0.55rem] font-bold text-gray-500 whitespace-nowrap">next</span>
+                            </div>
+                            <div class="border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-r-gray-400 -mr-[1px]"></div>
+                        </div>
+                        <div class="relative flex flex-col items-center mx-1">
+                            <div class="w-20 h-16 bg-orange-300 rounded-xl flex items-center justify-center text-gray-800 font-bold text-xl shadow-md">30</div>
+                            <span class="text-[0.6rem] font-bold text-purple-600 mt-1 bg-purple-50 px-2 rounded-full">Tail</span>
+                        </div>
+                        <div class="flex items-center mx-0">
+                            <div class="w-10 h-1 bg-gray-400"></div>
+                            <div class="border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-r-gray-400 -mr-[1px]"></div>
+                        </div>
+                        <div class="w-12 h-12 rounded-full border-2 border-dashed border-gray-400 flex items-center justify-center text-[0.6rem] font-bold text-gray-400 mx-1">NULL</div>
+                    </div>
+                </div>
+                <p class="text-center text-sm text-gray-500 mt-3">Head → [10] → [20] → [30] → NULL</p>
+            </div>
+
+            <div class="bg-amber-50 border border-amber-200 rounded-xl p-5">
+                <h4 class="font-bold text-amber-800 mb-2 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    استخدامات القوائم المترابطة
+                </h4>
+                <ul class="list-disc list-inside text-gray-700 space-y-1 text-sm mr-6">
+                    <li>تنفيذ <strong class="text-amber-700">المكدس (Stack)</strong> و <strong class="text-amber-700">الطابور (Queue)</strong>.</li>
+                    <li><strong class="text-amber-700">إدارة الذاكرة الديناميكية</strong> في أنظمة التشغيل.</li>
+                    <li>تنفيذ <strong class="text-amber-700">قوائم التشغيل</strong> (Playlists) في مشغلات الموسيقى — إضافة/إزالة الأغاني بسهولة.</li>
+                    <li>تمثيل <strong class="text-amber-700">الرسوم البيانية (Graphs)</strong> عبر قوائم الجوار (Adjacency List).</li>
+                    <li><strong class="text-amber-700">تصفح الصور</strong> (Image Viewer) — السابقة والتالية عبر doubly linked list.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- المصفوفات vs القوائم المترابطة -->
+        <section class="mb-8">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+                <span class="w-10 h-10 bg-indigo-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                    </svg>
+                </span>
+                المقارنة: المصفوفات (Arrays) vs القوائم المترابطة (Linked Lists)
+            </h2>
+
+            <div class="overflow-x-auto rounded-xl border border-gray-200">
+                <table class="w-full border-collapse bg-white">
+                    <thead>
+                        <tr class="bg-gray-900 text-white">
+                            <th class="p-4 border border-gray-700 font-bold text-right">الخاصية</th>
+                            <th class="p-4 border border-gray-700 font-bold">المصفوفة (Array)</th>
+                            <th class="p-4 border border-gray-700 font-bold text-orange-500">القائمة المترابطة</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-gray-200">
+                            <td class="p-4 border border-gray-200 font-bold text-gray-800">الحجم</td>
+                            <td class="p-4 border border-gray-200 text-center text-gray-600">ثابت (ثابت الطول)</td>
+                            <td class="p-4 border border-gray-200 text-center text-gray-600">ديناميكي (يتغير)</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 bg-gray-50">
+                            <td class="p-4 border border-gray-200 font-bold text-gray-800">الوصول العشوائي</td>
+                            <td class="p-4 border border-gray-200 text-center text-green-600 font-bold">O(1)</td>
+                            <td class="p-4 border border-gray-200 text-center text-red-600 font-bold">O(n)</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="p-4 border border-gray-200 font-bold text-gray-800">الإدراج/الحذف في البداية</td>
+                            <td class="p-4 border border-gray-200 text-center text-red-600 font-bold">O(n)</td>
+                            <td class="p-4 border border-gray-200 text-center text-green-600 font-bold">O(1)</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 bg-gray-50">
+                            <td class="p-4 border border-gray-200 font-bold text-gray-800">استهلاك الذاكرة</td>
+                            <td class="p-4 border border-gray-200 text-center text-gray-600">أقل (قيم فقط)</td>
+                            <td class="p-4 border border-gray-200 text-center text-gray-600">أكثر (قيم + مؤشرات)</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 border border-gray-200 font-bold text-gray-800">الاجتياز</td>
+                            <td class="p-4 border border-gray-200 text-center text-gray-600">تتابعي أو عشوائي</td>
+                            <td class="p-4 border border-gray-200 text-center text-gray-600">تتابعي فقط</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <div class="text-center mt-10 mb-4">
+            <a href="simulation.html" class="inline-flex items-center gap-2 px-8 py-4 bg-orange-600 hover:bg-orange-700 text-white font-bold text-lg rounded-xl shadow-lg transition-all duration-300 hover:scale-105">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                جرب المحاكاة التفاعلية
+            </a>
+        </div>
+    </div>
+
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p class="text-gray-400 text-sm">
+                &copy; 2026 مقرر الحاسوب — جميع الحقوق محفوظة
+            </p>
+        </div>
+    </footer>
+
+  <script src="../../assets/js/theme-toggle.js"></script>
+</body>
+</html>

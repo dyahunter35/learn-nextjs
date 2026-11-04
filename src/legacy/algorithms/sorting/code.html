@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>خوارزميات الترتيب - الكود البرمجي</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../../assets/css/code-tabs.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/atom-one-dark.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <link rel="stylesheet" href="../../assets/css/design-system.css" />
+  <link rel="stylesheet" href="../../assets/css/dark-content.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50 min-h-screen">
+  
+    <nav class="site-nav">
+      <div class="site-nav-inner">
+        <div class="nav-main">
+          <a href="../../index.html" class="nav-logo">
+            <svg class="nav-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.663 17h4.673M12 3v1m6.364 1.636-.707.707M21 12h-1M4 12H3m3.343-5.657-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            <span>مقرر الحاسوب</span>
+          </a>
+          <div class="nav-links">
+                  <a href="../../index.html">الرئيسية</a>
+      <a href="index.html">الشرح</a>
+      <a href="simulation.html">المحاكاة</a>
+          </div>
+          <div class="nav-actions">
+            <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme"></button>
+            <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="nav-mobile" id="navMobile">
+                <a href="../../index.html">الرئيسية</a>
+      <a href="index.html">الشرح</a>
+      <a href="simulation.html">المحاكاة</a>
+        </div>
+        <div class="nav-breadcrumb">
+          <a href="../../index.html">الرئيسية</a><span class="sep">›</span><a href="index.html">خوارزميات الترتيب (Sorting)</a><span class="sep">›</span><span class="current">الكود البرمجي</span>
+        </div>
+      </div>
+    </nav>
+    <script>function toggleMenu(){var m=document.getElementById("navMobile");if(m)m.classList.toggle("open")}</script>
+
+  <div class="code-page">
+    <h1>خوارزميات الترتيب — الكود البرمجي</h1>
+    <p class="subtitle">شرح مبسط لخوارزميتي ترتيب الفقاعة وترتيب الاختيار مع أمثلة برمجية بلغات متعددة. يمكنك نسخ الكود واستخدامه مباشرة.</p>
+    
+    <div class="algorithm-code-description">
+      <strong>كيف تعمل خوارزميات الترتيب:</strong><br/>
+      <strong>ترتيب الفقاعة (Bubble Sort):</strong> تقارن الخوارزمية كل زوج من العناصر المتجاورة وتقوم بتبديلهما إذا كانا بترتيب خاطئ. تستمر العملية حتى يتم ترتيب المصفوفة بالكامل. في كل تمريرة، "تطفو" أكبر قيمة إلى نهاية المصفوفة.<br/><br/>
+      <strong>ترتيب الاختيار (Selection Sort):</strong> تقوم الخوارزمية بتقسيم المصفوفة إلى جزئين: مرتب وغير مرتب. في كل خطوة، تبحث عن أصغر قيمة في الجزء غير المرتب وتضعها في نهاية الجزء المرتب. تستمر حتى يتم ترتيب جميع العناصر.
+    </div>
+
+    <div class="lang-tabs">
+      <button class="lang-tab active" data-lang="cpp" onclick="switchLang('cpp')">C++</button>
+      <button class="lang-tab" data-lang="java" onclick="switchLang('java')">Java</button>
+      <button class="lang-tab" data-lang="js" onclick="switchLang('js')">JavaScript</button>
+      <button class="lang-tab" data-lang="php" onclick="switchLang('php')">PHP</button>
+    </div>
+    
+    <div class="code-block active" id="code-cpp">
+      <button class="copy-btn" data-lang="cpp" onclick="copyCode('cpp')">نسخ</button>
+      <pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+void bubbleSort(vector&lt;int&gt;&amp; arr) {
+    int n = arr.size();
+    for (int i = 0; i &lt; n - 1; i++) {
+        for (int j = 0; j &lt; n - i - 1; j++) {
+            if (arr[j] &gt; arr[j + 1]) {
+                swap(arr[j], arr[j + 1]);
+            }
+        }
+    }
+}
+
+void selectionSort(vector&lt;int&gt;&amp; arr) {
+    int n = arr.size();
+    for (int i = 0; i &lt; n - 1; i++) {
+        int minIdx = i;
+        for (int j = i + 1; j &lt; n; j++) {
+            if (arr[j] &lt; arr[minIdx]) {
+                minIdx = j;
+            }
+        }
+        swap(arr[i], arr[minIdx]);
+    }
+}
+
+void printArray(const vector&lt;int&gt;&amp; arr) {
+    for (int x : arr) cout &lt;&lt; x &lt;&lt; " ";
+    cout &lt;&lt; endl;
+}
+
+int main() {
+    vector&lt;int&gt; arr1 = {64, 34, 25, 12, 22, 11, 90};
+    vector&lt;int&gt; arr2 = arr1;
+
+    cout &lt;&lt; "Original array: ";
+    printArray(arr1);
+
+    bubbleSort(arr1);
+    cout &lt;&lt; "After Bubble Sort: ";
+    printArray(arr1);
+
+    selectionSort(arr2);
+    cout &lt;&lt; "After Selection Sort: ";
+    printArray(arr2);
+
+    return 0;
+}</code></pre>
+    </div>
+    
+    <div class="code-block" id="code-java">
+      <button class="copy-btn" data-lang="java" onclick="copyCode('java')">نسخ</button>
+      <pre><code class="language-java">import java.util.Arrays;
+
+public class SortingAlgorithms {
+
+    public static void bubbleSort(int[] arr) {
+        int n = arr.length;
+        for (int i = 0; i &lt; n - 1; i++) {
+            for (int j = 0; j &lt; n - i - 1; j++) {
+                if (arr[j] &gt; arr[j + 1]) {
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+    }
+
+    public static void selectionSort(int[] arr) {
+        int n = arr.length;
+        for (int i = 0; i &lt; n - 1; i++) {
+            int minIdx = i;
+            for (int j = i + 1; j &lt; n; j++) {
+                if (arr[j] &lt; arr[minIdx]) {
+                    minIdx = j;
+                }
+            }
+            int temp = arr[i];
+            arr[i] = arr[minIdx];
+            arr[minIdx] = temp;
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] arr1 = {64, 34, 25, 12, 22, 11, 90};
+        int[] arr2 = Arrays.copyOf(arr1, arr1.length);
+
+        System.out.println("Original array: " + Arrays.toString(arr1));
+
+        bubbleSort(arr1);
+        System.out.println("After Bubble Sort: " + Arrays.toString(arr1));
+
+        selectionSort(arr2);
+        System.out.println("After Selection Sort: " + Arrays.toString(arr2));
+    }
+}</code></pre>
+    </div>
+    
+    <div class="code-block" id="code-js">
+      <button class="copy-btn" data-lang="js" onclick="copyCode('js')">نسخ</button>
+      <pre><code class="language-javascript">function bubbleSort(arr) {
+    const n = arr.length;
+    for (let i = 0; i &lt; n - 1; i++) {
+        for (let j = 0; j &lt; n - i - 1; j++) {
+            if (arr[j] &gt; arr[j + 1]) {
+                [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+            }
+        }
+    }
+    return arr;
+}
+
+function selectionSort(arr) {
+    const n = arr.length;
+    for (let i = 0; i &lt; n - 1; i++) {
+        let minIdx = i;
+        for (let j = i + 1; j &lt; n; j++) {
+            if (arr[j] &lt; arr[minIdx]) {
+                minIdx = j;
+            }
+        }
+        [arr[i], arr[minIdx]] = [arr[minIdx], arr[i]];
+    }
+    return arr;
+}
+
+const arr1 = [64, 34, 25, 12, 22, 11, 90];
+const arr2 = [...arr1];
+
+console.log("Original array:", arr1);
+console.log("After Bubble Sort:", bubbleSort([...arr1]));
+console.log("After Selection Sort:", selectionSort([...arr2]));</code></pre>
+    </div>
+    
+    <div class="code-block" id="code-php">
+      <button class="copy-btn" data-lang="php" onclick="copyCode('php')">نسخ</button>
+      <pre><code class="language-php">&lt;?php
+
+function bubbleSort(&amp;$arr) {
+    $n = count($arr);
+    for ($i = 0; $i &lt; $n - 1; $i++) {
+        for ($j = 0; $j &lt; $n - $i - 1; $j++) {
+            if ($arr[$j] &gt; $arr[$j + 1]) {
+                $temp = $arr[$j];
+                $arr[$j] = $arr[$j + 1];
+                $arr[$j + 1] = $temp;
+            }
+        }
+    }
+}
+
+function selectionSort(&amp;$arr) {
+    $n = count($arr);
+    for ($i = 0; $i &lt; $n - 1; $i++) {
+        $minIdx = $i;
+        for ($j = $i + 1; $j &lt; $n; $j++) {
+            if ($arr[$j] &lt; $arr[$minIdx]) {
+                $minIdx = $j;
+            }
+        }
+        $temp = $arr[$i];
+        $arr[$i] = $arr[$minIdx];
+        $arr[$minIdx] = $temp;
+    }
+}
+
+$arr1 = [64, 34, 25, 12, 22, 11, 90];
+$arr2 = $arr1;
+
+echo "Original array: " . implode(", ", $arr1) . "\n";
+
+bubbleSort($arr1);
+echo "After Bubble Sort: " . implode(", ", $arr1) . "\n";
+
+selectionSort($arr2);
+echo "After Selection Sort: " . implode(", ", $arr2) . "\n";
+
+?&gt;</code></pre>
+    </div>
+  </div>
+
+  <footer class="bg-gray-900 text-white py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p class="text-gray-400 text-sm">خوارزميات الترتيب — أمثلة برمجية تفاعلية</p>
+    </div>
+  </footer>
+  
+  <script src="../../assets/js/code-tabs.js"></script>
+  <script src="../../assets/js/theme-toggle.js"></script>
+</body>
+</html>

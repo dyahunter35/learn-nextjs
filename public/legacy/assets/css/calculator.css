@@ -1,0 +1,31 @@
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap");
+
+body {
+  font-family: "Cairo", sans-serif;
+}
+
+.calc-button {
+  transition: all 0.15s ease-in-out;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -2px rgba(0, 0, 0, 0.1);
+}
+
+.calc-button:active {
+  transform: scale(0.98);
+  opacity: 0.95;
+  box-shadow: none;
+}
+
+.text-scale-4xl {
+  font-size: 2.25rem !important;
+}
+.text-scale-3xl {
+  font-size: 1.875rem !important;
+}
+
+.bg-scientific {
+  background-color: #5b21b6;
+}
+.hover\:bg-scientific-hover:hover {
+  background-color: #4c1d95;
+}

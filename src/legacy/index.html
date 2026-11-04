@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>مقرر الحاسوب - الخوارزميات والمحاكاة التفاعلية</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link rel="stylesheet" href="assets/css/design-system.css" />
+  <link rel="stylesheet" href="assets/css/index.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Importmap for Three.js -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+
+<body>
+
+  <!-- ===== حاوية المشهد ثلاثي الأبعاد (خلفية ثابتة) ===== -->
+  <div id="three-container"></div>
+
+  <!-- ===== الشريط العلوي (Navbar) ===== -->
+  <nav class="main-nav site-nav fixed top-0 right-0 left-0 z-50">
+    <div class="site-nav-inner">
+      <div class="nav-main">
+        <a href="#" class="nav-logo">
+          <svg class="nav-logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.663 17h4.673M12 3v1m6.364 1.636-.707.707M21 12h-1M4 12H3m3.343-5.657-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+          <span>مقرر الحاسوب</span>
+        </a>
+        <div class="nav-links">
+          <a href="#sections">الأقسام</a>
+          <a href="#tools">أدوات</a>
+          <a href="#extra-knowledge">معرفة إضافية</a>
+          <a href="#developer">المطور</a>
+        </div>
+        <div class="nav-actions">
+          <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme"></button>
+          <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="nav-mobile" id="navMobile">
+        <a href="#sections">الأقسام</a>
+        <a href="#tools">أدوات</a>
+        <a href="#extra-knowledge">معرفة إضافية</a>
+        <a href="#developer">المطور</a>
+      </div>
+    </div>
+  </nav>
+  <script>function toggleMenu(){var m=document.getElementById("navMobile");if(m)m.classList.toggle("open")}</script>
+
+  <!-- ===== قسم الهيرو (Hero) ===== -->
+  <header class="hero-section text-white min-h-screen flex items-center justify-center relative overflow-hidden">
+    <!-- طبقة تدرج شفافة فوق المشهد ثلاثي الأبعاد -->
+    <div class="absolute inset-0 bg-gradient-to-b from-indigo-950/60 via-indigo-900/40 to-slate-900/70 z-[1]"></div>
+
+    <div class="hero-content relative z-10 max-w-5xl mx-auto px-4 text-center">
+      <!-- شارة -->
+      <div class="inline-block mb-6 animate__animated animate__fadeInDown">
+        <span class="bg-amber-500/20 text-amber-300 text-sm font-bold px-4 py-1.5 rounded-full border border-amber-500/30 backdrop-blur-sm">
+          🎓 الصف الثالث الثانوي
+        </span>
+      </div>
+
+      <h1 class="text-4xl sm:text-5xl md:text-7xl font-extrabold mb-6 leading-tight animate__animated animate__fadeInDown animate__slow">
+        اكتشف عالم
+        <span class="text-transparent bg-clip-text bg-gradient-to-l from-amber-400 to-yellow-300">الخوارزميات</span>
+        <br />ومحاكاة تفاعلية
+      </h1>
+
+      <p class="text-lg sm:text-xl md:text-2xl font-light mb-10 text-gray-300 max-w-3xl mx-auto animate__animated animate__fadeInDown animate__delay-1s">
+        دليلك الشامل لفهم الخوارزميات، هياكل البيانات، ونظم التشفير — مع محاكيات تفاعلية تجعل التعلم ممتعاً
+      </p>
+
+      <!-- أزرار الهيرو -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center animate__animated animate__fadeInUp animate__delay-2s">
+        <a href="#sections"
+          class="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-gray-900 font-bold py-3.5 px-8 rounded-full shadow-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-amber-500/40 text-lg">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+          ابدأ رحلة التعلم
+        </a>
+        <a href="#coming-soon"
+          class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold py-3.5 px-8 rounded-full border border-white/20 backdrop-blur-sm transition-all duration-300 transform hover:scale-105 text-lg">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+          </svg>
+          خوارزميات قادمة
+        </a>
+      </div>
+    </div>
+
+    <!-- موجة سفلية -->
+    <div class="absolute bottom-0 left-0 right-0 z-[2]">
+      <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
+        <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="#f8fafc"/>
+      </svg>
+    </div>
+  </header>
+
+  <!-- ===== شريط الإحصائيات ===== -->
+  <section class="stats-bar bg-white border-b border-gray-200 py-6 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        <div class="stat-item">
+          <div class="text-3xl md:text-4xl font-extrabold text-indigo-600" data-count="15">0</div>
+          <div class="text-sm text-gray-500 mt-1 font-medium">خوارزمية تفاعلية</div>
+        </div>
+        <div class="stat-item">
+          <div class="text-3xl md:text-4xl font-extrabold text-indigo-600" data-count="18">0</div>
+          <div class="text-sm text-gray-500 mt-1 font-medium">محاكاة عملية</div>
+        </div>
+        <div class="stat-item">
+          <div class="text-3xl md:text-4xl font-extrabold text-indigo-600" data-count="8">0</div>
+          <div class="text-sm text-gray-500 mt-1 font-medium">أدوات تعليمية</div>
+        </div>
+        <div class="stat-item">
+          <div class="text-3xl md:text-4xl font-extrabold text-amber-500" data-count="1">0</div>
+          <div class="text-sm text-gray-500 mt-1 font-medium">مشروع تعليمي</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== أقسام المقرر الرئيسية ===== -->
+  <main id="sections" class="py-16 md:py-24 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- عنوان الأقسام -->
+      <div class="text-center mb-14">
+        <span class="inline-block text-indigo-600 font-bold text-sm tracking-widest uppercase mb-2">ALGORITHMS</span>
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">أقسام المقرر الأساسية</h2>
+        <p class="text-gray-500 max-w-2xl mx-auto text-lg">اختر أحد الأقسام أدناه لبدء التعلم والتفاعل مع المحاكيات</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8" id="cards-container">
+
+        <!-- 1. خوارزميات الترتيب (Sorting) -->
+        <a href="algorithms/sorting/index.html"
+          class="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden card-main">
+          <!-- الشريط العلوي الملون -->
+          <div class="h-2 bg-gradient-to-l from-indigo-500 to-indigo-600"></div>
+          <div class="p-6 md:p-8">
+            <!-- أيقونة الخلفية -->
+            <div class="absolute -top-6 -left-6 w-24 h-24 bg-indigo-50 rounded-full opacity-50 group-hover:scale-150 transition-transform duration-700"></div>
+            <div class="relative">
+              <div class="w-14 h-14 bg-indigo-100 rounded-xl flex items-center justify-center mb-5 group-hover:bg-indigo-600 transition-colors duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-indigo-600 group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h16m-9 4h5m-6 4l-4-4m0 0l4-4m-4 4h18" />
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold text-gray-900 mb-3">الترتيب <span class="text-indigo-600">(Sorting)</span></h3>
+              <p class="text-gray-500 leading-relaxed mb-4">
+                خوارزميات الفقاعات، الإدراج، والتحديد. تعلم كيفية تنظيم البيانات بكفاءة.
+              </p>
+              <span class="inline-flex items-center gap-1 text-indigo-600 font-semibold text-sm group-hover:gap-2 transition-all">
+                ابدأ التعلم
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+              </span>
+            </div>
+          </div>
+        </a>
+
+        <!-- 2. خوارزميات البحث (Searching) -->
+        <a href="algorithms/searching/index.html"
+          class="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden card-main">
+          <div class="h-2 bg-gradient-to-l from-blue-500 to-cyan-500"></div>
+          <div class="p-6 md:p-8">
+            <div class="absolute -top-6 -left-6 w-24 h-24 bg-blue-50 rounded-full opacity-50 group-hover:scale-150 transition-transform duration-700"></div>
+            <div class="relative">
+              <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center mb-5 group-hover:bg-blue-600 transition-colors duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-blue-600 group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold text-gray-900 mb-3">البحث <span class="text-blue-600">(Searching)</span></h3>
+              <p class="text-gray-500 leading-relaxed mb-4">
+                البحث الخطي والثنائي. اكتشف أسرع الطرق لإيجاد المعلومات داخل البيانات.
+              </p>
+              <span class="inline-flex items-center gap-1 text-blue-600 font-semibold text-sm group-hover:gap-2 transition-all">
+                ابدأ التعلم
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+              </span>
+            </div>
+          </div>
+        </a>
+
+        <!-- 3. خوارزميات التشفير (Encryption) -->
+        <div
+          class="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden card-main">
+          <div class="h-2 bg-gradient-to-l from-green-500 to-emerald-500"></div>
+          <div class="p-6 md:p-8">
+            <div class="absolute -top-6 -left-6 w-24 h-24 bg-green-50 rounded-full opacity-50 group-hover:scale-150 transition-transform duration-700"></div>
+            <div class="relative">
+              <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-green-600 transition-colors duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600 group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6-6v6m12-6v6m-4-6v6m-12 0h18m-12 0a2 2 0 100-4 2 2 0 000 4zm12 0a2 2 0 100-4 2 2 0 000 4zm-6 0a2 2 0 100-4 2 2 0 000 4z" />
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-gray-900 mb-2">التشفير <span class="text-green-600">(Encryption)</span></h3>
+              <p class="text-gray-500 leading-relaxed mb-3 text-sm">
+                أمن المعلومات، تشفير قيصر، وخوارزميات ضغط هوفمان.
+              </p>
+            </div>
+            <div class="space-y-1.5">
+              <a href="algorithms/caesar/index.html"
+                class="w-full flex items-center justify-between bg-gradient-to-l from-green-50 to-emerald-50 hover:from-green-100 hover:to-emerald-100 text-green-700 font-medium py-1.5 px-3 rounded-lg transition-all duration-300 border border-green-200/50 group/btn text-sm">
+                <span>خوارزمية يوليوس قيصر</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 opacity-0 group-hover/btn:opacity-100 transition-all group-hover/btn:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+              </a>
+              <a href="algorithms/huffman/index.html"
+                class="w-full flex items-center justify-between bg-gradient-to-l from-green-50 to-emerald-50 hover:from-green-100 hover:to-emerald-100 text-green-700 font-medium py-1.5 px-3 rounded-lg transition-all duration-300 border border-green-200/50 group/btn text-sm">
+                <span>خوارزمية هوفمان للضغط</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 opacity-0 group-hover/btn:opacity-100 transition-all group-hover/btn:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. المكدس والطابور (Stack & Queue) -->
+        <a href="algorithms/stackqueue/index.html"
+          class="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden card-main">
+          <div class="h-2 bg-gradient-to-l from-cyan-500 to-teal-500"></div>
+          <div class="p-6 md:p-8">
+            <div class="absolute -top-6 -left-6 w-24 h-24 bg-cyan-50 rounded-full opacity-50 group-hover:scale-150 transition-transform duration-700"></div>
+            <div class="relative">
+              <div class="w-14 h-14 bg-cyan-100 rounded-xl flex items-center justify-center mb-5 group-hover:bg-cyan-600 transition-colors duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-cyan-600 group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold text-gray-900 mb-3">المكدس والطابور <span class="text-cyan-600">(Stack & Queue)</span></h3>
+              <p class="text-gray-500 leading-relaxed mb-4">
+                هياكل البيانات الأساسية LIFO و FIFO مع محاكاة تفاعلية للعمليات.
+              </p>
+              <span class="inline-flex items-center gap-1 text-cyan-600 font-semibold text-sm group-hover:gap-2 transition-all">
+                ابدأ التعلم
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+              </span>
+            </div>
+          </div>
+        </a>
+
+        <!-- 5. القوائم المترابطة (Linked Lists) -->
+        <a href="algorithms/linkedlist/index.html"
+          class="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden card-main">
+          <div class="h-2 bg-gradient-to-l from-orange-500 to-red-500"></div>
+          <div class="p-6 md:p-8">
+            <div class="absolute -top-6 -left-6 w-24 h-24 bg-orange-50 rounded-full opacity-50 group-hover:scale-150 transition-transform duration-700"></div>
+            <div class="relative">
+              <div class="w-14 h-14 bg-orange-100 rounded-xl flex items-center justify-center mb-5 group-hover:bg-orange-600 transition-colors duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-orange-600 group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold text-gray-900 mb-3">القوائم المترابطة <span class="text-orange-600">(Linked Lists)</span></h3>
+              <p class="text-gray-500 leading-relaxed mb-4">
+                بنية ديناميكية للبيانات تربط العناصر عبر مؤشرات متسلسلة مع محاكاة تفاعلية.
+              </p>
+              <span class="inline-flex items-center gap-1 text-orange-600 font-semibold text-sm group-hover:gap-2 transition-all">
+                ابدأ التعلم
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+              </span>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- ===== قسم الأدوات التعليمية (Tools) ===== -->
+  <section id="tools" class="py-16 md:py-24 bg-gradient-to-b from-amber-50/50 to-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <span class="inline-block text-amber-600 font-bold text-sm tracking-widest uppercase mb-2">TOOLS</span>
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">أدوات تعليمية</h2>
+        <p class="text-gray-500 max-w-2xl mx-auto text-lg">أدوات ووسائل تعليمية مساعدة — ليست خوارزميات ولكنها مهمة لفهم الحاسوب</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+
+        <!-- 1. التحويلات العددية (Number Systems) -->
+        <a href="algorithms/converters/index.html"
+          class="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden card-main">
+          <div class="h-2 bg-gradient-to-l from-amber-500 to-orange-500"></div>
+          <div class="p-6 md:p-8">
+            <div class="absolute -top-6 -left-6 w-24 h-24 bg-amber-50 rounded-full opacity-50 group-hover:scale-150 transition-transform duration-700"></div>
+            <div class="relative">
+              <div class="w-14 h-14 bg-amber-100 rounded-xl flex items-center justify-center mb-5 group-hover:bg-amber-600 transition-colors duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-amber-600 group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-2.414-2.414a1 1 0 00-.707-.293H7a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div class="flex items-center gap-2 mb-2">
+                <h3 class="text-xl font-bold text-gray-900">التحويلات العددية</h3>
+                <span class="text-xs bg-amber-100 text-amber-700 font-bold px-2 py-0.5 rounded-full">أداة</span>
+              </div>
+              <p class="text-gray-500 leading-relaxed mb-4 text-sm">
+                من ثنائي لعشري والعكس. فهم كيفية تمثيل البيانات داخل الحاسوب.
+              </p>
+              <span class="inline-flex items-center gap-1 text-amber-600 font-semibold text-sm group-hover:gap-2 transition-all">
+                استخدم الأداة
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+              </span>
+            </div>
+          </div>
+        </a>
+
+        <!-- 2. الآلة الحاسبة (Calculator) -->
+        <a href="algorithms/calculator/index.html"
+          class="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden card-main">
+          <div class="h-2 bg-gradient-to-l from-purple-500 to-violet-500"></div>
+          <div class="p-6 md:p-8">
+            <div class="absolute -top-6 -left-6 w-24 h-24 bg-purple-50 rounded-full opacity-50 group-hover:scale-150 transition-transform duration-700"></div>
+            <div class="relative">
+              <div class="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center mb-5 group-hover:bg-purple-600 transition-colors duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-purple-600 group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div class="flex items-center gap-2 mb-2">
+                <h3 class="text-xl font-bold text-gray-900">الآلة الحاسبة</h3>
+                <span class="text-xs bg-amber-100 text-amber-700 font-bold px-2 py-0.5 rounded-full">أداة</span>
+              </div>
+              <p class="text-gray-500 leading-relaxed mb-4 text-sm">
+                آلة حاسبة علمية متكاملة مع واجهة تفاعلية وسهلة الاستخدام.
+              </p>
+              <span class="inline-flex items-center gap-1 text-purple-600 font-semibold text-sm group-hover:gap-2 transition-all">
+                استخدم الأداة
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+              </span>
+            </div>
+          </div>
+        </a>
+
+        <!-- 3. جداول الصواب (Truth Tables) -->
+        <a href="algorithms/truetale/index.html"
+          class="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden card-main">
+          <div class="h-2 bg-gradient-to-l from-rose-500 to-pink-500"></div>
+          <div class="p-6 md:p-8">
+            <div class="absolute -top-6 -left-6 w-24 h-24 bg-rose-50 rounded-full opacity-50 group-hover:scale-150 transition-transform duration-700"></div>
+            <div class="relative">
+              <div class="w-14 h-14 bg-rose-100 rounded-xl flex items-center justify-center mb-5 group-hover:bg-rose-600 transition-colors duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-rose-600 group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div class="flex items-center gap-2 mb-2">
+                <h3 class="text-xl font-bold text-gray-900">جداول الصواب</h3>
+                <span class="text-xs bg-amber-100 text-amber-700 font-bold px-2 py-0.5 rounded-full">أداة</span>
+              </div>
+              <p class="text-gray-500 leading-relaxed mb-4 text-sm">
+                مولد تفاعلي لجداول الصواب المنطقية مع بوابات AND, OR, NOT.
+              </p>
+              <span class="inline-flex items-center gap-1 text-rose-600 font-semibold text-sm group-hover:gap-2 transition-all">
+                استخدم الأداة
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+              </span>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== قسم المعرفة الإضافية (Extra Knowledge) ===== -->
+  <section id="extra-knowledge" class="py-16 md:py-24 bg-gradient-to-b from-emerald-50/50 to-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <span class="inline-block text-emerald-600 font-bold text-sm tracking-widest uppercase mb-2">EXTRA KNOWLEDGE</span>
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">معرفة إضافية</h2>
+        <p class="text-gray-500 max-w-2xl mx-auto text-lg">خوارزميات وهياكل بيانات متقدمة — خارج المنهج الدراسي — لزيادة معرفتك وإثراء مهاراتك البرمجية</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+
+        <!-- 1. Recursion -->
+        <a href="algorithms/recursion/index.html"
+          class="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden card-main border-t-4 border-emerald-400">
+          <div class="p-6 md:p-8">
+            <div class="absolute -top-6 -left-6 w-24 h-24 bg-emerald-50 rounded-full opacity-50 group-hover:scale-150 transition-transform duration-700"></div>
+            <div class="relative">
+              <div class="w-14 h-14 bg-emerald-100 rounded-xl flex items-center justify-center mb-5 group-hover:bg-emerald-600 transition-colors duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-emerald-600 group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+              </div>
+              <div class="flex items-center gap-2 mb-2">
+                <h3 class="text-xl font-bold text-gray-900">الخوارزميات العودية</h3>
+                <span class="text-xs bg-emerald-100 text-emerald-700 font-bold px-2 py-0.5 rounded-full">جديد</span>
+              </div>
+              <p class="text-gray-500 leading-relaxed mb-4 text-sm">
+                Recursion — حل المشكلات بتقسيمها إلى أجزاء أصغر وإعادة تطبيق الحل. محاكاة تفاعلية مع شجرة العودية.
+              </p>
+              <span class="inline-flex items-center gap-1 text-emerald-600 font-semibold text-sm group-hover:gap-2 transition-all">
+                ابدأ التعلم
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+              </span>
+            </div>
+          </div>
+        </a>
+
+        <!-- 2. Graph Algorithms (BFS/DFS) -->
+        <a href="algorithms/graphs/index.html"
+          class="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden card-main border-t-4 border-violet-400">
+          <div class="p-6 md:p-8">
+            <div class="absolute -top-6 -left-6 w-24 h-24 bg-violet-50 rounded-full opacity-50 group-hover:scale-150 transition-transform duration-700"></div>
+            <div class="relative">
+              <div class="w-14 h-14 bg-violet-100 rounded-xl flex items-center justify-center mb-5 group-hover:bg-violet-600 transition-colors duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-violet-600 group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                </svg>
+              </div>
+              <div class="flex items-center gap-2 mb-2">
+                <h3 class="text-xl font-bold text-gray-900">الرسوم البيانية (BFS/DFS)</h3>
+                <span class="text-xs bg-emerald-100 text-emerald-700 font-bold px-2 py-0.5 rounded-full">جديد</span>
+              </div>
+              <p class="text-gray-500 leading-relaxed mb-4 text-sm">
+                Graph Algorithms — البحث في الشبكات باستخدام خوارزميتي العرض (BFS) والعمق (DFS) مع رسوم متحركة.
+              </p>
+              <span class="inline-flex items-center gap-1 text-violet-600 font-semibold text-sm group-hover:gap-2 transition-all">
+                ابدأ التعلم
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+              </span>
+            </div>
+          </div>
+        </a>
+
+        <!-- 3. Dynamic Programming -->
+        <a href="algorithms/dp/index.html"
+          class="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden card-main border-t-4 border-rose-400">
+          <div class="p-6 md:p-8">
+            <div class="absolute -top-6 -left-6 w-24 h-24 bg-rose-50 rounded-full opacity-50 group-hover:scale-150 transition-transform duration-700"></div>
+            <div class="relative">
+              <div class="w-14 h-14 bg-rose-100 rounded-xl flex items-center justify-center mb-5 group-hover:bg-rose-600 transition-colors duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-rose-600 group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+              </div>
+              <div class="flex items-center gap-2 mb-2">
+                <h3 class="text-xl font-bold text-gray-900">البرمجة الديناميكية</h3>
+                <span class="text-xs bg-emerald-100 text-emerald-700 font-bold px-2 py-0.5 rounded-full">جديد</span>
+              </div>
+              <p class="text-gray-500 leading-relaxed mb-4 text-sm">
+                Dynamic Programming — حل المشكلات المعقدة بتقسيمها إلى مشكلات فرعية متداخلة. مع محاكاة فيبوناتشي والعملات.
+              </p>
+              <span class="inline-flex items-center gap-1 text-rose-600 font-semibold text-sm group-hover:gap-2 transition-all">
+                ابدأ التعلم
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+              </span>
+            </div>
+          </div>
+        </a>
+
+        <!-- 4. Hashing -->
+        <a href="algorithms/hashing/index.html"
+          class="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden card-main border-t-4 border-cyan-400">
+          <div class="p-6 md:p-8">
+            <div class="absolute -top-6 -left-6 w-24 h-24 bg-cyan-50 rounded-full opacity-50 group-hover:scale-150 transition-transform duration-700"></div>
+            <div class="relative">
+              <div class="w-14 h-14 bg-cyan-100 rounded-xl flex items-center justify-center mb-5 group-hover:bg-cyan-600 transition-colors duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-cyan-600 group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                </svg>
+              </div>
+              <div class="flex items-center gap-2 mb-2">
+                <h3 class="text-xl font-bold text-gray-900">التجزئة (Hashing)</h3>
+                <span class="text-xs bg-emerald-100 text-emerald-700 font-bold px-2 py-0.5 rounded-full">جديد</span>
+              </div>
+              <p class="text-gray-500 leading-relaxed mb-4 text-sm">
+                Hashing Tables — تخزين واسترجاع البيانات بسرعة باستخدام دوال التجزئة مع معالجة التصادمات.
+              </p>
+              <span class="inline-flex items-center gap-1 text-cyan-600 font-semibold text-sm group-hover:gap-2 transition-all">
+                ابدأ التعلم
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+              </span>
+            </div>
+          </div>
+        </a>
+
+        <!-- 5. Divide & Conquer -->
+        <a href="algorithms/divide-conquer/index.html"
+          class="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden card-main border-t-4 border-blue-400">
+          <div class="p-6 md:p-8">
+            <div class="absolute -top-6 -left-6 w-24 h-24 bg-blue-50 rounded-full opacity-50 group-hover:scale-150 transition-transform duration-700"></div>
+            <div class="relative">
+              <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center mb-5 group-hover:bg-blue-600 transition-colors duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-blue-600 group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+              </div>
+              <div class="flex items-center gap-2 mb-2">
+                <h3 class="text-xl font-bold text-gray-900">فرق تسد (Divide & Conquer)</h3>
+                <span class="text-xs bg-emerald-100 text-emerald-700 font-bold px-2 py-0.5 rounded-full">جديد</span>
+              </div>
+              <p class="text-gray-500 leading-relaxed mb-4 text-sm">
+                دمج القوائم (Merge Sort) والترتيب السريع (Quick Sort) — تقسيم المشكلة ثم دمج الحلول.
+              </p>
+              <span class="inline-flex items-center gap-1 text-blue-600 font-semibold text-sm group-hover:gap-2 transition-all">
+                ابدأ التعلم
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+              </span>
+            </div>
+          </div>
+        </a>
+
+        <!-- 6. Greedy Algorithms -->
+        <a href="algorithms/greedy/index.html"
+          class="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden card-main border-t-4 border-amber-400">
+          <div class="p-6 md:p-8">
+            <div class="absolute -top-6 -left-6 w-24 h-24 bg-amber-50 rounded-full opacity-50 group-hover:scale-150 transition-transform duration-700"></div>
+            <div class="relative">
+              <div class="w-14 h-14 bg-amber-100 rounded-xl flex items-center justify-center mb-5 group-hover:bg-amber-600 transition-colors duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-amber-600 group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                </svg>
+              </div>
+              <div class="flex items-center gap-2 mb-2">
+                <h3 class="text-xl font-bold text-gray-900">الخوارزميات الجشعة (Greedy)</h3>
+                <span class="text-xs bg-emerald-100 text-emerald-700 font-bold px-2 py-0.5 rounded-full">جديد</span>
+              </div>
+              <p class="text-gray-500 leading-relaxed mb-4 text-sm">
+                اختيار الحل الأمثل محلياً في كل خطوة للوصول للحل الأمثل شاملاً. مع محاكاة تفاعلية.
+              </p>
+              <span class="inline-flex items-center gap-1 text-amber-600 font-semibold text-sm group-hover:gap-2 transition-all">
+                ابدأ التعلم
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+              </span>
+            </div>
+          </div>
+        </a>
+
+        <!-- 7. Backtracking -->
+        <a href="algorithms/backtracking/index.html"
+          class="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden card-main border-t-4 border-rose-400">
+          <div class="p-6 md:p-8">
+            <div class="absolute -top-6 -left-6 w-24 h-24 bg-rose-50 rounded-full opacity-50 group-hover:scale-150 transition-transform duration-700"></div>
+            <div class="relative">
+              <div class="w-14 h-14 bg-rose-100 rounded-xl flex items-center justify-center mb-5 group-hover:bg-rose-600 transition-colors duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-rose-600 group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div class="flex items-center gap-2 mb-2">
+                <h3 class="text-xl font-bold text-gray-900">التراجع (Backtracking)</h3>
+                <span class="text-xs bg-emerald-100 text-emerald-700 font-bold px-2 py-0.5 rounded-full">جديد</span>
+              </div>
+              <p class="text-gray-500 leading-relaxed mb-4 text-sm">
+                حل المتاهات وألغاز N-Queens بالتراجع عن الحلول غير الصحيحة تجريبياً مع محاكاة تفاعلية.
+              </p>
+              <span class="inline-flex items-center gap-1 text-rose-600 font-semibold text-sm group-hover:gap-2 transition-all">
+                ابدأ التعلم
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+              </span>
+            </div>
+          </div>
+        </a>
+
+        <!-- 8. Shortest Path (Dijkstra) -->
+        <a href="algorithms/shortest-path/index.html"
+          class="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden card-main border-t-4 border-purple-400">
+          <div class="p-6 md:p-8">
+            <div class="absolute -top-6 -left-6 w-24 h-24 bg-purple-50 rounded-full opacity-50 group-hover:scale-150 transition-transform duration-700"></div>
+            <div class="relative">
+              <div class="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center mb-5 group-hover:bg-purple-600 transition-colors duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-purple-600 group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                </svg>
+              </div>
+              <div class="flex items-center gap-2 mb-2">
+                <h3 class="text-xl font-bold text-gray-900">أقصر مسار (Dijkstra)</h3>
+                <span class="text-xs bg-emerald-100 text-emerald-700 font-bold px-2 py-0.5 rounded-full">جديد</span>
+              </div>
+              <p class="text-gray-500 leading-relaxed mb-4 text-sm">
+                إيجاد أقصر مسار بين نقطتين في رسم بياني موزون باستخدام خوارزمية Dijkstra مع محاكاة تفاعلية.
+              </p>
+              <span class="inline-flex items-center gap-1 text-purple-600 font-semibold text-sm group-hover:gap-2 transition-all">
+                ابدأ التعلم
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+              </span>
+            </div>
+          </div>
+        </a>
+
+        <!-- 9. Minimum Spanning Tree (MST) -->
+        <a href="algorithms/mst/index.html"
+          class="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden card-main border-t-4 border-cyan-400">
+          <div class="p-6 md:p-8">
+            <div class="absolute -top-6 -left-6 w-24 h-24 bg-cyan-50 rounded-full opacity-50 group-hover:scale-150 transition-transform duration-700"></div>
+            <div class="relative">
+              <div class="w-14 h-14 bg-cyan-100 rounded-xl flex items-center justify-center mb-5 group-hover:bg-cyan-600 transition-colors duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-cyan-600 group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+              </div>
+              <div class="flex items-center gap-2 mb-2">
+                <h3 class="text-xl font-bold text-gray-900">الشجرة الممتدة الدنيا (MST)</h3>
+                <span class="text-xs bg-emerald-100 text-emerald-700 font-bold px-2 py-0.5 rounded-full">جديد</span>
+              </div>
+              <p class="text-gray-500 leading-relaxed mb-4 text-sm">
+                خوارزميتا Kruskal و Prim لإيجاد أقل تكلفة لربط جميع نقاط الشبكة مع محاكاة تفاعلية.
+              </p>
+              <span class="inline-flex items-center gap-1 text-cyan-600 font-semibold text-sm group-hover:gap-2 transition-all">
+                ابدأ التعلم
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+              </span>
+            </div>
+          </div>
+        </a>
+
+        <!-- 10. String Matching -->
+        <a href="algorithms/string-matching/index.html"
+          class="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden card-main border-t-4 border-indigo-400">
+          <div class="p-6 md:p-8">
+            <div class="absolute -top-6 -left-6 w-24 h-24 bg-indigo-50 rounded-full opacity-50 group-hover:scale-150 transition-transform duration-700"></div>
+            <div class="relative">
+              <div class="w-14 h-14 bg-indigo-100 rounded-xl flex items-center justify-center mb-5 group-hover:bg-indigo-600 transition-colors duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-indigo-600 group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-2.414-2.414a1 1 0 00-.707-.293H7a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div class="flex items-center gap-2 mb-2">
+                <h3 class="text-xl font-bold text-gray-900">مطابقة السلاسل النصية</h3>
+                <span class="text-xs bg-emerald-100 text-emerald-700 font-bold px-2 py-0.5 rounded-full">جديد</span>
+              </div>
+              <p class="text-gray-500 leading-relaxed mb-4 text-sm">
+                KMP و Boyer-Moore — البحث بكفاءة عن نص داخل نص أطول باستخدام تقنيات ذكية مع محاكاة تفاعلية.
+              </p>
+              <span class="inline-flex items-center gap-1 text-indigo-600 font-semibold text-sm group-hover:gap-2 transition-all">
+                ابدأ التعلم
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+              </span>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== قسم المطور ===== -->
+  <section id="developer" class="bg-gradient-to-b from-slate-50 to-white py-16 md:py-24">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">المطور وراء هذا المشروع</h2>
+        <p class="text-gray-500 max-w-xl mx-auto">فريق التطوير والجهود المبذولة لإثراء المحتوى التعليمي</p>
+      </div>
+
+      <div class="bg-white rounded-3xl shadow-xl border border-gray-100 p-8 md:p-12 max-w-4xl mx-auto relative overflow-hidden group/dev">
+        <!-- عنصر زخرفي -->
+        <div class="absolute -top-20 -right-20 w-40 h-40 bg-indigo-50 rounded-full group-hover/dev:scale-150 transition-transform duration-700"></div>
+        <div class="absolute -bottom-20 -left-20 w-40 h-40 bg-amber-50 rounded-full group-hover/dev:scale-150 transition-transform duration-700"></div>
+
+        <div class="relative flex flex-col md:flex-row items-center gap-8">
+          <!-- الصورة -->
+          <div class="flex-shrink-0">
+            <div class="relative">
+              <img src="./image/deyaa.png" alt="صورة المطور ضياء البشرى محمد"
+                class="w-36 h-36 md:w-44 md:h-44 rounded-2xl object-cover object-top shadow-xl border-4 border-indigo-100" />
+              <div class="absolute -bottom-2 -left-2 bg-green-500 w-5 h-5 rounded-full border-4 border-white"></div>
+            </div>
+          </div>
+
+          <!-- المعلومات -->
+          <div class="flex-grow text-center md:text-right">
+            <h3 class="text-3xl font-extrabold text-gray-900 mb-1">ضياء البشرى محمد</h3>
+            <p class="text-lg font-semibold text-green-600 mb-4 flex items-center gap-2 justify-center md:justify-end">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+              </svg>
+              مطور تطبيقات ويب (Laravel Developer)
+            </p>
+            <p class="leading-relaxed text-gray-600 text-sm max-w-lg mx-auto md:mx-0">
+              مطور تطبيقات ويب يتمتع بمهارات عالية وخبرة واسعة في بناء أنظمة ومواقع معقدة، متخصص في
+              <span class="font-bold text-red-500">Full Stack</span> وإطار العمل
+              <span class="font-bold text-red-500">Laravel</span>. خبرة مُثبتة في تصميم وتنفيذ منصات إدارة متكاملة ومنصات خدمات لتحسين الإنتاجية.
+            </p>
+
+            <!-- المهارات -->
+            <div class="mt-5 flex flex-wrap justify-center md:justify-end gap-2">
+              <span class="bg-indigo-50 text-indigo-700 text-xs font-bold px-3 py-1.5 rounded-lg border border-indigo-100">PHP</span>
+              <span class="bg-blue-50 text-blue-700 text-xs font-bold px-3 py-1.5 rounded-lg border border-blue-100">MySQL</span>
+              <span class="bg-yellow-50 text-yellow-700 text-xs font-bold px-3 py-1.5 rounded-lg border border-yellow-100">JavaScript</span>
+              <span class="bg-green-50 text-green-700 text-xs font-bold px-3 py-1.5 rounded-lg border border-green-100">HTML/CSS</span>
+              <a href="https://deyaa.alsultansudan.com/" target="_blank" rel="noopener noreferrer"
+                class="bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition-all duration-300 hover:scale-105">
+                الموقع الشخصي
+              </a>
+            </div>
+
+            <!-- روابط التواصل -->
+            <div class="mt-6 pt-5 border-t border-gray-100 flex justify-center md:justify-end gap-4">
+              <a href="https://www.linkedin.com/in/Deyaa-Albushra-Mohamed" target="_blank" rel="noopener noreferrer"
+                class="w-10 h-10 rounded-xl bg-gray-100 hover:bg-[#0077b5] text-gray-500 hover:text-white flex items-center justify-center transition-all duration-300 hover:scale-110">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM4 11h4v10H4zM6 4a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" />
+                </svg>
+              </a>
+              <a href="https://x.com/your_twitter_handle" target="_blank" rel="noopener noreferrer"
+                class="w-10 h-10 rounded-xl bg-gray-100 hover:bg-black text-gray-500 hover:text-white flex items-center justify-center transition-all duration-300 hover:scale-110">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.9 3.2c.4 0 .7.1 1 .3.3.2.6.4.8.7.2.3.3.6.3 1s-.1.7-.3 1l-3 4-3 4c-.3.4-.6.7-1 .9-.4.2-.9.3-1.4.3s-1-.1-1.4-.3c-.4-.2-.7-.5-1-.9l-3-4-3-4c-.2-.3-.3-.6-.3-1s.1-.7.3-1c.2-.3.4-.6.7-.8.3-.2.6-.3 1-.3.4 0 .7.1 1 .3l2 2 3 4 3-4 2-2c.3-.2.6-.3 1-.3z" />
+                </svg>
+              </a>
+              <a href="https://github.com/your_github_profile" target="_blank" rel="noopener noreferrer"
+                class="w-10 h-10 rounded-xl bg-gray-100 hover:bg-gray-800 text-gray-500 hover:text-white flex items-center justify-center transition-all duration-300 hover:scale-110">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 0c-6.63 0-12 5.37-12 12 0 5.31 3.43 9.8 8.21 11.38.6.11.82-.26.82-.57 0-.28-.01-1.01-.01-2.02-3.34.73-4.04-1.61-4.04-1.61-.55-1.4-1.34-1.78-1.34-1.78-1.09-.74.08-.73.08-.73 1.21.08 1.84 1.24 1.84 1.24 1.08 1.84 2.82 1.3 3.5.99.11-.77.42-1.3.77-1.6-2.67-.3-5.47-1.33-5.47-5.94 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3.12A11.5 11.5 0 0 1 12 5.86c1.02.04 2.05.15 3.03.44 2.29-.44 3.3-.12 3.3-.12.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.62-2.8 5.63-5.48 5.93.43.37.82 1.1.82 2.22 0 1.6-.01 2.89-.01 3.28 0 .31.22.68.83.57C20.57 21.8 24 17.31 24 12c0-6.63-5.37-12-12-12z" />
+                </svg>
+              </a>
+              <a href="https://deyaa.alsultansudan.com/" target="_blank" rel="noopener noreferrer"
+                class="w-10 h-10 rounded-xl bg-gray-100 hover:bg-amber-500 text-gray-500 hover:text-white flex items-center justify-center transition-all duration-300 hover:scale-110">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== التذييل (Footer) ===== -->
+  <footer class="bg-gray-900 text-white">
+    <!-- موجة علوية -->
+    <div class="bg-slate-50">
+      <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
+        <path d="M0 0L60 10C120 20 240 40 360 45C480 50 600 50 720 45C840 40 960 30 1080 25C1200 20 1320 15 1380 10L1440 5V60H1380C1320 60 1200 60 1080 60C960 60 840 60 720 60C600 60 480 60 360 60C240 60 120 60 60 60H0V0Z" fill="#1e293b"/>
+      </svg>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 py-12">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 mb-8">
+        <!-- العمود الأول -->
+        <div class="md:col-span-2">
+          <div class="flex items-center gap-2 text-white font-bold text-lg mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+            </svg>
+            مقرر الحاسوب
+          </div>
+          <p class="text-gray-400 text-sm leading-relaxed">
+            منصة تعليمية تفاعلية تهدف لتبسيط مفاهيم الخوارزميات وهياكل البيانات لطلاب الصف الثالث الثانوي.
+          </p>
+        </div>
+
+        <!-- العمود الثاني -->
+        <div>
+          <h4 class="text-white font-bold text-lg mb-4">الأقسام</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="algorithms/sorting/index.html" class="text-gray-400 hover:text-amber-400 transition">الترتيب</a></li>
+            <li><a href="algorithms/searching/index.html" class="text-gray-400 hover:text-amber-400 transition">البحث</a></li>
+            <li><a href="algorithms/caesar/index.html" class="text-gray-400 hover:text-amber-400 transition">التشفير</a></li>
+            <li><a href="algorithms/stackqueue/index.html" class="text-gray-400 hover:text-amber-400 transition">المكدس والطابور</a></li>
+            <li><a href="algorithms/linkedlist/index.html" class="text-gray-400 hover:text-amber-400 transition">القوائم المترابطة</a></li>
+          </ul>
+        </div>
+
+        <!-- العمود الثالث - الأدوات التعليمية -->
+        <div>
+          <h4 class="text-white font-bold text-lg mb-4">أدوات تعليمية</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="algorithms/converters/index.html" class="text-gray-400 hover:text-amber-400 transition">التحويلات العددية</a></li>
+            <li><a href="algorithms/calculator/index.html" class="text-gray-400 hover:text-amber-400 transition">الآلة الحاسبة</a></li>
+            <li><a href="algorithms/truetale/index.html" class="text-gray-400 hover:text-amber-400 transition">جداول الصواب</a></li>
+          </ul>
+        </div>
+
+        <!-- العمود الرابع - المعرفة الإضافية -->
+        <div>
+          <h4 class="text-white font-bold text-lg mb-4">معرفة إضافية</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="algorithms/recursion/index.html" class="text-gray-400 hover:text-amber-400 transition">الخوارزميات العودية</a></li>
+            <li><a href="algorithms/graphs/index.html" class="text-gray-400 hover:text-amber-400 transition">الرسوم البيانية</a></li>
+            <li><a href="algorithms/dp/index.html" class="text-gray-400 hover:text-amber-400 transition">البرمجة الديناميكية</a></li>
+            <li><a href="algorithms/hashing/index.html" class="text-gray-400 hover:text-amber-400 transition">التجزئة (Hashing)</a></li>
+            <li><a href="algorithms/divide-conquer/index.html" class="text-gray-400 hover:text-amber-400 transition">فرق تسد</a></li>
+            <li><a href="algorithms/greedy/index.html" class="text-gray-400 hover:text-amber-400 transition">الخوارزميات الجشعة</a></li>
+            <li><a href="algorithms/backtracking/index.html" class="text-gray-400 hover:text-amber-400 transition">التراجع</a></li>
+            <li><a href="algorithms/shortest-path/index.html" class="text-gray-400 hover:text-amber-400 transition">أقصر مسار</a></li>
+            <li><a href="algorithms/mst/index.html" class="text-gray-400 hover:text-amber-400 transition">الشجرة الممتدة الدنيا</a></li>
+            <li><a href="algorithms/string-matching/index.html" class="text-gray-400 hover:text-amber-400 transition">مطابقة السلاسل</a></li>
+          </ul>
+        </div>
+
+        <!-- العمود الرابع -->
+        <div>
+          <h4 class="text-white font-bold text-lg mb-4">روابط سريعة</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#sections" class="text-gray-400 hover:text-amber-400 transition">الأقسام الرئيسية</a></li>
+            <li><a href="#extra-knowledge" class="text-gray-400 hover:text-amber-400 transition">معرفة إضافية</a></li>
+            <li><a href="algorithms/stackqueue/simulation.html" class="text-gray-400 hover:text-amber-400 transition">المحاكاة التفاعلية</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-gray-800 pt-8 text-center">
+        <p class="text-gray-500 text-sm">
+          &copy; 2026 مقرر الحاسوب — جميع الحقوق محفوظة
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- GSAP for scroll animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- 3D Scene (module) -->
+  <script type="module" src="assets/js/3d-scene.js"></script>
+
+  <!-- UI Animations -->
+  <script src="assets/js/index.js"></script>
+  <script src="assets/js/theme-toggle.js"></script>
+</body>
+
+</html>
