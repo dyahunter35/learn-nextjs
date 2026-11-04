@@ -154,13 +154,18 @@ function previousStep() {
 }
 
 function resetSimulation() {
+  const treeCont = document.getElementById('treeContainer');
+  const callStackCont = document.getElementById('callStackContainer');
+  if (!treeCont && !callStackCont) return;
+
   state.currentStep = -1;
   state.simulationHistory = [];
   state.steps = [];
   state.started = false;
   state.finished = false;
 
-  document.getElementById('treeContainer').innerHTML = `
+  if (treeCont) {
+    treeCont.innerHTML = `
     <div class="empty-state">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
@@ -169,20 +174,28 @@ function resetSimulation() {
       <p class="text-sm text-gray-400 mt-1">اختر مثالاً وأدخل القيمة ثم اضغط "ابدأ المحاكاة"</p>
     </div>
   `;
-  document.getElementById('callStackContainer').innerHTML = '';
-  document.getElementById('stepsLog').innerHTML = '';
-  document.getElementById('resultDisplay').innerHTML = '';
-  document.getElementById('nodeCountBadge').textContent = '0 عقدة';
-  document.getElementById('startButton').disabled = false;
+  }
+  if (callStackCont) callStackCont.innerHTML = '';
+  const stepsLogEl = document.getElementById('stepsLog');
+  if (stepsLogEl) stepsLogEl.innerHTML = '';
+  const resultDisp = document.getElementById('resultDisplay');
+  if (resultDisp) resultDisp.innerHTML = '';
+  const nodeCountEl = document.getElementById('nodeCountBadge');
+  if (nodeCountEl) nodeCountEl.textContent = '0 عقدة';
+  const startBtn = document.getElementById('startButton');
+  if (startBtn) startBtn.disabled = false;
   showMessage('المحاكاة جاهزة. اختر مثالاً وأدخل القيمة.', 'info');
   updateControls();
 }
 
 function updateControls() {
   const totalSteps = state.steps.length;
-  document.getElementById('startButton').disabled = state.started && !state.finished;
-  document.getElementById('nextButton').disabled = !state.started || state.finished || state.currentStep >= totalSteps - 1;
-  document.getElementById('prevButton').disabled = !state.started || state.currentStep <= 0;
+  const startBtn = document.getElementById('startButton');
+  if (startBtn) startBtn.disabled = state.started && !state.finished;
+  const nextBtn = document.getElementById('nextButton');
+  if (nextBtn) nextBtn.disabled = !state.started || state.finished || state.currentStep >= totalSteps - 1;
+  const prevBtn = document.getElementById('prevButton');
+  if (prevBtn) prevBtn.disabled = !state.started || state.currentStep <= 0;
 }
 
 function updateExample(choice) {
@@ -582,27 +595,31 @@ function showFinalResult() {
 
 function showMessage(message, type = 'info') {
   const el = document.getElementById('statusMessage');
+  if (!el) return;
   el.textContent = message;
   el.className = 'status-message ' + type;
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  document.getElementById('nInput').addEventListener('change', function () {
-    const val = parseInt(this.value);
-    if (isNaN(val) || val < 0) {
-      this.value = state.example === 'factorial' ? 0 : 0;
-      return;
-    }
-    const max = state.example === 'factorial' ? 10 : 15;
-    if (val > max) this.value = max;
-    state.n = parseInt(this.value);
-    if (state.started) resetSimulation();
-  });
+  const nInput = document.getElementById('nInput');
+  if (nInput) {
+    nInput.addEventListener('change', function () {
+      const val = parseInt(this.value);
+      if (isNaN(val) || val < 0) {
+        this.value = state.example === 'factorial' ? 0 : 0;
+        return;
+      }
+      const max = state.example === 'factorial' ? 10 : 15;
+      if (val > max) this.value = max;
+      state.n = parseInt(this.value);
+      if (state.started) resetSimulation();
+    });
 
-  document.getElementById('nInput').addEventListener('keydown', function (e) {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      if (!state.started) startSimulation();
-    }
-  });
+    nInput.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        if (!state.started) startSimulation();
+      }
+    });
+  }
 });

@@ -528,6 +528,7 @@ function renderStepLog() {
   }
 }
 function showMessage(msg, type) {
+  if (!statusMsg) return;
   statusMsg.textContent = msg;
   statusMsg.className = 'status-message ' + type;
 }
@@ -535,23 +536,27 @@ function updateButtons() {
   const startBtn = document.getElementById('startButton');
   const nextBtn = document.getElementById('nextButton');
   const prevBtn = document.getElementById('prevButton');
-  nextBtn.disabled = isFinished || currentStep >= simulationHistory.length - 1;
-  prevBtn.disabled = currentStep <= 0;
-  if (currentStep === -1 && !isFinished) {
-    startBtn.textContent = translateLegacyRuntime("legacy.cdcdb088305e072a");
-    startBtn.disabled = false;
-  } else if (isFinished) {
-    startBtn.textContent = translateLegacyRuntime("legacy.37d92d5b69376358");
-    startBtn.disabled = true;
-  } else {
-    startBtn.textContent = translateLegacyRuntime("legacy.5eaaff812af33515");
-    startBtn.disabled = false;
+  if (nextBtn) nextBtn.disabled = isFinished || currentStep >= simulationHistory.length - 1;
+  if (prevBtn) prevBtn.disabled = currentStep <= 0;
+  if (startBtn) {
+    if (currentStep === -1 && !isFinished) {
+      startBtn.textContent = translateLegacyRuntime("legacy.cdcdb088305e072a");
+      startBtn.disabled = false;
+    } else if (isFinished) {
+      startBtn.textContent = translateLegacyRuntime("legacy.37d92d5b69376358");
+      startBtn.disabled = true;
+    } else {
+      startBtn.textContent = translateLegacyRuntime("legacy.5eaaff812af33515");
+      startBtn.disabled = false;
+    }
   }
   if (currentStep >= simulationHistory.length - 1 && simulationHistory.length > 0) {
     isFinished = true;
-    nextBtn.disabled = true;
-    startBtn.textContent = translateLegacyRuntime("legacy.37d92d5b69376358");
-    startBtn.disabled = true;
+    if (nextBtn) nextBtn.disabled = true;
+    if (startBtn) {
+      startBtn.textContent = translateLegacyRuntime("legacy.37d92d5b69376358");
+      startBtn.disabled = true;
+    }
   }
 }
 function updateUI() {
@@ -643,18 +648,26 @@ function previousStep() {
   }
 }
 function resetSimulation() {
+  const graphSvg = document.getElementById('graphSvg');
+  if (!graphSvg) return;
   simulationHistory = [];
   currentStep = -1;
   isFinished = false;
   updateUI();
-  statusMsg.textContent = translateLegacyRuntime("legacy.bb4e47e6adbc1c2d");
-  statusMsg.className = 'status-message';
-  celebrationSection.classList.add('hidden');
+  if (statusMsg) {
+    statusMsg.textContent = translateLegacyRuntime("legacy.bb4e47e6adbc1c2d");
+    statusMsg.className = 'status-message';
+  }
+  if (celebrationSection) {
+    celebrationSection.classList.add('hidden');
+  }
 }
-algorithmSelect.addEventListener('change', function () {
-  currentAlgorithm = algorithmSelect.value;
-  resetSimulation();
-});
+if (algorithmSelect) {
+  algorithmSelect.addEventListener('change', function () {
+    currentAlgorithm = algorithmSelect.value;
+    resetSimulation();
+  });
+}
 window.addEventListener('load', resetSimulation);
 Object.assign(window, {
   edgeEquals: edgeEquals,

@@ -28,6 +28,7 @@ function addStep(operation, key, hashResult, bucketIndex, action, details) {
   renderStepLog();
 }
 function resetTable() {
+  if (!document.getElementById('hashTableContainer')) return;
   if (isAnimating) {
     cancelAnimation();
   }
@@ -36,11 +37,17 @@ function resetTable() {
   currentStep = -1;
   renderTable();
   renderStepLog();
-  document.getElementById('statusDisplay').innerHTML = translateLegacyRuntime("legacy.abe9815a2273dc0b");
-  document.getElementById('hashFormulaDisplay').textContent = '---';
-  document.getElementById('currentKeyDisplay').textContent = '?';
-  document.getElementById('valueInput').value = '';
-  document.getElementById('valueInput').focus();
+  const statusDisp = document.getElementById('statusDisplay');
+  if (statusDisp) statusDisp.innerHTML = translateLegacyRuntime("legacy.abe9815a2273dc0b");
+  const hashForm = document.getElementById('hashFormulaDisplay');
+  if (hashForm) hashForm.textContent = '---';
+  const currKey = document.getElementById('currentKeyDisplay');
+  if (currKey) currKey.textContent = '?';
+  const valInp = document.getElementById('valueInput');
+  if (valInp) {
+    valInp.value = '';
+    valInp.focus();
+  }
 }
 function changeHashFunc(val) {
   if (isAnimating) return;
@@ -387,16 +394,22 @@ function deleteKey() {
 
 // ==================== Keyboard support ====================
 document.addEventListener('DOMContentLoaded', function () {
-  document.getElementById('valueInput').addEventListener('keydown', function (e) {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      addKey();
-    }
-  });
+  const valueInput = document.getElementById('valueInput');
+  if (valueInput) {
+    valueInput.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        addKey();
+      }
+    });
+  }
 
   // Set default table size display
-  document.getElementById('hashFuncSelect').value = '10';
-  resetTable();
+  const hashFuncSelect = document.getElementById('hashFuncSelect');
+  if (hashFuncSelect) {
+    hashFuncSelect.value = '10';
+    resetTable();
+  }
 });
 Object.assign(window, {
   hashMod: hashMod,

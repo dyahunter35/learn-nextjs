@@ -305,6 +305,7 @@ function updateStepLog() {
 }
 
 function showMessage(msg, type = 'info') {
+  if (!statusMsg) return;
   statusMsg.textContent = msg;
   statusMsg.className = 'status-message ' + type;
 }
@@ -408,13 +409,16 @@ function previousStep() {
 }
 
 function resetSimulation() {
+  if (!document.getElementById('graphSvg')) return;
   stopAutoPlay();
   simulationHistory = [];
   currentStep = -1;
   isFinished = false;
   updateUI();
-  statusMsg.textContent = 'اختر الخوارزمية وعقدة البداية، ثم اضغط "ابدأ".';
-  statusMsg.className = 'status-message';
+  if (statusMsg) {
+    statusMsg.textContent = 'اختر الخوارزمية وعقدة البداية، ثم اضغط "ابدأ".';
+    statusMsg.className = 'status-message';
+  }
 }
 
 function stopAutoPlay() {
@@ -422,7 +426,8 @@ function stopAutoPlay() {
     clearInterval(autoPlayTimer);
     autoPlayTimer = null;
   }
-  document.getElementById('autoPlayBtn').textContent = '▶ تشغيل تلقائي';
+  const btn = document.getElementById('autoPlayBtn');
+  if (btn) btn.textContent = '▶ تشغيل تلقائي';
 }
 
 function toggleAutoPlay() {

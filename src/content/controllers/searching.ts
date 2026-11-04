@@ -7,11 +7,20 @@ let currentStepIndex = -1;
 let simulationHistory = [];
 let isSearchFinished = false;
 window.onload = function () {
+  if (!document.getElementById("arrayContainer") || !document.getElementById("algorithmSelect")) return;
   arrayContainer = document.getElementById("arrayContainer");
   stepsLog = document.getElementById("stepsLog");
   statusMessage = document.getElementById("statusMessage");
   arrayInput = document.getElementById("arrayInput");
   nodeCountBadge = document.getElementById("nodeCountBadge");
+  if (arrayInput) {
+    arrayInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        updateArray();
+      }
+    });
+  }
   resetSearch(false);
 };
 function renderArray({
@@ -23,6 +32,7 @@ function renderArray({
   algorithm = "binary",
   foundIndex = -1
 } = {}) {
+  if (!arrayContainer) return;
   arrayContainer.innerHTML = "";
   array.forEach((value, index) => {
     const wrapper = document.createElement("div");
@@ -116,23 +126,34 @@ function updateArray() {
   showMessage(translateLegacyRuntime(`✅ تم تحديث المصفوفة بنجاح: ${array.length} عنصر`, "legacy.469884fe0ba7071c", "\u2705 \u062A\u0645 \u062A\u062D\u062F\u064A\u062B \u0627\u0644\u0645\u0635\u0641\u0648\u0641\u0629 \u0628\u0646\u062C\u0627\u062D: ${array.length} \u0639\u0646\u0635\u0631"), "success");
 }
 function showMessage(message, type = "info") {
+  if (!statusMessage) return;
   statusMessage.textContent = message;
   statusMessage.className = "status-message " + type;
 }
 function updateControlButtons() {
-  document.getElementById("nextButton").disabled = isSearchFinished || currentStepIndex === simulationHistory.length - 1;
-  document.getElementById("prevButton").disabled = currentStepIndex <= 0;
-  document.getElementById("startButton").disabled = isSearchFinished;
-  if (currentStepIndex === -1 && !isSearchFinished) {
-    document.getElementById("startButton").textContent = translateLegacyRuntime("legacy.1fee8fc5adebd723");
-  } else if (isSearchFinished) {
-    document.getElementById("startButton").textContent = translateLegacyRuntime("legacy.cb13da8d5d407000");
-    document.getElementById("nextButton").disabled = true;
-  } else {
-    document.getElementById("startButton").textContent = translateLegacyRuntime("legacy.5eaaff812af33515");
+  const nextBtn = document.getElementById("nextButton");
+  const prevBtn = document.getElementById("prevButton");
+  const startBtn = document.getElementById("startButton");
+  if (nextBtn) {
+    nextBtn.disabled = isSearchFinished || currentStepIndex === simulationHistory.length - 1;
+  }
+  if (prevBtn) {
+    prevBtn.disabled = currentStepIndex <= 0;
+  }
+  if (startBtn) {
+    startBtn.disabled = isSearchFinished;
+    if (currentStepIndex === -1 && !isSearchFinished) {
+      startBtn.textContent = translateLegacyRuntime("legacy.1fee8fc5adebd723");
+    } else if (isSearchFinished) {
+      startBtn.textContent = translateLegacyRuntime("legacy.cb13da8d5d407000");
+      if (nextBtn) nextBtn.disabled = true;
+    } else {
+      startBtn.textContent = translateLegacyRuntime("legacy.5eaaff812af33515");
+    }
   }
 }
 function renderBinaryTable(steps) {
+  if (!stepsLog) return;
   let tableHTML = translateLegacyRuntime(`
     <div class="overflow-x-auto rounded-xl border border-gray-200">
       <table class="steps-table">
@@ -167,6 +188,7 @@ function renderBinaryTable(steps) {
   stepsLog.innerHTML = tableHTML;
 }
 function renderSequentialTable(steps) {
+  if (!stepsLog) return;
   let tableHTML = translateLegacyRuntime(`
     <div class="overflow-x-auto rounded-xl border border-gray-200">
       <table class="steps-table">
@@ -262,14 +284,15 @@ function resetSearch(shouldClearMessage = true) {
   currentStepIndex = -1;
   simulationHistory = [];
   isSearchFinished = false;
-  stepsLog.innerHTML = "";
-  nodeCountBadge.textContent = translateLegacyRuntime(`${array.length} عقدة`, "legacy.f3329f48af6426b2", "${array.length} \u0639\u0642\u062F\u0629");
+  if (stepsLog) stepsLog.innerHTML = "";
+  if (nodeCountBadge) nodeCountBadge.textContent = translateLegacyRuntime(`${array.length} عقدة`, "legacy.f3329f48af6426b2", "${array.length} \u0639\u0642\u062F\u0629");
+  const algoSelect = document.getElementById("algorithmSelect");
   renderArray({
     highlightIndex: -1,
     excludedIndices: new Set(),
-    algorithm: document.getElementById("algorithmSelect").value
+    algorithm: algoSelect ? algoSelect.value : "binary"
   });
-  if (shouldClearMessage) {
+  if (shouldClearMessage && statusMessage) {
     statusMessage.textContent = translateLegacyRuntime("legacy.3827c2f852a0ffbc");
     statusMessage.className = "status-message";
   }
@@ -279,7 +302,8 @@ function updateVisualization() {
   if (currentStepIndex >= 0 && currentStepIndex < simulationHistory.length) {
     const step = simulationHistory[currentStepIndex];
     renderArray(step.arrayState);
-    const algorithm = document.getElementById("algorithmSelect").value;
+    const algoSelect = document.getElementById("algorithmSelect");
+    const algorithm = algoSelect ? algoSelect.value : "binary";
     if (algorithm === "binary") {
       renderBinaryTable(simulationHistory.map(s => s.logEntry));
     } else {
@@ -296,12 +320,6 @@ function updateVisualization() {
   }
   updateControlButtons();
 }
-arrayInput.addEventListener('keydown', e => {
-  if (e.key === 'Enter') {
-    e.preventDefault();
-    updateArray();
-  }
-});
 function sequentialSearchSimulator(target) {
   let foundIndex = -1;
   simulationHistory.push({

@@ -261,6 +261,7 @@ function updateStepLog() {
   stepsLog.innerHTML = tableHtml;
 }
 function showMessage(msg, type = 'info') {
+  if (!statusMsg) return;
   statusMsg.textContent = msg;
   statusMsg.className = 'status-message ' + type;
 }
@@ -358,20 +359,24 @@ function previousStep() {
   }
 }
 function resetSimulation() {
+  if (!document.getElementById('graphSvg')) return;
   stopAutoPlay();
   simulationHistory = [];
   currentStep = -1;
   isFinished = false;
   updateUI();
-  statusMsg.textContent = translateLegacyRuntime("legacy.830cf9ecf13ebe5d");
-  statusMsg.className = 'status-message';
+  if (statusMsg) {
+    statusMsg.textContent = translateLegacyRuntime("legacy.830cf9ecf13ebe5d");
+    statusMsg.className = 'status-message';
+  }
 }
 function stopAutoPlay() {
   if (autoPlayTimer) {
     clearInterval(autoPlayTimer);
     autoPlayTimer = null;
   }
-  document.getElementById('autoPlayBtn').textContent = translateLegacyRuntime("legacy.77fc635fa291d9b1");
+  const btn = document.getElementById('autoPlayBtn');
+  if (btn) btn.textContent = translateLegacyRuntime("legacy.77fc635fa291d9b1");
 }
 function toggleAutoPlay() {
   if (autoPlayTimer) {

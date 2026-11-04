@@ -286,14 +286,18 @@ function previousStep() {
   updateControls();
 }
 function resetSimulation() {
+  const dpVis = document.getElementById('dpVisualization');
+  if (!dpVis) return;
   state.currentStep = -1;
   state.simulationHistory = [];
   state.steps = [];
   state.started = false;
   state.finished = false;
-  document.getElementById('exampleSelect').disabled = false;
-  document.getElementById('startButton').disabled = false;
-  document.getElementById('dpVisualization').innerHTML = translateLegacyRuntime(`
+  const exampleSelect = document.getElementById('exampleSelect');
+  if (exampleSelect) exampleSelect.disabled = false;
+  const startBtn = document.getElementById('startButton');
+  if (startBtn) startBtn.disabled = false;
+  dpVis.innerHTML = translateLegacyRuntime(`
     <div class="empty-state">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
@@ -302,18 +306,25 @@ function resetSimulation() {
       <p class="text-sm text-gray-400 mt-1">اختر مثالاً وأدخل القيمة ثم اضغط "ابدأ المحاكاة"</p>
     </div>
   `, "legacy.4ddadd020f569ee6", "\n    <div class=\"empty-state\">\n      <svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\">\n        <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" d=\"M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z\" />\n      </svg>\n      <p class=\"text-lg font-medium text-gray-500\">\u0644\u0645 \u062A\u0628\u062F\u0623 \u0627\u0644\u0645\u062D\u0627\u0643\u0627\u0629 \u0628\u0639\u062F</p>\n      <p class=\"text-sm text-gray-400 mt-1\">\u0627\u062E\u062A\u0631 \u0645\u062B\u0627\u0644\u0627\u064B \u0648\u0623\u062F\u062E\u0644 \u0627\u0644\u0642\u064A\u0645\u0629 \u062B\u0645 \u0627\u0636\u063A\u0637 \"\u0627\u0628\u062F\u0623 \u0627\u0644\u0645\u062D\u0627\u0643\u0627\u0629\"</p>\n    </div>\n  ");
-  document.getElementById('naiveComparison').innerHTML = '';
-  document.getElementById('stepsLog').innerHTML = '';
-  document.getElementById('resultDisplay').innerHTML = '';
-  document.getElementById('legendContainer').style.display = 'none';
+  const naiveComp = document.getElementById('naiveComparison');
+  if (naiveComp) naiveComp.innerHTML = '';
+  const stepsLogEl = document.getElementById('stepsLog');
+  if (stepsLogEl) stepsLogEl.innerHTML = '';
+  const resultDisp = document.getElementById('resultDisplay');
+  if (resultDisp) resultDisp.innerHTML = '';
+  const legendCont = document.getElementById('legendContainer');
+  if (legendCont) legendCont.style.display = 'none';
   showMessage(translateLegacyRuntime("legacy.ce84e65a4bffcb0a"), 'info');
   updateControls();
 }
 function updateControls() {
   const totalSteps = state.steps.length;
-  document.getElementById('startButton').disabled = state.started && !state.finished;
-  document.getElementById('nextButton').disabled = !state.started || state.finished || state.currentStep >= totalSteps - 1;
-  document.getElementById('prevButton').disabled = !state.started || state.currentStep <= 0;
+  const startBtn = document.getElementById('startButton');
+  if (startBtn) startBtn.disabled = state.started && !state.finished;
+  const nextBtn = document.getElementById('nextButton');
+  if (nextBtn) nextBtn.disabled = !state.started || state.finished || state.currentStep >= totalSteps - 1;
+  const prevBtn = document.getElementById('prevButton');
+  if (prevBtn) prevBtn.disabled = !state.started || state.currentStep <= 0;
 }
 function updateExample(choice) {
   state.example = choice;
@@ -614,29 +625,35 @@ function showMessage(message, type = 'info') {
   el.className = 'status-message ' + type;
 }
 document.addEventListener('DOMContentLoaded', function () {
-  document.getElementById('nInput').addEventListener('change', function () {
-    const val = parseInt(this.value);
-    if (isNaN(val) || val < 0) {
-      this.value = 0;
-      return;
-    }
-    if (val > 20) this.value = 20;
-    state.n = parseInt(this.value);
-    if (state.started) resetSimulation();
-  });
-  document.getElementById('nInput').addEventListener('keydown', function (e) {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      if (!state.started) startSimulation();
-    }
-  });
-  document.getElementById('amountInput').addEventListener('change', function () {
-    const val = parseInt(this.value);
-    if (isNaN(val) || val < 1) this.value = 1;
-    if (val > 50) this.value = 50;
-    state.amount = parseInt(this.value);
-    if (state.started) resetSimulation();
-  });
+  const nInput = document.getElementById('nInput');
+  if (nInput) {
+    nInput.addEventListener('change', function () {
+      const val = parseInt(this.value);
+      if (isNaN(val) || val < 0) {
+        this.value = 0;
+        return;
+      }
+      if (val > 20) this.value = 20;
+      state.n = parseInt(this.value);
+      if (state.started) resetSimulation();
+    });
+    nInput.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        if (!state.started) startSimulation();
+      }
+    });
+  }
+  const amountInput = document.getElementById('amountInput');
+  if (amountInput) {
+    amountInput.addEventListener('change', function () {
+      const val = parseInt(this.value);
+      if (isNaN(val) || val < 1) this.value = 1;
+      if (val > 50) this.value = 50;
+      state.amount = parseInt(this.value);
+      if (state.started) resetSimulation();
+    });
+  }
 });
 Object.assign(window, {
   buildFibonacciSteps: buildFibonacciSteps,

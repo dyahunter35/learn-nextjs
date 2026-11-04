@@ -79,13 +79,13 @@ export default function NativePage() {
               {t("legacy.78a6d6235bc21484")}
             </label>
             {"\n          "}
-            <select id={"speed-control"} className={"speed-control border border-gray-300 rounded-lg px-2 py-1.5 text-xs bg-white"}>
+            <select id={"speed-control"} className={"speed-control border border-gray-300 rounded-lg px-2 py-1.5 text-xs bg-white"} defaultValue={"500"}>
               {"\n            "}
               <option value={"1000"}>
                 {t("legacy.cea9b08959aa1a0c")}
               </option>
               {"\n            "}
-              <option value={"500"} selected={true}>
+              <option value={"500"}>
                 {t("legacy.42a5dadf6e451488")}
               </option>
               {"\n            "}

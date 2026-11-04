@@ -46,9 +46,7 @@ export default function NativePage() {
               {"\n            "}
             </div>
             {"\n            "}
-            <textarea id={"textInput"} rows={3} className={"w-full px-5 py-4 bg-gray-50 text-gray-900 border-2 border-gray-200 rounded-xl text-left text-lg char-display focus:ring-0 focus:border-indigo-400 transition-colors placeholder-gray-300"} placeholder={"Enter English text here, only lowercase letters will be counted. Example: huffman coding is efficient..."}>
-              {"\naabbbccdeeeeff"}
-            </textarea>
+            <textarea id={"textInput"} rows={3} className={"w-full px-5 py-4 bg-gray-50 text-gray-900 border-2 border-gray-200 rounded-xl text-left text-lg char-display focus:ring-0 focus:border-indigo-400 transition-colors placeholder-gray-300"} placeholder={"Enter English text here, only lowercase letters will be counted. Example: huffman coding is efficient..."} defaultValue={"aabbbccdeeeeff"}></textarea>
             {"\n          "}
           </div>
           {"\n\n          "}

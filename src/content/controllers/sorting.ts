@@ -6,6 +6,7 @@ let currentStepIndex = -1;
 let simulationHistory = [];
 let isSortFinished = false;
 window.onload = function () {
+  if (!document.getElementById("arrayContainer") || !document.getElementById("algorithmSelect")) return;
   arrayContainer = document.getElementById("arrayContainer");
   stepsLog = document.getElementById("stepsLog");
   statusMessage = document.getElementById("statusMessage");
@@ -21,6 +22,7 @@ function renderArray({
   sortedIndices = new Set(),
   algorithm = "bubble"
 } = {}) {
+  if (!arrayContainer) return;
   arrayContainer.innerHTML = "";
   const maxValue = Math.max(...array, 1);
   const maxHeight = 160;
@@ -109,23 +111,34 @@ function renderArray({
   });
 }
 function showMessage(message, type = "info") {
+  if (!statusMessage) return;
   statusMessage.textContent = message;
   statusMessage.className = "status-message " + type;
 }
 function updateControlButtons() {
-  document.getElementById("nextButton").disabled = isSortFinished || currentStepIndex === simulationHistory.length - 1;
-  document.getElementById("prevButton").disabled = currentStepIndex <= 0;
-  document.getElementById("startButton").disabled = isSortFinished;
-  if (currentStepIndex === -1 && !isSortFinished) {
-    document.getElementById("startButton").textContent = translateLegacyRuntime("legacy.a8094f238fe603c2");
-  } else if (isSortFinished) {
-    document.getElementById("startButton").textContent = translateLegacyRuntime("legacy.678b717ab14a2572");
-    document.getElementById("nextButton").disabled = true;
-  } else {
-    document.getElementById("startButton").textContent = translateLegacyRuntime("legacy.5eaaff812af33515");
+  const nextBtn = document.getElementById("nextButton");
+  const prevBtn = document.getElementById("prevButton");
+  const startBtn = document.getElementById("startButton");
+  if (nextBtn) {
+    nextBtn.disabled = isSortFinished || currentStepIndex === simulationHistory.length - 1;
+  }
+  if (prevBtn) {
+    prevBtn.disabled = currentStepIndex <= 0;
+  }
+  if (startBtn) {
+    startBtn.disabled = isSortFinished;
+    if (currentStepIndex === -1 && !isSortFinished) {
+      startBtn.textContent = translateLegacyRuntime("legacy.a8094f238fe603c2");
+    } else if (isSortFinished) {
+      startBtn.textContent = translateLegacyRuntime("legacy.678b717ab14a2572");
+      if (nextBtn) nextBtn.disabled = true;
+    } else {
+      startBtn.textContent = translateLegacyRuntime("legacy.5eaaff812af33515");
+    }
   }
 }
 function renderSortTable(steps, algorithm) {
+  if (!stepsLog) return;
   let headers = [];
   if (algorithm === "bubble") {
     headers = [translateLegacyRuntime("legacy.41195137d9eaa4ab"), "j", "arr[j]", "arr[j+1]", translateLegacyRuntime("legacy.a881a87897ba730f")];
@@ -223,8 +236,9 @@ function resetSort(shouldClearMessage = true) {
   currentStepIndex = -1;
   simulationHistory = [];
   isSortFinished = false;
-  stepsLog.innerHTML = "";
-  const input = document.getElementById("arrayInput").value;
+  if (stepsLog) stepsLog.innerHTML = "";
+  const inputEl = document.getElementById("arrayInput");
+  const input = inputEl ? inputEl.value : "";
   try {
     currentArray = input.split(",").map(n => {
       const num = parseInt(n.trim());
@@ -234,13 +248,14 @@ function resetSort(shouldClearMessage = true) {
   } catch (e) {
     currentArray = [50, 20, 80, 10, 60];
   }
-  nodeCountBadge.textContent = translateLegacyRuntime(`${currentArray.length} عناصر`, "legacy.c378d002a974ac9c", "${currentArray.length} \u0639\u0646\u0627\u0635\u0631");
+  if (nodeCountBadge) nodeCountBadge.textContent = translateLegacyRuntime(`${currentArray.length} عناصر`, "legacy.c378d002a974ac9c", "${currentArray.length} \u0639\u0646\u0627\u0635\u0631");
+  const algoSelect = document.getElementById("algorithmSelect");
   renderArray({
     array: currentArray,
     sortedIndices: new Set(),
-    algorithm: document.getElementById("algorithmSelect").value
+    algorithm: algoSelect ? algoSelect.value : "bubble"
   });
-  if (shouldClearMessage) {
+  if (shouldClearMessage && statusMessage) {
     statusMessage.textContent = translateLegacyRuntime("legacy.731a32faccd0b15a");
     statusMessage.className = "status-message";
   }
@@ -250,7 +265,8 @@ function updateVisualization() {
   if (currentStepIndex >= 0 && currentStepIndex < simulationHistory.length) {
     const step = simulationHistory[currentStepIndex];
     renderArray(step.arrayState);
-    const algorithm = document.getElementById("algorithmSelect").value;
+    const algoSelect = document.getElementById("algorithmSelect");
+    const algorithm = algoSelect ? algoSelect.value : "bubble";
     renderSortTable(simulationHistory.map(s => s.logEntry).filter(l => l.i !== undefined), algorithm);
     showMessage(step.message, step.isError ? "error" : step.isSuccess ? "success" : "info");
     if (currentStepIndex === simulationHistory.length - 1) {

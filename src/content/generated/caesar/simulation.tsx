@@ -79,9 +79,7 @@ export default function NativePage() {
                   {t("legacy.9fe8f15516a5e830")}
                 </label>
                 {"\n                "}
-                <textarea id={"textInput"} rows={2} className={"w-full px-3.5 py-2.5 bg-gray-50 text-gray-900 border-2 border-gray-200 rounded-xl focus:ring-0 focus:border-indigo-400 transition-colors placeholder-gray-400 text-right text-sm"} placeholder={"أدخل النص هنا للتشفير أو فك التشفير..."} data-legacy-input={"resetCipher(true)"}>
-                  {t("legacy.edf5d932616f1481")}
-                </textarea>
+                <textarea id={"textInput"} rows={2} className={"w-full px-3.5 py-2.5 bg-gray-50 text-gray-900 border-2 border-gray-200 rounded-xl focus:ring-0 focus:border-indigo-400 transition-colors placeholder-gray-400 text-right text-sm"} placeholder={"أدخل النص هنا للتشفير أو فك التشفير..."} data-legacy-input={"resetCipher(true)"} defaultValue={t("legacy.edf5d932616f1481")}></textarea>
                 {"\n              "}
               </div>
               {"\n              "}

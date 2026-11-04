@@ -11,6 +11,7 @@ let cleanText = "";
 let autoPlayTimer = null;
 function renderAlphabetTable() {
   const container = document.getElementById("alphabetTableContainer");
+  if (!container) return;
   let tableHTML = `<table class="alphabet-table w-full text-sm"><thead>`;
   tableHTML += translateLegacyRuntime("legacy.281c9da91610a39d");
   ARABIC_ALPHABET.forEach((_, index) => {
@@ -56,6 +57,8 @@ function getCharIndex(char) {
   return ARABIC_ALPHABET.indexOf(char);
 }
 window.onload = function () {
+  const container = document.getElementById("alphabetTableContainer");
+  if (!container) return;
   stepsLog = document.getElementById("stepsLog");
   statusMessage = document.getElementById("statusMessage");
   resultText = document.getElementById("resultText");
@@ -160,11 +163,13 @@ function resetCipher(shouldClearMessage = true) {
   simulationHistory = [];
   isCipherFinished = false;
   operationMode = "";
-  stepsLog.innerHTML = "";
-  resultText.textContent = "...";
-  resultText.className = "cipher-text text-gray-400 min-h-[40px] text-lg text-center py-4";
+  if (stepsLog) stepsLog.innerHTML = "";
+  if (resultText) {
+    resultText.textContent = "...";
+    resultText.className = "cipher-text text-gray-400 min-h-[40px] text-lg text-center py-4";
+  }
   renderAlphabetTable();
-  if (shouldClearMessage) {
+  if (shouldClearMessage && statusMessage) {
     statusMessage.textContent = translateLegacyRuntime("legacy.89091e5900e284ed");
     statusMessage.className = "text-center py-3 px-4 rounded-xl bg-gray-50 border border-gray-200 text-gray-500 text-sm font-medium";
   }
@@ -189,22 +194,39 @@ function updateControlButtons() {
       stepCounter.textContent = translateLegacyRuntime("legacy.78436e9ac7e3fd24");
     }
   }
-  document.getElementById("encryptButton").disabled = isStarted && operationMode === "encrypt" && !isCipherFinished;
-  document.getElementById("decryptButton").disabled = isStarted && operationMode === "decrypt" && !isCipherFinished;
+  const encryptBtn = document.getElementById("encryptButton");
+  const decryptBtn = document.getElementById("decryptButton");
+  if (encryptBtn) {
+    encryptBtn.disabled = isStarted && operationMode === "encrypt" && !isCipherFinished;
+  }
+  if (decryptBtn) {
+    decryptBtn.disabled = isStarted && operationMode === "decrypt" && !isCipherFinished;
+  }
   if (isCipherFinished) {
-    document.getElementById("encryptButton").textContent = translateLegacyRuntime("legacy.6085ac4fb11d601b");
-    document.getElementById("decryptButton").textContent = translateLegacyRuntime("legacy.966a705a95cc638c");
-    document.getElementById("encryptButton").disabled = false;
-    document.getElementById("decryptButton").disabled = false;
+    if (encryptBtn) {
+      encryptBtn.textContent = translateLegacyRuntime("legacy.6085ac4fb11d601b");
+      encryptBtn.disabled = false;
+    }
+    if (decryptBtn) {
+      decryptBtn.textContent = translateLegacyRuntime("legacy.966a705a95cc638c");
+      decryptBtn.disabled = false;
+    }
   } else if (isStarted) {
-    document.getElementById("encryptButton").textContent = translateLegacyRuntime("legacy.31b7168bb42e8833");
-    document.getElementById("decryptButton").textContent = translateLegacyRuntime("legacy.ac3fd7cf907498da");
+    if (encryptBtn) encryptBtn.textContent = translateLegacyRuntime("legacy.31b7168bb42e8833");
+    if (decryptBtn) decryptBtn.textContent = translateLegacyRuntime("legacy.ac3fd7cf907498da");
   } else {
-    document.getElementById("encryptButton").textContent = translateLegacyRuntime("legacy.06eaab093501b264");
-    document.getElementById("decryptButton").textContent = translateLegacyRuntime("legacy.6ce29cb0340fb55a");
+    if (encryptBtn) {
+      encryptBtn.textContent = translateLegacyRuntime("legacy.06eaab093501b264");
+      encryptBtn.disabled = false;
+    }
+    if (decryptBtn) {
+      decryptBtn.textContent = translateLegacyRuntime("legacy.6ce29cb0340fb55a");
+      decryptBtn.disabled = false;
+    }
   }
 }
 function showMessage(msg, isError) {
+  if (!statusMessage) return;
   statusMessage.textContent = msg;
   statusMessage.className = `text-center py-3 px-4 rounded-xl text-sm font-bold ${isError ? "bg-red-50 border border-red-200 text-red-700" : "bg-emerald-50 border border-emerald-200 text-emerald-700"}`;
 }
@@ -264,7 +286,7 @@ function renderCipherTable(steps, mode) {
                 </tr>`;
   }
   tableHTML += "</tbody></table>";
-  stepsLog.innerHTML = tableHTML;
+  if (stepsLog) stepsLog.innerHTML = tableHTML;
 }
 function cipherSimulator(text, key, mode) {
   let result = "";

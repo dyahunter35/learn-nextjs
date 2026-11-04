@@ -359,6 +359,7 @@ function renderFinalPaths(previousData) {
   }
 }
 function showMessage(msg, type) {
+  if (!statusMsg) return;
   statusMsg.textContent = msg;
   statusMsg.className = 'status-message ' + type;
 }
@@ -465,14 +466,17 @@ function previousStep() {
   }
 }
 function resetSimulation() {
+  if (!document.getElementById('graphSvg')) return;
   simulationHistory = [];
   currentStep = -1;
   isFinished = false;
   latestPrevious = null;
   highlightDestination = null;
   updateUI();
-  statusMsg.textContent = translateLegacyRuntime("legacy.d5da8f55cca6bb8d");
-  statusMsg.className = 'status-message';
+  if (statusMsg) {
+    statusMsg.textContent = translateLegacyRuntime("legacy.d5da8f55cca6bb8d");
+    statusMsg.className = 'status-message';
+  }
 }
 window.addEventListener('load', function () {
   resetSimulation();

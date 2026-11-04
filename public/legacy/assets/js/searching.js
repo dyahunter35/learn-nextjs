@@ -6,11 +6,17 @@ let simulationHistory = [];
 let isSearchFinished = false;
 
 window.onload = function () {
+  if (!document.getElementById("arrayContainer") || !document.getElementById("algorithmSelect")) return;
   arrayContainer = document.getElementById("arrayContainer");
   stepsLog = document.getElementById("stepsLog");
   statusMessage = document.getElementById("statusMessage");
   arrayInput = document.getElementById("arrayInput");
   nodeCountBadge = document.getElementById("nodeCountBadge");
+  if (arrayInput) {
+    arrayInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); updateArray(); }
+    });
+  }
   resetSearch(false);
 };
 
@@ -23,6 +29,7 @@ function renderArray({
   algorithm = "binary",
   foundIndex = -1,
 } = {}) {
+  if (!arrayContainer) return;
   arrayContainer.innerHTML = "";
 
   array.forEach((value, index) => {
@@ -127,28 +134,37 @@ function updateArray() {
 }
 
 function showMessage(message, type = "info") {
+  if (!statusMessage) return;
   statusMessage.textContent = message;
   statusMessage.className = "status-message " + type;
 }
 
 function updateControlButtons() {
-  document.getElementById("nextButton").disabled =
-    isSearchFinished || currentStepIndex === simulationHistory.length - 1;
-  document.getElementById("prevButton").disabled = currentStepIndex <= 0;
-  document.getElementById("startButton").disabled = isSearchFinished;
+  const nextBtn = document.getElementById("nextButton");
+  const prevBtn = document.getElementById("prevButton");
+  const startBtn = document.getElementById("startButton");
 
-  if (currentStepIndex === -1 && !isSearchFinished) {
-    document.getElementById("startButton").textContent =
-      "ابدأ / ابحث عن الخطوة الأولى";
-  } else if (isSearchFinished) {
-    document.getElementById("startButton").textContent = "انتهى البحث ✓";
-    document.getElementById("nextButton").disabled = true;
-  } else {
-    document.getElementById("startButton").textContent = "▶ تم البدء";
+  if (nextBtn) {
+    nextBtn.disabled = isSearchFinished || currentStepIndex === simulationHistory.length - 1;
+  }
+  if (prevBtn) {
+    prevBtn.disabled = currentStepIndex <= 0;
+  }
+  if (startBtn) {
+    startBtn.disabled = isSearchFinished;
+    if (currentStepIndex === -1 && !isSearchFinished) {
+      startBtn.textContent = "ابدأ / ابحث عن الخطوة الأولى";
+    } else if (isSearchFinished) {
+      startBtn.textContent = "انتهى البحث ✓";
+      if (nextBtn) nextBtn.disabled = true;
+    } else {
+      startBtn.textContent = "▶ تم البدء";
+    }
   }
 }
 
 function renderBinaryTable(steps) {
+  if (!stepsLog) return;
   let tableHTML = `
     <div class="overflow-x-auto rounded-xl border border-gray-200">
       <table class="steps-table">
@@ -191,6 +207,7 @@ function renderBinaryTable(steps) {
 }
 
 function renderSequentialTable(steps) {
+  if (!stepsLog) return;
   let tableHTML = `
     <div class="overflow-x-auto rounded-xl border border-gray-200">
       <table class="steps-table">
@@ -311,16 +328,17 @@ function resetSearch(shouldClearMessage = true) {
   currentStepIndex = -1;
   simulationHistory = [];
   isSearchFinished = false;
-  stepsLog.innerHTML = "";
-  nodeCountBadge.textContent = `${array.length} عقدة`;
+  if (stepsLog) stepsLog.innerHTML = "";
+  if (nodeCountBadge) nodeCountBadge.textContent = `${array.length} عقدة`;
 
+  const algoSelect = document.getElementById("algorithmSelect");
   renderArray({
     highlightIndex: -1,
     excludedIndices: new Set(),
-    algorithm: document.getElementById("algorithmSelect").value,
+    algorithm: algoSelect ? algoSelect.value : "binary",
   });
 
-  if (shouldClearMessage) {
+  if (shouldClearMessage && statusMessage) {
     statusMessage.textContent =
       'اضغط على "ابدأ / ابحث عن الخطوة الأولى" للبدء.';
     statusMessage.className = "status-message";
@@ -338,7 +356,8 @@ function updateVisualization() {
 
     renderArray(step.arrayState);
 
-    const algorithm = document.getElementById("algorithmSelect").value;
+    const algoSelect = document.getElementById("algorithmSelect");
+    const algorithm = algoSelect ? algoSelect.value : "binary";
     if (algorithm === "binary") {
       renderBinaryTable(simulationHistory.map((s) => s.logEntry));
     } else {
@@ -358,10 +377,6 @@ function updateVisualization() {
 
   updateControlButtons();
 }
-
-arrayInput.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') { e.preventDefault(); updateArray(); }
-});
 
 function sequentialSearchSimulator(target) {
   let foundIndex = -1;

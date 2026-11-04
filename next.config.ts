@@ -1,22 +1,15 @@
 import type { NextConfig } from "next";
 
-const slugs = [
-  "backtracking", "caesar", "calculator", "converters", "divide-conquer",
-  "dp", "graphs", "greedy", "hashing", "huffman", "linkedlist", "mst",
-  "recursion", "searching", "shortest-path", "sorting", "stackqueue",
-  "string-matching", "truetale",
-];
+const isGithubActions = process.env.GITHUB_ACTIONS === "true";
+const repo = process.env.GITHUB_REPOSITORY ? process.env.GITHUB_REPOSITORY.split("/")[1] : "learn-nextjs";
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || (isGithubActions ? `/${repo}` : "");
 
 const nextConfig: NextConfig = {
-  async redirects() {
-    return [
-      { source: "/index.html", destination: "/", permanent: true },
-      ...slugs.flatMap((slug) => [
-        { source: `/algorithms/${slug}/index.html`, destination: `/algorithms/${slug}`, permanent: true },
-        { source: `/algorithms/${slug}/simulation.html`, destination: `/algorithms/${slug}/simulation`, permanent: true },
-        { source: `/algorithms/${slug}/code.html`, destination: `/algorithms/${slug}/code`, permanent: true },
-      ]),
-    ];
+  output: "export",
+  basePath,
+  trailingSlash: true,
+  images: {
+    unoptimized: true,
   },
 };
 

@@ -31,6 +31,7 @@ function addStep(operation, key, hashResult, bucketIndex, action, details) {
 }
 
 function resetTable() {
+  if (!document.getElementById('hashTableContainer')) return;
   if (isAnimating) {
     cancelAnimation();
   }
@@ -39,11 +40,17 @@ function resetTable() {
   currentStep = -1;
   renderTable();
   renderStepLog();
-  document.getElementById('statusDisplay').innerHTML = '<span class="status-badge status-badge-waiting">⏳ في انتظار الإدخال</span>';
-  document.getElementById('hashFormulaDisplay').textContent = '---';
-  document.getElementById('currentKeyDisplay').textContent = '?';
-  document.getElementById('valueInput').value = '';
-  document.getElementById('valueInput').focus();
+  const statusDisp = document.getElementById('statusDisplay');
+  if (statusDisp) statusDisp.innerHTML = '<span class="status-badge status-badge-waiting">⏳ في انتظار الإدخال</span>';
+  const hashForm = document.getElementById('hashFormulaDisplay');
+  if (hashForm) hashForm.textContent = '---';
+  const currKey = document.getElementById('currentKeyDisplay');
+  if (currKey) currKey.textContent = '?';
+  const valInp = document.getElementById('valueInput');
+  if (valInp) {
+    valInp.value = '';
+    valInp.focus();
+  }
 }
 
 function changeHashFunc(val) {
@@ -451,14 +458,20 @@ function deleteKey() {
 
 // ==================== Keyboard support ====================
 document.addEventListener('DOMContentLoaded', function() {
-  document.getElementById('valueInput').addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      addKey();
-    }
-  });
+  const valueInput = document.getElementById('valueInput');
+  if (valueInput) {
+    valueInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        addKey();
+      }
+    });
+  }
 
   // Set default table size display
-  document.getElementById('hashFuncSelect').value = '10';
-  resetTable();
+  const hashFuncSelect = document.getElementById('hashFuncSelect');
+  if (hashFuncSelect) {
+    hashFuncSelect.value = '10';
+    resetTable();
+  }
 });
