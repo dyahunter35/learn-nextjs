@@ -1,0 +1,122 @@
+/* ==========================================================================
+   CRYPTOGRAPHY & HISTORICAL CIPHER DASHBOARD STYLES
+   Isolated theme for the dedicated intelligence & cryptanalysis workbench.
+   ========================================================================== */
+
+.crypto-universe {
+  --cy-bg: #0b0f19;
+  --cy-surface: #111827;
+  --cy-surface-hover: #1e293b;
+  --cy-card: #141e33;
+  --cy-border: #1f2d48;
+  --cy-border-bright: #334b77;
+  --cy-emerald: #10b981;
+  --cy-emerald-glow: rgba(16, 185, 129, 0.2);
+  --cy-amber: #f59e0b;
+  --cy-amber-glow: rgba(245, 158, 11, 0.2);
+  --cy-cyan: #06b6d4;
+  --cy-cyan-glow: rgba(6, 182, 212, 0.2);
+  --cy-red: #ef4444;
+  --cy-text: #f1f5f9;
+  --cy-text-muted: #94a3b8;
+  --cy-text-dim: #64748b;
+  --cy-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  
+  background-color: var(--cy-bg);
+  color: var(--cy-text);
+  font-family: "Cairo", sans-serif;
+  min-height: 100vh;
+}
+
+.crypto-universe code,
+.crypto-universe pre,
+.crypto-universe .mono {
+  font-family: var(--cy-mono);
+  direction: ltr;
+}
+
+/* Tactical glowing header */
+.crypto-nav-link {
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.crypto-nav-link.active {
+  color: #38bdf8;
+  background-color: rgba(56, 189, 248, 0.1);
+  border-bottom: 2px solid #38bdf8;
+}
+
+.crypto-card {
+  background: var(--cy-card);
+  border: 1px solid var(--cy-border);
+  border-radius: 12px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.crypto-card:hover {
+  border-color: var(--cy-border-bright);
+}
+
+.crypto-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+}
+
+/* Enigma Lampboard styling */
+.enigma-lamp {
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+}
+
+.enigma-lamp.lit {
+  background-color: #fef08a !important;
+  color: #854d0e !important;
+  box-shadow: 0 0 20px 6px rgba(253, 224, 71, 0.8), 0 0 40px 15px rgba(250, 204, 21, 0.4) !important;
+  transform: scale(1.08);
+}
+
+/* Vigenere square table grid */
+.vigenere-cell {
+  transition: background-color 0.1s ease, color 0.1s ease;
+}
+.vigenere-cell.highlight-row {
+  background-color: rgba(59, 130, 246, 0.25);
+  color: #93c5fd;
+}
+.vigenere-cell.highlight-col {
+  background-color: rgba(16, 185, 129, 0.25);
+  color: #a7f3d0;
+}
+.vigenere-cell.highlight-intersection {
+  background-color: #f59e0b !important;
+  color: #111827 !important;
+  font-weight: 800 !important;
+  transform: scale(1.25);
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.9);
+  z-index: 10;
+}
+
+/* Custom scrollbar for data tables */
+.crypto-scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.crypto-scroll::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+.crypto-scroll::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 3px;
+}
+.crypto-scroll::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+

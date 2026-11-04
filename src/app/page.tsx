@@ -30,6 +30,9 @@ export default function HomePage() {
               <div className="hero-actions">
                 <Link className="button-primary" href="#library">{en ? "Start learning" : "ابدأ التعلّم"} <span aria-hidden="true">←</span></Link>
                 <Link className="button-secondary" href="/algorithms">{en ? "Browse all topics" : "استعرض كل الموضوعات"}</Link>
+                <Link className="button-secondary border-sky-500/50 text-sky-400 bg-slate-900/40 hover:bg-slate-800" href="/cryptography">
+                  {en ? "🔐 Cryptography Lab" : "🔐 مختبر التشفير ومسرح التاريخ"}
+                </Link>
               </div>
               <div className="hero-note">{en ? `${algorithms.length} topics · explanations, code, and simulations` : `${algorithms.length} موضوعًا تعليميًا · شرح وكود ومحاكاة لكل موضوع`}</div>
             </div>

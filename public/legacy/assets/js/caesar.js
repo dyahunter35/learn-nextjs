@@ -10,6 +10,7 @@ let simulationHistory = [];
 let isCipherFinished = false;
 let operationMode = "";
 let cleanText = "";
+let autoPlayTimer = null;
 
 function renderAlphabetTable() {
   const container = document.getElementById("alphabetTableContainer");
@@ -137,10 +138,13 @@ function nextStep() {
   if (currentStepIndex < simulationHistory.length - 1) {
     currentStepIndex++;
     updateVisualization();
+  } else {
+    stopAutoPlay();
   }
 }
 
 function previousStep() {
+  stopAutoPlay();
   if (currentStepIndex > 0) {
     currentStepIndex--;
     updateVisualization();
@@ -150,7 +154,52 @@ function previousStep() {
   }
 }
 
+function jumpToEnd() {
+  if (simulationHistory.length === 0) return;
+  stopAutoPlay();
+  currentStepIndex = simulationHistory.length - 1;
+  updateVisualization();
+}
+
+function toggleAutoPlay() {
+  if (simulationHistory.length === 0) {
+    const textInput = document.getElementById("textInput");
+    if (textInput && textInput.value.trim()) {
+      startCipher(operationMode || "encrypt");
+    }
+  }
+
+  if (autoPlayTimer) {
+    stopAutoPlay();
+  } else {
+    if (currentStepIndex >= simulationHistory.length - 1) {
+      currentStepIndex = 0;
+      updateVisualization();
+    }
+    const btn = document.getElementById("autoPlayButton");
+    if (btn) btn.textContent = "إيقاف مؤقت ⏸";
+    autoPlayTimer = setInterval(() => {
+      if (currentStepIndex < simulationHistory.length - 1) {
+        currentStepIndex++;
+        updateVisualization();
+      } else {
+        stopAutoPlay();
+      }
+    }, 600);
+  }
+}
+
+function stopAutoPlay() {
+  if (autoPlayTimer) {
+    clearInterval(autoPlayTimer);
+    autoPlayTimer = null;
+    const btn = document.getElementById("autoPlayButton");
+    if (btn) btn.textContent = "تشغيل تلقائي ▶";
+  }
+}
+
 function resetCipher(shouldClearMessage = true) {
+  stopAutoPlay();
   currentStepIndex = -1;
   simulationHistory = [];
   isCipherFinished = false;
@@ -172,10 +221,28 @@ function resetCipher(shouldClearMessage = true) {
 
 function updateControlButtons() {
   const isStarted = currentStepIndex >= 0;
+  const isAtEnd = isCipherFinished || currentStepIndex === simulationHistory.length - 1;
 
-  document.getElementById("nextButton").disabled =
-    isCipherFinished || currentStepIndex === simulationHistory.length - 1;
-  document.getElementById("prevButton").disabled = currentStepIndex <= 0;
+  const nextBtn = document.getElementById("nextButton");
+  if (nextBtn) nextBtn.disabled = isAtEnd || simulationHistory.length === 0;
+
+  const prevBtn = document.getElementById("prevButton");
+  if (prevBtn) prevBtn.disabled = currentStepIndex <= 0;
+
+  const jumpBtn = document.getElementById("jumpEndButton");
+  if (jumpBtn) jumpBtn.disabled = isAtEnd || simulationHistory.length === 0;
+
+  const autoBtn = document.getElementById("autoPlayButton");
+  if (autoBtn) autoBtn.disabled = simulationHistory.length === 0 && !document.getElementById("textInput")?.value?.trim();
+
+  const stepCounter = document.getElementById("stepCounter");
+  if (stepCounter) {
+    if (simulationHistory.length > 0 && currentStepIndex >= 0) {
+      stepCounter.textContent = `الخطوة ${currentStepIndex + 1} من ${simulationHistory.length}`;
+    } else {
+      stepCounter.textContent = "بانتظار البدء";
+    }
+  }
 
   document.getElementById("encryptButton").disabled =
     isStarted && operationMode === "encrypt" && !isCipherFinished;
@@ -232,11 +299,14 @@ function updateVisualization() {
     isCipherFinished = false;
   }
 
-  const currentStepRow = stepsLog.querySelector(".bg-yellow-200");
-  if (currentStepRow) {
-    currentStepRow.scrollIntoView({
+  const currentStepRow = stepsLog ? stepsLog.querySelector(".bg-yellow-200") : null;
+  if (currentStepRow && stepsLog) {
+    // Scroll ONLY inside the stepsLog container, NEVER scroll the browser window!
+    const rowOffset = currentStepRow.offsetTop - stepsLog.offsetTop;
+    const targetScroll = rowOffset - (stepsLog.clientHeight / 2) + (currentStepRow.clientHeight / 2);
+    stepsLog.scrollTo({
+      top: Math.max(0, targetScroll),
       behavior: "smooth",
-      block: "center",
     });
   }
 
