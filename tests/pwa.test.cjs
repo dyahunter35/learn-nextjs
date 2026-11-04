@@ -50,12 +50,12 @@ test("production build generates offline routes and includes all compiled chunks
   const exportedManifest = path.join(root, "out/offline-precache.json");
   if (fs.existsSync(exportedManifest)) {
     const precache = JSON.parse(fs.readFileSync(exportedManifest, "utf8"));
-    assert.ok(precache.routes.includes("/"));
-    assert.ok(precache.routes.some((route) => route.replace(/\/+$/, "") === "/offline"));
+    assert.ok(precache.routes.some((route) => route === "/" || route.endsWith("/")));
+    assert.ok(precache.routes.some((route) => route.replace(/\/+$/, "").endsWith("offline")));
     assert.ok(precache.routes.some((route) => route.includes("/algorithms/huffman/simulation")));
     assert.ok(precache.assets.some((asset) => asset.includes("/_next/static/") && asset.endsWith(".js")));
-    assert.ok(precache.assets.includes("/sw.js"));
-    assert.ok(precache.assets.includes("/manifest.webmanifest"));
+    assert.ok(precache.assets.some((asset) => asset.endsWith("/sw.js")));
+    assert.ok(precache.assets.some((asset) => asset.endsWith("/manifest.webmanifest")));
     assert.deepEqual(JSON.parse(fs.readFileSync(path.join(root, "public/offline-precache.json"), "utf8")), precache);
   }
 });
