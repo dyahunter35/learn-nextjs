@@ -79,6 +79,24 @@ a { color: inherit; }
   background: transparent; color: #fff; cursor: pointer; font-size: 19px;
 }
 .theme-button:hover { background: rgba(255,255,255,.1); }
+.language-button { min-width: 42px; height: 38px; padding: 0 9px; border: 1px solid rgba(255,255,255,.22); border-radius: 9px; background: transparent; color: white; cursor: pointer; font-size: 13px; font-weight: 800; }
+.native-lesson { max-width: 1050px; margin: 0 auto; }
+.native-lesson-head, .lesson-panel { padding: clamp(20px, 4vw, 42px); border: 1px solid var(--line); border-radius: 16px; background: var(--surface); box-shadow: var(--shadow-card); }
+.native-lesson-head { margin-bottom: 16px; }
+.native-lesson-head h1 { margin: 4px 0; font-size: clamp(28px, 4vw, 42px); }
+.native-lesson-head p, .lesson-panel p { color: var(--muted); }
+.lesson-eyebrow { color: var(--indigo); font-size: 12px; font-weight: 800; letter-spacing: .12em; }
+.lesson-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+.lesson-tabs a, .sim-controls button { padding: 9px 15px; border: 1px solid var(--line); border-radius: 9px; background: var(--surface); color: var(--ink); text-decoration: none; cursor: pointer; }
+.lesson-panel h2 { margin-top: 0; }
+.lesson-panel li { margin-block: 8px; }
+.complexity-card { margin-top: 24px; padding: 18px; border-inline-start: 4px solid var(--indigo); border-radius: 9px; background: var(--paper); }
+.sim-bars { min-height: 210px; display: flex; align-items: end; justify-content: center; gap: 14px; padding: 22px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); }
+.sim-item { display: grid; justify-items: center; gap: 7px; }
+.sim-item div { width: clamp(28px, 6vw, 56px); max-height: 160px; border-radius: 7px 7px 2px 2px; background: linear-gradient(180deg, #818cf8, #4f46e5); transition: height .25s ease; }
+.sim-controls { display: flex; flex-wrap: wrap; gap: 9px; }
+.sim-controls button:first-child { border-color: var(--indigo); background: var(--indigo); color: #fff; }
+.native-code { overflow: auto; padding: 20px; border-radius: 12px; background: #0b1220; color: #dbeafe; direction: ltr; text-align: left; font: 14px/1.8 "JetBrains Mono", monospace; }
 
 .home-hero {
   overflow: hidden;

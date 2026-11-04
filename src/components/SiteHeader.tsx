@@ -1,19 +1,24 @@
-import Link from "next/link";
+"use client";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { LanguageToggle } from "@/components/LanguageToggle";
+import { useLanguage } from "@/components/LanguageProvider";
 
 export function SiteHeader() {
+  const { language } = useLanguage();
+  const en = language === "en";
   return (
     <header className="site-header">
       <div className="site-header-inner">
-        <Link className="brand" href="/" aria-label="مقرر الحاسوب، الصفحة الرئيسية">
+        <a className="brand" href="/" aria-label="مقرر الحاسوب، الصفحة الرئيسية">
           <span className="brand-mark" aria-hidden="true">م</span>
-          <span className="brand-name">مقرر الحاسوب</span>
-        </Link>
+          <span className="brand-name">{en ? "Computer Science" : "مقرر الحاسوب"}</span>
+        </a>
         <nav className="primary-nav" aria-label="التنقل الرئيسي">
-          <Link href="/">الرئيسية</Link>
-          <Link href="/algorithms">مكتبة الخوارزميات</Link>
+          <a href="/">{en ? "Home" : "الرئيسية"}</a>
+          <a href="/algorithms">{en ? "Algorithm library" : "مكتبة الخوارزميات"}</a>
         </nav>
         <div className="header-actions">
+          <LanguageToggle />
           <ThemeToggle />
         </div>
       </div>

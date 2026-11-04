@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { LegacyExperience } from "@/components/LegacyExperience";
+import { LegacyContent } from "@/components/LegacyContent";
 import { SiteShell } from "@/components/SiteShell";
 import { getAlgorithm } from "@/data/algorithms";
-import { getLegacyDocument, legacyStaticParams } from "@/lib/legacy-pages";
+import { algorithmStaticParams } from "@/data/algorithms";
+import { getLegacyDocument } from "@/lib/legacy-pages";
 
 export const dynamicParams = false;
-export function generateStaticParams() { return legacyStaticParams(); }
+export function generateStaticParams() { return algorithmStaticParams(); }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
@@ -19,5 +20,5 @@ export default async function CodePage({ params }: { params: Promise<{ slug: str
   const algorithm = getAlgorithm(slug);
   if (!algorithm) notFound();
   const document = await getLegacyDocument(slug, "code");
-  return <SiteShell algorithm={algorithm} pageKind="الكود البرمجي"><LegacyExperience title={`كود ${algorithm.title}`} srcDoc={document.html} /></SiteShell>;
+  return <SiteShell algorithm={algorithm} pageKind="الكود البرمجي"><LegacyContent {...document} /></SiteShell>;
 }

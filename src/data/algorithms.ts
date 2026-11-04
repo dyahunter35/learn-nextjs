@@ -36,3 +36,7 @@ export const groups: AlgorithmGroup[] = ["أساسيات المقرر", "أدو�
 export function getAlgorithm(slug: string) {
   return algorithms.find((algorithm) => algorithm.slug === slug);
 }
+
+export function algorithmStaticParams() {
+  return algorithms.map(({ slug }) => ({ slug }));
+}

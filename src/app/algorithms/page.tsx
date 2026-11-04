@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
+"use client";
 import { Catalogue } from "@/components/Catalogue";
 import { SiteHeader } from "@/components/SiteHeader";
-
-export const metadata: Metadata = { title: "مكتبة الخوارزميات" };
+import { useLanguage } from "@/components/LanguageProvider";
 
 export default function AlgorithmsPage() {
-  return <><SiteHeader /><main className="catalog-section"><Catalogue /></main><footer className="site-footer">مقرر الحاسوب</footer></>;
+  const { language } = useLanguage();
+  return <><SiteHeader /><main className="catalog-section"><Catalogue /></main><footer className="site-footer">{language === "en" ? "Computer Science" : "مقرر الحاسوب"}</footer></>;
 }
