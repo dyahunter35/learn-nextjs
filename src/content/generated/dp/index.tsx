@@ -1,4 +1,11 @@
+"use client";
+
+import { useLanguage } from "@/components/LanguageProvider";
+import { translateLegacyText } from "@/data/legacy-english";
+
 export default function NativePage() {
+  const { language } = useLanguage();
+  const t = (text: string) => translateLegacyText(text, "dp", language);
   return (
     <div className="native-legacy-body bg-gray-50">
     {"\n\n    \n    \n    \n\n    "}
@@ -11,7 +18,7 @@ export default function NativePage() {
         </span>
         {"\n            "}
         <h1 className={"text-4xl font-extrabold text-gray-900"}>
-          {"\n                البرمجة الديناميكية "}
+          {t("legacy.5acc5c63c096dcde")}
           <span className={"text-indigo-600"}>
             {"(Dynamic Programming)"}
           </span>
@@ -19,7 +26,7 @@ export default function NativePage() {
         </h1>
         {"\n            "}
         <p className={"mt-2 text-lg text-gray-500"}>
-          {"\n                تقنية حل المشكلات بتجزئتها إلى مشكلات فرعية وتخزين نتائجها لتجنب إعادة الحساب\n            "}
+          {t("legacy.bd54215b9b991d0d")}
         </p>
         {"\n        "}
       </header>
@@ -33,21 +40,21 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"}></path>
             {"\n                "}
           </svg>
-          {"\n                المفهوم\n            "}
+          {t("legacy.9d0e671ad254b897")}
         </h2>
         {"\n            "}
         <p className={"text-gray-700 leading-loose mb-4"}>
-          {"\n                البرمجة الديناميكية (Dynamic Programming) هي تقنية رياضية وخوارزمية تُستخدم لحل المشكلات المعقدة عن طريق تقسيمها إلى مشكلات فرعية أصغر، ثم تخزين نتائج هذه المشكلات الفرعية في جدول (Memoization) لتجنب إعادة حسابها عند الحاجة إليها مرة أخرى. هذا الأسلوب يحول التعقيد الزمني من أسي إلى خطي أو متعدد الحدود.\n            "}
+          {t("legacy.79c07e92b13a5259")}
         </p>
         {"\n            "}
         <div className={"bg-purple-50 p-5 rounded-lg shadow-md mb-6 concept-card border-purple-400"}>
           {"\n                "}
           <h3 className={"text-xl font-semibold text-purple-800 mb-3"}>
-            {"مثال من الحياة اليومية"}
+            {t("legacy.7370773479f02ddf")}
           </h3>
           {"\n                "}
           <p className={"text-gray-700"}>
-            {"\n                    تخيل أنك تريد حساب المسافة بين عدة مدن. بدلاً من إعادة حساب نفس المسافة في كل مرة تحتاجها، يمكنك إنشاء جدول يخزن المسافات بين كل زوج من المدن. عندما تحتاج إلى مسافة معينة، تنظر في الجدول بدلاً من إعادة الحساب. هذا بالضبط ما تفعله البرمجة الديناميكية — تخزين نتائج المشكلات الفرعية لحساب النتائج الأكبر بكفاءة.\n                "}
+            {t("legacy.6fa791cbcd9a211d")}
           </p>
           {"\n            "}
         </div>
@@ -63,11 +70,11 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M13 10V3L4 14h7v7l9-11h-7z"}></path>
             {"\n                "}
           </svg>
-          {"\n                متى نستخدم البرمجة الديناميكية؟\n            "}
+          {t("legacy.3c6cc41da37e74ac")}
         </h2>
         {"\n            "}
         <p className={"text-gray-700 leading-loose mb-4"}>
-          {"\n                هناك شرطان أساسيان يجب توفرهما في المشكلة لاستخدام البرمجة الديناميكية:\n            "}
+          {t("legacy.831257a24bb204ac")}
         </p>
         {"\n            "}
         <div className={"grid grid-cols-1 md:grid-cols-2 gap-4 mb-4"}>
@@ -75,11 +82,11 @@ export default function NativePage() {
           <div className={"bg-green-50 p-5 rounded-lg shadow-md border-green-400"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-green-800 mb-2"}>
-              {"١. البنية الفرعية المثلى (Optimal Substructure)"}
+              {t("legacy.e0a714aaac20c5cc")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700 text-sm"}>
-              {"يمكن حل المشكلة الكبيرة من خلال الجمع بين الحلول المثلى للمشكلات الفرعية. بمعنى أن الحل الأمثل للمشكلة يحتوي على الحلول المثلى للمشكلات الفرعية داخله."}
+              {t("legacy.7f02bda5b0e61885")}
             </p>
             {"\n                "}
           </div>
@@ -87,11 +94,11 @@ export default function NativePage() {
           <div className={"bg-blue-50 p-5 rounded-lg shadow-md border-blue-400"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-blue-800 mb-2"}>
-              {"٢. المشكلات الفرعية المتداخلة (Overlapping Subproblems)"}
+              {t("legacy.0545f0d485da06c3")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700 text-sm"}>
-              {"المشكلة يمكن تقسيمها إلى مشكلات فرعية يتم تكرارها عدة مرات. عندها نقوم بتخزين نتائجها بدلاً من إعادة حسابها — وهذا هو جوهر البرمجة الديناميكية."}
+              {t("legacy.10b7154593cb58c8")}
             </p>
             {"\n                "}
           </div>
@@ -109,7 +116,7 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M9 5l7 7-7 7"}></path>
             {"\n                "}
           </svg>
-          {"\n                الطريقتان: Top-down vs Bottom-up\n            "}
+          {t("legacy.b068a2f3d7055b3e")}
         </h2>
         {"\n\n            "}
         <div className={"grid grid-cols-1 md:grid-cols-2 gap-4 mb-4"}>
@@ -117,11 +124,11 @@ export default function NativePage() {
           <div className={"bg-cyan-50 p-5 rounded-lg shadow-md border-cyan-400"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-cyan-800 mb-2"}>
-              {"من الأعلى للأسفل (Top-down / Memoization)"}
+              {t("legacy.9a462c30e9ee3fd2")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700 text-sm mb-3"}>
-              {"نبدأ بالمشكلة الأصلية ونقسمها بشكل عودي إلى مشكلات فرعية. نخزن نتائج المشكلات الفرعية في مصفوفة (Memo) ونسترجعها عند الحاجة."}
+              {t("legacy.6f41ab36d0a01d36")}
             </p>
             {"\n                    "}
             <div className={"bg-white p-3 rounded-lg border border-cyan-200 font-mono text-sm ltr-text"} dir={"ltr"}>
@@ -133,7 +140,7 @@ export default function NativePage() {
               <br />
               {"\n                          "}
               <span className={"text-gray-500"}>
-                {"// حالة أساسية"}
+                {t("legacy.6d79d087a3365525")}
               </span>
               <br />
               {"\n                          "}
@@ -148,7 +155,7 @@ export default function NativePage() {
               <br />
               {"\n                          "}
               <span className={"text-gray-500"}>
-                {"// إذا كان المحسوب موجودًا، استرجعه"}
+                {t("legacy.dc32d78c781426fc")}
               </span>
               <br />
               {"\n                          "}
@@ -167,7 +174,7 @@ export default function NativePage() {
               <br />
               {"\n                          "}
               <span className={"text-gray-500"}>
-                {"// حساب القيمة وتخزينها"}
+                {t("legacy.a0a2ec1c902778dd")}
               </span>
               <br />
               {"\n                          memo[n] = fib(n-1, memo) + fib(n-2, memo);"}
@@ -186,11 +193,11 @@ export default function NativePage() {
           <div className={"bg-teal-50 p-5 rounded-lg shadow-md border-teal-400"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-teal-800 mb-2"}>
-              {"من الأسفل للأعلى (Bottom-up / Tabulation)"}
+              {t("legacy.365952d761abf093")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700 text-sm mb-3"}>
-              {"نبدأ من أصغر المشكلات الفرعية (الحالات الأساسية) ونبني الحلول الأكبر تصاعديًا باستخدام جدول (Table)."}
+              {t("legacy.af7308fbff2cde96")}
             </p>
             {"\n                    "}
             <div className={"bg-white p-3 rounded-lg border border-teal-200 font-mono text-sm ltr-text"} dir={"ltr"}>
@@ -244,7 +251,7 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M12 6v6m0 0v6m0-6h6m-6 0H6"}></path>
             {"\n                "}
           </svg>
-          {"\n                مثال فيبوناتشي — مقارنة التعقيد\n            "}
+          {t("legacy.faced266016c8401")}
         </h2>
         {"\n\n            "}
         <div className={"grid grid-cols-1 md:grid-cols-2 gap-4 mb-4"}>
@@ -252,11 +259,11 @@ export default function NativePage() {
           <div className={"bg-red-50 p-5 rounded-lg shadow-md border-red-400"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-red-800 mb-2"}>
-              {"بدون DP — عودية ساذجة (O(2ⁿ))"}
+              {t("legacy.a4b4621d50c5206b")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700 text-sm mb-2"}>
-              {"استدعاءات متكررة تعيد حساب نفس القيم مئات المرات."}
+              {t("legacy.e91ad00d45d5f008")}
             </p>
             {"\n                    "}
             <div className={"bg-white p-3 rounded-lg border border-red-200 font-mono text-sm ltr-text"} dir={"ltr"}>
@@ -268,7 +275,7 @@ export default function NativePage() {
               <br />
               {"\n                        "}
               <span className={"text-red-500"}>
-                {"→ يتم حساب fib(2) ثلاث مرات!"}
+                {t("legacy.5691885d9514d59c")}
               </span>
               {"\n                    "}
             </div>
@@ -278,11 +285,11 @@ export default function NativePage() {
           <div className={"bg-emerald-50 p-5 rounded-lg shadow-md border-emerald-400"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-emerald-800 mb-2"}>
-              {"مع DP — خطي (O(n))"}
+              {t("legacy.dfd6208522b76439")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700 text-sm mb-2"}>
-              {"كل قيمة تحسب مرة واحدة فقط وتخزن."}
+              {t("legacy.9a8e29fe704f72ad")}
             </p>
             {"\n                    "}
             <div className={"bg-white p-3 rounded-lg border border-emerald-200 font-mono text-sm ltr-text"} dir={"ltr"}>
@@ -314,27 +321,27 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"}></path>
             {"\n                "}
           </svg>
-          {"\n                مثال العملات المعدنية (Coin Change)\n            "}
+          {t("legacy.7bd6b550461e46b8")}
         </h2>
         {"\n            "}
         <p className={"text-gray-700 leading-loose mb-4"}>
-          {"\n                مشكلة العملات المعدنية: لدينا عملات بقيم معينة (مثل ١، ٥، ١٠، ٢٥) ونريد معرفة أقل عدد من العملات لتكوين مبلغ معين. الحل باستخدام DP:\n            "}
+          {t("legacy.ac5b80c4b689c59f")}
         </p>
         {"\n            "}
         <div className={"bg-amber-50 p-5 rounded-lg shadow-md mb-6 concept-card border-amber-400"}>
           {"\n                "}
           <h3 className={"text-xl font-semibold text-amber-800 mb-3"}>
-            {"معادلة DP"}
+            {t("legacy.4c62186d73560925")}
           </h3>
           {"\n                "}
           <div className={"bg-white p-4 rounded-lg border border-amber-200 font-mono text-sm ltr-text mb-2"} dir={"ltr"}>
             {"\n                    dp[0] = 0"}
             <br />
-            {"\n                    dp[amount] = min(dp[amount - coin] + 1) لكل coin ≤ amount\n                "}
+            {t("legacy.feb2b5187bfacfd3")}
           </div>
           {"\n                "}
           <p className={"text-gray-700 text-sm"}>
-            {"\n                    مثال: عملات [١، ٣، ٤]، المبلغ ٦ ← الحل الأمثل = عملتان (٣ + ٣)\n                "}
+            {t("legacy.032d6c89e761303b")}
           </p>
           {"\n            "}
         </div>
@@ -350,7 +357,7 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"}></path>
             {"\n                "}
           </svg>
-          {"\n                مميزات وعيوب البرمجة الديناميكية\n            "}
+          {t("legacy.34a4b8c52782dd3e")}
         </h2>
         {"\n\n            "}
         <div className={"overflow-x-auto"}>
@@ -359,60 +366,60 @@ export default function NativePage() {
             <thead>
               <tr className={"bg-indigo-600 text-white"}>
                 <th className={"p-3 border border-indigo-500"}>
-                  {"المعيار"}
+                  {t("legacy.695ebc35ab262fcd")}
                 </th>
                 <th className={"p-3 border border-indigo-500"}>
-                  {"الشرح"}
+                  {t("legacy.e78e51fdadaf4568")}
                 </th>
               </tr>
             </thead>
             <tbody>
               <tr className={"even:bg-gray-100"}>
                 <td className={"p-3 border border-gray-300 font-bold text-green-700"}>
-                  {"مميز"}
+                  {t("legacy.73b9091bdadfbadb")}
                 </td>
                 <td className={"p-3 border border-gray-300"}>
-                  {"يقلل التعقيد الزمني بشكل كبير — من أسي O(2ⁿ) إلى خطي O(n) أو متعدد الحدود."}
+                  {t("legacy.d95a3916c198ea05")}
                 </td>
               </tr>
               <tr className={"even:bg-gray-100"}>
                 <td className={"p-3 border border-gray-300 font-bold text-green-700"}>
-                  {"مميز"}
+                  {t("legacy.73b9091bdadfbadb")}
                 </td>
                 <td className={"p-3 border border-gray-300"}>
-                  {"يحل مشكلات معقدة يصعب حلها بالطرق التقليدية (مثل المسارات الأقصر، الحقيبة، التقطيع)."}
+                  {t("legacy.ed8372414f4b9c1b")}
                 </td>
               </tr>
               <tr className={"even:bg-gray-100"}>
                 <td className={"p-3 border border-gray-300 font-bold text-green-700"}>
-                  {"مميز"}
+                  {t("legacy.73b9091bdadfbadb")}
                 </td>
                 <td className={"p-3 border border-gray-300"}>
-                  {"يقدم حلاً منظمًا وواضحًا بخطوات متسلسلة يمكن تتبعها بسهولة."}
+                  {t("legacy.2a874c5b8baf9300")}
                 </td>
               </tr>
               <tr className={"even:bg-gray-100"}>
                 <td className={"p-3 border border-gray-300 font-bold text-red-700"}>
-                  {"عيب"}
+                  {t("legacy.16d0a77d1ff4b7dc")}
                 </td>
                 <td className={"p-3 border border-gray-300"}>
-                  {"يستهلك ذاكرة إضافية لتخزين جدول DP (عادة O(n) أو O(n × m))."}
+                  {t("legacy.63d6f9e3210ab393")}
                 </td>
               </tr>
               <tr className={"even:bg-gray-100"}>
                 <td className={"p-3 border border-gray-300 font-bold text-red-700"}>
-                  {"عيب"}
+                  {t("legacy.16d0a77d1ff4b7dc")}
                 </td>
                 <td className={"p-3 border border-gray-300"}>
-                  {"ليس كل المشكلات يمكن حلها باستخدام DP — تحتاج إلى توفر الشرطين الأساسيين."}
+                  {t("legacy.e8c2337972f48b55")}
                 </td>
               </tr>
               <tr className={"even:bg-gray-100"}>
                 <td className={"p-3 border border-gray-300 font-bold text-red-700"}>
-                  {"عيب"}
+                  {t("legacy.16d0a77d1ff4b7dc")}
                 </td>
                 <td className={"p-3 border border-gray-300"}>
-                  {"قد يكون تصميم معادلة DP صعبًا ويتطلب فهماً عميقاً للمشكلة."}
+                  {t("legacy.4b92f82c1ec754fa")}
                 </td>
               </tr>
             </tbody>
@@ -433,7 +440,7 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M21 12a9 9 0 11-18 0 9 9 0 0118 0z"}></path>
             {"\n                "}
           </svg>
-          {"\n                انتقل إلى المحاكاة التفاعلية\n            "}
+          {t("legacy.25a3659fbc955cd1")}
         </a>
         {"\n        "}
       </div>

@@ -1,4 +1,11 @@
+"use client";
+
+import { useLanguage } from "@/components/LanguageProvider";
+import { translateLegacyText } from "@/data/legacy-english";
+
 export default function NativePage() {
+  const { language } = useLanguage();
+  const t = (text: string) => translateLegacyText(text, "sorting", language);
   return (
     <div className="native-legacy-body bg-gray-50">
     {"\n\n    \n    \n    \n\n    "}
@@ -11,7 +18,7 @@ export default function NativePage() {
         </span>
         {"\n            "}
         <h1 className={"text-4xl font-extrabold text-gray-900"}>
-          {"\n                خوارزميات الترتيب "}
+          {t("legacy.939dfdf18baf9f73")}
           <span className={"text-indigo-600"}>
             {"(Sorting Algorithms)"}
           </span>
@@ -19,7 +26,7 @@ export default function NativePage() {
         </h1>
         {"\n            "}
         <p className={"mt-2 text-lg text-gray-500"}>
-          {"\n                فهم آلية ترتيب البيانات: الفقاعة والاختيار\n            "}
+          {t("legacy.b7a0cb96e845dd4f")}
         </p>
         {"\n        "}
       </header>
@@ -33,21 +40,21 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"}></path>
             {"\n                "}
           </svg>
-          {"\n                ما هي خوارزميات الترتيب؟\n            "}
+          {t("legacy.e28f267f4d1d414b")}
         </h2>
         {"\n\n            "}
         <p className={"text-gray-700 leading-loose mb-4"}>
-          {"\n                خوارزميات الترتيب (Sorting Algorithms) هي إحدى الركائز الأساسية في علم الحاسوب. تُستخدم لإعادة ترتيب مجموعة من البيانات (سواء كانت أرقاماً أو نصوصاً) بترتيب معين، إما تصاعدياً (من الأصغر إلى الأكبر) أو تنازلياً (من الأكبر إلى الأصغر).\n            "}
+          {t("legacy.2114e768aa12afcb")}
         </p>
         {"\n\n            "}
         <div className={"bg-blue-50 p-5 rounded-lg shadow-md mb-6 concept-card border-blue-400"}>
           {"\n                "}
           <h3 className={"text-xl font-semibold text-blue-800 mb-3"}>
-            {"لماذا تعتبر مهمة؟"}
+            {t("legacy.56c4cc0c6fb26494")}
           </h3>
           {"\n                "}
           <p className={"text-gray-700"}>
-            {"\n                    تُستخدم خوارزميات الترتيب في جميع مجالات الحاسوب تقريباً: تنظيم قوائم البيانات، تسريع عمليات البحث (مثل البحث الثنائي)، تحليل البيانات، وعرض المعلومات بشكل منظم. اختيار الخوارزمية المناسبة يؤثر بشكل كبير على أداء البرنامج.\n                "}
+            {t("legacy.b9d35cc5aa6dbefa")}
           </p>
           {"\n            "}
         </div>
@@ -63,39 +70,39 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M13 10V3L4 14h7v7l9-11h-7z"}></path>
             {"\n                "}
           </svg>
-          {"\n                خوارزمية ترتيب الفقاعة (Bubble Sort)\n            "}
+          {t("legacy.1537fa50aa01841e")}
         </h2>
         {"\n\n            "}
         <p className={"text-gray-700 leading-loose mb-4"}>
-          {"\n                خوارزمية بسيطة تعتمد على مقارنة كل عنصرين متجاورين في المصفوفة وتبديل مواضعهما إذا كانا بترتيب خاطئ. تستمر الخوارزمية بالمرور على المصفوفة حتى لا يحدث أي تبديل في مرور كامل، مما يعني أن البيانات أصبحت مرتبة. سُميت بهذا الاسم لأن العناصر الأكبر \"تطفو\" إلى نهاية المصفوفة مثل الفقاعات.\n            "}
+          {t("legacy.a29d4d233722edee")}
         </p>
         {"\n\n            "}
         <div className={"bg-green-50 p-5 rounded-lg shadow-md mb-6 concept-card border-green-400"}>
           {"\n                "}
           <h3 className={"text-xl font-semibold text-green-800 mb-3"}>
-            {"التعقيد الحسابي"}
+            {t("legacy.1b29b192688f3da3")}
           </h3>
           {"\n                "}
           <p className={"text-gray-700"}>
-            {"\n                    أسوأ حالة: "}
+            {t("legacy.b0db58de11901bdd")}
             <span className={"font-mono ltr-text bg-gray-200 p-1 rounded"}>
               {"O(n²)"}
             </span>
-            {" — أفضل حالة: "}
+            {t("legacy.88a988c4ae7f766b")}
             <span className={"font-mono ltr-text bg-gray-200 p-1 rounded"}>
               {"O(n)"}
             </span>
-            {" (عندما تكون المصفوفة مرتبة أصلاً). متوسط الحالة: "}
+            {t("legacy.e93637bbf8bffb1e")}
             <span className={"font-mono ltr-text bg-gray-200 p-1 rounded"}>
               {"O(n²)"}
             </span>
-            {". الخوارزمية بسيطة ولكنها غير فعالة للمصفوفات الكبيرة.\n                "}
+            {t("legacy.c1f4a6753f77bc48")}
           </p>
           {"\n            "}
         </div>
         {"\n\n            "}
         <h3 className={"text-2xl font-bold text-gray-800 mb-4"}>
-          {"خطوات الخوارزمية:"}
+          {t("legacy.78df25a7285668e7")}
         </h3>
         {"\n            "}
         <div className={"list-none p-0 counter-reset:step-counter"}>
@@ -103,11 +110,11 @@ export default function NativePage() {
           <div className={"step-item"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-amber-800"}>
-              {"المقارنة الزوجية"}
+              {t("legacy.eec3723932eb62dd")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700 mr-10"}>
-              {"\n                        ابدأ من أول عنصر في المصفوفة وقارن بين كل زوج من العناصر المتجاورة. إذا كان العنصر الأيسر أكبر من الأيمن (في الترتيب التصاعدي)، قم بتبديلهما.\n                    "}
+              {t("legacy.0c9970ad38d62534")}
             </p>
             {"\n                "}
           </div>
@@ -115,11 +122,11 @@ export default function NativePage() {
           <div className={"step-item"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-amber-800"}>
-              {"الانتقال إلى الزوج التالي"}
+              {t("legacy.fb863a8a867385b0")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700 mr-10"}>
-              {"\n                        انتقل إلى الزوج التالي من العناصر المتجاورة وكرر عملية المقارنة والتبديل. تستمر هذه العملية حتى نهاية المصفوفة.\n                    "}
+              {t("legacy.52788069bfec395b")}
             </p>
             {"\n                "}
           </div>
@@ -127,11 +134,11 @@ export default function NativePage() {
           <div className={"step-item"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-amber-800"}>
-              {"تكرار المرور"}
+              {t("legacy.6037d50881f18613")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700 mr-10"}>
-              {"\n                        بعد الوصول إلى نهاية المصفوفة، يضمن ذلك أن أكبر عنصر قد انتقل إلى موقعه الصحيح في النهاية. كرر المرور على المصفوفة بأكملها مجدداً، متجاهلاً العناصر التي تم ترتيبها بالفعل.\n                    "}
+              {t("legacy.91be21fa587916db")}
             </p>
             {"\n                "}
           </div>
@@ -139,11 +146,11 @@ export default function NativePage() {
           <div className={"step-item"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-amber-800"}>
-              {"التوقف عند الاستقرار"}
+              {t("legacy.25ae3ee007b55757")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700 mr-10"}>
-              {"\n                        استمر في تكرار المرور على المصفوفة حتى تقوم بمرور كامل دون إجراء أي عملية تبديل. في هذه المرحلة، تكون المصفوفة مرتبة بالكامل وتتوقف الخوارزمية.\n                    "}
+              {t("legacy.6b6799305eb4a9ec")}
             </p>
             {"\n                "}
           </div>
@@ -161,31 +168,31 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"}></path>
             {"\n                "}
           </svg>
-          {"\n                خوارزمية ترتيب الاختيار (Selection Sort)\n            "}
+          {t("legacy.48470324baa88a4b")}
         </h2>
         {"\n\n            "}
         <p className={"text-gray-700 leading-loose mb-4"}>
-          {"\n                خوارزمية بسيطة تعتمد على تقسيم المصفوفة إلى جزئين: جزء مرتب وجزء غير مرتب. في كل خطوة، تبحث الخوارزمية عن أصغر عنصر في الجزء غير المرتب وتنقله إلى نهاية الجزء المرتب. سُميت بهذا الاسم لأنها \"تختار\" أصغر عنصر في كل دورة وتضعه في موضعه الصحيح.\n            "}
+          {t("legacy.50a9446623dfd750")}
         </p>
         {"\n\n            "}
         <div className={"bg-purple-50 p-5 rounded-lg shadow-md mb-6 concept-card border-purple-400"}>
           {"\n                "}
           <h3 className={"text-xl font-semibold text-purple-800 mb-3"}>
-            {"التعقيد الحسابي"}
+            {t("legacy.1b29b192688f3da3")}
           </h3>
           {"\n                "}
           <p className={"text-gray-700"}>
-            {"\n                    جميع الحالات (أسوأ، متوسط، أفضل): "}
+            {t("legacy.d72006251b7e1d4c")}
             <span className={"font-mono ltr-text bg-gray-200 p-1 rounded"}>
               {"O(n²)"}
             </span>
-            {". على عكس Bubble Sort، لا تستفيد الخوارزمية من المصفوفات المرتبة جزئياً — فهي تقوم بنفس عدد المقارنات بغض النظر عن ترتيب البيانات.\n                "}
+            {t("legacy.8fbc8c50ef4c1cca")}
           </p>
           {"\n            "}
         </div>
         {"\n\n            "}
         <h3 className={"text-2xl font-bold text-gray-800 mb-4"}>
-          {"خطوات الخوارزمية:"}
+          {t("legacy.78df25a7285668e7")}
         </h3>
         {"\n            "}
         <div className={"list-none p-0 counter-reset:step-counter"}>
@@ -193,11 +200,11 @@ export default function NativePage() {
           <div className={"step-item"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-amber-800"}>
-              {"البحث عن الحد الأدنى"}
+              {t("legacy.019459f61a92239e")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700 mr-10"}>
-              {"\n                        ابدأ من أول عنصر في الجزء غير المرتب من المصفوفة. ابحث عبر جميع العناصر المتبقية للعثور على أصغر عنصر (الحد الأدنى).\n                    "}
+              {t("legacy.d4cc65dcdbc832cd")}
             </p>
             {"\n                "}
           </div>
@@ -205,11 +212,11 @@ export default function NativePage() {
           <div className={"step-item"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-amber-800"}>
-              {"التبديل مع الموضع الحالي"}
+              {t("legacy.a12b46bac4b93300")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700 mr-10"}>
-              {"\n                        بعد العثور على أصغر عنصر، قم بتبديله مع العنصر الموجود في الموضع الحالي (أول عنصر في الجزء غير المرتب). هذا يضع العنصر الأصغر في مكانه الصحيح.\n                    "}
+              {t("legacy.27874e6c267abda4")}
             </p>
             {"\n                "}
           </div>
@@ -217,11 +224,11 @@ export default function NativePage() {
           <div className={"step-item"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-amber-800"}>
-              {"توسيع الجزء المرتب"}
+              {t("legacy.dfa99c45dcfc0df3")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700 mr-10"}>
-              {"\n                        يعتبر العنصر الذي تم وضعه في موضعه الصحيح الآن جزءاً من الجزء المرتب. قم بتحريك الحد الفاصل بين الجزء المرتب والجزء غير المرتب بمقدار موضع واحد إلى الأمام.\n                    "}
+              {t("legacy.fc7b5939b3507bf5")}
             </p>
             {"\n                "}
           </div>
@@ -229,11 +236,11 @@ export default function NativePage() {
           <div className={"step-item"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-amber-800"}>
-              {"التكرار حتى الاكتمال"}
+              {t("legacy.99836db7ed56a3d9")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700 mr-10"}>
-              {"\n                        كرر عملية البحث عن الحد الأدنى والتبديل مع الموضع الحالي حتى يصبح الجزء غير المرتب فارغاً. عندها تكون جميع العناصر في أماكنها الصحيحة وتكون المصفوفة مرتبة بالكامل.\n                    "}
+              {t("legacy.77f08c7fa99767b5")}
             </p>
             {"\n                "}
           </div>
@@ -251,7 +258,7 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"}></path>
             {"\n                "}
           </svg>
-          {"\n                مقارنة بين الخوارزميتين\n            "}
+          {t("legacy.32ddfca4000e81f8")}
         </h2>
         {"\n\n            "}
         <div className={"overflow-x-auto"}>
@@ -260,7 +267,7 @@ export default function NativePage() {
             <thead>
               <tr className={"bg-indigo-600 text-white"}>
                 <th className={"p-3 border border-indigo-500"}>
-                  {"المعيار"}
+                  {t("legacy.695ebc35ab262fcd")}
                 </th>
                 <th className={"p-3 border border-indigo-500"}>
                   {"Bubble Sort"}
@@ -273,7 +280,7 @@ export default function NativePage() {
             <tbody>
               <tr className={"even:bg-gray-100"}>
                 <td className={"p-3 border border-gray-300 font-bold"}>
-                  {"التعقيد (أسوأ حالة)"}
+                  {t("legacy.fbde134950d11b2d")}
                 </td>
                 <td className={"p-3 border border-gray-300 ltr-text"}>
                   {"O(n²)"}
@@ -284,7 +291,7 @@ export default function NativePage() {
               </tr>
               <tr className={"even:bg-gray-100"}>
                 <td className={"p-3 border border-gray-300 font-bold"}>
-                  {"التعقيد (أفضل حالة)"}
+                  {t("legacy.aaa2930ed156e108")}
                 </td>
                 <td className={"p-3 border border-gray-300 ltr-text"}>
                   {"O(n)"}
@@ -295,18 +302,18 @@ export default function NativePage() {
               </tr>
               <tr className={"even:bg-gray-100"}>
                 <td className={"p-3 border border-gray-300 font-bold"}>
-                  {"عدد التبديلات"}
+                  {t("legacy.ca8fe283f8bd6e3c")}
                 </td>
                 <td className={"p-3 border border-gray-300"}>
-                  {"كبير (O(n²))"}
+                  {t("legacy.2aac95b35ecc5623")}
                 </td>
                 <td className={"p-3 border border-gray-300"}>
-                  {"قليل (O(n))"}
+                  {t("legacy.2182be389b72799e")}
                 </td>
               </tr>
               <tr className={"even:bg-gray-100"}>
                 <td className={"p-3 border border-gray-300 font-bold"}>
-                  {"عدد المقارنات"}
+                  {t("legacy.dedd3f772d994b10")}
                 </td>
                 <td className={"p-3 border border-gray-300 ltr-text"}>
                   {"O(n²)"}
@@ -317,35 +324,35 @@ export default function NativePage() {
               </tr>
               <tr className={"even:bg-gray-100"}>
                 <td className={"p-3 border border-gray-300 font-bold"}>
-                  {"الاستقرار (Stability)"}
+                  {t("legacy.7568ca6f3555c685")}
                 </td>
                 <td className={"p-3 border border-gray-300"}>
-                  {"مستقر ✓"}
+                  {t("legacy.a518dd220cea3609")}
                 </td>
                 <td className={"p-3 border border-gray-300"}>
-                  {"غير مستقر ✗"}
+                  {t("legacy.189800055b84ebd1")}
                 </td>
               </tr>
               <tr className={"even:bg-gray-100"}>
                 <td className={"p-3 border border-gray-300 font-bold"}>
-                  {"سهولة الفهم"}
+                  {t("legacy.d86e93e1ed53276d")}
                 </td>
                 <td className={"p-3 border border-gray-300"}>
-                  {"سهلة جداً"}
+                  {t("legacy.c638ebb7a818575a")}
                 </td>
                 <td className={"p-3 border border-gray-300"}>
-                  {"سهلة"}
+                  {t("legacy.6e819dec0128322d")}
                 </td>
               </tr>
               <tr className={"even:bg-gray-100"}>
                 <td className={"p-3 border border-gray-300 font-bold"}>
-                  {"الأداء على بيانات كبيرة"}
+                  {t("legacy.bdb3985139d61801")}
                 </td>
                 <td className={"p-3 border border-gray-300"}>
-                  {"ضعيف"}
+                  {t("legacy.2525e0e23413feb6")}
                 </td>
                 <td className={"p-3 border border-gray-300"}>
-                  {"ضعيف"}
+                  {t("legacy.2525e0e23413feb6")}
                 </td>
               </tr>
             </tbody>
@@ -366,7 +373,7 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M21 12a9 9 0 11-18 0 9 9 0 0118 0z"}></path>
             {"\n                "}
           </svg>
-          {"\n                انتقل إلى المحاكاة التفاعلية\n            "}
+          {t("legacy.25a3659fbc955cd1")}
         </a>
         {"\n        "}
       </div>

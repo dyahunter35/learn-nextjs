@@ -1,4 +1,11 @@
+"use client";
+
+import { useLanguage } from "@/components/LanguageProvider";
+import { translateLegacyText } from "@/data/legacy-english";
+
 export default function NativePage() {
+  const { language } = useLanguage();
+  const t = (text: string) => translateLegacyText(text, "searching", language);
   return (
     <div className="native-legacy-body min-h-screen bg-gradient-to-b from-slate-50 to-white">
     {"\n    \n    \n    \n\n    \n\n    "}
@@ -12,11 +19,11 @@ export default function NativePage() {
         </span>
         {"\n        "}
         <h1 className={"text-3xl md:text-4xl font-extrabold text-gray-900"}>
-          {"محاكاة بصرية لخوارزميات البحث التفاعلية"}
+          {t("legacy.8bbd76b433dba98b")}
         </h1>
         {"\n        "}
         <p className={"text-gray-500 mt-2"}>
-          {"استكشف خوارزميات البحث المتتالي والثنائي — خطوة بخطوة — بعرض يشبه القوائم المترابطة"}
+          {t("legacy.ba8d47421b1dee97")}
         </p>
         {"\n      "}
       </div>
@@ -32,7 +39,7 @@ export default function NativePage() {
             <div className={"w-3 h-3 bg-indigo-500 rounded-full animate-pulse"}></div>
             {"\n            "}
             <h2 className={"text-lg font-bold text-gray-800"}>
-              {"إعدادات البحث"}
+              {t("legacy.a901f761a3660882")}
             </h2>
             {"\n          "}
           </div>
@@ -42,17 +49,17 @@ export default function NativePage() {
             <div>
               {"\n              "}
               <label htmlFor={"algorithmSelect"} className={"block text-sm font-bold text-gray-700 mb-2"}>
-                {"اختر خوارزمية البحث:"}
+                {t("legacy.4df6b4c34bc66025")}
               </label>
               {"\n              "}
               <select id={"algorithmSelect"} className={"w-full px-5 py-4 bg-gray-50 text-gray-900 border-2 border-gray-200 rounded-xl focus:ring-0 focus:border-indigo-400 transition-all duration-200 appearance-none cursor-pointer"} data-legacy-change={"resetSearch(true)"}>
                 {"\n                "}
                 <option value={"sequential"}>
-                  {"🔍 البحث المتتالي (Sequential Search)"}
+                  {t("legacy.ee3f9eab2aae3584")}
                 </option>
                 {"\n                "}
                 <option value={"binary"}>
-                  {"⚡ البحث الثنائي (Binary Search)"}
+                  {t("legacy.dffa87a79fb399c4")}
                 </option>
                 {"\n              "}
               </select>
@@ -62,7 +69,7 @@ export default function NativePage() {
             <div>
               {"\n              "}
               <label htmlFor={"targetInput"} className={"block text-sm font-bold text-gray-700 mb-2"}>
-                {"القيمة المستهدفة:"}
+                {t("legacy.50f8486b97789301")}
               </label>
               {"\n              "}
               <input type={"number"} id={"targetInput"} defaultValue={"30"} className={"w-full px-5 py-4 bg-gray-50 text-gray-900 border-2 border-gray-200 rounded-xl text-left focus:ring-0 focus:border-indigo-400 transition-all duration-200"} dir={"ltr"} data-legacy-change={"resetSearch(true)"} />
@@ -72,7 +79,7 @@ export default function NativePage() {
             <div>
               {"\n              "}
               <label htmlFor={"arrayInput"} className={"block text-sm font-bold text-gray-700 mb-2"}>
-                {"المصفوفة (أرقام مفصولة بفارزة):"}
+                {t("legacy.e341289b4dba125a")}
               </label>
               {"\n              "}
               <div className={"flex gap-2"}>
@@ -80,7 +87,7 @@ export default function NativePage() {
                 <input type={"text"} id={"arrayInput"} defaultValue={"10,20,30,40,50,60,70,80,90,100"} className={"flex-1 px-5 py-4 bg-gray-50 text-gray-900 border-2 border-gray-200 rounded-xl text-left font-mono text-sm focus:ring-0 focus:border-indigo-400 transition-all duration-200"} dir={"ltr"} />
                 {"\n                "}
                 <button data-legacy-click={"updateArray()"} className={"px-4 py-4 bg-indigo-100 hover:bg-indigo-200 text-indigo-700 font-bold rounded-xl transition-all duration-200 text-sm whitespace-nowrap border-2 border-indigo-200 hover:border-indigo-300"}>
-                  {"\n                  تحديث\n                "}
+                  {t("legacy.00eab31f95b7da86")}
                 </button>
                 {"\n              "}
               </div>
@@ -92,19 +99,19 @@ export default function NativePage() {
           <div className={"flex flex-col sm:flex-row gap-3 mt-6"}>
             {"\n            "}
             <button data-legacy-click={"startSearch()"} id={"startButton"} className={"flex-1 px-6 py-3.5 bg-gradient-to-l from-indigo-600 to-indigo-700 text-white font-bold rounded-xl shadow-lg shadow-indigo-200 hover:shadow-xl hover:shadow-indigo-300 hover:-translate-y-0.5 transition-all duration-200 text-sm disabled:opacity-50 disabled:cursor-not-allowed"}>
-              {"\n              ▶ ابدأ / ابحث عن الخطوة الأولى\n            "}
+              {t("legacy.676d0a28058984a5")}
             </button>
             {"\n            "}
             <button data-legacy-click={"nextStep()"} id={"nextButton"} disabled={true} className={"flex-1 px-6 py-3.5 bg-gradient-to-l from-emerald-500 to-emerald-600 text-white font-bold rounded-xl shadow-lg shadow-emerald-200 hover:shadow-xl hover:shadow-emerald-300 hover:-translate-y-0.5 transition-all duration-200 text-sm disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-lg"}>
-              {"\n              ← الخطوة التالية\n            "}
+              {t("legacy.0103ac838415af8b")}
             </button>
             {"\n            "}
             <button data-legacy-click={"previousStep()"} id={"prevButton"} disabled={true} className={"flex-1 px-6 py-3.5 bg-gradient-to-l from-gray-500 to-gray-600 text-white font-bold rounded-xl shadow-lg shadow-gray-200 hover:shadow-xl hover:shadow-gray-300 hover:-translate-y-0.5 transition-all duration-200 text-sm disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-lg"}>
-              {"\n              → الخطوة السابقة\n            "}
+              {t("legacy.c0fa11616338a947")}
             </button>
             {"\n            "}
             <button data-legacy-click={"resetSearch(true)"} className={"px-6 py-3.5 bg-gradient-to-l from-rose-500 to-rose-600 text-white font-bold rounded-xl shadow-lg shadow-rose-200 hover:shadow-xl hover:shadow-rose-300 hover:-translate-y-0.5 transition-all duration-200 text-sm"}>
-              {"\n              ↺ إعادة الضبط\n            "}
+              {t("legacy.d1c2eaaa776c5219")}
             </button>
             {"\n          "}
           </div>
@@ -121,7 +128,7 @@ export default function NativePage() {
               <div className={"w-3 h-3 bg-emerald-500 rounded-full animate-pulse"}></div>
               {"\n              "}
               <h2 className={"text-lg font-bold text-gray-800"}>
-                {"عرض البيانات (عقد متصلة)"}
+                {t("legacy.abdc5dbc684d36ba")}
               </h2>
               {"\n            "}
             </div>
@@ -135,7 +142,7 @@ export default function NativePage() {
               </svg>
               {"\n              "}
               <span id={"nodeCountBadge"}>
-                {"10 عقدة"}
+                {t("legacy.52bf43b9b410d55c")}
               </span>
               {"\n            "}
             </div>
@@ -150,22 +157,22 @@ export default function NativePage() {
             {"\n            "}
             <span className={"flex items-center gap-1"}>
               <span className={"w-3 h-3 rounded bg-[#6366f1] inline-block"}></span>
-              {" افتراضي"}
+              {t("legacy.b2981dfb94c9f4de")}
             </span>
             {"\n            "}
             <span className={"flex items-center gap-1"}>
               <span className={"w-3 h-3 rounded bg-[#fbbf24] inline-block"}></span>
-              {" جاري المقارنة"}
+              {t("legacy.f58610369442c2da")}
             </span>
             {"\n            "}
             <span className={"flex items-center gap-1"}>
               <span className={"w-3 h-3 rounded bg-[#34d399] inline-block"}></span>
-              {" تم العثور"}
+              {t("legacy.97edd3dec902cdd0")}
             </span>
             {"\n            "}
             <span className={"flex items-center gap-1"}>
               <span className={"w-3 h-3 rounded bg-[#e5e7eb] opacity-50 inline-block"}></span>
-              {" مستبعد"}
+              {t("legacy.eb0bd9ba362a61d0")}
             </span>
             {"\n          "}
           </div>
@@ -180,13 +187,13 @@ export default function NativePage() {
             <div className={"w-3 h-3 bg-amber-500 rounded-full animate-pulse"}></div>
             {"\n            "}
             <h2 className={"text-lg font-bold text-gray-800"}>
-              {"سجل الخطوات والنتائج"}
+              {t("legacy.a07b7854cf797c7f")}
             </h2>
             {"\n          "}
           </div>
           {"\n          "}
           <div id={"statusMessage"} className={"status-message mb-4"}>
-            {"\n            اضغط على \"ابدأ\" للبدء.\n          "}
+            {t("legacy.3fee18c507645216")}
           </div>
           {"\n          "}
           <div id={"stepsLog"} className={"steps-log-container"}>

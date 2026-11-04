@@ -1,4 +1,11 @@
+"use client";
+
+import { useLanguage } from "@/components/LanguageProvider";
+import { translateLegacyText } from "@/data/legacy-english";
+
 export default function NativePage() {
+  const { language } = useLanguage();
+  const t = (text: string) => translateLegacyText(text, "truetale", language);
   return (
     <div className="native-legacy-body bg-gray-50">
     {"\n\n\n    \n    \n\n    \n\n"}
@@ -11,7 +18,7 @@ export default function NativePage() {
         </span>
         {"\n        "}
         <h1 className={"text-4xl font-extrabold text-gray-900"}>
-          {"\n            جداول الصواب والخطأ المنطقية "}
+          {t("legacy.4bd65dfacabf9ead")}
           <span className={"text-rose-600"}>
             {"(Truth Tables)"}
           </span>
@@ -19,7 +26,7 @@ export default function NativePage() {
         </h1>
         {"\n        "}
         <p className={"mt-2 text-lg text-gray-500"}>
-          {"\n            أساس المنطق الرقمي وفهم العمليات المنطقية خطوة بخطوة\n        "}
+          {t("legacy.064204552fe8f197")}
         </p>
         {"\n    "}
       </header>
@@ -33,23 +40,23 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"}></path>
             {"\n            "}
           </svg>
-          {"\n            ما هي جداول الصواب؟\n        "}
+          {t("legacy.007a803ffb9972d9")}
         </h2>
         {"\n        "}
         <p className={"text-gray-700 leading-loose mb-4"}>
-          {"\n            جدول الصواب (Truth Table) هو أداة رياضية ومنطقية تُستخدم لتحديد القيمة المنطقية (صواب ✓ أو خطأ ✗) لناتج عبارة منطقية بناءً على جميع التركيبات الممكنة لقيم المدخلات. يُعتبر جدول الصواب الأساس الذي تقوم عليه الدوائر الرقمية والإلكترونيات الحديثة، حيث يمثل طريقة منهجية لتحليل وتصميم البوابات المنطقية (Logic Gates) في الحاسوب.\n        "}
+          {t("legacy.ccec9da48e0cf2e3")}
         </p>
         {"\n        "}
         <p className={"text-gray-700 leading-loose"}>
-          {"\n            كل عبارة منطقية تتكون من متغيرات منطقية تأخذ القيم إما "}
+          {t("legacy.19470e96f0e34fc1")}
           <span className={"text-green-600 font-bold"}>
-            {"صحيح (1 / True)"}
+            {t("legacy.01ac709d10e837eb")}
           </span>
-          {" أو "}
+          {t("legacy.2553faf2d7c4285c")}
           <span className={"text-red-600 font-bold"}>
-            {"خطأ (0 / False)"}
+            {t("legacy.32587fe9798ac308")}
           </span>
-          {". يقوم جدول الصواب بحصر جميع الاحتمالات وحساب النتيجة لكل حالة.\n        "}
+          {t("legacy.c9b8f52520d8aac4")}
         </p>
         {"\n    "}
       </section>
@@ -63,11 +70,11 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"}></path>
             {"\n            "}
           </svg>
-          {"\n            العمليات المنطقية الأساسية\n        "}
+          {t("legacy.0ac9818f64f1981b")}
         </h2>
         {"\n        "}
         <p className={"text-gray-700 mb-6"}>
-          {"\n            هناك خمس عمليات منطقية أساسية تشكل اللبنات الأولى للمنطق الرقمي:\n        "}
+          {t("legacy.422a607d23b75625")}
         </p>
         {"\n\n        "}
         <div className={"bg-red-50 p-5 rounded-lg shadow-md mb-6 concept-card border-red-400"}>
@@ -79,11 +86,11 @@ export default function NativePage() {
               <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"}></path>
               {"\n                "}
             </svg>
-            {"\n                1. النفي (NOT - ¬)\n            "}
+            {t("legacy.e9dcbd8b39020065")}
           </h3>
           {"\n            "}
           <p className={"text-gray-700 mb-3"}>
-            {"\n                عملية النفي تعكس القيمة المنطقية للمدخل. إذا كان المدخل صواباً، يكون الناتج خطأ، والعكس صحيح.\n            "}
+            {t("legacy.6e8b064e3780b8b2")}
           </p>
           {"\n            "}
           <div className={"overflow-x-auto"}>
@@ -122,7 +129,7 @@ export default function NativePage() {
           </div>
           {"\n            "}
           <p className={"text-sm mt-3 text-red-600"}>
-            {"يُستخدم في البوابة المنطقية NOT Gate ويعرف أيضاً بالمُكمّل (Complement)."}
+            {t("legacy.41fd4b619c6735f8")}
           </p>
           {"\n        "}
         </div>
@@ -136,11 +143,11 @@ export default function NativePage() {
               <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M12 4v16m8-8H4"}></path>
               {"\n                "}
             </svg>
-            {"\n                2. العطف (AND - ∧)\n            "}
+            {t("legacy.4760615928a3c9ec")}
           </h3>
           {"\n            "}
           <p className={"text-gray-700 mb-3"}>
-            {"\n                عملية العطف تعطي ناتجاً صحيحاً (1) فقط عندما تكون جميع المدخلات صحيحة. إذا كان أي مدخل خطأ، يكون الناتج خطأ.\n            "}
+            {t("legacy.6a7e09e2d23a3b13")}
           </p>
           {"\n            "}
           <div className={"overflow-x-auto"}>
@@ -210,7 +217,7 @@ export default function NativePage() {
           </div>
           {"\n            "}
           <p className={"text-sm mt-3 text-blue-600"}>
-            {"يُستخدم في البوابة المنطقية AND Gate ويحقق الخاصية: كل من A و B يجب أن يكونا صحيحين."}
+            {t("legacy.61bc4c4d3adc17fd")}
           </p>
           {"\n        "}
         </div>
@@ -224,11 +231,11 @@ export default function NativePage() {
               <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"}></path>
               {"\n                "}
             </svg>
-            {"\n                3. الفصل (OR - ∨)\n            "}
+            {t("legacy.ed97556c29b487c5")}
           </h3>
           {"\n            "}
           <p className={"text-gray-700 mb-3"}>
-            {"\n                عملية الفصل تعطي ناتجاً صحيحاً (1) عندما يكون على الأقل أحد المدخلات صحيحاً. الناتج يكون خطأ فقط عندما تكون جميع المدخلات خطأ.\n            "}
+            {t("legacy.5233ac2dbb0d69cb")}
           </p>
           {"\n            "}
           <div className={"overflow-x-auto"}>
@@ -298,7 +305,7 @@ export default function NativePage() {
           </div>
           {"\n            "}
           <p className={"text-sm mt-3 text-green-600"}>
-            {"يُستخدم في البوابة المنطقية OR Gate ويحقق: يكفي أن يكون A أو B صحيحاً."}
+            {t("legacy.b2a566845e0f4569")}
           </p>
           {"\n        "}
         </div>
@@ -312,11 +319,11 @@ export default function NativePage() {
               <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M13 7l5 5m0 0l-5 5m5-5H6"}></path>
               {"\n                "}
             </svg>
-            {"\n                4. الشرط (Implication - →)\n            "}
+            {t("legacy.27364963056cc8ae")}
           </h3>
           {"\n            "}
           <p className={"text-gray-700 mb-3"}>
-            {"\n                عملية الشرط (الاستلزام) تعطي ناتجاً خطأ (0) فقط عندما يكون المقدّم (A) صحيحاً والتالي (B) خطأ. في جميع الحالات الأخرى، الناتج صحيح.\n            "}
+            {t("legacy.2f168cada1f55fd1")}
           </p>
           {"\n            "}
           <div className={"overflow-x-auto"}>
@@ -386,7 +393,7 @@ export default function NativePage() {
           </div>
           {"\n            "}
           <p className={"text-sm mt-3 text-purple-600"}>
-            {"تُقرأ \"إذا A فإن B\" وهي أساس الاستدلال المنطقي في البرمجة والرياضيات."}
+            {t("legacy.5701a79698bf235d")}
           </p>
           {"\n        "}
         </div>
@@ -400,11 +407,11 @@ export default function NativePage() {
               <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"}></path>
               {"\n                "}
             </svg>
-            {"\n                5. التكافؤ (Equivalence - ↔)\n            "}
+            {t("legacy.de9706526544ab8b")}
           </h3>
           {"\n            "}
           <p className={"text-gray-700 mb-3"}>
-            {"\n                عملية التكافؤ تعطي ناتجاً صحيحاً (1) عندما تكون قيمتا المدخلين متطابقتين (كلاهما صواب أو كلاهما خطأ). إذا اختلفتا، يكون الناتج خطأ.\n            "}
+            {t("legacy.d1b77891cbdb8ad0")}
           </p>
           {"\n            "}
           <div className={"overflow-x-auto"}>
@@ -474,7 +481,7 @@ export default function NativePage() {
           </div>
           {"\n            "}
           <p className={"text-sm mt-3 text-amber-600"}>
-            {"تُقرأ \"A إذا وفقط إذا B\" وتستخدم لتحديد تساوي قيمتين منطقيتين."}
+            {t("legacy.2bfd3c62d2200ed5")}
           </p>
           {"\n        "}
         </div>
@@ -490,21 +497,21 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"}></path>
             {"\n            "}
           </svg>
-          {"\n            كيفية بناء جدول الصواب لأي عبارة منطقية\n        "}
+          {t("legacy.70c676da4a59e079")}
         </h2>
         {"\n        "}
         <p className={"text-gray-700 mb-6"}>
-          {"\n            لبناء جدول الصواب لأي عبارة منطقية معقدة، اتبع هذه الخطوات المنهجية:\n        "}
+          {t("legacy.d74903688dd7e2a8")}
         </p>
         {"\n\n        "}
         <div className={"step-item"}>
           {"\n            "}
           <h3 className={"text-xl font-semibold text-indigo-800"}>
-            {"تحديد عدد المتغيرات"}
+            {t("legacy.890b39547ebb2a3d")}
           </h3>
           {"\n            "}
           <p className={"text-gray-700 mr-10"}>
-            {"\n                حدد عدد المتغيرات المنطقية المختلفة في العبارة (مثل A, B, C). عدد الصفوف في جدول الصواب يساوي \\(2^n\\) حيث n هو عدد المتغيرات.\n            "}
+            {t("legacy.f0e3717601e98640")}
           </p>
           {"\n        "}
         </div>
@@ -512,11 +519,11 @@ export default function NativePage() {
         <div className={"step-item"}>
           {"\n            "}
           <h3 className={"text-xl font-semibold text-indigo-800"}>
-            {"توليد جميع التركيبات الممكنة"}
+            {t("legacy.891e1f7a02f2fe23")}
           </h3>
           {"\n            "}
           <p className={"text-gray-700 mr-10"}>
-            {"\n                اكتب جميع الاحتمالات الممكنة لقيم المتغيرات. أفضل طريقة هي العد الثنائي: ابدأ بجعل كل القيم 0 وتدرج حتى تصل إلى جميع القيم 1.\n            "}
+            {t("legacy.d61f34eebf69a06a")}
           </p>
           {"\n        "}
         </div>
@@ -524,11 +531,11 @@ export default function NativePage() {
         <div className={"step-item"}>
           {"\n            "}
           <h3 className={"text-xl font-semibold text-indigo-800"}>
-            {"تقسيم العبارة إلى أجزاء"}
+            {t("legacy.2153fb148e386250")}
           </h3>
           {"\n            "}
           <p className={"text-gray-700 mr-10"}>
-            {"\n                قسّم العبارة المنطقية المعقدة إلى عمليات فرعية صغرى. أضف عموداً لكل عملية فرعية في جدول الصواب.\n            "}
+            {t("legacy.8ad92cfda5f1c42c")}
           </p>
           {"\n        "}
         </div>
@@ -536,11 +543,11 @@ export default function NativePage() {
         <div className={"step-item"}>
           {"\n            "}
           <h3 className={"text-xl font-semibold text-indigo-800"}>
-            {"تعبئة النتائج من الأعمدة الداخلية إلى الخارجية"}
+            {t("legacy.9c72c700d6a9e981")}
           </h3>
           {"\n            "}
           <p className={"text-gray-700 mr-10"}>
-            {"\n                احسب ناتج كل عملية فرعية بالتدريج مستخدماً قيم المدخلات. انتقل من العمليات الأكثر أولوية (مثل NOT) إلى الأقل أولوية (مثل Implication) حتى تصل إلى العمود النهائي الذي يمثل العبارة الكاملة.\n            "}
+            {t("legacy.6eb15c82133881d0")}
           </p>
           {"\n        "}
         </div>
@@ -558,11 +565,11 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"}></path>
             {"\n            "}
           </svg>
-          {"\n            مثال عملي: (A ∧ B) → (¬A ∨ C)\n        "}
+          {t("legacy.c1ffec2463eec139")}
         </h2>
         {"\n        "}
         <p className={"text-gray-700 mb-4"}>
-          {"\n            لنطبق الخطوات السابقة على العبارة المنطقية: "}
+          {t("legacy.323aef0bcff908cb")}
           <span className={"font-mono ltr-text bg-gray-200 p-1 rounded"}>
             {"(A ∧ B) → (¬A ∨ C)"}
           </span>
@@ -788,11 +795,11 @@ export default function NativePage() {
         </div>
         {"\n        "}
         <p className={"text-gray-700 leading-loose"}>
-          {"\n            في هذا المثال، نلاحظ أن العبارة "}
+          {t("legacy.c6e4c6c07b09b8de")}
           <span className={"font-mono ltr-text bg-gray-200 p-1 rounded"}>
             {"(A ∧ B) → (¬A ∨ C)"}
           </span>
-          {" تكون خطأ فقط في حالة واحدة: عندما يكون A = 1, B = 1, و C = 0. أي عندما يكون A ∧ B = 1 و ¬A ∨ C = 0.\n        "}
+          {t("legacy.b0d77d07aa64a06a")}
         </p>
         {"\n    "}
       </section>
@@ -806,7 +813,7 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"}></path>
             {"\n            "}
           </svg>
-          {"\n            انتقل إلى المولد التفاعلي\n        "}
+          {t("legacy.f75cffef460db615")}
         </a>
         {"\n    "}
       </div>

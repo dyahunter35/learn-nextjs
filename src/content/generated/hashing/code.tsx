@@ -1,27 +1,34 @@
+"use client";
+
+import { useLanguage } from "@/components/LanguageProvider";
+import { translateLegacyText } from "@/data/legacy-english";
+
 export default function NativePage() {
+  const { language } = useLanguage();
+  const t = (text: string) => translateLegacyText(text, "hashing", language);
   return (
     <div className="native-legacy-body bg-gray-50 min-h-screen">
     {"\n  \n    \n    \n\n  "}
     <div className={"code-page"}>
       {"\n    "}
       <h1>
-        {"التجزئة (Hashing) — الكود البرمجي"}
+        {t("legacy.ea155d2d45492625")}
       </h1>
       {"\n    "}
       <p className={"subtitle"}>
-        {"شرح مبسط مع أمثلة بلغات متعددة. يمكنك نسخ الكود واستخدامه."}
+        {t("legacy.f6641497577af02a")}
       </p>
       {"\n    \n    "}
       <div className={"algorithm-code-description"}>
         {"\n      "}
         <strong>
-          {"كيف تعمل:"}
+          {t("legacy.ef1c667af06fc25c")}
         </strong>
-        {" جدول التجزئة (Hash Table) يخزن البيانات باستخدام دالة تجزئة تحول المفتاح إلى فهرس في مصفوفة. تستخدم هذه الخوارزمية "}
+        {t("legacy.003e6da10f5072ac")}
         <strong>
-          {"التسلسل (Chaining)"}
+          {t("legacy.1aa64667ddc107d8")}
         </strong>
-        {" لحل التصادمات — كل خلية تحتوي على قائمة مرتبطة (linked list) من العناصر التي تشترك في نفس قيمة التجزئة. دالة التجزئة: "}
+        {t("legacy.5c94cfcedee698c3")}
         <strong>
           {"key % size"}
         </strong>
@@ -51,7 +58,7 @@ export default function NativePage() {
       <div className={"code-block active"} id={"code-cpp"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"cpp"} data-legacy-click={"copyCode('cpp')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>
@@ -65,7 +72,7 @@ export default function NativePage() {
       <div className={"code-block"} id={"code-java"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"java"} data-legacy-click={"copyCode('java')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>
@@ -79,7 +86,7 @@ export default function NativePage() {
       <div className={"code-block"} id={"code-js"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"js"} data-legacy-click={"copyCode('js')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>
@@ -93,7 +100,7 @@ export default function NativePage() {
       <div className={"code-block"} id={"code-php"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"php"} data-legacy-click={"copyCode('php')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>

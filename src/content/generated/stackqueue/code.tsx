@@ -1,35 +1,42 @@
+"use client";
+
+import { useLanguage } from "@/components/LanguageProvider";
+import { translateLegacyText } from "@/data/legacy-english";
+
 export default function NativePage() {
+  const { language } = useLanguage();
+  const t = (text: string) => translateLegacyText(text, "stackqueue", language);
   return (
     <div className="native-legacy-body bg-gray-50 min-h-screen">
     {"\n  \n    \n    \n\n  "}
     <div className={"code-page"}>
       {"\n    "}
       <h1>
-        {"المكدس والطابور — الكود البرمجي"}
+        {t("legacy.b903f2c2f2c10f74")}
       </h1>
       {"\n    "}
       <p className={"subtitle"}>
-        {"شرح مبسط لهياكل بيانات المكدس والطابور مع أمثلة برمجية بلغات متعددة. يمكنك نسخ الكود واستخدامه مباشرة."}
+        {t("legacy.d939c59799b4fc3d")}
       </p>
       {"\n    \n    "}
       <div className={"algorithm-code-description"}>
         {"\n      "}
         <strong>
-          {"كيف تعمل هياكل البيانات:"}
+          {t("legacy.dde289e1bd9ca46f")}
         </strong>
         <br />
         {"\n      "}
         <strong>
-          {"المكدس (Stack):"}
+          {t("legacy.a6228edda4b4b853")}
         </strong>
-        {" هو هيكل بيانات يتبع مبدأ LIFO (Last In First Out) أي أن آخر عنصر تم إضافته هو أول عنصر يتم إزالته. العمليات الأساسية: push (إضافة إلى الأعلى)، pop (إزالة من الأعلى)، peek (مشاهدة العنصر العلوي)."}
+        {t("legacy.e47a7f1be91865d9")}
         <br />
         <br />
         {"\n      "}
         <strong>
-          {"الطابور (Queue):"}
+          {t("legacy.d83b2121aebaac50")}
         </strong>
-        {" هو هيكل بيانات يتبع مبدأ FIFO (First In First Out) أي أن أول عنصر تم إضافته هو أول عنصر يتم إزالته. العمليات الأساسية: enqueue (إضافة إلى النهاية)، dequeue (إزالة من البداية)، peek (مشاهدة العنصر الأول).\n    "}
+        {t("legacy.ab926397f70bb8ca")}
       </div>
       {"\n\n    "}
       <div className={"lang-tabs"}>
@@ -55,7 +62,7 @@ export default function NativePage() {
       <div className={"code-block active"} id={"code-cpp"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"cpp"} data-legacy-click={"copyCode('cpp')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>
@@ -69,7 +76,7 @@ export default function NativePage() {
       <div className={"code-block"} id={"code-java"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"java"} data-legacy-click={"copyCode('java')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>
@@ -83,7 +90,7 @@ export default function NativePage() {
       <div className={"code-block"} id={"code-js"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"js"} data-legacy-click={"copyCode('js')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>
@@ -97,7 +104,7 @@ export default function NativePage() {
       <div className={"code-block"} id={"code-php"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"php"} data-legacy-click={"copyCode('php')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>

@@ -1,4 +1,11 @@
+"use client";
+
+import { useLanguage } from "@/components/LanguageProvider";
+import { translateLegacyText } from "@/data/legacy-english";
+
 export default function NativePage() {
+  const { language } = useLanguage();
+  const t = (text: string) => translateLegacyText(text, "mst", language);
   return (
     <div className="native-legacy-body min-h-screen bg-gradient-to-b from-slate-50 to-white">
     {"\n\n    \n    \n    \n\n    \n\n    "}
@@ -11,11 +18,11 @@ export default function NativePage() {
         </span>
         {"\n            "}
         <h1 className={"text-3xl md:text-4xl font-extrabold text-gray-900"}>
-          {"محاكاة الشجرة الممتدة الدنيا"}
+          {t("legacy.3b52fdd6de944479")}
         </h1>
         {"\n            "}
         <p className={"text-gray-500 mt-2"}>
-          {"خوارزميتا كروسكال وبريم — خطوة بخطوة على رسم بياني موزون"}
+          {t("legacy.a3e5076702c8ed9a")}
         </p>
         {"\n        "}
       </div>
@@ -29,7 +36,7 @@ export default function NativePage() {
             <div className={"w-3 h-3 bg-indigo-500 rounded-full animate-pulse"}></div>
             {"\n                    "}
             <h2 className={"text-lg font-bold text-gray-800"}>
-              {"إعدادات المحاكاة والتحكم"}
+              {t("legacy.4f27a849caa92554")}
             </h2>
             {"\n                "}
           </div>
@@ -39,17 +46,17 @@ export default function NativePage() {
             <div>
               {"\n                        "}
               <label htmlFor={"algorithmSelect"} className={"block text-sm font-bold text-gray-700 mb-2"}>
-                {"الخوارزمية:"}
+                {t("legacy.e9bec262a08d08ef")}
               </label>
               {"\n                        "}
               <select id={"algorithmSelect"} className={"w-full px-4 py-3.5 bg-gray-50 text-gray-900 border-2 border-gray-200 rounded-xl focus:border-indigo-400 transition-all appearance-none cursor-pointer"}>
                 {"\n                            "}
                 <option value={"kruskal"}>
-                  {"كروسكال (Kruskal)"}
+                  {t("legacy.39065ff37bcab9f2")}
                 </option>
                 {"\n                            "}
                 <option value={"prim"}>
-                  {"بريم (Prim)"}
+                  {t("legacy.1bb6103be62eeeeb")}
                 </option>
                 {"\n                        "}
               </select>
@@ -59,7 +66,7 @@ export default function NativePage() {
             <div>
               {"\n                        "}
               <label className={"block text-sm font-bold text-gray-700 mb-2"}>
-                {"الرسم البياني:"}
+                {t("legacy.67eb8a4e9b299bf0")}
               </label>
               {"\n                        "}
               <div className={"flex items-center gap-2 h-[50px]"}>
@@ -73,7 +80,7 @@ export default function NativePage() {
                   </svg>
                   {"\n                                "}
                   <span>
-                    {"٦ عقد — ٩ حواف موزونة"}
+                    {t("legacy.6a3f0f58beeb2047")}
                   </span>
                   {"\n                            "}
                 </div>
@@ -87,19 +94,19 @@ export default function NativePage() {
           <div className={"flex flex-wrap gap-3 mt-4"}>
             {"\n                    "}
             <button data-legacy-click={"startSimulation()"} id={"startButton"} className={"flex-1 min-w-[100px] px-5 py-3.5 bg-gradient-to-l from-indigo-600 to-indigo-700 text-white font-bold rounded-xl shadow-lg shadow-indigo-200 hover:shadow-xl hover:shadow-indigo-300 hover:-translate-y-0.5 transition-all duration-200 text-sm disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-lg"}>
-              {"\n                        ▶ ابدأ\n                    "}
+              {t("legacy.cdcdb088305e072a")}
             </button>
             {"\n                    "}
             <button data-legacy-click={"nextStep()"} id={"nextButton"} className={"flex-1 min-w-[100px] px-5 py-3.5 bg-gradient-to-l from-emerald-500 to-emerald-600 text-white font-bold rounded-xl shadow-lg shadow-emerald-200 hover:shadow-xl hover:shadow-emerald-300 hover:-translate-y-0.5 transition-all duration-200 text-sm disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-lg"} disabled={true}>
-              {"\n                        ← الخطوة التالية\n                    "}
+              {t("legacy.0103ac838415af8b")}
             </button>
             {"\n                    "}
             <button data-legacy-click={"previousStep()"} id={"prevButton"} className={"flex-1 min-w-[100px] px-5 py-3.5 bg-gradient-to-l from-gray-500 to-gray-600 text-white font-bold rounded-xl shadow-lg shadow-gray-200 hover:shadow-xl hover:shadow-gray-300 hover:-translate-y-0.5 transition-all duration-200 text-sm disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-lg"} disabled={true}>
-              {"\n                        → الخطوة السابقة\n                    "}
+              {t("legacy.c0fa11616338a947")}
             </button>
             {"\n                    "}
             <button data-legacy-click={"resetSimulation()"} id={"resetButton"} className={"flex-1 min-w-[100px] px-5 py-3.5 bg-gradient-to-l from-rose-500 to-rose-600 text-white font-bold rounded-xl shadow-lg shadow-rose-200 hover:shadow-xl hover:shadow-rose-300 hover:-translate-y-0.5 transition-all duration-200 text-sm"}>
-              {"\n                        ↺ إعادة الضبط\n                    "}
+              {t("legacy.d1c2eaaa776c5219")}
             </button>
             {"\n                "}
           </div>
@@ -113,7 +120,7 @@ export default function NativePage() {
             <div className={"w-3 h-3 bg-emerald-500 rounded-full animate-pulse"}></div>
             {"\n                    "}
             <h2 className={"text-lg font-bold text-gray-800"}>
-              {"تمثيل الرسم البياني الموزون"}
+              {t("legacy.68d77a5035b58f38")}
             </h2>
             {"\n                "}
           </div>
@@ -122,42 +129,42 @@ export default function NativePage() {
             {"\n                    "}
             <span className={"legend-item"}>
               <span className={"legend-line border-gray-300"}></span>
-              {" غير مفحوصة"}
+              {t("legacy.b5a4353e576153d2")}
             </span>
             {"\n                    "}
             <span className={"legend-item"}>
               <span className={"legend-line border-amber-400"} style={{"borderTopStyle":"dashed"}}></span>
-              {" قيد الفحص"}
+              {t("legacy.d9b7f58c4ad7eb1b")}
             </span>
             {"\n                    "}
             <span className={"legend-item"}>
               <span className={"legend-line border-emerald-400"}></span>
-              {" في MST"}
+              {t("legacy.0cf38c7ae47c116e")}
             </span>
             {"\n                    "}
             <span className={"legend-item legend-item-kruskal"}>
               <span className={"legend-line border-red-300"} style={{"borderTopStyle":"dashed"}}></span>
-              {" مرفوضة"}
+              {t("legacy.20db2f449d34e573")}
             </span>
             {"\n                    "}
             <span className={"legend-item legend-item-prim hidden"}>
               <span className={"legend-line border-blue-300"} style={{"borderTopStyle":"dashed"}}></span>
-              {" في الحدود"}
+              {t("legacy.1944f3282e14224f")}
             </span>
             {"\n                    "}
             <span className={"legend-item"}>
               <span className={"legend-dot bg-gray-200 border border-gray-400"}></span>
-              {" خارج MST"}
+              {t("legacy.c90af8c7ca6f52ca")}
             </span>
             {"\n                    "}
             <span className={"legend-item"}>
               <span className={"legend-dot bg-indigo-500"}></span>
-              {" في MST"}
+              {t("legacy.0cf38c7ae47c116e")}
             </span>
             {"\n                    "}
             <span className={"legend-item legend-item-prim hidden"}>
               <span className={"legend-dot bg-amber-400"}></span>
-              {" الحالية"}
+              {t("legacy.58d0e21f45f82a9a")}
             </span>
             {"\n                "}
           </div>
@@ -183,7 +190,7 @@ export default function NativePage() {
                   <div className={"w-2.5 h-2.5 bg-amber-500 rounded-full animate-pulse"}></div>
                   {"\n                                "}
                   <h3 className={"text-sm font-bold text-gray-700"}>
-                    {"معلومات الخوارزمية"}
+                    {t("legacy.f54e34069c5e2302")}
                   </h3>
                   {"\n                            "}
                 </div>
@@ -191,7 +198,7 @@ export default function NativePage() {
                 <div id={"algorithmInfoPanel"}>
                   {"\n                                "}
                   <div className={"text-gray-400 text-xs text-center py-8"}>
-                    {"اضغط \"ابدأ\" لبدء المحاكاة"}
+                    {t("legacy.67804cf1feefe6ae")}
                   </div>
                   {"\n                            "}
                 </div>
@@ -211,19 +218,19 @@ export default function NativePage() {
             <div className={"w-3 h-3 bg-amber-500 rounded-full animate-pulse"}></div>
             {"\n                    "}
             <h2 className={"text-lg font-bold text-gray-800"}>
-              {"معلومات الخطوات والنتائج"}
+              {t("legacy.a181fa5fa09ce847")}
             </h2>
             {"\n                "}
           </div>
           {"\n\n                "}
           <div id={"statusMessage"} className={"status-message mb-4"}>
-            {"\n                    اختر الخوارزمية، ثم اضغط \"ابدأ\".\n                "}
+            {t("legacy.bb4e47e6adbc1c2d")}
           </div>
           {"\n\n                "}
           <div className={"info-panel mb-4"}>
             {"\n                    "}
             <h3 className={"text-sm font-bold text-gray-700 mb-2"}>
-              {"سجل الخطوات"}
+              {t("legacy.b8ed5556a18721a0")}
             </h3>
             {"\n                    "}
             <div id={"stepsLog"} className={"steps-log-container"}></div>
@@ -249,11 +256,11 @@ export default function NativePage() {
                 <div>
                   {"\n                                "}
                   <h3 className={"text-xl font-bold text-emerald-800"}>
-                    {"اكتملت الخوارزمية!"}
+                    {t("legacy.98a5018528651362")}
                   </h3>
                   {"\n                                "}
                   <p className={"text-emerald-600 text-sm"}>
-                    {"تم إيجاد الشجرة الممتدة الدنيا بنجاح"}
+                    {t("legacy.7fe88065f6fbcb2a")}
                   </p>
                   {"\n                            "}
                 </div>
@@ -265,7 +272,7 @@ export default function NativePage() {
                 <div className={"bg-white rounded-xl p-4 border border-emerald-200"}>
                   {"\n                                "}
                   <div className={"text-xs text-gray-500 mb-1"}>
-                    {"عدد الحواف في MST"}
+                    {t("legacy.d8d4927bfeb25b4a")}
                   </div>
                   {"\n                                "}
                   <div className={"text-2xl font-bold text-emerald-700"} id={"resultCount"}>
@@ -277,7 +284,7 @@ export default function NativePage() {
                 <div className={"bg-white rounded-xl p-4 border border-emerald-200"}>
                   {"\n                                "}
                   <div className={"text-xs text-gray-500 mb-1"}>
-                    {"الوزن الإجمالي"}
+                    {t("legacy.c1fa588d7566ef96")}
                   </div>
                   {"\n                                "}
                   <div className={"text-2xl font-bold text-emerald-700"} id={"resultWeight"}>
@@ -289,7 +296,7 @@ export default function NativePage() {
                 <div className={"bg-white rounded-xl p-4 border border-emerald-200 sm:col-span-1"}>
                   {"\n                                "}
                   <div className={"text-xs text-gray-500 mb-1"}>
-                    {"حواف MST"}
+                    {t("legacy.32ba8bfaed7a3356")}
                   </div>
                   {"\n                                "}
                   <div className={"font-mono font-bold text-emerald-700 text-sm break-all"} id={"resultEdges"}>

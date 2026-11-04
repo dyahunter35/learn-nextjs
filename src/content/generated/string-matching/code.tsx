@@ -1,28 +1,35 @@
+"use client";
+
+import { useLanguage } from "@/components/LanguageProvider";
+import { translateLegacyText } from "@/data/legacy-english";
+
 export default function NativePage() {
+  const { language } = useLanguage();
+  const t = (text: string) => translateLegacyText(text, "string-matching", language);
   return (
     <div className="native-legacy-body bg-gray-50 min-h-screen">
     {"\n  \n    \n    \n\n  "}
     <div className={"code-page"}>
       {"\n    "}
       <h1>
-        {"مطابقة السلاسل النصية — الكود البرمجي"}
+        {t("legacy.ca720d188bfa6322")}
       </h1>
       {"\n    "}
       <p className={"subtitle"}>
-        {"خوارزميتا البحث البسيط (Naive) و KMP للبحث بكفاءة عن نمط داخل نص مع أمثلة بلغات متعددة."}
+        {t("legacy.1a7c4e9bfbfac554")}
       </p>
       {"\n\n    "}
       <div className={"algorithm-code-description"}>
         {"\n      "}
         <strong>
-          {"كيف تعمل Naive:"}
+          {t("legacy.c33021ce0acc82d6")}
         </strong>
-        {" تحريك النمط حرفاً حرفاً فوق النص ومقارنة كل حرف.\n      "}
+        {t("legacy.36efebaca5da432b")}
         <br />
         <strong>
-          {"كيف تعمل KMP:"}
+          {t("legacy.cb150d3e91e5c6ad")}
         </strong>
-        {" استخدام جدول البادئات (LPS) لتجنب المقارنات غير الضرورية عند عدم التطابق.\n    "}
+        {t("legacy.8e90adefd069ba69")}
       </div>
       {"\n\n    "}
       <div className={"lang-tabs"}>
@@ -48,7 +55,7 @@ export default function NativePage() {
       <div className={"code-block active"} id={"code-cpp"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"cpp"} data-legacy-click={"copyCode('cpp')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>
@@ -90,7 +97,7 @@ export default function NativePage() {
       <div className={"code-block"} id={"code-java"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"java"} data-legacy-click={"copyCode('java')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>
@@ -114,7 +121,7 @@ export default function NativePage() {
       <div className={"code-block"} id={"code-js"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"js"} data-legacy-click={"copyCode('js')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>
@@ -138,7 +145,7 @@ export default function NativePage() {
       <div className={"code-block"} id={"code-php"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"php"} data-legacy-click={"copyCode('php')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>

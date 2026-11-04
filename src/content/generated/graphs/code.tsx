@@ -1,23 +1,30 @@
+"use client";
+
+import { useLanguage } from "@/components/LanguageProvider";
+import { translateLegacyText } from "@/data/legacy-english";
+
 export default function NativePage() {
+  const { language } = useLanguage();
+  const t = (text: string) => translateLegacyText(text, "graphs", language);
   return (
     <div className="native-legacy-body bg-gray-50 min-h-screen">
     {"\n  \n    \n    \n\n  "}
     <div className={"code-page"}>
       {"\n    "}
       <h1>
-        {"الرسوم البيانية (BFS/DFS) — الكود البرمجي"}
+        {t("legacy.e540213c4ba7a64a")}
       </h1>
       {"\n    "}
       <p className={"subtitle"}>
-        {"شرح مبسط مع أمثلة بلغات متعددة. يمكنك نسخ الكود واستخدامه."}
+        {t("legacy.f6641497577af02a")}
       </p>
       {"\n    \n    "}
       <div className={"algorithm-code-description"}>
         {"\n      "}
         <strong>
-          {"كيف تعمل:"}
+          {t("legacy.ef1c667af06fc25c")}
         </strong>
-        {" تمثل Graph الرسم البياني باستخدام قائمة مجاورة (adjacency list). BFS (البحث بالعرض) يستخدم طابوراً (queue) لزيارة العقدة جاراً بعد جار. DFS (البحث بالعمق) يستخدم مكدساً (stack) أو استدعاء متكرراً للتعمق في المسار قبل العودة. المثال يستخدم 6 عقد A-F.\n    "}
+        {t("legacy.a4649c6dd3e96683")}
       </div>
       {"\n\n    "}
       <div className={"lang-tabs"}>
@@ -43,7 +50,7 @@ export default function NativePage() {
       <div className={"code-block active"} id={"code-cpp"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"cpp"} data-legacy-click={"copyCode('cpp')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>
@@ -57,7 +64,7 @@ export default function NativePage() {
       <div className={"code-block"} id={"code-java"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"java"} data-legacy-click={"copyCode('java')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>
@@ -71,7 +78,7 @@ export default function NativePage() {
       <div className={"code-block"} id={"code-js"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"js"} data-legacy-click={"copyCode('js')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>
@@ -85,7 +92,7 @@ export default function NativePage() {
       <div className={"code-block"} id={"code-php"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"php"} data-legacy-click={"copyCode('php')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>

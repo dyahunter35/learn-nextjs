@@ -1,12 +1,11 @@
 // @ts-nocheck
+import { translateLegacyRuntime } from "@/data/legacy-english";
 function toRadians(degrees) {
   return degrees * (Math.PI / 180);
 }
-
 function toDegrees(radians) {
   return radians * (180 / Math.PI);
 }
-
 function factorial(n) {
   if (n < 0) return "Error";
   if (n === 0 || n === 1) return 1;
@@ -18,26 +17,20 @@ function factorial(n) {
   }
   return result;
 }
-
 class Calculator {
   constructor(previousOperandTextElement, currentOperandTextElement) {
     this.previousOperandTextElement = previousOperandTextElement;
     this.currentOperandTextElement = currentOperandTextElement;
     this.clear();
   }
-
   clear() {
     this.currentOperand = "0";
     this.previousOperand = "";
     this.operation = undefined;
     this.isAwaitingPower = false;
   }
-
   delete() {
-    if (
-      this.currentOperand === "Error" ||
-      this.currentOperand === "NaN"
-    ) {
+    if (this.currentOperand === "Error" || this.currentOperand === "NaN") {
       this.clear();
     } else if (this.currentOperand.length === 1) {
       this.currentOperand = "0";
@@ -45,49 +38,34 @@ class Calculator {
       this.currentOperand = this.currentOperand.toString().slice(0, -1);
     }
   }
-
   appendNumber(number) {
     if (number === "." && this.currentOperand.includes(".")) return;
-
     if (this.isAwaitingPower) {
       this.currentOperand = number.toString();
       this.isAwaitingPower = false;
     } else if (this.currentOperand === "0" && number !== ".") {
       this.currentOperand = number.toString();
-    } else if (
-      this.currentOperand === "Error" ||
-      this.currentOperand === "NaN"
-    ) {
+    } else if (this.currentOperand === "Error" || this.currentOperand === "NaN") {
       this.currentOperand = number.toString();
     } else {
-      this.currentOperand =
-        this.currentOperand.toString() + number.toString();
+      this.currentOperand = this.currentOperand.toString() + number.toString();
     }
   }
-
   chooseOperation(operation) {
-    if (this.currentOperand === "Error" || this.currentOperand === "NaN")
-      return;
-
-    if (this.currentOperand === "0" && this.previousOperand === "")
-      return;
-
+    if (this.currentOperand === "Error" || this.currentOperand === "NaN") return;
+    if (this.currentOperand === "0" && this.previousOperand === "") return;
     if (this.previousOperand !== "") {
       this.compute();
     }
-
     this.operation = operation;
     this.previousOperand = this.currentOperand;
     this.currentOperand = "0";
   }
-
   performFunction(func) {
     const current = parseFloat(this.currentOperand);
     if (isNaN(current) && func !== "pi" && func !== "euler") return;
-
     let result;
     let displayFunc = func;
-
     switch (func) {
       case "pi":
         result = Math.PI;
@@ -222,26 +200,21 @@ class Calculator {
       default:
         return;
     }
-
     if (result === "Error" || isNaN(result)) {
       this.currentOperand = "Error";
     } else {
       this.currentOperand = result.toString();
     }
-
     if (displayFunc) {
       this.previousOperand = displayFunc;
     }
     this.operation = undefined;
   }
-
   compute() {
     let computation;
     const prev = parseFloat(this.previousOperand);
     const current = parseFloat(this.currentOperand);
-
     if (isNaN(prev) || isNaN(current)) return;
-
     switch (this.operation) {
       case "+":
         computation = prev + current;
@@ -267,53 +240,36 @@ class Calculator {
       default:
         return;
     }
-
     this.currentOperand = computation.toString();
     this.operation = undefined;
     this.previousOperand = "";
   }
-
   getDisplayNumber(number) {
     const stringNumber = number.toString();
     const parts = stringNumber.split(".");
     const integerDigits = parseFloat(parts[0]);
     const decimalDigits = parts[1];
     let integerDisplay;
-
-    if (
-      number === "Error" ||
-      number === "NaN" ||
-      number === "Infinity" ||
-      number === "-Infinity"
-    ) {
-      return "خطأ";
+    if (number === "Error" || number === "NaN" || number === "Infinity" || number === "-Infinity") {
+      return translateLegacyRuntime("legacy.acc74dcf4c2f5679");
     }
-
     if (isNaN(integerDigits)) {
       integerDisplay = "";
     } else {
       integerDisplay = integerDigits.toLocaleString("en", {
-        maximumFractionDigits: 0,
+        maximumFractionDigits: 0
       });
     }
-
     if (decimalDigits != null) {
       return `${integerDisplay}.${decimalDigits}`;
     } else {
       return integerDisplay;
     }
   }
-
   updateDisplay() {
     const currentDisplay = this.getDisplayNumber(this.currentOperand);
     this.currentOperandTextElement.innerText = currentDisplay;
-
-    this.currentOperandTextElement.classList.remove(
-      "text-5xl",
-      "text-scale-4xl",
-      "text-scale-3xl"
-    );
-
+    this.currentOperandTextElement.classList.remove("text-5xl", "text-scale-4xl", "text-scale-3xl");
     if (currentDisplay.length > 18) {
       this.currentOperandTextElement.classList.add("text-scale-3xl");
     } else if (currentDisplay.length > 12) {
@@ -321,43 +277,31 @@ class Calculator {
     } else {
       this.currentOperandTextElement.classList.add("text-5xl");
     }
-
     if (this.operation != null) {
       let displayOp = this.operation;
       if (this.operation === "^") {
         displayOp = "^";
       }
-      this.previousOperandTextElement.innerText = `${this.getDisplayNumber(
-        this.previousOperand
-      )} ${displayOp}`;
+      this.previousOperandTextElement.innerText = `${this.getDisplayNumber(this.previousOperand)} ${displayOp}`;
     } else {
       this.previousOperandTextElement.innerText = "";
     }
   }
 }
-
 const numberButtons = document.querySelectorAll("[data-number]");
 const operationButtons = document.querySelectorAll("[data-operation]");
 const functionButtons = document.querySelectorAll("[data-function]");
-const previousOperandTextElement =
-  document.getElementById("previous-operand");
-const currentOperandTextElement =
-  document.getElementById("current-operand");
-
-const calculator = new Calculator(
-  previousOperandTextElement,
-  currentOperandTextElement
-);
+const previousOperandTextElement = document.getElementById("previous-operand");
+const currentOperandTextElement = document.getElementById("current-operand");
+const calculator = new Calculator(previousOperandTextElement, currentOperandTextElement);
 calculator.updateDisplay();
-
-numberButtons.forEach((button) => {
+numberButtons.forEach(button => {
   button.addEventListener("click", () => {
     calculator.appendNumber(button.dataset.number);
     calculator.updateDisplay();
   });
 });
-
-operationButtons.forEach((button) => {
+operationButtons.forEach(button => {
   const operation = button.dataset.operation;
   button.addEventListener("click", () => {
     switch (operation) {
@@ -377,40 +321,31 @@ operationButtons.forEach((button) => {
     calculator.updateDisplay();
   });
 });
-
-functionButtons.forEach((button) => {
+functionButtons.forEach(button => {
   button.addEventListener("click", () => {
     calculator.performFunction(button.dataset.function);
     calculator.updateDisplay();
   });
 });
-
-document.addEventListener("keydown", (e) => {
-  if ((e.key >= "0" && e.key <= "9") || e.key === ".") {
+document.addEventListener("keydown", e => {
+  if (e.key >= "0" && e.key <= "9" || e.key === ".") {
     calculator.appendNumber(e.key);
-  }
-  else if (
-    e.key === "+" ||
-    e.key === "-" ||
-    e.key === "*" ||
-    e.key === "/"
-  ) {
+  } else if (e.key === "+" || e.key === "-" || e.key === "*" || e.key === "/") {
     const op = e.key === "*" ? "×" : e.key === "/" ? "÷" : e.key;
     calculator.chooseOperation(op);
-  }
-  else if (e.key === "=" || e.key === "Enter") {
+  } else if (e.key === "=" || e.key === "Enter") {
     e.preventDefault();
     calculator.compute();
-  }
-  else if (e.key === "Backspace") {
+  } else if (e.key === "Backspace") {
     calculator.delete();
-  }
-  else if (e.key === "Escape") {
+  } else if (e.key === "Escape") {
     calculator.clear();
   }
-
   calculator.updateDisplay();
 });
-
-Object.assign(window, {toRadians: toRadians, toDegrees: toDegrees, factorial: factorial});
-export {toRadians, toDegrees, factorial};
+Object.assign(window, {
+  toRadians: toRadians,
+  toDegrees: toDegrees,
+  factorial: factorial
+});
+export { toRadians, toDegrees, factorial };

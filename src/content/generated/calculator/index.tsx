@@ -1,4 +1,11 @@
+"use client";
+
+import { useLanguage } from "@/components/LanguageProvider";
+import { translateLegacyText } from "@/data/legacy-english";
+
 export default function NativePage() {
+  const { language } = useLanguage();
+  const t = (text: string) => translateLegacyText(text, "calculator", language);
   return (
     <div className="native-legacy-body bg-gray-50">
     {"\n\n    \n    \n    \n\n    \n\n    "}
@@ -11,7 +18,7 @@ export default function NativePage() {
         </span>
         {"\n            "}
         <h1 className={"text-4xl font-extrabold text-gray-900"}>
-          {"\n                الآلة الحاسبة العلمية "}
+          {t("legacy.f27a5b6f5339e7d5")}
           <span className={"text-purple-600"}>
             {"(Scientific Calculator)"}
           </span>
@@ -19,7 +26,7 @@ export default function NativePage() {
         </h1>
         {"\n            "}
         <p className={"mt-2 text-lg text-gray-500"}>
-          {"\n                آلة حاسبة علمية متكاملة مع واجهة تفاعلية\n            "}
+          {t("legacy.75e28399fd36b0a9")}
         </p>
         {"\n        "}
       </header>
@@ -33,17 +40,17 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"}></path>
             {"\n                "}
           </svg>
-          {"\n                مقدمة عن الآلات الحاسبة العلمية\n            "}
+          {t("legacy.c97d4db44e31c51a")}
         </h2>
         {"\n            "}
         <p className={"text-gray-700 leading-loose mb-4"}>
-          {"\n                الآلة الحاسبة العلمية هي أداة إلكترونية مصممة لإجراء العمليات الحسابية المتقدمة التي تتجاوز الجمع والطرح والضرب والقسمة. تدعم هذه الآلات الدوال المثلثية واللوغاريتمية والأسية، مما يجعلها أداة أساسية للطلاب والمهندسين والعلماء.\n            "}
+          {t("legacy.de5c3cb30a646146")}
         </p>
         {"\n            "}
         <div className={"bg-indigo-50 p-5 rounded-lg shadow-md border-r-4 border-indigo-400"}>
           {"\n                "}
           <p className={"text-indigo-800 font-semibold"}>
-            {"\n                    تُستخدم الآلات الحاسبة العلمية في مجالات متعددة مثل الرياضيات، الفيزياء، الكيمياء، الهندسة، والعديد من التخصصات العلمية الأخرى.\n                "}
+            {t("legacy.9a2d72c1a6cbd47a")}
           </p>
           {"\n            "}
         </div>
@@ -59,11 +66,11 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"}></path>
             {"\n                "}
           </svg>
-          {"\n                العمليات الأساسية\n            "}
+          {t("legacy.14143b4ad0d1c7a8")}
         </h2>
         {"\n            "}
         <p className={"text-gray-700 leading-loose mb-4"}>
-          {"\n                تشكل العمليات الحسابية الأساسية اللبنات الأولى لأي آلة حاسبة. إليك نظرة على كل عملية:\n            "}
+          {t("legacy.f99dc4def4ff110e")}
         </p>
         {"\n            "}
         <div className={"grid grid-cols-1 md:grid-cols-2 gap-4"}>
@@ -75,11 +82,11 @@ export default function NativePage() {
               <span className={"ml-2 text-2xl font-bold text-blue-600"}>
                 {"+"}
               </span>
-              {"\n                        الجمع (Addition)\n                    "}
+              {t("legacy.ba75f2847dd3fe5a")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700"}>
-              {"\n                        عملية الجمع هي أبسط العمليات الحسابية. تُستخدم لإضافة عددين أو أكثر للحصول على المجموع. مثال: 5 + 3 = 8\n                    "}
+              {t("legacy.348472a732b46cd5")}
             </p>
             {"\n                "}
           </div>
@@ -91,11 +98,11 @@ export default function NativePage() {
               <span className={"ml-2 text-2xl font-bold text-red-600"}>
                 {"-"}
               </span>
-              {"\n                        الطرح (Subtraction)\n                    "}
+              {t("legacy.68095c0c87e73d1a")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700"}>
-              {"\n                        عملية الطرح تُستخدم لإيجاد الفرق بين عددين. مثال: 10 - 4 = 6\n                    "}
+              {t("legacy.8829f84b89e65992")}
             </p>
             {"\n                "}
           </div>
@@ -107,11 +114,11 @@ export default function NativePage() {
               <span className={"ml-2 text-2xl font-bold text-amber-600"}>
                 {"×"}
               </span>
-              {"\n                        الضرب (Multiplication)\n                    "}
+              {t("legacy.fd7784534096d894")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700"}>
-              {"\n                        الضرب هو عملية حسابية تمثل الجمع المتكرر. مثال: 4 × 3 = 12\n                    "}
+              {t("legacy.147f8c3dbce88241")}
             </p>
             {"\n                "}
           </div>
@@ -123,11 +130,11 @@ export default function NativePage() {
               <span className={"ml-2 text-2xl font-bold text-purple-600"}>
                 {"÷"}
               </span>
-              {"\n                        القسمة (Division)\n                    "}
+              {t("legacy.7ec9615f7d457cd3")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700"}>
-              {"\n                        القسمة هي عملية توزيع عدد على عدد آخر. مثال: 15 ÷ 3 = 5\n                    "}
+              {t("legacy.2a8df348c52bd35e")}
             </p>
             {"\n                "}
           </div>
@@ -145,11 +152,11 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"}></path>
             {"\n                "}
           </svg>
-          {"\n                الدوال المثلثية (Trigonometric Functions)\n            "}
+          {t("legacy.9a58ad5303def06c")}
         </h2>
         {"\n            "}
         <p className={"text-gray-700 leading-loose mb-4"}>
-          {"\n                الدوال المثلثية هي دوال رياضية تربط زوايا المثلث بأطوال أضلاعه. تستخدم بشكل واسع في الهندسة والفيزياء.\n            "}
+          {t("legacy.b5e4b312a3a3424b")}
         </p>
         {"\n            "}
         <div className={"grid grid-cols-1 md:grid-cols-3 gap-4"}>
@@ -157,11 +164,11 @@ export default function NativePage() {
           <div className={"bg-cyan-50 p-5 rounded-lg shadow-md border-cyan-400"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-cyan-800 mb-2"}>
-              {"Sin (الجيب)"}
+              {t("legacy.02067168583c68d6")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700"}>
-              {"\n                        دالة الجيب تُحسب نسبة طول الضلع المقابل للزاوية إلى طول الوتر في المثلث قائم الزاوية. مثال: sin(90°) = 1\n                    "}
+              {t("legacy.29f67b663858a570")}
             </p>
             {"\n                "}
           </div>
@@ -169,11 +176,11 @@ export default function NativePage() {
           <div className={"bg-teal-50 p-5 rounded-lg shadow-md border-teal-400"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-teal-800 mb-2"}>
-              {"Cos (جيب التمام)"}
+              {t("legacy.993e35b28f88578a")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700"}>
-              {"\n                        دالة جيب التمام تُحسب نسبة طول الضلع المجاور للزاوية إلى طول الوتر. مثال: cos(0°) = 1\n                    "}
+              {t("legacy.bb8d3f3d3fb886e2")}
             </p>
             {"\n                "}
           </div>
@@ -181,11 +188,11 @@ export default function NativePage() {
           <div className={"bg-amber-50 p-5 rounded-lg shadow-md border-amber-400"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-amber-800 mb-2"}>
-              {"Tan (الظل)"}
+              {t("legacy.f49961f2105138f7")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700"}>
-              {"\n                        دالة الظل تُحسب نسبة طول الضلع المقابل للزاوية إلى طول الضلع المجاور. tan(θ) = sin(θ) / cos(θ)\n                    "}
+              {t("legacy.a6ac339e56867fa7")}
             </p>
             {"\n                "}
           </div>
@@ -203,11 +210,11 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"}></path>
             {"\n                "}
           </svg>
-          {"\n                الدوال اللوغاريتمية (Logarithmic Functions)\n            "}
+          {t("legacy.0e8a85a9d6f04652")}
         </h2>
         {"\n            "}
         <p className={"text-gray-700 leading-loose mb-4"}>
-          {"\n                اللوغاريتمات هي العملية العكسية للأسس. تُستخدم في حل المعادلات الأسية وفي العديد من التطبيقات العلمية.\n            "}
+          {t("legacy.edaee713ad274f8a")}
         </p>
         {"\n            "}
         <div className={"grid grid-cols-1 md:grid-cols-2 gap-4"}>
@@ -215,11 +222,11 @@ export default function NativePage() {
           <div className={"bg-lime-50 p-5 rounded-lg shadow-md border-lime-400"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-lime-800 mb-2"}>
-              {"Log (اللوغاريتم العشري)"}
+              {t("legacy.0cef83d22aaeb7cf")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700"}>
-              {"\n                        اللوغاريتم العشري هو لوغاريتم للأساس 10. يُستخدم بكثرة في العلوم والهندسة. مثال: log(100) = 2 لأن 10² = 100\n                    "}
+              {t("legacy.92cedcacf0325d4d")}
             </p>
             {"\n                "}
           </div>
@@ -227,11 +234,11 @@ export default function NativePage() {
           <div className={"bg-green-50 p-5 rounded-lg shadow-md border-green-400"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-green-800 mb-2"}>
-              {"Ln (اللوغاريتم الطبيعي)"}
+              {t("legacy.87e3ab3c73334ffa")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700"}>
-              {"\n                        اللوغاريتم الطبيعي هو لوغاريتم للأساس e (حيث e ≈ 2.71828). يُستخدم في التفاضل والتكامل والنمذجة الرياضية. مثال: ln(e) = 1\n                    "}
+              {t("legacy.2d75268e4f8bfe2d")}
             </p>
             {"\n                "}
           </div>
@@ -249,11 +256,11 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"}></path>
             {"\n                "}
           </svg>
-          {"\n                الجذر التربيعي والقوى\n            "}
+          {t("legacy.beac31f8bd36c74e")}
         </h2>
         {"\n            "}
         <p className={"text-gray-700 leading-loose mb-4"}>
-          {"\n                عمليات الجذر التربيعي والقوى هي عمليات أساسية في الجبر والهندسة.\n            "}
+          {t("legacy.2bc33ac6a70c70ee")}
         </p>
         {"\n            "}
         <div className={"grid grid-cols-1 md:grid-cols-2 gap-4"}>
@@ -261,11 +268,11 @@ export default function NativePage() {
           <div className={"bg-orange-50 p-5 rounded-lg shadow-md border-orange-400"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-orange-800 mb-2"}>
-              {"√ (الجذر التربيعي)"}
+              {t("legacy.d6a65c4b83508044")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700"}>
-              {"\n                        الجذر التربيعي لعدد x هو العدد الذي إذا ضرب في نفسه يعطي x. مثال: √9 = 3 لأن 3 × 3 = 9\n                    "}
+              {t("legacy.e98447ee6d89662d")}
             </p>
             {"\n                "}
           </div>
@@ -273,11 +280,11 @@ export default function NativePage() {
           <div className={"bg-yellow-50 p-5 rounded-lg shadow-md border-yellow-400"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-yellow-800 mb-2"}>
-              {"x² (التربيع)"}
+              {t("legacy.a8f5914870144b94")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700"}>
-              {"\n                        تربيع عدد يعني ضربه في نفسه. مثال: 5² = 5 × 5 = 25. وتوجد أيضاً عملية xʹ للأسس الأعلى.\n                    "}
+              {t("legacy.0b46c1762747a850")}
             </p>
             {"\n                "}
           </div>
@@ -295,11 +302,11 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"}></path>
             {"\n                "}
           </svg>
-          {"\n                ترتيب العمليات الحسابية (الأسبقية)\n            "}
+          {t("legacy.871fa015ee509881")}
         </h2>
         {"\n            "}
         <p className={"text-gray-700 leading-loose mb-4"}>
-          {"\n                عند وجود عدة عمليات في تعبير رياضي واحد، يجب اتباع ترتيب معين يُعرف بقاعدة أسبقية العمليات الحسابية (PEMDAS/BODMAS):\n            "}
+          {t("legacy.c56b9762155b2845")}
         </p>
         {"\n            "}
         <div className={"bg-violet-50 p-5 rounded-lg shadow-md border-violet-400"}>
@@ -309,14 +316,14 @@ export default function NativePage() {
             <li className={"flex items-start"}>
               {"\n                        "}
               <span className={"font-bold text-violet-800 ml-2"}>
-                {"١."}
+                {t("legacy.6224c3b053c22635")}
               </span>
               {"\n                        "}
               <span>
                 <span className={"font-bold"}>
-                  {"الأقواس"}
+                  {t("legacy.13d6dad0a7eefbaa")}
                 </span>
-                {" (Parentheses) - يتم حساب ما داخل الأقواس أولاً."}
+                {t("legacy.5ecc21ed153b91d3")}
               </span>
               {"\n                    "}
             </li>
@@ -324,14 +331,14 @@ export default function NativePage() {
             <li className={"flex items-start"}>
               {"\n                        "}
               <span className={"font-bold text-violet-800 ml-2"}>
-                {"٢."}
+                {t("legacy.94d535e89b87761d")}
               </span>
               {"\n                        "}
               <span>
                 <span className={"font-bold"}>
-                  {"الأسس"}
+                  {t("legacy.b1a86c95f392c38d")}
                 </span>
-                {" (Exponents) - مثل التربيع والتكعيب."}
+                {t("legacy.3f3f10f340b0d70e")}
               </span>
               {"\n                    "}
             </li>
@@ -339,14 +346,14 @@ export default function NativePage() {
             <li className={"flex items-start"}>
               {"\n                        "}
               <span className={"font-bold text-violet-800 ml-2"}>
-                {"٣."}
+                {t("legacy.5c729ec0b0798ec6")}
               </span>
               {"\n                        "}
               <span>
                 <span className={"font-bold"}>
-                  {"الضرب والقسمة"}
+                  {t("legacy.1669a852b1e3b410")}
                 </span>
-                {" (Multiplication & Division) - من اليسار إلى اليمين."}
+                {t("legacy.18f4d40ba5735a99")}
               </span>
               {"\n                    "}
             </li>
@@ -354,14 +361,14 @@ export default function NativePage() {
             <li className={"flex items-start"}>
               {"\n                        "}
               <span className={"font-bold text-violet-800 ml-2"}>
-                {"٤."}
+                {t("legacy.d5a574a7250b2092")}
               </span>
               {"\n                        "}
               <span>
                 <span className={"font-bold"}>
-                  {"الجمع والطرح"}
+                  {t("legacy.ab40d7ef8713175f")}
                 </span>
-                {" (Addition & Subtraction) - من اليسار إلى اليمين."}
+                {t("legacy.33c25c327fc5a9ba")}
               </span>
               {"\n                    "}
             </li>
@@ -373,7 +380,7 @@ export default function NativePage() {
         <div className={"mt-4 bg-gray-100 p-4 rounded-lg shadow-inner"}>
           {"\n                "}
           <p className={"text-gray-700 font-mono text-center text-lg"}>
-            {"\n                    3 + 5 × 2 = 3 + 10 = 13   (وليس 16، لأن الضرب له أسبقية أعلى)\n                "}
+            {t("legacy.a6ef3ffdf3403bb0")}
           </p>
           {"\n            "}
         </div>
@@ -389,11 +396,11 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M8 9l4-4 4 4m0 6l-4 4-4-4"}></path>
             {"\n                "}
           </svg>
-          {"\n                كيفية استخدام الأقواس في التعبيرات الرياضية\n            "}
+          {t("legacy.e25551a9776df236")}
         </h2>
         {"\n            "}
         <p className={"text-gray-700 leading-loose mb-4"}>
-          {"\n                تُستخدم الأقواس لتحديد أولوية العمليات الحسابية وتجميع التعبيرات. يمكن استخدام الأقواس العادية () والأقواس المتداخلة للتعبيرات المعقدة.\n            "}
+          {t("legacy.2f2ed6ea7a174a80")}
         </p>
         {"\n            "}
         <div className={"grid grid-cols-1 md:grid-cols-2 gap-4"}>
@@ -401,11 +408,11 @@ export default function NativePage() {
           <div className={"bg-sky-50 p-5 rounded-lg shadow-md border-sky-400"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-sky-800 mb-2"}>
-              {"الأقواس العادية ()"}
+              {t("legacy.23b6bd5dc46ae293")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700"}>
-              {"\n                        تُستخدم لتحديد أي جزء من التعبير يجب حسابه أولاً. مثال: (2 + 3) × 4 = 5 × 4 = 20\n                    "}
+              {t("legacy.f9906fb613b6b427")}
             </p>
             {"\n                "}
           </div>
@@ -413,11 +420,11 @@ export default function NativePage() {
           <div className={"bg-blue-50 p-5 rounded-lg shadow-md border-blue-400"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-blue-800 mb-2"}>
-              {"الأقواس المتداخلة"}
+              {t("legacy.ad3466e04063276a")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700"}>
-              {"\n                        يمكن وضع أقواس داخل أقواس للتعبيرات المعقدة. يحسب الأقواس الداخلية أولاً. مثال: ((2 + 3) × (4 - 1)) = 5 × 3 = 15\n                    "}
+              {t("legacy.aeb657ca34a9c6eb")}
             </p>
             {"\n                "}
           </div>
@@ -429,11 +436,11 @@ export default function NativePage() {
       <div className={"text-center mt-10 pt-8 border-t"}>
         {"\n            "}
         <a href={"/algorithms/calculator/code"} className={"inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-10 rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 text-xl"}>
-          {"\n                انتقل إلى الآلة الحاسبة التفاعلية\n            "}
+          {t("legacy.52503378a34cbc4e")}
         </a>
         {"\n            "}
         <p className={"text-gray-500 mt-3 text-sm"}>
-          {"\n                جرب بنفسك! استخدم الآلة الحاسبة التفاعلية لتطبيق ما تعلمته\n            "}
+          {t("legacy.1e2782f882dc1e55")}
         </p>
         {"\n        "}
       </div>

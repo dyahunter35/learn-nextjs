@@ -1,4 +1,5 @@
 // @ts-nocheck
+import { translateLegacyRuntime } from "@/data/legacy-english";
 const state = {
   currentStep: -1,
   simulationHistory: [],
@@ -7,23 +8,19 @@ const state = {
   n: 5,
   started: false,
   finished: false,
-  nodeIdCounter: 0,
+  nodeIdCounter: 0
 };
-
 function factorial(n) {
   if (n <= 1) return 1;
   return n * factorial(n - 1);
 }
-
 function fibonacci(n) {
   if (n <= 1) return n;
   return fibonacci(n - 1) + fibonacci(n - 2);
 }
-
 function buildRecursionTree(name, n, type) {
   const steps = [];
   let nodeIdCounter = 0;
-
   function traverse(funcName, arg, depth, parentId) {
     const nodeId = ++nodeIdCounter;
     steps.push({
@@ -33,9 +30,8 @@ function buildRecursionTree(name, n, type) {
       depth,
       id: nodeId,
       parentId,
-      returnValue: null,
+      returnValue: null
     });
-
     if (type === 'factorial') {
       if (arg <= 1) {
         steps.push({
@@ -46,7 +42,7 @@ function buildRecursionTree(name, n, type) {
           id: ++nodeIdCounter,
           parentId: nodeId,
           returnValue: 1,
-          baseCase: true,
+          baseCase: true
         });
         return 1;
       }
@@ -61,7 +57,7 @@ function buildRecursionTree(name, n, type) {
         parentId: nodeId,
         returnValue: result,
         childResult,
-        operation: `${arg} × ${childResult}`,
+        operation: `${arg} × ${childResult}`
       });
       return result;
     } else {
@@ -74,7 +70,7 @@ function buildRecursionTree(name, n, type) {
           id: ++nodeIdCounter,
           parentId: nodeId,
           returnValue: arg,
-          baseCase: true,
+          baseCase: true
         });
         return arg;
       }
@@ -90,45 +86,38 @@ function buildRecursionTree(name, n, type) {
         parentId: nodeId,
         returnValue: result,
         childResult: `${leftResult} + ${rightResult}`,
-        operation: `${leftResult} + ${rightResult}`,
+        operation: `${leftResult} + ${rightResult}`
       });
       return result;
     }
   }
-
   traverse(name, n, 0, null);
   return steps;
 }
-
 function startSimulation() {
   const example = state.example;
   const inputEl = document.getElementById('nInput');
   state.n = parseInt(inputEl.value);
   if (isNaN(state.n) || state.n < 0) state.n = 0;
   const n = state.n;
-
   if (example === 'factorial' && (n < 0 || n > 10 || !Number.isInteger(n))) {
-    showMessage('الرجاء إدخال عدد صحيح بين 0 و 10', 'error');
+    showMessage(translateLegacyRuntime("legacy.2e817b01f3a2eafb"), 'error');
     return;
   }
   if (example === 'fibonacci' && (n < 0 || n > 15 || !Number.isInteger(n))) {
-    showMessage('الرجاء إدخال عدد صحيح بين 0 و 15', 'error');
+    showMessage(translateLegacyRuntime("legacy.dbc268e2db615514"), 'error');
     return;
   }
-
   const funcName = example === 'factorial' ? 'fact' : 'fib';
   state.steps = buildRecursionTree(funcName, n, example);
   state.currentStep = -1;
   state.simulationHistory = [];
   state.finished = false;
   state.started = true;
-
   document.getElementById('startButton').disabled = true;
-
-  showMessage(`بدء المحاكاة لـ ${funcName}(${n}) ...`, 'info');
+  showMessage(translateLegacyRuntime(`بدء المحاكاة لـ ${funcName}(${n}) ...`, "legacy.7b4191e21c79d93b", "\u0628\u062F\u0621 \u0627\u0644\u0645\u062D\u0627\u0643\u0627\u0629 \u0644\u0640 ${funcName}(${n}) ..."), 'info');
   nextStep();
 }
-
 function nextStep() {
   if (state.started && state.currentStep >= state.steps.length - 1) {
     if (!state.finished) {
@@ -138,13 +127,11 @@ function nextStep() {
     updateControls();
     return;
   }
-
   state.currentStep++;
   state.simulationHistory.push(state.steps[state.currentStep]);
   renderVisualization();
   updateControls();
 }
-
 function previousStep() {
   if (state.currentStep <= 0) return;
   state.simulationHistory.pop();
@@ -153,15 +140,13 @@ function previousStep() {
   renderVisualization();
   updateControls();
 }
-
 function resetSimulation() {
   state.currentStep = -1;
   state.simulationHistory = [];
   state.steps = [];
   state.started = false;
   state.finished = false;
-
-  document.getElementById('treeContainer').innerHTML = `
+  document.getElementById('treeContainer').innerHTML = translateLegacyRuntime(`
     <div class="empty-state">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
@@ -169,23 +154,21 @@ function resetSimulation() {
       <p class="text-lg font-medium text-gray-500">لم تبدأ المحاكاة بعد</p>
       <p class="text-sm text-gray-400 mt-1">اختر مثالاً وأدخل القيمة ثم اضغط "ابدأ المحاكاة"</p>
     </div>
-  `;
+  `, "legacy.4ddadd020f569ee6", "\n    <div class=\"empty-state\">\n      <svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\">\n        <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" d=\"M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z\" />\n      </svg>\n      <p class=\"text-lg font-medium text-gray-500\">\u0644\u0645 \u062A\u0628\u062F\u0623 \u0627\u0644\u0645\u062D\u0627\u0643\u0627\u0629 \u0628\u0639\u062F</p>\n      <p class=\"text-sm text-gray-400 mt-1\">\u0627\u062E\u062A\u0631 \u0645\u062B\u0627\u0644\u0627\u064B \u0648\u0623\u062F\u062E\u0644 \u0627\u0644\u0642\u064A\u0645\u0629 \u062B\u0645 \u0627\u0636\u063A\u0637 \"\u0627\u0628\u062F\u0623 \u0627\u0644\u0645\u062D\u0627\u0643\u0627\u0629\"</p>\n    </div>\n  ");
   document.getElementById('callStackContainer').innerHTML = '';
   document.getElementById('stepsLog').innerHTML = '';
   document.getElementById('resultDisplay').innerHTML = '';
-  document.getElementById('nodeCountBadge').textContent = '0 عقدة';
+  document.getElementById('nodeCountBadge').textContent = translateLegacyRuntime("legacy.638cc7f80d2ba328");
   document.getElementById('startButton').disabled = false;
-  showMessage('المحاكاة جاهزة. اختر مثالاً وأدخل القيمة.', 'info');
+  showMessage(translateLegacyRuntime("legacy.ce84e65a4bffcb0a"), 'info');
   updateControls();
 }
-
 function updateControls() {
   const totalSteps = state.steps.length;
   document.getElementById('startButton').disabled = state.started && !state.finished;
   document.getElementById('nextButton').disabled = !state.started || state.finished || state.currentStep >= totalSteps - 1;
   document.getElementById('prevButton').disabled = !state.started || state.currentStep <= 0;
 }
-
 function updateExample(choice) {
   state.example = choice;
   const input = document.getElementById('nInput');
@@ -200,50 +183,38 @@ function updateExample(choice) {
   }
   resetSimulation();
 }
-
 function renderVisualization() {
   const history = state.simulationHistory;
   if (history.length === 0) return;
-
   renderTree(history);
   renderCallStack(history);
   renderStepsTable(history);
   updateNodeCount(history);
-
   const lastStep = history[history.length - 1];
   if (lastStep.type === 'call') {
-    showMessage(`🔵 استدعاء: ${lastStep.name}(${lastStep.args}) - العمق ${lastStep.depth}`, 'info');
+    showMessage(translateLegacyRuntime(`🔵 استدعاء: ${lastStep.name}(${lastStep.args}) - العمق ${lastStep.depth}`, "legacy.91890a1ab6ba84da", "\uD83D\uDD35 \u0627\u0633\u062A\u062F\u0639\u0627\u0621: ${lastStep.name}(${lastStep.args}) - \u0627\u0644\u0639\u0645\u0642 ${lastStep.depth}"), 'info');
   } else if (lastStep.type === 'return') {
-    const msg = lastStep.baseCase
-      ? `🟢 حالة أساسية: ${lastStep.name}(${lastStep.args}) = ${lastStep.returnValue}`
-      : `🟢 عودة: ${lastStep.name}(${lastStep.args}) = ${lastStep.operation} = ${lastStep.returnValue}`;
+    const msg = lastStep.baseCase ? translateLegacyRuntime(`🟢 حالة أساسية: ${lastStep.name}(${lastStep.args}) = ${lastStep.returnValue}`, "legacy.e1a0569fc42a1dd0", "\uD83D\uDFE2 \u062D\u0627\u0644\u0629 \u0623\u0633\u0627\u0633\u064A\u0629: ${lastStep.name}(${lastStep.args}) = ${lastStep.returnValue}") : translateLegacyRuntime(`🟢 عودة: ${lastStep.name}(${lastStep.args}) = ${lastStep.operation} = ${lastStep.returnValue}`, "legacy.9916f699ae4ff8ba", "\uD83D\uDFE2 \u0639\u0648\u062F\u0629: ${lastStep.name}(${lastStep.args}) = ${lastStep.operation} = ${lastStep.returnValue}");
     showMessage(msg, 'success');
   }
 }
-
 function renderTree(history) {
   const container = document.getElementById('treeContainer');
   container.innerHTML = '';
-
   const callNodes = history.filter(s => s.type === 'call');
   const returnNodes = history.filter(s => s.type === 'return');
-
   if (callNodes.length === 0) return;
-
   const nodeW = 90;
   const nodeH = 60;
   const levelGapY = 100;
   const paddingX = 60;
   const paddingY = 40;
-
   const levelMap = {};
   callNodes.forEach(n => {
     if (!levelMap[n.depth]) levelMap[n.depth] = [];
     levelMap[n.depth].push(n);
   });
-
   const depths = Object.keys(levelMap).map(Number).sort((a, b) => a - b);
-
   let maxLeafCount = 1;
   depths.forEach(d => {
     const count = levelMap[d].length;
@@ -251,13 +222,11 @@ function renderTree(history) {
   });
   const treeWidth = Math.max(paddingX * 2 + nodeW, paddingX * 2 + maxLeafCount * (nodeW + 30));
   const treeHeight = depths.length * levelGapY + paddingY * 2;
-
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   svg.setAttribute('viewBox', `0 0 ${treeWidth} ${treeHeight}`);
   svg.setAttribute('width', '100%');
   svg.setAttribute('style', 'min-height: ' + treeHeight + 'px');
   svg.classList.add('rec-tree-svg');
-
   const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
   const marker = document.createElementNS('http://www.w3.org/2000/svg', 'marker');
   marker.setAttribute('id', 'arrowhead');
@@ -271,7 +240,6 @@ function renderTree(history) {
   polygon.setAttribute('fill', '#9ca3af');
   marker.appendChild(polygon);
   defs.appendChild(marker);
-
   const markerActive = document.createElementNS('http://www.w3.org/2000/svg', 'marker');
   markerActive.setAttribute('id', 'arrowhead-active');
   markerActive.setAttribute('markerWidth', '10');
@@ -284,7 +252,6 @@ function renderTree(history) {
   polygon2.setAttribute('fill', '#f59e0b');
   markerActive.appendChild(polygon2);
   defs.appendChild(markerActive);
-
   const markerReturn = document.createElementNS('http://www.w3.org/2000/svg', 'marker');
   markerReturn.setAttribute('id', 'arrowhead-return');
   markerReturn.setAttribute('markerWidth', '10');
@@ -297,29 +264,27 @@ function renderTree(history) {
   polygon3.setAttribute('fill', '#10b981');
   markerReturn.appendChild(polygon3);
   defs.appendChild(markerReturn);
-
   svg.appendChild(defs);
-
   const positions = {};
-
   depths.forEach((depth, di) => {
     const nodes = levelMap[depth];
     const totalWidth = nodes.length * nodeW + (nodes.length - 1) * 30;
     const startX = (treeWidth - totalWidth) / 2;
-
     nodes.forEach((n, ni) => {
       const x = startX + ni * (nodeW + 30);
       const y = paddingY + di * levelGapY;
-      positions[n.id] = { x, y, depth: di };
+      positions[n.id] = {
+        x,
+        y,
+        depth: di
+      };
     });
   });
-
   const completedCallIds = new Set();
   callNodes.forEach(s => {
     const hasReturn = returnNodes.some(r => r.parentId === s.id);
     if (hasReturn) completedCallIds.add(s.id);
   });
-
   const lastStepType = history.length > 0 ? history[history.length - 1].type : null;
 
   // Build a map from call id to its return step (if present)
@@ -335,12 +300,10 @@ function renderTree(history) {
     const child = positions[step.id];
     const isCompleted = completedCallIds.has(step.id);
     const returnStep = returnByParent[step.id];
-
     let connectorClass = 'rec-connector';
     let arrowId = 'url(#arrowhead)';
     let labelColor = '#6b7280';
     let labelText = '';
-
     if (isCompleted && returnStep) {
       connectorClass = 'rec-connector-return';
       arrowId = 'url(#arrowhead-return)';
@@ -352,7 +315,6 @@ function renderTree(history) {
       labelColor = '#f59e0b';
       labelText = `${step.name}(${step.args})`;
     }
-
     const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
     line.setAttribute('x1', parent.x + nodeW / 2);
     line.setAttribute('y1', parent.y + nodeH / 2);
@@ -361,7 +323,6 @@ function renderTree(history) {
     line.setAttribute('class', connectorClass);
     line.setAttribute('marker-end', arrowId);
     svg.appendChild(line);
-
     if (labelText) {
       const midX = (parent.x + child.x) / 2 + nodeW / 2;
       const midY = (parent.y + child.y) / 2 + nodeH / 2;
@@ -380,10 +341,8 @@ function renderTree(history) {
   callNodes.forEach(n => {
     const pos = positions[n.id];
     if (!pos) return;
-
     const isCompleted = completedCallIds.has(n.id);
     const isActive = !isCompleted;
-
     let nodeClass = 'rec-node';
     if (isActive && lastStepType === 'call') {
       nodeClass += ' rec-node-active';
@@ -392,105 +351,80 @@ function renderTree(history) {
     } else {
       nodeClass += ' rec-node-call';
     }
-
     const group = document.createElementNS('http://www.w3.org/2000/svg', 'foreignObject');
     group.setAttribute('x', pos.x);
     group.setAttribute('y', pos.y);
     group.setAttribute('width', nodeW);
     group.setAttribute('height', nodeH);
     group.setAttribute('style', 'overflow: visible;');
-
     const div = document.createElement('div');
     div.className = nodeClass;
     div.style.width = '100%';
     div.style.height = '100%';
     div.style.position = 'relative';
     div.style.boxSizing = 'border-box';
-
     const funcSpan = document.createElement('span');
     funcSpan.className = 'rec-node-func';
     funcSpan.textContent = `${n.name}(${n.args})`;
-
     const depthSpan = document.createElement('span');
     depthSpan.className = 'rec-depth-indicator';
-    depthSpan.textContent = `عمق ${n.depth}`;
-
+    depthSpan.textContent = translateLegacyRuntime(`عمق ${n.depth}`, "legacy.4ad059e92cd5434c", "\u0639\u0645\u0642 ${n.depth}");
     div.appendChild(funcSpan);
     div.appendChild(depthSpan);
-
     if (isCompleted && returnByParent[n.id]) {
       const returnSpan = document.createElement('span');
       returnSpan.className = 'rec-node-return-val';
       returnSpan.textContent = `← ${returnByParent[n.id].returnValue}`;
       div.appendChild(returnSpan);
     }
-
     group.appendChild(div);
     svg.appendChild(group);
   });
-
   container.appendChild(svg);
 }
-
 function renderCallStack(history) {
   const container = document.getElementById('callStackContainer');
   container.innerHTML = '';
-
   const activeCalls = history.filter(s => s.type === 'call');
-  const returnedIds = new Set(
-    history.filter(s => s.type === 'return').map(s => s.parentId)
-  );
-
+  const returnedIds = new Set(history.filter(s => s.type === 'return').map(s => s.parentId));
   const stack = activeCalls.filter(s => !returnedIds.has(s.id));
-
   if (stack.length === 0) {
-    container.innerHTML = '<div class="empty-state" style="padding:0.5rem"><p class="text-sm text-gray-400">مكدس الاستدعاء فارغ</p></div>';
+    container.innerHTML = translateLegacyRuntime("legacy.52576aaac00ef358");
     return;
   }
-
   const wrapper = document.createElement('div');
   wrapper.style.cssText = 'display:flex;flex-direction:column;align-items:center;gap:6px;width:100%';
-
   const label = document.createElement('div');
   label.className = 'callstack-label';
-  label.innerHTML = '🧩 <strong>مكدس الاستدعاء (Call Stack)</strong> — التنفيذ الحالي';
+  label.innerHTML = translateLegacyRuntime("legacy.122eaac609885d0a");
   wrapper.appendChild(label);
-
   const row = document.createElement('div');
   row.className = 'callstack-row';
   row.style.position = 'relative';
-
   stack.forEach((s, i) => {
     const nodeWrapper = document.createElement('div');
     nodeWrapper.className = 'callstack-node-wrapper';
-
     const node = document.createElement('div');
     node.className = 'callstack-node rec-node-callstack';
     node.style.animation = `nodeIn 0.3s ease ${i * 0.1}s both`;
-
     const funcSpan = document.createElement('span');
     funcSpan.className = 'cs-func';
     funcSpan.textContent = `${s.name}(${s.args})`;
-
     const depthSpan = document.createElement('span');
     depthSpan.className = 'cs-depth';
-    depthSpan.textContent = `عمق ${s.depth}`;
-
+    depthSpan.textContent = translateLegacyRuntime(`عمق ${s.depth}`, "legacy.a8a6a074e9fedba5", "\u0639\u0645\u0642 ${s.depth}");
     node.appendChild(funcSpan);
     node.appendChild(depthSpan);
-
     if (i === 0) {
       node.style.background = 'linear-gradient(135deg, #fbbf24, #f59e0b)';
       node.style.color = '#78350f';
       const topLabel = document.createElement('div');
       topLabel.className = 'callstack-top-arrow';
-      topLabel.textContent = '▲ التنفيذ الحالي';
+      topLabel.textContent = translateLegacyRuntime("legacy.6ea8af57e0a0bf74");
       node.style.position = 'relative';
       node.appendChild(topLabel);
     }
-
     nodeWrapper.appendChild(node);
-
     if (i < stack.length - 1) {
       const arrowDiv = document.createElement('div');
       arrowDiv.style.cssText = 'display:flex;align-items:center;padding:0 4px;';
@@ -507,19 +441,15 @@ function renderCallStack(history) {
       arrowDiv.appendChild(arrowSvg);
       nodeWrapper.appendChild(arrowDiv);
     }
-
     row.appendChild(nodeWrapper);
   });
-
   wrapper.appendChild(row);
   container.appendChild(wrapper);
 }
-
 function renderStepsTable(history) {
   const container = document.getElementById('stepsLog');
   const activeStep = state.currentStep;
-
-  let tableHTML = `
+  let tableHTML = translateLegacyRuntime(`
     <div class="overflow-x-auto rounded-xl border border-gray-200">
       <table class="steps-table">
         <thead><tr>
@@ -528,16 +458,14 @@ function renderStepsTable(history) {
           <th>الاستدعاء</th>
           <th>القيمة المُعادة</th>
         </tr></thead><tbody>
-  `;
-
+  `, "legacy.2648d72c51109158", "\n    <div class=\"overflow-x-auto rounded-xl border border-gray-200\">\n      <table class=\"steps-table\">\n        <thead><tr>\n          <th>#</th>\n          <th>\u0627\u0644\u0646\u0648\u0639</th>\n          <th>\u0627\u0644\u0627\u0633\u062A\u062F\u0639\u0627\u0621</th>\n          <th>\u0627\u0644\u0642\u064A\u0645\u0629 \u0627\u0644\u0645\u064F\u0639\u0627\u062F\u0629</th>\n        </tr></thead><tbody>\n  ");
   for (let i = history.length - 1; i >= 0; i--) {
     const step = history[i];
     const rowClass = i === activeStep ? 'current-step' : '';
     const typeColor = step.type === 'call' ? 'text-indigo-600' : 'text-emerald-600';
-    const typeText = step.type === 'call' ? '🔵 استدعاء' : '🟢 عودة';
-    const returnVal = step.type === 'return' ? (step.returnValue !== null ? step.returnValue : '-') : '-';
+    const typeText = step.type === 'call' ? translateLegacyRuntime("legacy.66d5da49059c5bda") : translateLegacyRuntime("legacy.5c69bb393f89eafe");
+    const returnVal = step.type === 'return' ? step.returnValue !== null ? step.returnValue : '-' : '-';
     const callText = `${step.name}(${step.args})`;
-
     tableHTML += `<tr class="${rowClass}">
       <td class="font-bold text-gray-600">${i + 1}</td>
       <td class="${typeColor} font-bold">${typeText}</td>
@@ -545,48 +473,37 @@ function renderStepsTable(history) {
       <td class="font-mono font-bold ${step.type === 'return' ? 'text-emerald-600' : 'text-gray-400'}">${returnVal}</td>
     </tr>`;
   }
-
   tableHTML += '</tbody></table></div>';
   container.innerHTML = tableHTML;
 }
-
 function updateNodeCount(history) {
   const callNodes = history.filter(s => s.type === 'call').length;
   const badge = document.getElementById('nodeCountBadge');
-  badge.textContent = `${callNodes} عقدة | ${history.length} خطوة`;
+  badge.textContent = translateLegacyRuntime(`${callNodes} عقدة | ${history.length} خطوة`, "legacy.aa8ed88daad7d91d", "${callNodes} \u0639\u0642\u062F\u0629 | ${history.length} \u062E\u0637\u0648\u0629");
 }
-
 function showFinalResult() {
   const lastStep = state.simulationHistory[state.simulationHistory.length - 1];
   if (!lastStep) return;
-
   const container = document.getElementById('resultDisplay');
   container.innerHTML = '';
-
   const resultDiv = document.createElement('div');
   resultDiv.className = 'result-display';
-
   const labelSpan = document.createElement('span');
   labelSpan.textContent = `${lastStep.name}(${lastStep.args}) = `;
-
   const valueSpan = document.createElement('span');
   valueSpan.className = 'result-value';
   valueSpan.textContent = lastStep.returnValue;
-
   resultDiv.appendChild(labelSpan);
   resultDiv.appendChild(valueSpan);
   container.appendChild(resultDiv);
-
-  showMessage(`🎉 تم الانتهاء! النتيجة: ${lastStep.name}(${lastStep.args}) = ${lastStep.returnValue}`, 'success');
+  showMessage(translateLegacyRuntime(`🎉 تم الانتهاء! النتيجة: ${lastStep.name}(${lastStep.args}) = ${lastStep.returnValue}`, "legacy.137a2bdd8274558b", "\uD83C\uDF89 \u062A\u0645 \u0627\u0644\u0627\u0646\u062A\u0647\u0627\u0621! \u0627\u0644\u0646\u062A\u064A\u062C\u0629: ${lastStep.name}(${lastStep.args}) = ${lastStep.returnValue}"), 'success');
   document.getElementById('startButton').disabled = true;
 }
-
 function showMessage(message, type = 'info') {
   const el = document.getElementById('statusMessage');
   el.textContent = message;
   el.className = 'status-message ' + type;
 }
-
 document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('nInput').addEventListener('change', function () {
     const val = parseInt(this.value);
@@ -599,7 +516,6 @@ document.addEventListener('DOMContentLoaded', function () {
     state.n = parseInt(this.value);
     if (state.started) resetSimulation();
   });
-
   document.getElementById('nInput').addEventListener('keydown', function (e) {
     if (e.key === 'Enter') {
       e.preventDefault();
@@ -607,6 +523,22 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 });
-
-Object.assign(window, {factorial: factorial, fibonacci: fibonacci, buildRecursionTree: buildRecursionTree, startSimulation: startSimulation, nextStep: nextStep, previousStep: previousStep, resetSimulation: resetSimulation, updateControls: updateControls, updateExample: updateExample, renderVisualization: renderVisualization, renderTree: renderTree, renderCallStack: renderCallStack, renderStepsTable: renderStepsTable, updateNodeCount: updateNodeCount, showFinalResult: showFinalResult, showMessage: showMessage});
-export {factorial, fibonacci, buildRecursionTree, startSimulation, nextStep, previousStep, resetSimulation, updateControls, updateExample, renderVisualization, renderTree, renderCallStack, renderStepsTable, updateNodeCount, showFinalResult, showMessage};
+Object.assign(window, {
+  factorial: factorial,
+  fibonacci: fibonacci,
+  buildRecursionTree: buildRecursionTree,
+  startSimulation: startSimulation,
+  nextStep: nextStep,
+  previousStep: previousStep,
+  resetSimulation: resetSimulation,
+  updateControls: updateControls,
+  updateExample: updateExample,
+  renderVisualization: renderVisualization,
+  renderTree: renderTree,
+  renderCallStack: renderCallStack,
+  renderStepsTable: renderStepsTable,
+  updateNodeCount: updateNodeCount,
+  showFinalResult: showFinalResult,
+  showMessage: showMessage
+});
+export { factorial, fibonacci, buildRecursionTree, startSimulation, nextStep, previousStep, resetSimulation, updateControls, updateExample, renderVisualization, renderTree, renderCallStack, renderStepsTable, updateNodeCount, showFinalResult, showMessage };

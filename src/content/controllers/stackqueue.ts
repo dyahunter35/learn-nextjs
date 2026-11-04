@@ -1,8 +1,9 @@
 // @ts-nocheck
+import { translateLegacyRuntime } from "@/data/legacy-english";
 const state = {
   mode: 'stack',
   items: [],
-  maxSize: 7,
+  maxSize: 7
 };
 
 /* ===== DOM refs ===== */
@@ -16,40 +17,29 @@ const emptyState = document.getElementById('empty-state');
 function setMode(mode) {
   state.mode = mode;
   state.items = [];
-
   document.querySelectorAll('.tab-btn').forEach(btn => {
     const m = btn.dataset.mode;
-    btn.className = 'tab-btn ' + (m === mode
-      ? (mode === 'stack' ? 'active-stack' : 'active-queue')
-      : 'inactive');
+    btn.className = 'tab-btn ' + (m === mode ? mode === 'stack' ? 'active-stack' : 'active-queue' : 'inactive');
   });
-
-  document.getElementById('action-primary').className =
-    `action-btn ${mode === 'stack' ? 'btn-push' : 'btn-enqueue'}`;
-  document.getElementById('action-primary-text').textContent =
-    mode === 'stack' ? 'Push (دفع)' : 'Enqueue (إدخال)';
-
-  document.getElementById('action-secondary').className =
-    `action-btn ${mode === 'stack' ? 'btn-pop' : 'btn-dequeue'}`;
-  document.getElementById('action-secondary-text').textContent =
-    mode === 'stack' ? 'Pop (حذف)' : 'Dequeue (إخراج)';
-
-  document.getElementById('action-primary-icon').innerHTML =
-    mode === 'stack'
-      ? '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>'
-      : '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>';
-
+  document.getElementById('action-primary').className = `action-btn ${mode === 'stack' ? 'btn-push' : 'btn-enqueue'}`;
+  document.getElementById('action-primary-text').textContent = mode === 'stack' ? translateLegacyRuntime("legacy.915f6a701946fc32") : translateLegacyRuntime("legacy.300944552cf7e564");
+  document.getElementById('action-secondary').className = `action-btn ${mode === 'stack' ? 'btn-pop' : 'btn-dequeue'}`;
+  document.getElementById('action-secondary-text').textContent = mode === 'stack' ? translateLegacyRuntime("legacy.45d5a24411c7a6ea") : translateLegacyRuntime("legacy.796546a926200a1e");
+  document.getElementById('action-primary-icon').innerHTML = mode === 'stack' ? '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>' : '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>';
   render();
-  addLog(`تم التبديل إلى ${mode === 'stack' ? 'المكدس' : 'الطابور'}`, 'info');
+  addLog(translateLegacyRuntime(`تم التبديل إلى ${mode === 'stack' ? 'المكدس' : 'الطابور'}`, "legacy.1ed20d94b8318ba3", "\u062A\u0645 \u0627\u0644\u062A\u0628\u062F\u064A\u0644 \u0625\u0644\u0649 ${mode === 'stack' ? '\u0627\u0644\u0645\u0643\u062F\u0633' : '\u0627\u0644\u0637\u0627\u0628\u0648\u0631'}"), 'info');
   valueInput.focus();
 }
 
 /* ===== Core operations ===== */
 function push() {
   const val = valueInput.value.trim();
-  if (!val) { shake(valueInput); return; }
+  if (!val) {
+    shake(valueInput);
+    return;
+  }
   if (state.items.length >= state.maxSize) {
-    addLog('المكدس ممتلئ!', 'info');
+    addLog(translateLegacyRuntime("legacy.702c8c8fa72e3286"), 'info');
     return;
   }
   state.items.push(val);
@@ -58,22 +48,23 @@ function push() {
   addLog(`Push: ${val}`, 'push');
   valueInput.focus();
 }
-
 function pop() {
   if (state.items.length === 0) {
-    addLog('المكدس فارغ!', 'info');
+    addLog(translateLegacyRuntime("legacy.08f01b53984490fc"), 'info');
     return;
   }
   const val = state.items.pop();
   render();
   addLog(`Pop: ${val}`, 'pop');
 }
-
 function enqueue() {
   const val = valueInput.value.trim();
-  if (!val) { shake(valueInput); return; }
+  if (!val) {
+    shake(valueInput);
+    return;
+  }
   if (state.items.length >= state.maxSize) {
-    addLog('الطابور ممتلئ!', 'info');
+    addLog(translateLegacyRuntime("legacy.cda9baa139e5883d"), 'info');
     return;
   }
   state.items.push(val);
@@ -82,42 +73,37 @@ function enqueue() {
   addLog(`Enqueue: ${val}`, 'enqueue');
   valueInput.focus();
 }
-
 function dequeue() {
   if (state.items.length === 0) {
-    addLog('الطابور فارغ!', 'info');
+    addLog(translateLegacyRuntime("legacy.1f6588104c9c3cfd"), 'info');
     return;
   }
   const val = state.items.shift();
   render();
   addLog(`Dequeue: ${val}`, 'dequeue');
 }
-
 function clearAll() {
   if (state.items.length === 0) return;
   state.items = [];
   render();
-  addLog('تم مسح الكل', 'info');
+  addLog(translateLegacyRuntime("legacy.f93da5471b141fe0"), 'info');
   valueInput.focus();
 }
 
 /* ===== Render ===== */
 function render() {
   sizeInfo.textContent = `${state.items.length} / ${state.maxSize}`;
-
   if (state.items.length === 0) {
     emptyState.classList.remove('hidden');
     visualEl.innerHTML = '';
     visualEl.appendChild(emptyState);
     return;
   }
-
   emptyState.classList.add('hidden');
-
   if (state.mode === 'stack') {
     visualEl.innerHTML = '<div class="stack-vertical" id="stack-render"></div>';
     const container = document.getElementById('stack-render');
-    state.items.forEach((val) => {
+    state.items.forEach(val => {
       const div = document.createElement('div');
       div.className = 'stack-item';
       div.textContent = val;
@@ -147,7 +133,6 @@ function render() {
       }
       container.appendChild(wrapper);
     });
-
     if (state.items.length === 1) {
       const firstWrapper = container.querySelector('[style*="position: relative"]');
       if (firstWrapper) {
@@ -164,7 +149,11 @@ function render() {
 function addLog(msg, type) {
   const entry = document.createElement('div');
   entry.className = `log-entry ${type}`;
-  const time = new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  const time = new Date().toLocaleTimeString('ar-SA', {
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit'
+  });
   entry.textContent = `[${time}] ${msg}`;
   logEl.appendChild(entry);
   logEl.scrollTop = logEl.scrollHeight;
@@ -192,15 +181,24 @@ style.textContent = `
 document.head.appendChild(style);
 
 /* ===== Keyboard support ===== */
-valueInput.addEventListener('keydown', (e) => {
+valueInput.addEventListener('keydown', e => {
   if (e.key === 'Enter') {
     e.preventDefault();
-    if (state.mode === 'stack') push(); else enqueue();
+    if (state.mode === 'stack') push();else enqueue();
   }
 });
 
 /* ===== Init ===== */
 setMode('stack');
-
-Object.assign(window, {setMode: setMode, push: push, pop: pop, enqueue: enqueue, dequeue: dequeue, clearAll: clearAll, render: render, addLog: addLog, shake: shake});
-export {setMode, push, pop, enqueue, dequeue, clearAll, render, addLog, shake};
+Object.assign(window, {
+  setMode: setMode,
+  push: push,
+  pop: pop,
+  enqueue: enqueue,
+  dequeue: dequeue,
+  clearAll: clearAll,
+  render: render,
+  addLog: addLog,
+  shake: shake
+});
+export { setMode, push, pop, enqueue, dequeue, clearAll, render, addLog, shake };

@@ -1,24 +1,31 @@
+"use client";
+
+import { useLanguage } from "@/components/LanguageProvider";
+import { translateLegacyText } from "@/data/legacy-english";
+
 export default function NativePage() {
+  const { language } = useLanguage();
+  const t = (text: string) => translateLegacyText(text, "caesar", language);
   return (
     <div className="native-legacy-body bg-gray-50 min-h-screen">
     {"\n  \n    \n    \n\n  "}
     <div className={"code-page"}>
       {"\n    "}
       <h1>
-        {"تشفير قيصر — الكود البرمجي"}
+        {t("legacy.969d8249d389ea36")}
       </h1>
       {"\n    "}
       <p className={"subtitle"}>
-        {"شرح مبسط لخوارزمية تشفير قيصر مع أمثلة برمجية بلغات متعددة. يمكنك نسخ الكود واستخدامه مباشرة."}
+        {t("legacy.5220bd2679400601")}
       </p>
       {"\n    \n    "}
       <div className={"algorithm-code-description"}>
         {"\n      "}
         <strong>
-          {"كيف تعمل خوارزمية تشفير قيصر:"}
+          {t("legacy.cd1801b02784e63f")}
         </strong>
         <br />
-        {"\n      تعتمد خوارزمية تشفير قيصر على إزاحة كل حرف في النص الأصلي بعدد ثابت من الخطوات في الأبجدية. مثلاً، مع إزاحة مقدارها 3، يصبح الحرف \"A\" هو \"D\". لفك التشفير، يتم إرجاع الحرف بنفس عدد الخطوات إلى الخلف. تعتبر هذه الخوارزمية من أبسط طرق التشفير وأكثرها شهرة منذ العصور الرومانية.\n    "}
+        {t("legacy.0ac155d9f9a31503")}
       </div>
       {"\n\n    "}
       <div className={"lang-tabs"}>
@@ -44,7 +51,7 @@ export default function NativePage() {
       <div className={"code-block active"} id={"code-cpp"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"cpp"} data-legacy-click={"copyCode('cpp')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>
@@ -58,7 +65,7 @@ export default function NativePage() {
       <div className={"code-block"} id={"code-java"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"java"} data-legacy-click={"copyCode('java')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>
@@ -72,7 +79,7 @@ export default function NativePage() {
       <div className={"code-block"} id={"code-js"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"js"} data-legacy-click={"copyCode('js')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>
@@ -90,7 +97,7 @@ export default function NativePage() {
       <div className={"code-block"} id={"code-php"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"php"} data-legacy-click={"copyCode('php')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>

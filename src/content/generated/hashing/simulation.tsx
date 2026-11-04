@@ -1,4 +1,11 @@
+"use client";
+
+import { useLanguage } from "@/components/LanguageProvider";
+import { translateLegacyText } from "@/data/legacy-english";
+
 export default function NativePage() {
+  const { language } = useLanguage();
+  const t = (text: string) => translateLegacyText(text, "hashing", language);
   return (
     <div className="native-legacy-body bg-gray-50 font-sans">
     {"\n\n  "}
@@ -16,7 +23,7 @@ export default function NativePage() {
           <div className={"flex items-center justify-between"}>
             {"\n          "}
             <h1 className={"text-2xl font-bold text-indigo-900"}>
-              {"محاكاة التجزئة التفاعلية"}
+              {t("legacy.41734fb7d83cfdb4")}
             </h1>
             {"\n          "}
             <button id={"resetBtn"} className={"btn btn-outline btn-sm btn-action"} data-legacy-click={"resetTable()"}>
@@ -24,7 +31,7 @@ export default function NativePage() {
               <svg className={"w-4 h-4"} fill={"none"} stroke={"currentColor"} viewBox={"0 0 24 24"}>
                 <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"}></path>
               </svg>
-              {"\n            إعادة ضبط\n          "}
+              {t("legacy.542eebf1231225f4")}
             </button>
             {"\n        "}
           </div>
@@ -38,7 +45,7 @@ export default function NativePage() {
               <div className={"flex items-center gap-2"}>
                 {"\n              "}
                 <label htmlFor={"valueInput"} className={"text-sm font-semibold text-gray-700"}>
-                  {"القيمة:"}
+                  {t("legacy.af1ec6d9fe091bc4")}
                 </label>
                 {"\n              "}
                 <input type={"number"} id={"valueInput"} className={"input-number"} placeholder={"0"} min={"0"} />
@@ -50,7 +57,7 @@ export default function NativePage() {
                 <svg className={"w-5 h-5"} fill={"none"} stroke={"currentColor"} viewBox={"0 0 24 24"}>
                   <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M12 4v16m8-8H4"}></path>
                 </svg>
-                {"\n              إضافة\n            "}
+                {t("legacy.d52453ac627d03a6")}
               </button>
               {"\n            "}
               <button className={"btn btn-warning btn-action"} data-legacy-click={"searchKey()"}>
@@ -58,7 +65,7 @@ export default function NativePage() {
                 <svg className={"w-5 h-5"} fill={"none"} stroke={"currentColor"} viewBox={"0 0 24 24"}>
                   <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"}></path>
                 </svg>
-                {"\n              بحث عن رقم\n            "}
+                {t("legacy.bd744c2f84f4ee0c")}
               </button>
               {"\n            "}
               <button className={"btn btn-danger btn-action"} data-legacy-click={"deleteKey()"}>
@@ -66,7 +73,7 @@ export default function NativePage() {
                 <svg className={"w-5 h-5"} fill={"none"} stroke={"currentColor"} viewBox={"0 0 24 24"}>
                   <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"}></path>
                 </svg>
-                {"\n              حذف رقم\n            "}
+                {t("legacy.64f016c6f2fa19e6")}
               </button>
               {"\n          "}
             </div>
@@ -77,7 +84,7 @@ export default function NativePage() {
               <div className={"flex items-center gap-2"}>
                 {"\n              "}
                 <label htmlFor={"hashFuncSelect"} className={"text-sm font-semibold text-gray-700"}>
-                  {"دالة التجزئة:"}
+                  {t("legacy.c707fef2ca8d49c7")}
                 </label>
                 {"\n              "}
                 <select id={"hashFuncSelect"} className={"hash-selector btn-action"} data-legacy-change={"changeHashFunc(this.value)"}>
@@ -97,7 +104,7 @@ export default function NativePage() {
               <div className={"flex items-center gap-2"}>
                 {"\n              "}
                 <span className={"text-sm font-semibold text-gray-700"}>
-                  {"المفتاح الحالي:"}
+                  {t("legacy.b73ca87a8ed9d44a")}
                 </span>
                 {"\n              "}
                 <div id={"currentKeyDisplay"} className={"key-display"}>
@@ -114,7 +121,7 @@ export default function NativePage() {
           <div id={"statusDisplay"} className={"text-center py-2"}>
             {"\n          "}
             <span className={"status-badge status-badge-waiting"}>
-              {"⏳ في انتظار الإدخال"}
+              {t("legacy.4379000c98dccf11")}
             </span>
             {"\n        "}
           </div>
@@ -138,11 +145,11 @@ export default function NativePage() {
               </svg>
               {"\n            "}
               <span className={"font-bold"}>
-                {"جدول التجزئة (Hash Table)"}
+                {t("legacy.900e69c7c8659653")}
               </span>
               {"\n            "}
               <span className={"text-indigo-200 text-sm mr-auto"}>
-                {"حجم الجدول: "}
+                {t("legacy.097b0359a62bb000")}
                 <span id={"tableSizeDisplay"}>
                   {"10"}
                 </span>
@@ -158,7 +165,7 @@ export default function NativePage() {
           <div className={"bg-white rounded-xl shadow-sm border border-gray-200 p-4"}>
             {"\n          "}
             <div className={"text-sm font-bold text-gray-700 mb-2"}>
-              {"وسائل الإيضاح:"}
+              {t("legacy.e44717ea67db588a")}
             </div>
             {"\n          "}
             <div className={"flex flex-wrap gap-4 text-xs"}>
@@ -168,7 +175,7 @@ export default function NativePage() {
                 <div className={"w-5 h-5 rounded border-2 border-dashed border-gray-300 bg-gray-50"}></div>
                 {"\n              "}
                 <span className={"text-gray-600"}>
-                  {"خلية فارغة"}
+                  {t("legacy.567617378c34d5bf")}
                 </span>
                 {"\n            "}
               </div>
@@ -178,7 +185,7 @@ export default function NativePage() {
                 <div className={"w-5 h-5 rounded"} style={{"background":"linear-gradient(135deg,#6366f1,#4f46e5)"}}></div>
                 {"\n              "}
                 <span className={"text-gray-600"}>
-                  {"تحتوي على عنصر"}
+                  {t("legacy.b5e4ebc5794d3b86")}
                 </span>
                 {"\n            "}
               </div>
@@ -188,7 +195,7 @@ export default function NativePage() {
                 <div className={"w-5 h-5 rounded"} style={{"background":"linear-gradient(135deg,#fbbf24,#f59e0b)"}}></div>
                 {"\n              "}
                 <span className={"text-gray-600"}>
-                  {"قيد المقارنة"}
+                  {t("legacy.51ba1d900a20c66f")}
                 </span>
                 {"\n            "}
               </div>
@@ -198,7 +205,7 @@ export default function NativePage() {
                 <div className={"w-5 h-5 rounded"} style={{"background":"linear-gradient(135deg,#34d399,#10b981)"}}></div>
                 {"\n              "}
                 <span className={"text-gray-600"}>
-                  {"تم العثور"}
+                  {t("legacy.97edd3dec902cdd0")}
                 </span>
                 {"\n            "}
               </div>
@@ -208,7 +215,7 @@ export default function NativePage() {
                 <div className={"w-5 h-5 rounded"} style={{"background":"linear-gradient(135deg,#f87171,#ef4444)"}}></div>
                 {"\n              "}
                 <span className={"text-gray-600"}>
-                  {"جاري الحذف"}
+                  {t("legacy.2c889b0bf51defa7")}
                 </span>
                 {"\n            "}
               </div>
@@ -232,11 +239,11 @@ export default function NativePage() {
               </svg>
               {"\n            "}
               <span className={"font-bold"}>
-                {"سجل العمليات"}
+                {t("legacy.3b94a4bfaecd9970")}
               </span>
               {"\n            "}
               <span className={"text-indigo-200 text-sm mr-auto"}>
-                {"عدد العمليات: "}
+                {t("legacy.838bd8d8ad049e1f")}
                 <span id={"stepCount"}>
                   {"0"}
                 </span>
@@ -250,22 +257,22 @@ export default function NativePage() {
                 <thead className={"sticky top-0"}>
                   <tr>
                     <th>
-                      {"العملية"}
+                      {t("legacy.1937a4fdfca8818c")}
                     </th>
                     <th>
-                      {"المفتاح"}
+                      {t("legacy.ac5d54e5562507c3")}
                     </th>
                     <th>
-                      {"التجزئة"}
+                      {t("legacy.308fc04e7e8b5d31")}
                     </th>
                     <th>
-                      {"الخلية"}
+                      {t("legacy.951ffc19d59ae07d")}
                     </th>
                     <th>
-                      {"الإجراء"}
+                      {t("legacy.9200595fd0fe471a")}
                     </th>
                     <th>
-                      {"تفاصيل"}
+                      {t("legacy.29f382c737796116")}
                     </th>
                   </tr>
                 </thead>
@@ -275,7 +282,7 @@ export default function NativePage() {
             </div>
             {"\n\n          "}
             <div className={"bg-gray-50 px-5 py-3 text-center text-xs text-gray-500 border-t"}>
-              {"\n            يتم تسجيل كل عملية بالتفصيل مع دالة التجزئة والخلية المستهدفة\n          "}
+              {t("legacy.a1eeb647c6a5429f")}
             </div>
             {"\n        "}
           </div>

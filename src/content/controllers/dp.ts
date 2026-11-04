@@ -1,4 +1,5 @@
 // @ts-nocheck
+import { translateLegacyRuntime } from "@/data/legacy-english";
 const state = {
   currentStep: -1,
   simulationHistory: [],
@@ -8,93 +9,98 @@ const state = {
   coins: [1, 3, 4],
   amount: 6,
   started: false,
-  finished: false,
+  finished: false
 };
-
 function buildFibonacciSteps(n) {
   const steps = [];
   const dp = [];
-
   steps.push({
     step: 0,
     index: 0,
     dpCopy: null,
-    explanation: 'نبدأ بتهيئة مصفوفة DP: dp[0] = 0, dp[1] = 1',
+    explanation: translateLegacyRuntime("legacy.aef1ba3dcbe2f4f0"),
     isComplete: false,
     isComputing: false,
-    dpBefore: null,
+    dpBefore: null
   });
-
   dp[0] = 0;
-
   steps.push({
     step: 1,
     index: 0,
-    dpCopy: { 0: 0 },
-    explanation: 'نخزن القيمة الأساسية: dp[0] = 0',
+    dpCopy: {
+      0: 0
+    },
+    explanation: translateLegacyRuntime("legacy.ce3c0e30d9c6dc99"),
     isComplete: false,
     isComputing: true,
-    dpBefore: null,
+    dpBefore: null
   });
-
   dp[1] = 1;
-
   steps.push({
     step: 2,
     index: 1,
-    dpCopy: { 0: 0, 1: 1 },
-    explanation: 'نخزن القيمة الأساسية: dp[1] = 1',
+    dpCopy: {
+      0: 0,
+      1: 1
+    },
+    explanation: translateLegacyRuntime("legacy.96e5e3e2ff9b27e3"),
     isComplete: false,
     isComputing: true,
-    dpBefore: { 0: 0 },
+    dpBefore: {
+      0: 0
+    }
   });
-
   for (let i = 2; i <= n; i++) {
     const before = {};
     for (let j = 0; j < i; j++) {
       before[j] = dp[j];
     }
-
     steps.push({
       step: steps.length,
       index: i,
-      dpCopy: { ...before },
-      explanation: `نحسب dp[${i}] = dp[${i - 1}] + dp[${i - 2}]`,
+      dpCopy: {
+        ...before
+      },
+      explanation: translateLegacyRuntime(`نحسب dp[${i}] = dp[${i - 1}] + dp[${i - 2}]`, "legacy.fe52fce01ce08823", "\u0646\u062D\u0633\u0628 dp[${i}] = dp[${i - 1}] + dp[${i - 2}]"),
       isComplete: false,
       isComputing: true,
-      dpBefore: { ...before },
+      dpBefore: {
+        ...before
+      }
     });
-
     dp[i] = dp[i - 1] + dp[i - 2];
-
     steps.push({
       step: steps.length,
       index: i,
-      dpCopy: { ...dp },
+      dpCopy: {
+        ...dp
+      },
       explanation: `dp[${i}] = ${dp[i - 1]} + ${dp[i - 2]} = ${dp[i]}`,
       isComplete: false,
       isComputing: false,
-      dpBefore: { ...before },
+      dpBefore: {
+        ...before
+      }
     });
   }
-
   steps.push({
     step: steps.length,
     index: n,
-    dpCopy: { ...dp },
-    explanation: `تم الانتهاء! نتيجة fib(${n}) = ${dp[n]}`,
+    dpCopy: {
+      ...dp
+    },
+    explanation: translateLegacyRuntime(`تم الانتهاء! نتيجة fib(${n}) = ${dp[n]}`, "legacy.1da1b5f8661671ed", "\u062A\u0645 \u0627\u0644\u0627\u0646\u062A\u0647\u0627\u0621! \u0646\u062A\u064A\u062C\u0629 fib(${n}) = ${dp[n]}"),
     isComplete: true,
     isComputing: false,
-    dpBefore: { ...dp },
+    dpBefore: {
+      ...dp
+    }
   });
-
   return steps;
 }
-
 function buildNaiveFibonacciSteps(n) {
   const steps = [];
   let nodeId = 0;
-
   function traverse(arg, depth) {
     const id = ++nodeId;
     steps.push({
@@ -103,9 +109,8 @@ function buildNaiveFibonacciSteps(n) {
       depth,
       returnValue: null,
       type: 'call',
-      parentId: null,
+      parentId: null
     });
-
     if (arg <= 1) {
       const retId = ++nodeId;
       steps.push({
@@ -115,15 +120,13 @@ function buildNaiveFibonacciSteps(n) {
         returnValue: arg,
         type: 'return',
         parentId: id,
-        baseCase: true,
+        baseCase: true
       });
       return arg;
     }
-
     const left = traverse(arg - 1, depth + 1);
     const right = traverse(arg - 2, depth + 1);
     const result = left + right;
-
     const retId = ++nodeId;
     steps.push({
       id: retId,
@@ -132,120 +135,108 @@ function buildNaiveFibonacciSteps(n) {
       returnValue: result,
       type: 'return',
       parentId: id,
-      operation: `${left} + ${right}`,
+      operation: `${left} + ${right}`
     });
     return result;
   }
-
   traverse(n, 0);
-
   const finalStep = steps[steps.length - 1];
-  return { fibSteps: steps, result: finalStep.returnValue };
+  return {
+    fibSteps: steps,
+    result: finalStep.returnValue
+  };
 }
-
 function buildCoinChangeSteps(coins, amount) {
   const steps = [];
   const dp = Array(amount + 1).fill(Infinity);
   dp[0] = 0;
-
   steps.push({
     step: 0,
     index: 0,
     dpCopy: null,
-    explanation: `نبدأ بتهيئة جدول DP: dp[0] = 0, باقي الخلايا = ∞`,
+    explanation: translateLegacyRuntime(`نبدأ بتهيئة جدول DP: dp[0] = 0, باقي الخلايا = ∞`, "legacy.37f22436e946ba8b", "\u0646\u0628\u062F\u0623 \u0628\u062A\u0647\u064A\u0626\u0629 \u062C\u062F\u0648\u0644 DP: dp[0] = 0, \u0628\u0627\u0642\u064A \u0627\u0644\u062E\u0644\u0627\u064A\u0627 = \u221E"),
     isComplete: false,
     isComputing: false,
     coinIndex: -1,
-    amountIndex: 0,
+    amountIndex: 0
   });
-
   for (let cIdx = 0; cIdx < coins.length; cIdx++) {
     const coin = coins[cIdx];
-
     steps.push({
       step: steps.length,
       index: -1,
       dpCopy: [...dp],
-      explanation: `نبدأ معالجة العملة رقم ${cIdx + 1}: ${coin}`,
+      explanation: translateLegacyRuntime(`نبدأ معالجة العملة رقم ${cIdx + 1}: ${coin}`, "legacy.d8e977e1ea062380", "\u0646\u0628\u062F\u0623 \u0645\u0639\u0627\u0644\u062C\u0629 \u0627\u0644\u0639\u0645\u0644\u0629 \u0631\u0642\u0645 ${cIdx + 1}: ${coin}"),
       isComplete: false,
       isComputing: false,
       coinIndex: cIdx,
-      amountIndex: -1,
+      amountIndex: -1
     });
-
     for (let a = coin; a <= amount; a++) {
       const before = [...dp];
-
       steps.push({
         step: steps.length,
         index: a,
         dpCopy: [...dp],
-        explanation: `نحسب dp[${a}] باستخدام عملة ${coin}: min(dp[${a}], dp[${a - coin}] + 1)`,
+        explanation: translateLegacyRuntime(`نحسب dp[${a}] باستخدام عملة ${coin}: min(dp[${a}], dp[${a - coin}] + 1)`, "legacy.bdf0f2c6958e9263", "\u0646\u062D\u0633\u0628 dp[${a}] \u0628\u0627\u0633\u062A\u062E\u062F\u0627\u0645 \u0639\u0645\u0644\u0629 ${coin}: min(dp[${a}], dp[${a - coin}] + 1)"),
         isComplete: false,
         isComputing: true,
         coinIndex: cIdx,
         amountIndex: a,
-        dpBefore: before,
+        dpBefore: before
       });
-
       if (dp[a - coin] + 1 < dp[a]) {
         dp[a] = dp[a - coin] + 1;
         steps.push({
           step: steps.length,
           index: a,
           dpCopy: [...dp],
-          explanation: `تم التحديث: dp[${a}] = dp[${a - coin}] + 1 = ${dp[a - coin]} + 1 = ${dp[a]}`,
+          explanation: translateLegacyRuntime(`تم التحديث: dp[${a}] = dp[${a - coin}] + 1 = ${dp[a - coin]} + 1 = ${dp[a]}`, "legacy.63505984a70f62aa", "\u062A\u0645 \u0627\u0644\u062A\u062D\u062F\u064A\u062B: dp[${a}] = dp[${a - coin}] + 1 = ${dp[a - coin]} + 1 = ${dp[a]}"),
           isComplete: false,
           isComputing: false,
           coinIndex: cIdx,
           amountIndex: a,
           dpBefore: before,
-          updated: true,
+          updated: true
         });
       } else {
         steps.push({
           step: steps.length,
           index: a,
           dpCopy: [...dp],
-          explanation: `لا حاجة للتحديث: dp[${a}] = ${dp[a]} (أفضل من ${dp[a - coin] + 1})`,
+          explanation: translateLegacyRuntime(`لا حاجة للتحديث: dp[${a}] = ${dp[a]} (أفضل من ${dp[a - coin] + 1})`, "legacy.6b06a4573803ecda", "\u0644\u0627 \u062D\u0627\u062C\u0629 \u0644\u0644\u062A\u062D\u062F\u064A\u062B: dp[${a}] = ${dp[a]} (\u0623\u0641\u0636\u0644 \u0645\u0646 ${dp[a - coin] + 1})"),
           isComplete: false,
           isComputing: false,
           coinIndex: cIdx,
           amountIndex: a,
           dpBefore: before,
-          updated: false,
+          updated: false
         });
       }
     }
   }
-
   const finalAns = dp[amount] === Infinity ? -1 : dp[amount];
   steps.push({
     step: steps.length,
     index: amount,
     dpCopy: [...dp],
-    explanation: finalAns === -1
-      ? `لا يمكن تكوين المبلغ ${amount} بالعملات المتاحة`
-      : `تم الانتهاء! أقل عدد عملات لتكوين ${amount} = ${finalAns}`,
+    explanation: finalAns === -1 ? translateLegacyRuntime(`لا يمكن تكوين المبلغ ${amount} بالعملات المتاحة`, "legacy.a6873328eef4a6b4", "\u0644\u0627 \u064A\u0645\u0643\u0646 \u062A\u0643\u0648\u064A\u0646 \u0627\u0644\u0645\u0628\u0644\u063A ${amount} \u0628\u0627\u0644\u0639\u0645\u0644\u0627\u062A \u0627\u0644\u0645\u062A\u0627\u062D\u0629") : translateLegacyRuntime(`تم الانتهاء! أقل عدد عملات لتكوين ${amount} = ${finalAns}`, "legacy.962e88327fef612a", "\u062A\u0645 \u0627\u0644\u0627\u0646\u062A\u0647\u0627\u0621! \u0623\u0642\u0644 \u0639\u062F\u062F \u0639\u0645\u0644\u0627\u062A \u0644\u062A\u0643\u0648\u064A\u0646 ${amount} = ${finalAns}"),
     isComplete: true,
     isComputing: false,
     coinIndex: coins.length - 1,
     amountIndex: amount,
-    finalValue: finalAns,
+    finalValue: finalAns
   });
-
   return steps;
 }
-
 function startSimulation() {
   const example = state.example;
   const inputEl = document.getElementById('nInput');
   state.n = parseInt(inputEl.value);
   if (isNaN(state.n) || state.n < 0) state.n = 0;
-
   if (example === 'fibonacci') {
     if (state.n < 0 || state.n > 20 || !Number.isInteger(state.n)) {
-      showMessage('الرجاء إدخال عدد صحيح بين 0 و 20', 'error');
+      showMessage(translateLegacyRuntime("legacy.f6fd3c06c37e1e11"), 'error');
       return;
     }
     state.steps = buildFibonacciSteps(state.n);
@@ -261,22 +252,17 @@ function startSimulation() {
     state.amount = parseInt(amountEl.value);
     if (isNaN(state.amount) || state.amount < 1) state.amount = 1;
     if (state.amount > 50) state.amount = 50;
-
     state.steps = buildCoinChangeSteps(state.coins, state.amount);
   }
-
   state.currentStep = -1;
   state.simulationHistory = [];
   state.finished = false;
   state.started = true;
-
   document.getElementById('startButton').disabled = true;
   document.getElementById('exampleSelect').disabled = true;
-
-  showMessage(`بدء المحاكاة...`, 'info');
+  showMessage(translateLegacyRuntime(`بدء المحاكاة...`, "legacy.7d28e0328bcb5f26", "\u0628\u062F\u0621 \u0627\u0644\u0645\u062D\u0627\u0643\u0627\u0629..."), 'info');
   nextStep();
 }
-
 function nextStep() {
   if (state.started && state.currentStep >= state.steps.length - 1) {
     if (!state.finished) {
@@ -286,13 +272,11 @@ function nextStep() {
     updateControls();
     return;
   }
-
   state.currentStep++;
   state.simulationHistory.push(state.steps[state.currentStep]);
   renderVisualization();
   updateControls();
 }
-
 function previousStep() {
   if (state.currentStep <= 0) return;
   state.simulationHistory.pop();
@@ -301,18 +285,15 @@ function previousStep() {
   renderVisualization();
   updateControls();
 }
-
 function resetSimulation() {
   state.currentStep = -1;
   state.simulationHistory = [];
   state.steps = [];
   state.started = false;
   state.finished = false;
-
   document.getElementById('exampleSelect').disabled = false;
   document.getElementById('startButton').disabled = false;
-
-  document.getElementById('dpVisualization').innerHTML = `
+  document.getElementById('dpVisualization').innerHTML = translateLegacyRuntime(`
     <div class="empty-state">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
@@ -320,22 +301,20 @@ function resetSimulation() {
       <p class="text-lg font-medium text-gray-500">لم تبدأ المحاكاة بعد</p>
       <p class="text-sm text-gray-400 mt-1">اختر مثالاً وأدخل القيمة ثم اضغط "ابدأ المحاكاة"</p>
     </div>
-  `;
+  `, "legacy.4ddadd020f569ee6", "\n    <div class=\"empty-state\">\n      <svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\">\n        <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" d=\"M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z\" />\n      </svg>\n      <p class=\"text-lg font-medium text-gray-500\">\u0644\u0645 \u062A\u0628\u062F\u0623 \u0627\u0644\u0645\u062D\u0627\u0643\u0627\u0629 \u0628\u0639\u062F</p>\n      <p class=\"text-sm text-gray-400 mt-1\">\u0627\u062E\u062A\u0631 \u0645\u062B\u0627\u0644\u0627\u064B \u0648\u0623\u062F\u062E\u0644 \u0627\u0644\u0642\u064A\u0645\u0629 \u062B\u0645 \u0627\u0636\u063A\u0637 \"\u0627\u0628\u062F\u0623 \u0627\u0644\u0645\u062D\u0627\u0643\u0627\u0629\"</p>\n    </div>\n  ");
   document.getElementById('naiveComparison').innerHTML = '';
   document.getElementById('stepsLog').innerHTML = '';
   document.getElementById('resultDisplay').innerHTML = '';
   document.getElementById('legendContainer').style.display = 'none';
-  showMessage('المحاكاة جاهزة. اختر مثالاً وأدخل القيمة.', 'info');
+  showMessage(translateLegacyRuntime("legacy.ce84e65a4bffcb0a"), 'info');
   updateControls();
 }
-
 function updateControls() {
   const totalSteps = state.steps.length;
   document.getElementById('startButton').disabled = state.started && !state.finished;
   document.getElementById('nextButton').disabled = !state.started || state.finished || state.currentStep >= totalSteps - 1;
   document.getElementById('prevButton').disabled = !state.started || state.currentStep <= 0;
 }
-
 function updateExample(choice) {
   state.example = choice;
   const fibSection = document.getElementById('fibonacciConfig');
@@ -354,7 +333,6 @@ function updateExample(choice) {
   }
   if (state.started) resetSimulation();
 }
-
 function addCoin() {
   const input = document.getElementById('newCoinInput');
   const val = parseInt(input.value);
@@ -374,61 +352,45 @@ function addCoin() {
   container.appendChild(tag);
   input.value = '';
 }
-
 function renderVisualization() {
   const history = state.simulationHistory;
   if (history.length === 0) return;
-
   if (state.example === 'fibonacci') {
     renderFibonacciVisualization(history);
   } else {
     renderCoinChangeVisualization(history);
   }
   renderStepsTable(history);
-
   const lastStep = history[history.length - 1];
   if (lastStep.explanation) {
     showMessage(lastStep.explanation, lastStep.isComplete ? 'success' : 'info');
   }
   document.getElementById('legendContainer').style.display = 'flex';
 }
-
 function renderFibonacciVisualization(history) {
   const container = document.getElementById('dpVisualization');
   const activeStep = state.currentStep;
   const currentStep = history[activeStep];
   const n = state.n;
-
   if (!currentStep || !currentStep.dpCopy) {
-    container.innerHTML =
-      '<div class="text-center text-gray-400 py-4">جاري تهيئة المصفوفة...</div>';
+    container.innerHTML = translateLegacyRuntime("legacy.d1d38cd4da4f5b1b");
     return;
   }
-
   const dpData = currentStep.dpCopy;
-  const computingIndex = currentStep.isComputing && !currentStep.isComplete
-    ? currentStep.index
-    : -1;
+  const computingIndex = currentStep.isComputing && !currentStep.isComplete ? currentStep.index : -1;
   const isComplete = currentStep.isComplete;
   const doneIndices = [];
   for (let i = 0; i <= n; i++) {
     if (dpData[i] !== undefined) doneIndices.push(i);
   }
-
   let html = '<div class="dp-table">';
-
   for (let i = 0; i <= n; i++) {
     const hasValue = dpData[i] !== undefined;
     const isComputing = i === computingIndex && !isComplete;
     const isDone = hasValue && !isComputing;
     const isFinal = isComplete && i === currentStep.index;
-
     let cellClass = 'dp-cell';
-    if (isFinal) cellClass += ' dp-cell-final';
-    else if (isComputing) cellClass += ' dp-cell-computing';
-    else if (isDone) cellClass += ' dp-cell-done';
-    else cellClass += ' dp-cell-empty';
-
+    if (isFinal) cellClass += ' dp-cell-final';else if (isComputing) cellClass += ' dp-cell-computing';else if (isDone) cellClass += ' dp-cell-done';else cellClass += ' dp-cell-empty';
     let value = '';
     let formula = '';
     if (hasValue) {
@@ -443,7 +405,6 @@ function renderFibonacciVisualization(history) {
     } else {
       value = i;
     }
-
     html += `<div style="display:flex;flex-direction:column;align-items:center;animation:cellIn 0.3s ease;">`;
     if (formula) {
       html += `<div class="formula-label">${formula}</div>`;
@@ -451,70 +412,53 @@ function renderFibonacciVisualization(history) {
     html += `<div class="${cellClass}">${isFinal || isDone || isComputing ? value : ''}</div>`;
     html += `<div class="dp-index-label">${i}</div>`;
     html += `</div>`;
-
     if (i < n) {
       html += `<div class="dp-arrow-connector">←</div>`;
     }
   }
-
   html += '</div>';
   container.innerHTML = html;
-
   renderNaiveComparison(n, activeStep);
 }
-
 function renderNaiveComparison(n) {
   const container = document.getElementById('naiveComparison');
   const naive = buildNaiveFibonacciSteps(n);
   const fibSteps = naive.fibSteps;
-
   const callNodes = fibSteps.filter(s => s.type === 'call');
   if (callNodes.length === 0) {
     container.innerHTML = '';
     return;
   }
-
   const nodeW = 70;
   const nodeH = 44;
   const levelGapY = 80;
   const paddingX = 40;
   const paddingY = 30;
-
   const levelMap = {};
   callNodes.forEach(n => {
     if (!levelMap[n.depth]) levelMap[n.depth] = [];
     levelMap[n.depth].push(n);
   });
-
   const depths = Object.keys(levelMap).map(Number).sort((a, b) => a - b);
   let maxLeafCount = 1;
   depths.forEach(d => {
     if (levelMap[d].length > maxLeafCount) maxLeafCount = levelMap[d].length;
   });
-
-  const treeWidth = Math.max(
-    paddingX * 2 + nodeW,
-    paddingX * 2 + maxLeafCount * (nodeW + 20)
-  );
+  const treeWidth = Math.max(paddingX * 2 + nodeW, paddingX * 2 + maxLeafCount * (nodeW + 20));
   const treeHeight = depths.length * levelGapY + paddingY * 2;
-
   const totalCalls = callNodes.length;
   const naiveResult = naive.result;
-
   const defs = `<defs>
     <marker id="arrowheadNaive" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
       <polygon points="0 0, 8 3, 0 6" fill="#9ca3af"></polygon>
     </marker>
   </defs>`;
-
-  let svgHtml = `<div class="text-center mb-3">
+  let svgHtml = translateLegacyRuntime(`<div class="text-center mb-3">
     <span class="text-sm font-bold text-red-500">استدعاءات العودية الساذجة: ${totalCalls}</span>
     <span class="mx-2 text-gray-300">|</span>
     <span class="text-sm font-bold text-emerald-600">DP يحسب n+1 = ${n + 1} مرة فقط</span>
-  </div>`;
-
+  </div>`, "legacy.701e9e289ab8efe4", "<div class=\"text-center mb-3\">\n    <span class=\"text-sm font-bold text-red-500\">\u0627\u0633\u062A\u062F\u0639\u0627\u0621\u0627\u062A \u0627\u0644\u0639\u0648\u062F\u064A\u0629 \u0627\u0644\u0633\u0627\u0630\u062C\u0629: ${totalCalls}</span>\n    <span class=\"mx-2 text-gray-300\">|</span>\n    <span class=\"text-sm font-bold text-emerald-600\">DP \u064A\u062D\u0633\u0628 n+1 = ${n + 1} \u0645\u0631\u0629 \u0641\u0642\u0637</span>\n  </div>");
   svgHtml += `<svg viewBox="0 0 ${treeWidth} ${treeHeight}" width="100%" style="min-height:${treeHeight}px" class="rec-tree-svg">${defs}`;
-
   const positions = {};
   depths.forEach((depth, di) => {
     const nodes = levelMap[depth];
@@ -523,17 +467,18 @@ function renderNaiveComparison(n) {
     nodes.forEach((n, ni) => {
       const x = startX + ni * (nodeW + 16);
       const y = paddingY + di * levelGapY;
-      positions[n.id] = { x, y };
+      positions[n.id] = {
+        x,
+        y
+      };
     });
   });
-
   callNodes.forEach(step => {
     if (!step.parentId || !positions[step.id] || !positions[step.parentId]) return;
     const parent = positions[step.parentId];
     const child = positions[step.id];
     svgHtml += `<line x1="${parent.x + nodeW / 2}" y1="${parent.y + nodeH / 2}" x2="${child.x + nodeW / 2}" y2="${child.y + nodeH / 2}" class="rec-connector" marker-end="url(#arrowheadNaive)" />`;
   });
-
   callNodes.forEach(n => {
     const pos = positions[n.id];
     if (!pos) return;
@@ -544,42 +489,32 @@ function renderNaiveComparison(n) {
       </div>
     </foreignObject>`;
   });
-
   svgHtml += '</svg>';
-
-  svgHtml += `<div class="text-center mt-2 text-sm font-bold text-gray-600">
+  svgHtml += translateLegacyRuntime(`<div class="text-center mt-2 text-sm font-bold text-gray-600">
     fib(${n}) = <span class="text-red-500">${naiveResult}</span>
     &nbsp;(بدون DP — ${totalCalls} استدعاء)
-  </div>`;
-
+  </div>`, "legacy.500888d976a21912", "<div class=\"text-center mt-2 text-sm font-bold text-gray-600\">\n    fib(${n}) = <span class=\"text-red-500\">${naiveResult}</span>\n    &nbsp;(\u0628\u062F\u0648\u0646 DP \u2014 ${totalCalls} \u0627\u0633\u062A\u062F\u0639\u0627\u0621)\n  </div>");
   container.innerHTML = svgHtml;
 }
-
 function renderCoinChangeVisualization(history) {
   const container = document.getElementById('dpVisualization');
   const activeStep = state.currentStep;
   const currentStep = history[activeStep];
-
   if (!currentStep) return;
-
   const coins = state.coins;
   const amount = state.amount;
   const dpData = currentStep.dpCopy || [];
-
   const coinIdx = currentStep.coinIndex;
   const amtIdx = currentStep.amountIndex;
   const isComputing = currentStep.isComputing && !currentStep.isComplete;
   const isComplete = currentStep.isComplete;
-
   let html = '<div class="dp-grid-container">';
-
   html += '<div class="dp-header-row">';
-  html += `<div class="dp-header-cell dp-header-corner">المبلغ</div>`;
+  html += translateLegacyRuntime(`<div class="dp-header-cell dp-header-corner">المبلغ</div>`, "legacy.1d18b688099e18f6", "<div class=\"dp-header-cell dp-header-corner\">\u0627\u0644\u0645\u0628\u0644\u063A</div>");
   for (let a = 0; a <= amount; a++) {
     html += `<div class="dp-header-cell">${a}</div>`;
   }
   html += '</div>';
-
   for (let c = 0; c < coins.length; c++) {
     html += '<div class="dp-grid-row">';
     html += `<div class="dp-row-label">${coins[c]}</div>`;
@@ -589,26 +524,15 @@ function renderCoinChangeVisualization(history) {
       const isDone = hasValue && !(isCurCell && isComputing) && !(isComplete && c === coins.length - 1);
       const isFinal = isComplete && c === coins.length - 1 && a === amount;
       const isEmpty = !hasValue && !isCurCell;
-
       let cellClass = 'dp-cell dp-cell-2d';
-      if (isFinal) cellClass += ' dp-cell-final';
-      else if (isCurCell && isComputing) cellClass += ' dp-cell-computing';
-      else if (hasValue && a === 0) cellClass += ' dp-cell-done';
-      else if (hasValue) cellClass += ' dp-cell-done';
-      else cellClass += ' dp-cell-empty';
-
+      if (isFinal) cellClass += ' dp-cell-final';else if (isCurCell && isComputing) cellClass += ' dp-cell-computing';else if (hasValue && a === 0) cellClass += ' dp-cell-done';else if (hasValue) cellClass += ' dp-cell-done';else cellClass += ' dp-cell-empty';
       let value = '';
-      if (hasValue) value = dpData[a];
-      else if (isEmpty && a === 0) value = '0';
-      else value = '∞';
-
+      if (hasValue) value = dpData[a];else if (isEmpty && a === 0) value = '0';else value = '∞';
       let formula = '';
       if (isCurCell && isComputing && a >= coins[c]) {
-        const prev = dpData[a - coins[c]] !== undefined && dpData[a - coins[c]] !== Infinity
-          ? dpData[a - coins[c]] : '∞';
+        const prev = dpData[a - coins[c]] !== undefined && dpData[a - coins[c]] !== Infinity ? dpData[a - coins[c]] : '∞';
         formula = `min(dp[${a}], ${prev}+1)`;
       }
-
       html += `<div style="position:relative;animation:cellIn 0.25s ease;">
         ${formula ? `<div class="formula-label coin-formula">${formula}</div>` : ''}
         <div class="${cellClass}">${value}</div>
@@ -616,27 +540,19 @@ function renderCoinChangeVisualization(history) {
     }
     html += '</div>';
   }
-
   html += '</div>';
-
   if (isComplete && currentStep.finalValue !== undefined) {
     const finalVal = currentStep.finalValue;
     html += `<div class="mt-4 text-center font-bold text-lg">
-      ${finalVal === -1
-        ? `<span class="text-red-600">✗ لا يمكن تكوين المبلغ ${amount} بالعملات المتاحة</span>`
-        : `<span class="text-emerald-600">✓ أقل عدد عملات = ${finalVal}</span>`
-      }
+      ${finalVal === -1 ? translateLegacyRuntime(`<span class="text-red-600">✗ لا يمكن تكوين المبلغ ${amount} بالعملات المتاحة</span>`, "legacy.89764847a6b2b0eb", "<span class=\"text-red-600\">\u2717 \u0644\u0627 \u064A\u0645\u0643\u0646 \u062A\u0643\u0648\u064A\u0646 \u0627\u0644\u0645\u0628\u0644\u063A ${amount} \u0628\u0627\u0644\u0639\u0645\u0644\u0627\u062A \u0627\u0644\u0645\u062A\u0627\u062D\u0629</span>") : translateLegacyRuntime(`<span class="text-emerald-600">✓ أقل عدد عملات = ${finalVal}</span>`, "legacy.03a7959dcdc8f5fd", "<span class=\"text-emerald-600\">\u2713 \u0623\u0642\u0644 \u0639\u062F\u062F \u0639\u0645\u0644\u0627\u062A = ${finalVal}</span>")}
     </div>`;
   }
-
   container.innerHTML = html;
 }
-
 function renderStepsTable(history) {
   const container = document.getElementById('stepsLog');
   const activeStep = state.currentStep;
-
-  let tableHTML = `
+  let tableHTML = translateLegacyRuntime(`
     <div class="overflow-x-auto rounded-xl border border-gray-200">
       <table class="steps-table">
         <thead><tr>
@@ -644,42 +560,28 @@ function renderStepsTable(history) {
           <th>الخطوة</th>
           <th>الشرح</th>
         </tr></thead><tbody>
-  `;
-
+  `, "legacy.ed9bdab8253f3f3c", "\n    <div class=\"overflow-x-auto rounded-xl border border-gray-200\">\n      <table class=\"steps-table\">\n        <thead><tr>\n          <th>#</th>\n          <th>\u0627\u0644\u062E\u0637\u0648\u0629</th>\n          <th>\u0627\u0644\u0634\u0631\u062D</th>\n        </tr></thead><tbody>\n  ");
   for (let i = Math.max(0, history.length - 20); i < history.length; i++) {
     const step = history[i];
     const rowClass = i === activeStep ? 'current-step' : '';
-    const stepLabel = state.example === 'fibonacci'
-      ? `dp[${step.index}]`
-      : (step.coinIndex >= 0 && step.amountIndex >= 0
-        ? `عملة ${state.coins[step.coinIndex] || ''} → مبلغ ${step.amountIndex}`
-        : step.coinIndex >= 0
-          ? `عملة ${state.coins[step.coinIndex] || ''}`
-          : 'تهيئة'
-      );
-
+    const stepLabel = state.example === 'fibonacci' ? `dp[${step.index}]` : step.coinIndex >= 0 && step.amountIndex >= 0 ? translateLegacyRuntime(`عملة ${state.coins[step.coinIndex] || ''} → مبلغ ${step.amountIndex}`, "legacy.d86b65ad84097418", "\u0639\u0645\u0644\u0629 ${state.coins[step.coinIndex] || ''} \u2192 \u0645\u0628\u0644\u063A ${step.amountIndex}") : step.coinIndex >= 0 ? translateLegacyRuntime(`عملة ${state.coins[step.coinIndex] || ''}`, "legacy.0f98378748228561", "\u0639\u0645\u0644\u0629 ${state.coins[step.coinIndex] || ''}") : translateLegacyRuntime("legacy.19f5467af87d49bb");
     tableHTML += `<tr class="${rowClass}">
       <td class="font-bold text-gray-600">${i + 1}</td>
       <td class="font-bold text-indigo-600">${stepLabel}</td>
       <td class="text-gray-700 text-sm">${step.explanation || ''}</td>
     </tr>`;
   }
-
   tableHTML += '</tbody></table></div>';
   container.innerHTML = tableHTML;
 }
-
 function showFinalResult() {
   const history = state.simulationHistory;
   const lastStep = history[history.length - 1];
   if (!lastStep) return;
-
   const container = document.getElementById('resultDisplay');
   container.innerHTML = '';
-
   const resultDiv = document.createElement('div');
   resultDiv.className = 'result-display';
-
   if (state.example === 'fibonacci') {
     const labelSpan = document.createElement('span');
     labelSpan.textContent = `fib(${state.n}) = `;
@@ -692,9 +594,9 @@ function showFinalResult() {
     const labelSpan = document.createElement('span');
     const finalAns = lastStep.finalValue;
     if (finalAns === -1) {
-      labelSpan.textContent = `لا يمكن تكوين المبلغ ${state.amount} بالعملات المتاحة`;
+      labelSpan.textContent = translateLegacyRuntime(`لا يمكن تكوين المبلغ ${state.amount} بالعملات المتاحة`, "legacy.b9c72c98ce081cd1", "\u0644\u0627 \u064A\u0645\u0643\u0646 \u062A\u0643\u0648\u064A\u0646 \u0627\u0644\u0645\u0628\u0644\u063A ${state.amount} \u0628\u0627\u0644\u0639\u0645\u0644\u0627\u062A \u0627\u0644\u0645\u062A\u0627\u062D\u0629");
     } else {
-      labelSpan.textContent = `أقل عدد عملات لتكوين ${state.amount} = `;
+      labelSpan.textContent = translateLegacyRuntime(`أقل عدد عملات لتكوين ${state.amount} = `, "legacy.ed322be925a22cbd", "\u0623\u0642\u0644 \u0639\u062F\u062F \u0639\u0645\u0644\u0627\u062A \u0644\u062A\u0643\u0648\u064A\u0646 ${state.amount} = ");
       const valueSpan = document.createElement('span');
       valueSpan.className = 'result-answer';
       valueSpan.textContent = finalAns;
@@ -702,19 +604,15 @@ function showFinalResult() {
       resultDiv.appendChild(valueSpan);
     }
   }
-
   container.appendChild(resultDiv);
-
-  showMessage('🎉 تم الانتهاء!', 'success');
+  showMessage(translateLegacyRuntime("legacy.815890c9726ba7ac"), 'success');
   document.getElementById('startButton').disabled = true;
 }
-
 function showMessage(message, type = 'info') {
   const el = document.getElementById('statusMessage');
   el.textContent = message;
   el.className = 'status-message ' + type;
 }
-
 document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('nInput').addEventListener('change', function () {
     const val = parseInt(this.value);
@@ -726,14 +624,12 @@ document.addEventListener('DOMContentLoaded', function () {
     state.n = parseInt(this.value);
     if (state.started) resetSimulation();
   });
-
   document.getElementById('nInput').addEventListener('keydown', function (e) {
     if (e.key === 'Enter') {
       e.preventDefault();
       if (!state.started) startSimulation();
     }
   });
-
   document.getElementById('amountInput').addEventListener('change', function () {
     const val = parseInt(this.value);
     if (isNaN(val) || val < 1) this.value = 1;
@@ -742,6 +638,23 @@ document.addEventListener('DOMContentLoaded', function () {
     if (state.started) resetSimulation();
   });
 });
-
-Object.assign(window, {buildFibonacciSteps: buildFibonacciSteps, buildNaiveFibonacciSteps: buildNaiveFibonacciSteps, buildCoinChangeSteps: buildCoinChangeSteps, startSimulation: startSimulation, nextStep: nextStep, previousStep: previousStep, resetSimulation: resetSimulation, updateControls: updateControls, updateExample: updateExample, addCoin: addCoin, renderVisualization: renderVisualization, renderFibonacciVisualization: renderFibonacciVisualization, renderNaiveComparison: renderNaiveComparison, renderCoinChangeVisualization: renderCoinChangeVisualization, renderStepsTable: renderStepsTable, showFinalResult: showFinalResult, showMessage: showMessage});
-export {buildFibonacciSteps, buildNaiveFibonacciSteps, buildCoinChangeSteps, startSimulation, nextStep, previousStep, resetSimulation, updateControls, updateExample, addCoin, renderVisualization, renderFibonacciVisualization, renderNaiveComparison, renderCoinChangeVisualization, renderStepsTable, showFinalResult, showMessage};
+Object.assign(window, {
+  buildFibonacciSteps: buildFibonacciSteps,
+  buildNaiveFibonacciSteps: buildNaiveFibonacciSteps,
+  buildCoinChangeSteps: buildCoinChangeSteps,
+  startSimulation: startSimulation,
+  nextStep: nextStep,
+  previousStep: previousStep,
+  resetSimulation: resetSimulation,
+  updateControls: updateControls,
+  updateExample: updateExample,
+  addCoin: addCoin,
+  renderVisualization: renderVisualization,
+  renderFibonacciVisualization: renderFibonacciVisualization,
+  renderNaiveComparison: renderNaiveComparison,
+  renderCoinChangeVisualization: renderCoinChangeVisualization,
+  renderStepsTable: renderStepsTable,
+  showFinalResult: showFinalResult,
+  showMessage: showMessage
+});
+export { buildFibonacciSteps, buildNaiveFibonacciSteps, buildCoinChangeSteps, startSimulation, nextStep, previousStep, resetSimulation, updateControls, updateExample, addCoin, renderVisualization, renderFibonacciVisualization, renderNaiveComparison, renderCoinChangeVisualization, renderStepsTable, showFinalResult, showMessage };

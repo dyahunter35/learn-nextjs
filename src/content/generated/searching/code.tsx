@@ -1,35 +1,42 @@
+"use client";
+
+import { useLanguage } from "@/components/LanguageProvider";
+import { translateLegacyText } from "@/data/legacy-english";
+
 export default function NativePage() {
+  const { language } = useLanguage();
+  const t = (text: string) => translateLegacyText(text, "searching", language);
   return (
     <div className="native-legacy-body bg-gray-50 min-h-screen">
     {"\n  \n    \n    \n\n  "}
     <div className={"code-page"}>
       {"\n    "}
       <h1>
-        {"خوارزميات البحث — الكود البرمجي"}
+        {t("legacy.a780d30b97ff14be")}
       </h1>
       {"\n    "}
       <p className={"subtitle"}>
-        {"شرح مبسط لخوارزميتي البحث المتتالي والبحث الثنائي مع أمثلة برمجية بلغات متعددة. يمكنك نسخ الكود واستخدامه مباشرة."}
+        {t("legacy.dc756dbc5fd8cd87")}
       </p>
       {"\n    \n    "}
       <div className={"algorithm-code-description"}>
         {"\n      "}
         <strong>
-          {"كيف تعمل خوارزميات البحث:"}
+          {t("legacy.0597795060297297")}
         </strong>
         <br />
         {"\n      "}
         <strong>
-          {"البحث المتتالي (Linear Search):"}
+          {t("legacy.e7533b69fccc2114")}
         </strong>
-        {" تفحص الخوارزمية كل عنصر في المصفوفة بالتتابع حتى تجد القيمة المطلوبة. تعمل على المصفوفات المرتبة وغير المرتبة. سرعتها O(n)."}
+        {t("legacy.4f3e1bcb1d4cebac")}
         <br />
         <br />
         {"\n      "}
         <strong>
-          {"البحث الثنائي (Binary Search):"}
+          {t("legacy.c8edc77009cf117a")}
         </strong>
-        {" تعمل الخوارزمية على مصفوفة مرتبة فقط. تقسم المصفوفة إلى نصفين في كل خطوة، وتقارن القيمة المستهدفة مع العنصر الأوسط، ثم تبحث في النصف المناسب. سرعتها O(log n).\n    "}
+        {t("legacy.22fd6eb783f4072a")}
       </div>
       {"\n\n    "}
       <div className={"lang-tabs"}>
@@ -55,7 +62,7 @@ export default function NativePage() {
       <div className={"code-block active"} id={"code-cpp"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"cpp"} data-legacy-click={"copyCode('cpp')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>
@@ -69,7 +76,7 @@ export default function NativePage() {
       <div className={"code-block"} id={"code-java"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"java"} data-legacy-click={"copyCode('java')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>
@@ -83,7 +90,7 @@ export default function NativePage() {
       <div className={"code-block"} id={"code-js"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"js"} data-legacy-click={"copyCode('js')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>
@@ -97,7 +104,7 @@ export default function NativePage() {
       <div className={"code-block"} id={"code-php"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"php"} data-legacy-click={"copyCode('php')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>

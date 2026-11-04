@@ -1,31 +1,38 @@
+"use client";
+
+import { useLanguage } from "@/components/LanguageProvider";
+import { translateLegacyText } from "@/data/legacy-english";
+
 export default function NativePage() {
+  const { language } = useLanguage();
+  const t = (text: string) => translateLegacyText(text, "dp", language);
   return (
     <div className="native-legacy-body bg-gray-50 min-h-screen">
     {"\n  \n    \n    \n\n  "}
     <div className={"code-page"}>
       {"\n    "}
       <h1>
-        {"البرمجة الديناميكية — الكود البرمجي"}
+        {t("legacy.be4537d3cfb5ebd7")}
       </h1>
       {"\n    "}
       <p className={"subtitle"}>
-        {"شرح مبسط مع أمثلة بلغات متعددة. يمكنك نسخ الكود واستخدامه."}
+        {t("legacy.f6641497577af02a")}
       </p>
       {"\n    \n    "}
       <div className={"algorithm-code-description"}>
         {"\n      "}
         <strong>
-          {"كيف تعمل:"}
+          {t("legacy.ef1c667af06fc25c")}
         </strong>
-        {" البرمجة الديناميكية (DP) تحل المسائل بتقسيمها إلى مسائل فرعية وتخزين نتائجها لتجنب إعادة الحساب. "}
+        {t("legacy.5604f456a5eabea7")}
         <strong>
           {"fibDP(n)"}
         </strong>
-        {" تحسب فيبوناتشي تصاعدياً (bottom-up). "}
+        {t("legacy.b46853214485df60")}
         <strong>
           {"minCoins(coins[], amount)"}
         </strong>
-        {" تحسب أقل عدد من العملات لتكوين مبلغ معين باستخدام جدول DP.\n    "}
+        {t("legacy.8225b47632ec9da7")}
       </div>
       {"\n\n    "}
       <div className={"lang-tabs"}>
@@ -51,7 +58,7 @@ export default function NativePage() {
       <div className={"code-block active"} id={"code-cpp"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"cpp"} data-legacy-click={"copyCode('cpp')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>
@@ -65,7 +72,7 @@ export default function NativePage() {
       <div className={"code-block"} id={"code-java"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"java"} data-legacy-click={"copyCode('java')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>
@@ -79,7 +86,7 @@ export default function NativePage() {
       <div className={"code-block"} id={"code-js"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"js"} data-legacy-click={"copyCode('js')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>
@@ -93,7 +100,7 @@ export default function NativePage() {
       <div className={"code-block"} id={"code-php"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"php"} data-legacy-click={"copyCode('php')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>

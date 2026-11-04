@@ -7,13 +7,17 @@
   },
   "scripts": {
     "dev": "next dev",
-    "predev": "npm run generate:legacy-react && npm run generate:legacy-controllers && npm run build:legacy-css",
-    "build": "npm run generate:legacy-react && npm run generate:legacy-controllers && npm run build:legacy-css && next build --webpack",
+    "predev": "npm run generate:legacy-react && npm run generate:legacy-controllers && npm run translate:controller-strings && npm run build:legacy-css",
+    "build": "npm run generate:legacy-react && npm run generate:legacy-controllers && npm run translate:controller-strings && npm run build:legacy-css && next build --webpack",
+    "test": "npm run generate:legacy-react && npm run generate:legacy-controllers && npm run translate:controller-strings && npm run test:locales && npm run test:markup",
+    "test:locales": "node --test tests/locales.test.cjs",
+    "test:markup": "python3 -m unittest discover -s tests -p 'test_*.py'",
     "start": "next start",
     "lint": "eslint .",
     "build:legacy-css": "tailwindcss -i ./src/legacy/legacy-tailwind.css -o ./public/legacy/tailwind.css --minify",
     "generate:legacy-react": "python3 scripts/generate-native-pages.py",
-    "generate:legacy-controllers": "python3 scripts/generate-native-controllers.py"
+    "generate:legacy-controllers": "python3 scripts/generate-native-controllers.py",
+    "translate:controller-strings": "node scripts/translate-controller-strings.cjs"
   },
   "dependencies": {
     "next": "16.4.5",

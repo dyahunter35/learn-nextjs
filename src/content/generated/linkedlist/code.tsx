@@ -1,24 +1,31 @@
+"use client";
+
+import { useLanguage } from "@/components/LanguageProvider";
+import { translateLegacyText } from "@/data/legacy-english";
+
 export default function NativePage() {
+  const { language } = useLanguage();
+  const t = (text: string) => translateLegacyText(text, "linkedlist", language);
   return (
     <div className="native-legacy-body bg-gray-50 min-h-screen">
     {"\n  \n    \n    \n\n  "}
     <div className={"code-page"}>
       {"\n    "}
       <h1>
-        {"القائمة المترابطة — الكود البرمجي"}
+        {t("legacy.83ec32ca5ff2458a")}
       </h1>
       {"\n    "}
       <p className={"subtitle"}>
-        {"شرح مبسط لهيكل بيانات القائمة المترابطة مع أمثلة برمجية بلغات متعددة. يمكنك نسخ الكود واستخدامه مباشرة."}
+        {t("legacy.501c8422abd7a181")}
       </p>
       {"\n    \n    "}
       <div className={"algorithm-code-description"}>
         {"\n      "}
         <strong>
-          {"كيف تعمل القائمة المترابطة (Linked List):"}
+          {t("legacy.47e2bb06b694de16")}
         </strong>
         <br />
-        {"\n      القائمة المترابطة هي هيكل بيانات خطي حيث يتم ترتيب العناصر (المسماة \"عقد\") بشكل متسلسل، وكل عقدة تحتوي على قيمة ومؤشر (رابط) إلى العقدة التالية. على عكس المصفوفات، يمكن إدراج وحذف العناصر بسهولة دون الحاجة إلى إعادة ترتيب العناصر الأخرى. العمليات الأساسية: إدراج عقدة، حذف عقدة، البحث عن قيمة، وعرض القائمة.\n    "}
+        {t("legacy.fe58243c7d74e86a")}
       </div>
       {"\n\n    "}
       <div className={"lang-tabs"}>
@@ -44,7 +51,7 @@ export default function NativePage() {
       <div className={"code-block active"} id={"code-cpp"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"cpp"} data-legacy-click={"copyCode('cpp')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>
@@ -58,7 +65,7 @@ export default function NativePage() {
       <div className={"code-block"} id={"code-java"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"java"} data-legacy-click={"copyCode('java')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>
@@ -72,7 +79,7 @@ export default function NativePage() {
       <div className={"code-block"} id={"code-js"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"js"} data-legacy-click={"copyCode('js')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>
@@ -86,7 +93,7 @@ export default function NativePage() {
       <div className={"code-block"} id={"code-php"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"php"} data-legacy-click={"copyCode('php')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>

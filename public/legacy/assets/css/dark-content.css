@@ -3,6 +3,15 @@
 [data-theme="dark"] body {
   background-color: #121212 !important;
 }
+[data-theme="dark"] .native-legacy-body {
+  background-color: #121212 !important;
+  background-image: none !important;
+  color: #e5e7eb;
+}
+[data-theme="dark"] .native-page-content {
+  background-color: transparent !important;
+  color: #e5e7eb;
+}
 [data-theme="dark"] .bg-white {
   background-color: #1a1a1a !important;
 }

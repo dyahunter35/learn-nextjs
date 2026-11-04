@@ -1,24 +1,31 @@
+"use client";
+
+import { useLanguage } from "@/components/LanguageProvider";
+import { translateLegacyText } from "@/data/legacy-english";
+
 export default function NativePage() {
+  const { language } = useLanguage();
+  const t = (text: string) => translateLegacyText(text, "huffman", language);
   return (
     <div className="native-legacy-body bg-gray-50 min-h-screen">
     {"\n  \n    \n    \n\n  "}
     <div className={"code-page"}>
       {"\n    "}
       <h1>
-        {"ترميز هوفمان — الكود البرمجي"}
+        {t("legacy.0902a6bced85060f")}
       </h1>
       {"\n    "}
       <p className={"subtitle"}>
-        {"شرح مبسط لخوارزمية ترميز هوفمان لضغط البيانات مع أمثلة برمجية بلغات متعددة. يمكنك نسخ الكود واستخدامه مباشرة."}
+        {t("legacy.8b07735effd2ed9c")}
       </p>
       {"\n    \n    "}
       <div className={"algorithm-code-description"}>
         {"\n      "}
         <strong>
-          {"كيف تعمل خوارزمية ترميز هوفمان:"}
+          {t("legacy.1642aa7a8279bf05")}
         </strong>
         <br />
-        {"\n      ترميز هوفمان هو خوارزمية ضغط بيانات تفقدية تستخدم لتقليل حجم البيانات عن طريق ترميز الأحرف الأكثر تكراراً بأكواد أقصر. تقوم الخوارزمية ببناء شجرة ثنائية حيث تكون الأحرف الأقل تكراراً في المستويات الأعمق (أكواد أطول)، والأحرف الأكثر تكراراً في المستويات الأعلى (أكواد أقصر). يتم استخدام هذه الشجرة لإنشاء أكواد ثنائية فريدة لكل حرف.\n    "}
+        {t("legacy.3d0395ae2c96cd54")}
       </div>
       {"\n\n    "}
       <div className={"lang-tabs"}>
@@ -44,7 +51,7 @@ export default function NativePage() {
       <div className={"code-block active"} id={"code-cpp"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"cpp"} data-legacy-click={"copyCode('cpp')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>
@@ -58,7 +65,7 @@ export default function NativePage() {
       <div className={"code-block"} id={"code-java"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"java"} data-legacy-click={"copyCode('java')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>
@@ -72,7 +79,7 @@ export default function NativePage() {
       <div className={"code-block"} id={"code-js"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"js"} data-legacy-click={"copyCode('js')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>
@@ -86,7 +93,7 @@ export default function NativePage() {
       <div className={"code-block"} id={"code-php"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"php"} data-legacy-click={"copyCode('php')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>

@@ -1,4 +1,11 @@
+"use client";
+
+import { useLanguage } from "@/components/LanguageProvider";
+import { translateLegacyText } from "@/data/legacy-english";
+
 export default function NativePage() {
+  const { language } = useLanguage();
+  const t = (text: string) => translateLegacyText(text, "recursion", language);
   return (
     <div className="native-legacy-body min-h-screen bg-gradient-to-b from-slate-50 to-white">
     {"\n    \n    \n    \n\n    \n\n    "}
@@ -11,11 +18,11 @@ export default function NativePage() {
         </span>
         {"\n        "}
         <h1 className={"text-3xl md:text-4xl font-extrabold text-gray-900"}>
-          {"محاكاة بصرية تفاعلية للخوارزميات العودية"}
+          {t("legacy.d74408c664b9a1f3")}
         </h1>
         {"\n        "}
         <p className={"text-gray-500 mt-2"}>
-          {"شاهد كيف تستدعي الدوال نفسها بنفسها — خطوة بخطوة — مع شجرة العودية"}
+          {t("legacy.ad2a9600717032b6")}
         </p>
         {"\n      "}
       </div>
@@ -30,7 +37,7 @@ export default function NativePage() {
             <div className={"w-3 h-3 bg-indigo-500 rounded-full animate-pulse"}></div>
             {"\n            "}
             <h2 className={"text-lg font-bold text-gray-800"}>
-              {"إعدادات المحاكاة"}
+              {t("legacy.4ba81b973cc839b0")}
             </h2>
             {"\n          "}
           </div>
@@ -40,17 +47,17 @@ export default function NativePage() {
             <div>
               {"\n              "}
               <label htmlFor={"exampleSelect"} className={"block text-sm font-bold text-gray-700 mb-2"}>
-                {"اختر مثال العودية:"}
+                {t("legacy.ecb99c91c01f10c5")}
               </label>
               {"\n              "}
               <select id={"exampleSelect"} className={"gradient-select"} data-legacy-change={"updateExample(this.value)"}>
                 {"\n                "}
                 <option value={"factorial"}>
-                  {"🔢 مضروب العدد (Factorial)"}
+                  {t("legacy.82c0bfb5ddc787e9")}
                 </option>
                 {"\n                "}
                 <option value={"fibonacci"}>
-                  {"🌀 متتالية فيبوناتشي (Fibonacci)"}
+                  {t("legacy.5fb7c61b4ef801c0")}
                 </option>
                 {"\n              "}
               </select>
@@ -60,7 +67,7 @@ export default function NativePage() {
             <div>
               {"\n              "}
               <label htmlFor={"nInput"} className={"block text-sm font-bold text-gray-700 mb-2"}>
-                {"أدخل القيمة n:"}
+                {t("legacy.0051bb167cbdac85")}
               </label>
               {"\n              "}
               <input type={"number"} id={"nInput"} className={"num-input"} defaultValue={"5"} min={"0"} max={"10"} step={"1"} />
@@ -76,19 +83,19 @@ export default function NativePage() {
           <div className={"flex flex-col sm:flex-row gap-3 mt-4"}>
             {"\n            "}
             <button data-legacy-click={"startSimulation()"} id={"startButton"} className={"gradient-btn btn-start flex-1"}>
-              {"\n              ▶ ابدأ المحاكاة\n            "}
+              {t("legacy.576f6d941cc9c53c")}
             </button>
             {"\n            "}
             <button data-legacy-click={"nextStep()"} id={"nextButton"} className={"gradient-btn btn-next flex-1"} disabled={true}>
-              {"\n              ← الخطوة التالية\n            "}
+              {t("legacy.0103ac838415af8b")}
             </button>
             {"\n            "}
             <button data-legacy-click={"previousStep()"} id={"prevButton"} className={"gradient-btn btn-prev flex-1"} disabled={true}>
-              {"\n              → الخطوة السابقة\n            "}
+              {t("legacy.c0fa11616338a947")}
             </button>
             {"\n            "}
             <button data-legacy-click={"resetSimulation()"} className={"gradient-btn btn-reset"}>
-              {"\n              ↺ إعادة الضبط\n            "}
+              {t("legacy.d1c2eaaa776c5219")}
             </button>
             {"\n          "}
           </div>
@@ -105,7 +112,7 @@ export default function NativePage() {
               <div className={"w-3 h-3 bg-amber-500 rounded-full animate-pulse"}></div>
               {"\n              "}
               <h2 className={"text-lg font-bold text-gray-800"}>
-                {"شجرة العودية (Recursion Tree)"}
+                {t("legacy.b9049ead01c98550")}
               </h2>
               {"\n            "}
             </div>
@@ -119,7 +126,7 @@ export default function NativePage() {
               </svg>
               {"\n              "}
               <span id={"nodeCountBadge"}>
-                {"0 عقدة"}
+                {t("legacy.638cc7f80d2ba328")}
               </span>
               {"\n            "}
             </div>
@@ -137,11 +144,11 @@ export default function NativePage() {
               </svg>
               {"\n              "}
               <p className={"text-lg font-medium text-gray-500"}>
-                {"لم تبدأ المحاكاة بعد"}
+                {t("legacy.52ed02f4996c233e")}
               </p>
               {"\n              "}
               <p className={"text-sm text-gray-400 mt-1"}>
-                {"اختر مثالاً وأدخل القيمة ثم اضغط \"ابدأ المحاكاة\""}
+                {t("legacy.c4bffdc73d499040")}
               </p>
               {"\n            "}
             </div>
@@ -152,17 +159,17 @@ export default function NativePage() {
             {"\n            "}
             <span className={"flex items-center gap-1"}>
               <span className={"w-3 h-3 rounded bg-[#6366f1] inline-block"}></span>
-              {" استدعاء"}
+              {t("legacy.bd9f423cf30cf0e8")}
             </span>
             {"\n            "}
             <span className={"flex items-center gap-1"}>
               <span className={"w-3 h-3 rounded bg-[#fbbf24] inline-block"}></span>
-              {" جاري التنفيذ"}
+              {t("legacy.9baef82e1566f6fa")}
             </span>
             {"\n            "}
             <span className={"flex items-center gap-1"}>
               <span className={"w-3 h-3 rounded bg-[#34d399] inline-block"}></span>
-              {" تمت العودة"}
+              {t("legacy.145201c2fc98e19c")}
             </span>
             {"\n          "}
           </div>
@@ -177,7 +184,7 @@ export default function NativePage() {
             <div className={"w-3 h-3 bg-blue-500 rounded-full animate-pulse"}></div>
             {"\n            "}
             <h2 className={"text-lg font-bold text-gray-800"}>
-              {"مكدس الاستدعاء (Call Stack)"}
+              {t("legacy.78aade59dff79144")}
             </h2>
             {"\n          "}
           </div>
@@ -187,7 +194,7 @@ export default function NativePage() {
             <div className={"empty-state"} style={{"padding":"0.5rem"}}>
               {"\n              "}
               <p className={"text-sm text-gray-400"}>
-                {"مكدس الاستدعاء فارغ — ابدأ المحاكاة أولاً"}
+                {t("legacy.2f1f8ec13d796d8f")}
               </p>
               {"\n            "}
             </div>
@@ -204,13 +211,13 @@ export default function NativePage() {
             <div className={"w-3 h-3 bg-amber-500 rounded-full animate-pulse"}></div>
             {"\n            "}
             <h2 className={"text-lg font-bold text-gray-800"}>
-              {"سجل الخطوات والنتائج"}
+              {t("legacy.a07b7854cf797c7f")}
             </h2>
             {"\n          "}
           </div>
           {"\n          "}
           <div id={"statusMessage"} className={"status-message info mb-4"}>
-            {"\n            المحاكاة جاهزة. اختر مثالاً وأدخل القيمة.\n          "}
+            {t("legacy.ce84e65a4bffcb0a")}
           </div>
           {"\n          "}
           <div id={"stepsLog"} className={"steps-log-container"}></div>
@@ -225,7 +232,7 @@ export default function NativePage() {
             <div className={"w-3 h-3 bg-emerald-500 rounded-full animate-pulse"}></div>
             {"\n            "}
             <h2 className={"text-lg font-bold text-gray-800"}>
-              {"النتيجة النهائية"}
+              {t("legacy.b57298672357447b")}
             </h2>
             {"\n          "}
           </div>

@@ -1,4 +1,11 @@
+"use client";
+
+import { useLanguage } from "@/components/LanguageProvider";
+import { translateLegacyText } from "@/data/legacy-english";
+
 export default function NativePage() {
+  const { language } = useLanguage();
+  const t = (text: string) => translateLegacyText(text, "string-matching", language);
   return (
     <div className="native-legacy-body bg-gray-50">
     {"\n\n    \n    \n    \n\n    \n\n    "}
@@ -11,7 +18,7 @@ export default function NativePage() {
         </span>
         {"\n            "}
         <h1 className={"text-4xl font-extrabold text-gray-900"}>
-          {"\n                خوارزميات مطابقة السلاسل النصية "}
+          {t("legacy.5926cab528a191a3")}
           <span className={"text-blue-600"}>
             {"(String Matching)"}
           </span>
@@ -19,7 +26,7 @@ export default function NativePage() {
         </h1>
         {"\n            "}
         <p className={"mt-2 text-lg text-gray-500"}>
-          {"\n                فهم آلية البحث عن نمط داخل نص: الخوارزمية البسيطة وخوارزمية KMP\n            "}
+          {t("legacy.d14bdd79800f2f62")}
         </p>
         {"\n        "}
       </header>
@@ -33,29 +40,29 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"}></path>
             {"\n                "}
           </svg>
-          {"\n                مفهوم مطابقة السلاسل النصية\n            "}
+          {t("legacy.d492cb3310199486")}
         </h2>
         {"\n            "}
         <p className={"text-gray-700 leading-loose mb-4"}>
-          {"\n                مطابقة السلاسل النصية (String Matching) هي إحدى المشكلات الأساسية في علم الحاسوب، حيث تهدف إلى إيجاد جميع مواضع ظهور نمط (Pattern) معين داخل نص (Text) معين. تُستخدم هذه الخوارزميات في محركات البحث، معالجة النصوص، تحليل الجينات، وأنظمة الأمن السيبراني.\n            "}
+          {t("legacy.a647d466184a71bd")}
         </p>
         {"\n            "}
         <div className={"bg-indigo-50 p-5 rounded-lg shadow-md concept-card border-indigo-400"}>
           {"\n                "}
           <h3 className={"text-xl font-semibold text-indigo-800 mb-3"}>
-            {"مثال توضيحي"}
+            {t("legacy.24a0c1a8b29299a0")}
           </h3>
           {"\n                "}
           <p className={"text-gray-700 leading-loose"}>
-            {"\n                    إذا كان لدينا النص "}
+            {t("legacy.664056f62daeaf44")}
             <code className={"bg-gray-200 px-2 py-0.5 rounded font-mono ltr-text"}>
               {"\"ABABDABACDABABCABAB\""}
             </code>
-            {" ونريد إيجاد النمط "}
+            {t("legacy.0bc198adcf0e8327")}
             <code className={"bg-gray-200 px-2 py-0.5 rounded font-mono ltr-text"}>
               {"\"ABABCABAB\""}
             </code>
-            {"، فإن الخوارزمية تقوم بمقارنة النمط مع كل موقع محتمل في النص لتحديد أماكن التطابق.\n                "}
+            {t("legacy.ad5ef3ffa23dba41")}
           </p>
           {"\n            "}
         </div>
@@ -71,17 +78,17 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"}></path>
             {"\n                "}
           </svg>
-          {"\n                أولاً: خوارزمية البحث البسيط (Naive String Matching)\n            "}
+          {t("legacy.fc744b1ad10c1a44")}
         </h2>
         {"\n\n            "}
         <div className={"bg-blue-50 p-5 rounded-lg shadow-md mb-6 concept-card border-blue-400"}>
           {"\n                "}
           <h3 className={"text-xl font-semibold text-blue-800 mb-3"}>
-            {"كيف تعمل؟"}
+            {t("legacy.b0c6e7806ac16125")}
           </h3>
           {"\n                "}
           <p className={"text-gray-700 leading-loose"}>
-            {"\n                    خوارزمية البحث البسيط هي أبسط طرق مطابقة السلاسل. تقوم بتحريك النمط بمقدار موضع واحد في كل خطوة، ومقارنة جميع أحرف النمط مع الحروف المقابلة في النص. إذا تطابقت جميع الأحرف، يتم تسجيل الموقع. وإذا حدث عدم تطابق، ينتقل النمط إلى الموضع التالي.\n                "}
+            {t("legacy.ef5ece6ceaec8060")}
           </p>
           {"\n            "}
         </div>
@@ -93,7 +100,7 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M13 10V3L4 14h7v7l9-11h-7z"}></path>
             {"\n                "}
           </svg>
-          {"\n                خطوات الخوارزمية\n            "}
+          {t("legacy.065b4a33559a439b")}
         </h3>
         {"\n\n            "}
         <div className={"list-none p-0"}>
@@ -101,11 +108,11 @@ export default function NativePage() {
           <div className={"step-item"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-blue-800"}>
-              {"محاذاة النمط"}
+              {t("legacy.97be2b6bd00c05bf")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700 mr-10"}>
-              {"\n                        ضع النمط في بداية النص بحيث يكون الحرف الأول من النمط محاذياً للحرف الأول من النص (الموضع "}
+              {t("legacy.d4e4245b5db7bd21")}
               <span className={"font-mono ltr-text bg-gray-200 p-1 rounded"}>
                 {"0"}
               </span>
@@ -117,11 +124,11 @@ export default function NativePage() {
           <div className={"step-item"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-blue-800"}>
-              {"المقارنة"}
+              {t("legacy.941e8670e5d497a9")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700 mr-10"}>
-              {"\n                        قارن أحرف النمط مع الحروف المقابلة في النص واحداً تلو الآخر من اليسار إلى اليمين.\n                    "}
+              {t("legacy.0c14e26f3bd3149e")}
             </p>
             {"\n                "}
           </div>
@@ -129,11 +136,11 @@ export default function NativePage() {
           <div className={"step-item"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-blue-800"}>
-              {"تسجيل المطابقة"}
+              {t("legacy.3879d9c4cffb50e9")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700 mr-10"}>
-              {"\n                        إذا تطابقت جميع الأحرف، قم بتسجيل الموضع الحالي كموقع للعثور على النمط.\n                    "}
+              {t("legacy.44251e5d4b64a3d4")}
             </p>
             {"\n                "}
           </div>
@@ -141,11 +148,11 @@ export default function NativePage() {
           <div className={"step-item"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-blue-800"}>
-              {"الإزاحة"}
+              {t("legacy.41d8aa88878f1742")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700 mr-10"}>
-              {"\n                        إذا حدث عدم تطابق أو تم العثور على النمط، قم بإزاحة النمط بمقدار موضع واحد إلى اليمين وكرر المقارنة.\n                    "}
+              {t("legacy.e5080c0b016aa264")}
             </p>
             {"\n                "}
           </div>
@@ -153,11 +160,11 @@ export default function NativePage() {
           <div className={"step-item"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-blue-800"}>
-              {"التكرار"}
+              {t("legacy.b308d640bc250471")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700 mr-10"}>
-              {"\n                        كرر الخطوات السابقة حتى يصل النمط إلى نهاية النص (الموضع "}
+              {t("legacy.0d0af9a6a6be506e")}
               <span className={"font-mono ltr-text bg-gray-200 p-1 rounded"}>
                 {"n - m"}
               </span>
@@ -171,7 +178,7 @@ export default function NativePage() {
         <div className={"bg-yellow-50 p-5 rounded-lg shadow-md mt-6 border-yellow-400"}>
           {"\n                "}
           <h3 className={"text-xl font-semibold text-yellow-800 mb-3"}>
-            {"تحليل التعقيد (Complexity Analysis)"}
+            {t("legacy.acb6e5390ee0d6f0")}
           </h3>
           {"\n                "}
           <div className={"grid md:grid-cols-2 gap-4"}>
@@ -179,7 +186,7 @@ export default function NativePage() {
             <div className={"bg-white p-4 rounded-lg shadow border border-yellow-300"}>
               {"\n                        "}
               <p className={"font-bold text-yellow-700"}>
-                {"التعقيد الزمني"}
+                {t("legacy.1ef1cbb46472e7cd")}
               </p>
               {"\n                        "}
               <p className={"text-2xl font-mono text-center mt-2 text-yellow-600"}>
@@ -187,7 +194,7 @@ export default function NativePage() {
               </p>
               {"\n                        "}
               <p className={"text-sm text-gray-600 mt-1"}>
-                {"في أسوأ الحالات، نحتاج لمقارنة كل حرف."}
+                {t("legacy.874b615eef15c0ba")}
               </p>
               {"\n                    "}
             </div>
@@ -195,7 +202,7 @@ export default function NativePage() {
             <div className={"bg-white p-4 rounded-lg shadow border border-yellow-300"}>
               {"\n                        "}
               <p className={"font-bold text-yellow-700"}>
-                {"أفضل حالة"}
+                {t("legacy.f9dfab1c1e5a30d9")}
               </p>
               {"\n                        "}
               <p className={"text-lg text-center mt-2 text-green-600"}>
@@ -203,7 +210,7 @@ export default function NativePage() {
               </p>
               {"\n                        "}
               <p className={"text-sm text-gray-600 mt-1"}>
-                {"عندما لا يتطابق الحرف الأول من النمط مع معظم المواضع."}
+                {t("legacy.c69d0e2f15ffb6b0")}
               </p>
               {"\n                    "}
             </div>
@@ -211,7 +218,7 @@ export default function NativePage() {
             <div className={"bg-white p-4 rounded-lg shadow border border-yellow-300"}>
               {"\n                        "}
               <p className={"font-bold text-yellow-700"}>
-                {"أسوأ حالة"}
+                {t("legacy.7f18f4ba9fcaa90b")}
               </p>
               {"\n                        "}
               <p className={"text-lg text-center mt-2 text-red-600"}>
@@ -219,7 +226,7 @@ export default function NativePage() {
               </p>
               {"\n                        "}
               <p className={"text-sm text-gray-600 mt-1"}>
-                {"مثلاً: النص = \"AAAAAA...\" والنمط = \"AAA...B\"."}
+                {t("legacy.408c3ed7bf7dcbf5")}
               </p>
               {"\n                    "}
             </div>
@@ -227,7 +234,7 @@ export default function NativePage() {
             <div className={"bg-white p-4 rounded-lg shadow border border-yellow-300"}>
               {"\n                        "}
               <p className={"font-bold text-yellow-700"}>
-                {"التعقيد المكاني"}
+                {t("legacy.516e2861f1737d56")}
               </p>
               {"\n                        "}
               <p className={"text-lg text-center mt-2 text-amber-600"}>
@@ -235,7 +242,7 @@ export default function NativePage() {
               </p>
               {"\n                        "}
               <p className={"text-sm text-gray-600 mt-1"}>
-                {"لا يحتاج لذاكرة إضافية."}
+                {t("legacy.c40a9e064949379f")}
               </p>
               {"\n                    "}
             </div>
@@ -255,17 +262,17 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"}></path>
             {"\n                "}
           </svg>
-          {"\n                ثانياً: خوارزمية KMP (Knuth-Morris-Pratt)\n            "}
+          {t("legacy.fa3c35bf0b89aed5")}
         </h2>
         {"\n\n            "}
         <div className={"bg-red-50 p-5 rounded-lg shadow-md mb-6 concept-card border-red-400"}>
           {"\n                "}
           <h3 className={"text-xl font-semibold text-red-800 mb-3"}>
-            {"لماذا KMP؟"}
+            {t("legacy.00f73b9f3c6cddb9")}
           </h3>
           {"\n                "}
           <p className={"text-gray-700 leading-loose"}>
-            {"\n                    خوارزمية البحث البسيط تعاني من مشكلة كبيرة: عند حدوث عدم تطابق، تعيد فحص أحكام سبق مقارنتها. خوارزمية KMP تحل هذه المشكلة باستخدام معلومات عن النمط نفسه لتجنب إعادة المقارنات غير الضرورية، مما يجعلها أكثر كفاءة خاصة مع النصوص الكبيرة.\n                "}
+            {t("legacy.7083174d6c8a267a")}
           </p>
           {"\n            "}
         </div>
@@ -273,15 +280,15 @@ export default function NativePage() {
         <div className={"bg-green-50 p-5 rounded-lg shadow-md mb-6 concept-card border-green-400"}>
           {"\n                "}
           <h3 className={"text-xl font-semibold text-green-800 mb-3"}>
-            {"الفكرة الأساسية"}
+            {t("legacy.5fae8947476ecb47")}
           </h3>
           {"\n                "}
           <p className={"text-gray-700 leading-loose"}>
-            {"\n                    تستخدم KMP "}
+            {t("legacy.3a9de0bf9d52c67f")}
             <strong>
-              {"جدول البادئات (Prefix Table / π array)"}
+              {t("legacy.d26a98450630c654")}
             </strong>
-            {" لتحديد عدد الأحرف التي يمكن تخطيها عند حدوث عدم تطابق. بدلاً من إزاحة النمط بمقدار موضع واحد فقط (كما في الخوارزمية البسيطة)، يمكن لـ KMP إزاحة النمط بأكثر من موضع بناءً على البادئات واللواحق المتطابقة داخل النمط نفسه.\n                "}
+            {t("legacy.86192b1d8033657c")}
           </p>
           {"\n            "}
         </div>
@@ -293,7 +300,7 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M13 10V3L4 14h7v7l9-11h-7z"}></path>
             {"\n                "}
           </svg>
-          {"\n                خطوات الخوارزمية\n            "}
+          {t("legacy.065b4a33559a439b")}
         </h3>
         {"\n\n            "}
         <div className={"list-none p-0"}>
@@ -301,15 +308,15 @@ export default function NativePage() {
           <div className={"step-item"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-green-800"}>
-              {"بناء جدول البادئات"}
+              {t("legacy.5bc261d2c86993ab")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700 mr-10"}>
-              {"\n                        قم بإنشاء جدول البادئات (π) للنمط. كل خلية "}
+              {t("legacy.c85f418922b4e6e6")}
               <span className={"font-mono ltr-text bg-gray-200 p-1 rounded"}>
                 {"π[i]"}
               </span>
-              {" تخزن طول أطول بادئة حقيقية في النمط[0..i] تساوي لاحقة حقيقية في نفس المقطع.\n                    "}
+              {t("legacy.8cfd3a847e9d3fc3")}
             </p>
             {"\n                "}
           </div>
@@ -317,15 +324,15 @@ export default function NativePage() {
           <div className={"step-item"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-green-800"}>
-              {"المقارنة مع التخطي"}
+              {t("legacy.5495fe8b748f61b3")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700 mr-10"}>
-              {"\n                        ابدأ بمقارنة النمط مع النص. عند حدوث تطابق، استمر. عند حدوث عدم تطابق عند النمط[j]، استخدم "}
+              {t("legacy.ca31f086ca769ad0")}
               <span className={"font-mono ltr-text bg-gray-200 p-1 rounded"}>
                 {"j = π[j-1]"}
               </span>
-              {" بدلاً من إعادة تعيين j إلى الصفر.\n                    "}
+              {t("legacy.df2320d238c22a38")}
             </p>
             {"\n                "}
           </div>
@@ -333,11 +340,11 @@ export default function NativePage() {
           <div className={"step-item"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-green-800"}>
-              {"تجنب إعادة المقارنة"}
+              {t("legacy.8c676d43460ea6bc")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700 mr-10"}>
-              {"\n                        مؤشر النص (i) لا يتراجع أبداً. فقط مؤشر النمط (j) هو الذي يتغير بناءً على جدول البادئات، مما يضمن أن كل حرف من النص يُقرأ مرة واحدة فقط.\n                    "}
+              {t("legacy.9ce6ffb5033845d3")}
             </p>
             {"\n                "}
           </div>
@@ -345,23 +352,23 @@ export default function NativePage() {
           <div className={"step-item"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-green-800"}>
-              {"تسجيل المطابقة"}
+              {t("legacy.3879d9c4cffb50e9")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700 mr-10"}>
-              {"\n                        عندما يصبح "}
+              {t("legacy.7453a670632883e9")}
               <span className={"font-mono ltr-text bg-gray-200 p-1 rounded"}>
                 {"j == m"}
               </span>
-              {" (طول النمط)، تم العثور على النمط عند الموضع "}
+              {t("legacy.05731077c96022fe")}
               <span className={"font-mono ltr-text bg-gray-200 p-1 rounded"}>
                 {"i - j"}
               </span>
-              {". ثم قم بتعيين "}
+              {t("legacy.69c0f17f91a051d3")}
               <span className={"font-mono ltr-text bg-gray-200 p-1 rounded"}>
                 {"j = π[j-1]"}
               </span>
-              {" للبحث عن المطابقات التالية.\n                    "}
+              {t("legacy.90ce8cce14dc95df")}
             </p>
             {"\n                "}
           </div>
@@ -371,7 +378,7 @@ export default function NativePage() {
         <div className={"bg-yellow-50 p-5 rounded-lg shadow-md mt-6 border-yellow-400"}>
           {"\n                "}
           <h3 className={"text-xl font-semibold text-yellow-800 mb-3"}>
-            {"تحليل التعقيد (Complexity Analysis)"}
+            {t("legacy.acb6e5390ee0d6f0")}
           </h3>
           {"\n                "}
           <div className={"grid md:grid-cols-2 gap-4"}>
@@ -379,7 +386,7 @@ export default function NativePage() {
             <div className={"bg-white p-4 rounded-lg shadow border border-yellow-300"}>
               {"\n                        "}
               <p className={"font-bold text-yellow-700"}>
-                {"التعقيد الزمني"}
+                {t("legacy.1ef1cbb46472e7cd")}
               </p>
               {"\n                        "}
               <p className={"text-2xl font-mono text-center mt-2 text-green-600"}>
@@ -387,7 +394,7 @@ export default function NativePage() {
               </p>
               {"\n                        "}
               <p className={"text-sm text-gray-600 mt-1"}>
-                {"خطي: n + m (نص + نمط)."}
+                {t("legacy.17a855f5ec6ece5d")}
               </p>
               {"\n                    "}
             </div>
@@ -395,7 +402,7 @@ export default function NativePage() {
             <div className={"bg-white p-4 rounded-lg shadow border border-yellow-300"}>
               {"\n                        "}
               <p className={"font-bold text-yellow-700"}>
-                {"التعقيد المكاني"}
+                {t("legacy.516e2861f1737d56")}
               </p>
               {"\n                        "}
               <p className={"text-lg text-center mt-2 text-amber-600"}>
@@ -403,7 +410,7 @@ export default function NativePage() {
               </p>
               {"\n                        "}
               <p className={"text-sm text-gray-600 mt-1"}>
-                {"لتخزين جدول البادئات (بحجم النمط)."}
+                {t("legacy.96e5c218ad716c82")}
               </p>
               {"\n                    "}
             </div>
@@ -411,7 +418,7 @@ export default function NativePage() {
             <div className={"bg-white p-4 rounded-lg shadow border border-yellow-300"}>
               {"\n                        "}
               <p className={"font-bold text-yellow-700"}>
-                {"أفضل حالة"}
+                {t("legacy.f9dfab1c1e5a30d9")}
               </p>
               {"\n                        "}
               <p className={"text-lg text-center mt-2 text-green-600"}>
@@ -419,7 +426,7 @@ export default function NativePage() {
               </p>
               {"\n                        "}
               <p className={"text-sm text-gray-600 mt-1"}>
-                {"حتى مع أفضل الحالات، لا يقل عن O(n)."}
+                {t("legacy.f0bfccdbf7af0469")}
               </p>
               {"\n                    "}
             </div>
@@ -427,7 +434,7 @@ export default function NativePage() {
             <div className={"bg-white p-4 rounded-lg shadow border border-yellow-300"}>
               {"\n                        "}
               <p className={"font-bold text-yellow-700"}>
-                {"أسوأ حالة"}
+                {t("legacy.7f18f4ba9fcaa90b")}
               </p>
               {"\n                        "}
               <p className={"text-lg text-center mt-2 text-green-600"}>
@@ -435,7 +442,7 @@ export default function NativePage() {
               </p>
               {"\n                        "}
               <p className={"text-sm text-gray-600 mt-1"}>
-                {"يظل خطياً حتى في أسوأ الحالات."}
+                {t("legacy.046377c41567c360")}
               </p>
               {"\n                    "}
             </div>
@@ -455,17 +462,17 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"}></path>
             {"\n                "}
           </svg>
-          {"\n                جدول البادئات (Prefix Table / π array)\n            "}
+          {t("legacy.d26a98450630c654")}
         </h2>
         {"\n            "}
         <p className={"text-gray-700 leading-loose mb-4"}>
-          {"\n                جدول البادئات هو جوهر خوارزمية KMP. لكل موقع i في النمط، يخزن π[i] طول أطول بادئة حقيقية للمقطع pattern[0..i] والتي تساوي لاحقة حقيقية لهذا المقطع.\n            "}
+          {t("legacy.2c217f5899808278")}
         </p>
         {"\n            "}
         <div className={"bg-indigo-50 p-5 rounded-lg shadow-md mb-4 concept-card border-indigo-400"}>
           {"\n                "}
           <h3 className={"text-xl font-semibold text-indigo-800 mb-3"}>
-            {"مثال: حساب π للنمط \"ABABCABAB\""}
+            {t("legacy.ac3e6023eae7774c")}
           </h3>
           {"\n                "}
           <div className={"overflow-x-auto"}>
@@ -588,7 +595,7 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"}></path>
             {"\n                "}
           </svg>
-          {"\n                التطبيقات (Applications)\n            "}
+          {t("legacy.fce1894bf54c20af")}
         </h2>
         {"\n            "}
         <div className={"grid md:grid-cols-2 gap-4"}>
@@ -596,11 +603,11 @@ export default function NativePage() {
           <div className={"bg-white p-5 rounded-lg shadow-md border border-gray-200"}>
             {"\n                    "}
             <h3 className={"text-lg font-bold text-gray-800 mb-2"}>
-              {"محركات البحث"}
+              {t("legacy.7e03147f036c6290")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-600 text-sm leading-relaxed"}>
-              {"البحث عن كلمة أو عبارة داخل صفحات الويب والمستندات الضخمة."}
+              {t("legacy.d3486a698d838a23")}
             </p>
             {"\n                "}
           </div>
@@ -608,11 +615,11 @@ export default function NativePage() {
           <div className={"bg-white p-5 rounded-lg shadow-md border border-gray-200"}>
             {"\n                    "}
             <h3 className={"text-lg font-bold text-gray-800 mb-2"}>
-              {"تحليل الجينات"}
+              {t("legacy.81f28e270c954460")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-600 text-sm leading-relaxed"}>
-              {"البحث عن تسلسلات معينة من الحمض النووي (DNA) داخل سلاسل جينية طويلة."}
+              {t("legacy.aa37d8c7d6609ba1")}
             </p>
             {"\n                "}
           </div>
@@ -620,11 +627,11 @@ export default function NativePage() {
           <div className={"bg-white p-5 rounded-lg shadow-md border border-gray-200"}>
             {"\n                    "}
             <h3 className={"text-lg font-bold text-gray-800 mb-2"}>
-              {"معالجة النصوص"}
+              {t("legacy.524f779475f46e30")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-600 text-sm leading-relaxed"}>
-              {"أمر find في أنظمة التشغيل، ميزة البحث والاستبدال في محررات النصوص."}
+              {t("legacy.e68920c9d47c5b82")}
             </p>
             {"\n                "}
           </div>
@@ -632,11 +639,11 @@ export default function NativePage() {
           <div className={"bg-white p-5 rounded-lg shadow-md border border-gray-200"}>
             {"\n                    "}
             <h3 className={"text-lg font-bold text-gray-800 mb-2"}>
-              {"الأمن السيبراني"}
+              {t("legacy.a433fb4c62295358")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-600 text-sm leading-relaxed"}>
-              {"كشف التواقيع في أنظمة كشف الاختراق (IDS) وتحليل حركة الشبكة."}
+              {t("legacy.8c31b6f2f4a6c451")}
             </p>
             {"\n                "}
           </div>
@@ -654,7 +661,7 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"}></path>
             {"\n                "}
           </svg>
-          {"\n                مقارنة الأداء\n            "}
+          {t("legacy.f3dcd20d2dc42573")}
         </h2>
         {"\n\n            "}
         <div className={"overflow-x-auto"}>
@@ -663,20 +670,20 @@ export default function NativePage() {
             <thead>
               <tr className={"bg-indigo-700 text-white"}>
                 <th className={"p-4 text-right border-b-2 border-indigo-800"}>
-                  {"المعيار"}
+                  {t("legacy.695ebc35ab262fcd")}
                 </th>
                 <th className={"p-4 text-right border-b-2 border-indigo-800"}>
-                  {"البحث البسيط (Naive)"}
+                  {t("legacy.4010d4a44d1d3ed3")}
                 </th>
                 <th className={"p-4 text-right border-b-2 border-indigo-800"}>
-                  {"خوارزمية KMP"}
+                  {t("legacy.6a47a7154d65f722")}
                 </th>
               </tr>
             </thead>
             <tbody className={"divide-y divide-gray-200"}>
               <tr className={"hover:bg-gray-50"}>
                 <td className={"p-4 font-semibold text-gray-800"}>
-                  {"التعقيد الزمني"}
+                  {t("legacy.1ef1cbb46472e7cd")}
                 </td>
                 <td className={"p-4"}>
                   <span className={"inline-block bg-amber-100 text-amber-800 px-3 py-1 rounded-full font-mono"}>
@@ -691,7 +698,7 @@ export default function NativePage() {
               </tr>
               <tr className={"hover:bg-gray-50"}>
                 <td className={"p-4 font-semibold text-gray-800"}>
-                  {"التعقيد المكاني"}
+                  {t("legacy.516e2861f1737d56")}
                 </td>
                 <td className={"p-4"}>
                   <span className={"inline-block bg-green-100 text-green-800 px-3 py-1 rounded-full font-mono"}>
@@ -706,46 +713,46 @@ export default function NativePage() {
               </tr>
               <tr className={"hover:bg-gray-50"}>
                 <td className={"p-4 font-semibold text-gray-800"}>
-                  {"إعادة مقارنة الأحرف"}
+                  {t("legacy.767d5d27da629c22")}
                 </td>
                 <td className={"p-4"}>
-                  {"نعم — تعيد مقارنة أحرف سبق فحصها"}
+                  {t("legacy.3d319322f7d81c75")}
                 </td>
                 <td className={"p-4"}>
-                  {"لا — تقرأ كل حرف مرة واحدة فقط"}
+                  {t("legacy.d00c316d82168504")}
                 </td>
               </tr>
               <tr className={"hover:bg-gray-50"}>
                 <td className={"p-4 font-semibold text-gray-800"}>
-                  {"استخدام ذاكرة إضافية"}
+                  {t("legacy.0bc643dc2bc0ca8b")}
                 </td>
                 <td className={"p-4"}>
-                  {"لا يحتاج"}
+                  {t("legacy.948dc886227fc88b")}
                 </td>
                 <td className={"p-4"}>
-                  {"يحتاج لجدول البادئات"}
+                  {t("legacy.934002a75aa45195")}
                 </td>
               </tr>
               <tr className={"hover:bg-gray-50"}>
                 <td className={"p-4 font-semibold text-gray-800"}>
-                  {"سهولة التطبيق"}
+                  {t("legacy.061cffbd53dfc96f")}
                 </td>
                 <td className={"p-4"}>
-                  {"بسيط جداً"}
+                  {t("legacy.b650ae64c8a54258")}
                 </td>
                 <td className={"p-4"}>
-                  {"متوسط (يتطلب فهم جدول البادئات)"}
+                  {t("legacy.c6e2899a0794204d")}
                 </td>
               </tr>
               <tr className={"hover:bg-gray-50"}>
                 <td className={"p-4 font-semibold text-gray-800"}>
-                  {"الأداء مع النصوص الكبيرة"}
+                  {t("legacy.73dda4d868a0242d")}
                 </td>
                 <td className={"p-4"}>
-                  {"ضعيف (يزداد الوقت بشكل مضاعف)"}
+                  {t("legacy.d8dbe4f8d15f5229")}
                 </td>
                 <td className={"p-4"}>
-                  {"ممتاز (يزداد الوقت خطياً)"}
+                  {t("legacy.5e33f14954af4f51")}
                 </td>
               </tr>
             </tbody>
@@ -766,7 +773,7 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M21 12a9 9 0 11-18 0 9 9 0 0118 0z"}></path>
             {"\n                "}
           </svg>
-          {"\n                انتقل إلى المحاكاة التفاعلية\n            "}
+          {t("legacy.25a3659fbc955cd1")}
         </a>
         {"\n        "}
       </div>

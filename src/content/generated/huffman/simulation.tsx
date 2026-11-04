@@ -1,4 +1,11 @@
+"use client";
+
+import { useLanguage } from "@/components/LanguageProvider";
+import { translateLegacyText } from "@/data/legacy-english";
+
 export default function NativePage() {
+  const { language } = useLanguage();
+  const t = (text: string) => translateLegacyText(text, "huffman", language);
   return (
     <div className="native-legacy-body min-h-screen bg-gradient-to-b from-slate-50 to-white">
     {"\n    \n    \n    \n\n    \n\n    "}
@@ -14,11 +21,11 @@ export default function NativePage() {
           </span>
           {"\n          "}
           <h1 className={"text-3xl md:text-4xl font-extrabold text-gray-900"}>
-            {"بناء شجرة هوفمان: طريقة الخطوات التفاعلية"}
+            {t("legacy.6caa62292b813a75")}
           </h1>
           {"\n          "}
           <p className={"text-gray-500 mt-2"}>
-            {"أدخل نصاً بالأحرف الإنجليزية الصغيرة وشاهد خطوات بناء شجرة هوفمان خطوة بخطوة"}
+            {t("legacy.f2d23fc1453bdcdd")}
           </p>
           {"\n        "}
         </div>
@@ -34,7 +41,7 @@ export default function NativePage() {
               <div className={"w-2 h-2 bg-indigo-500 rounded-full"}></div>
               {"\n              "}
               <h2 className={"text-lg font-bold text-gray-800"}>
-                {"النص المدخل"}
+                {t("legacy.4a915275b49d9a17")}
               </h2>
               {"\n            "}
             </div>
@@ -57,7 +64,7 @@ export default function NativePage() {
                   <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"}></path>
                   {"\n                "}
                 </svg>
-                {"\n                سيتم استخدام الأحرف الإنجليزية الصغيرة فقط\n              "}
+                {t("legacy.d70e03bfae74299a")}
               </p>
               {"\n              "}
               <button data-legacy-click={"initializeHuffman()"} className={"bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-8 rounded-xl shadow-md hover:shadow-lg transition-all duration-200"}>
@@ -67,7 +74,7 @@ export default function NativePage() {
                   <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"}></path>
                   {"\n                "}
                 </svg>
-                {"\n                بدء البناء خطوة بخطوة\n              "}
+                {t("legacy.7c574037b6493500")}
               </button>
               {"\n            "}
             </div>
@@ -96,7 +103,7 @@ export default function NativePage() {
                     <path fillRule={"evenodd"} d={"M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"} clipRule={"evenodd"}></path>
                     {"\n                  "}
                   </svg>
-                  {"\n                  السابق\n                "}
+                  {t("legacy.a9e9d067101af97d")}
                 </button>
                 {"\n                "}
                 <div id={"stepIndicator"} className={"text-lg font-bold text-indigo-600 bg-white px-5 py-2 rounded-lg shadow-sm border border-gray-100"}>
@@ -104,7 +111,7 @@ export default function NativePage() {
                 </div>
                 {"\n                "}
                 <button id={"nextBtn"} data-legacy-click={"nextStep()"} className={"flex items-center bg-indigo-600 text-white py-2.5 px-5 rounded-lg font-semibold hover:bg-indigo-700 transition duration-150 shadow-md disabled:opacity-50 disabled:cursor-not-allowed"}>
-                  {"\n                  التالي\n                  "}
+                  {t("legacy.5cf7af74fd3aad4b")}
                   <svg xmlns={"http://www.w3.org/2000/svg"} className={"h-5 w-5 mr-2"} viewBox={"0 0 20 20"} fill={"currentColor"}>
                     {"\n                    "}
                     <path fillRule={"evenodd"} d={"M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"} clipRule={"evenodd"}></path>
@@ -127,7 +134,7 @@ export default function NativePage() {
               <div className={"w-2 h-2 bg-blue-500 rounded-full"}></div>
               {"\n              "}
               <h2 className={"text-lg font-bold text-gray-800"}>
-                {"جدول التكرارات المجمع"}
+                {t("legacy.d032a1be41dd3a53")}
               </h2>
               {"\n            "}
             </div>
@@ -138,20 +145,20 @@ export default function NativePage() {
                 <thead className={"text-xs text-gray-700 uppercase bg-gray-50"}>
                   <tr>
                     <th scope={"col"} className={"px-4 py-3 text-center font-bold"}>
-                      {"المحتوى المدمج"}
+                      {t("legacy.00130a27f01252cb")}
                     </th>
                     <th scope={"col"} className={"px-4 py-3 text-center font-bold"}>
-                      {"التكرار"}
+                      {t("legacy.b308d640bc250471")}
                     </th>
                     <th scope={"col"} className={"px-4 py-3 text-center font-bold"}>
-                      {"النوع"}
+                      {t("legacy.caa3f2bb4a36fda8")}
                     </th>
                   </tr>
                 </thead>
                 <tbody id={"combinedTableBody"}>
                   <tr className={"bg-white border-b border-gray-100"}>
                     <td colSpan={3} className={"text-center py-8 text-gray-400"}>
-                      {"ابدأ الخوارزمية لرؤية الجدول"}
+                      {t("legacy.f1b2a457e2a60054")}
                     </td>
                   </tr>
                 </tbody>
@@ -169,7 +176,7 @@ export default function NativePage() {
               <div className={"w-2 h-2 bg-emerald-500 rounded-full"}></div>
               {"\n              "}
               <h2 className={"text-lg font-bold text-gray-800"}>
-                {"التمثيل المرئي لشجرة هوفمان"}
+                {t("legacy.7e7784f2854244ed")}
               </h2>
               {"\n            "}
             </div>
@@ -177,7 +184,7 @@ export default function NativePage() {
             <div id={"treeVisualization"} className={"relative min-h-[300px] overflow-hidden border border-gray-200 rounded-xl bg-gray-50 p-4"}>
               {"\n              "}
               <p className={"text-center text-gray-400 mt-20"} id={"treePlaceholder"}>
-                {"\n                سيظهر بناء الشجرة هنا خطوة بخطوة.\n              "}
+                {t("legacy.87ba08b0f4ba84a4")}
               </p>
               {"\n            "}
             </div>
@@ -192,7 +199,7 @@ export default function NativePage() {
               <div className={"w-2 h-2 bg-green-500 rounded-full"}></div>
               {"\n              "}
               <h2 className={"text-lg font-bold text-gray-800"}>
-                {"النتائج النهائية وكفاءة التشفير"}
+                {t("legacy.a0c1176e24dfd04d")}
               </h2>
               {"\n            "}
             </div>
@@ -206,16 +213,16 @@ export default function NativePage() {
                   <thead className={"text-xs text-white uppercase bg-green-600"}>
                     <tr>
                       <th scope={"col"} className={"px-4 py-3 text-center"}>
-                        {"الحرف"}
+                        {t("legacy.fdfdf3a018085c1f")}
                       </th>
                       <th scope={"col"} className={"px-4 py-3 text-center"}>
-                        {"التكرار (f)"}
+                        {t("legacy.71716db1b395a3de")}
                       </th>
                       <th scope={"col"} className={"px-4 py-3 text-center"}>
-                        {"رمز هوفمان"}
+                        {t("legacy.53fc6959691a3c45")}
                       </th>
                       <th scope={"col"} className={"px-4 py-3 text-center"}>
-                        {"طول الرمز (L)"}
+                        {t("legacy.52906b5afa1256c7")}
                       </th>
                     </tr>
                   </thead>
@@ -230,13 +237,13 @@ export default function NativePage() {
               <div className={"bg-gray-50 p-5 rounded-xl border border-gray-200"}>
                 {"\n                "}
                 <h3 className={"font-bold text-gray-800 mb-3"}>
-                  {"حساب متوسط طول الرمز (Average Code Length)"}
+                  {t("legacy.a8d4751ab5df5d74")}
                 </h3>
                 {"\n                "}
                 <div className={"text-gray-700 space-y-3"}>
                   {"\n                  "}
                   <p className={"font-semibold text-sm"}>
-                    {"القانون المستخدم:"}
+                    {t("legacy.4ce04f4a15a08995")}
                   </p>
                   {"\n                  "}
                   <div className={"bg-white p-3 rounded-lg border border-gray-200 char-display text-lg overflow-x-auto"}>
@@ -246,37 +253,37 @@ export default function NativePage() {
                   <ul className={"text-xs list-disc list-inside space-y-1 text-gray-500"}>
                     {"\n                    "}
                     <li>
-                      {"$$ L_{avg} $$: متوسط طول الرمز (بالبت/حرف)"}
+                      {t("legacy.bfd7bca38fde8cf2")}
                     </li>
                     {"\n                    "}
                     <li>
-                      {"$$ f_i $$ : تكرار الحرف (i)"}
+                      {t("legacy.4365414a7f69a742")}
                     </li>
                     {"\n                    "}
                     <li>
-                      {"$$ L_i $$ : طول رمز هوفمان للحرف (i)"}
+                      {t("legacy.799a95f8891edd5c")}
                     </li>
                     {"\n                    "}
                     <li>
-                      {"$$ N $$: العدد الكلي للأحرف في النص ($N = \\sum f_i$)"}
+                      {t("legacy.138238d02cd76bdf")}
                     </li>
                     {"\n                  "}
                   </ul>
                   {"\n\n                  "}
                   <p className={"font-semibold text-sm mt-3"}>
-                    {"خطوات الحساب:"}
+                    {t("legacy.aa617511225e9963")}
                   </p>
                   {"\n                  "}
                   <p id={"calculationSteps"} className={"bg-white p-3 rounded-lg border border-gray-200 text-sm char-display overflow-x-auto"}></p>
                   {"\n                  "}
                   <p className={"text-sm bg-white p-3 rounded-lg border border-gray-200 char-display overflow-x-auto"}>
-                    {"\n                    $$ \\frac{1}{١٤} \\times \\left[ (٤ \\times 2) + (٣ \\times 2) + (٢ \\times 3) + (٢ \\times 3) + (٢ \\times 3) + (١ \\times 3) \\right] = \\frac{٣٥}{١٤} = 2.500 \\text{ بت/حرف} $$\n                  "}
+                    {t("legacy.06b95e7264d9017f")}
                   </p>
                   {"\n                  "}
                   <div className={"bg-gradient-to-l from-green-50 to-emerald-50 p-4 rounded-xl border border-green-200"}>
                     {"\n                    "}
                     <p className={"font-bold text-green-800 mb-1"}>
-                      {"الناتج النهائي (كفاءة التشفير):"}
+                      {t("legacy.d75ac7d3d0e1d235")}
                     </p>
                     {"\n                    "}
                     <p className={"text-2xl font-mono text-green-700"}>
@@ -284,7 +291,7 @@ export default function NativePage() {
                       <span id={"avgCodeLength"}>
                         {"0"}
                       </span>
-                      {" بت/حرف\n                    "}
+                      {t("legacy.db82c8eb1cd593a7")}
                     </p>
                     {"\n                  "}
                   </div>

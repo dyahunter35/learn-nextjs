@@ -1,4 +1,11 @@
+"use client";
+
+import { useLanguage } from "@/components/LanguageProvider";
+import { translateLegacyText } from "@/data/legacy-english";
+
 export default function NativePage() {
+  const { language } = useLanguage();
+  const t = (text: string) => translateLegacyText(text, "converters", language);
   return (
     <div className="native-legacy-body bg-gray-50">
     {"\n\n    \n    \n    \n\n    \n\n    "}
@@ -11,7 +18,7 @@ export default function NativePage() {
         </span>
         {"\n            "}
         <h1 className={"text-4xl font-extrabold text-gray-900"}>
-          {"\n                التحويلات العددية "}
+          {t("legacy.f297bd903eff5132")}
           <span className={"text-amber-600"}>
             {"(Number Converters)"}
           </span>
@@ -19,7 +26,7 @@ export default function NativePage() {
         </h1>
         {"\n            "}
         <p className={"mt-2 text-lg text-gray-500"}>
-          {"\n                تحويل الأعداد بين الأنظمة المختلفة: ثنائي، ثماني، عشري، سداسي عشر\n            "}
+          {t("legacy.6db1ca61c71a146c")}
         </p>
         {"\n        "}
       </header>
@@ -33,30 +40,30 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"}></path>
             {"\n                "}
           </svg>
-          {"\n                ما هو النظام العشري (Decimal)؟\n            "}
+          {t("legacy.77318f031ff906bf")}
         </h2>
         {"\n            "}
         <div className={"bg-green-50 p-5 rounded-lg shadow-md mb-6 concept-card border-green-400"}>
           {"\n                "}
           <p className={"text-gray-700 leading-loose mb-3"}>
-            {"\n                    النظام العشري هو نظام العد الذي نستخدمه في حياتنا اليومية. يعتمد على الرقم "}
+            {t("legacy.baf479ce391846a3")}
             <span className={"font-bold text-green-700"}>
               {"10"}
             </span>
-            {" كأساس له، ويستخدم الأرقام من 0 إلى 9 لتمثيل أي قيمة.\n                "}
+            {t("legacy.639c0cb12a91aa88")}
           </p>
           {"\n                "}
           <div className={"bg-white p-4 rounded-lg shadow-inner"}>
             {"\n                    "}
             <p className={"text-gray-700"}>
               <span className={"font-bold"}>
-                {"مثال:"}
+                {t("legacy.03bf106531a9fdaf")}
               </span>
-              {" العدد "}
+              {t("legacy.92085a8f598eefdf")}
               <span className={"mono-font text-lg text-green-700"}>
                 {"456"}
               </span>
-              {" يعني:"}
+              {t("legacy.933b53e12e4788c9")}
             </p>
             {"\n                    "}
             <p className={"mono-font text-lg text-green-700 mt-2 text-center ltr-text"}>
@@ -82,21 +89,21 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"}></path>
             {"\n                "}
           </svg>
-          {"\n                ما هو النظام الثنائي (Binary)؟\n            "}
+          {t("legacy.a79c243c43a27235")}
         </h2>
         {"\n            "}
         <div className={"bg-blue-50 p-5 rounded-lg shadow-md mb-6 concept-card border-blue-400"}>
           {"\n                "}
           <p className={"text-gray-700 leading-loose mb-3"}>
-            {"\n                    النظام الثنائي هو نظام العد المستخدم في الحواسيب والإلكترونيات الرقمية. يعتمد على الرقم "}
+            {t("legacy.0a43faac0b5c742e")}
             <span className={"font-bold text-blue-700"}>
               {"2"}
             </span>
-            {" كأساس له، ويستخدم رقمين فقط: "}
+            {t("legacy.e38df8a480d18459")}
             <span className={"mono-font bg-gray-200 p-1 rounded"}>
               {"0"}
             </span>
-            {" و "}
+            {t("legacy.6245b4d08f3f2a99")}
             <span className={"mono-font bg-gray-200 p-1 rounded"}>
               {"1"}
             </span>
@@ -107,13 +114,13 @@ export default function NativePage() {
             {"\n                    "}
             <p className={"text-gray-700"}>
               <span className={"font-bold"}>
-                {"مثال:"}
+                {t("legacy.03bf106531a9fdaf")}
               </span>
-              {" العدد الثنائي "}
+              {t("legacy.a034785c62512a71")}
               <span className={"mono-font text-lg text-blue-700"}>
                 {"1101"}
               </span>
-              {" يمثل:"}
+              {t("legacy.b80f19efc429d2cb")}
             </p>
             {"\n                    "}
             <p className={"mono-font text-lg text-blue-700 mt-2 text-center ltr-text"}>
@@ -121,7 +128,7 @@ export default function NativePage() {
             </p>
             {"\n                    "}
             <p className={"mono-font text-lg text-blue-700 text-center ltr-text"}>
-              {"= 8 + 4 + 0 + 1 = 13 (في النظام العشري)"}
+              {t("legacy.4830ae2c751b390d")}
             </p>
             {"\n                "}
           </div>
@@ -139,21 +146,21 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M13 10V3L4 14h7v7l9-11h-7z"}></path>
             {"\n                "}
           </svg>
-          {"\n                التحويل من ثنائي إلى عشري\n            "}
+          {t("legacy.c0ffaf350ec68783")}
         </h2>
         {"\n            "}
         <p className={"text-gray-700 leading-loose mb-4"}>
-          {"\n                لتحويل عدد ثنائي إلى عشري، نستخدم "}
+          {t("legacy.d4aab32340880649")}
           <span className={"font-bold"}>
-            {"طريقة التوسيع (Expansion Method)"}
+            {t("legacy.917a73a450df44ae")}
           </span>
-          {" حيث نضرب كل رقم في 2 مرفوعاً لأس يساوي موقعه (بدءاً من الصفر من اليمين إلى اليسار)، ثم نجمع النتائج.\n            "}
+          {t("legacy.ffc5bfba0e3d99f7")}
         </p>
         {"\n            "}
         <div className={"bg-amber-50 p-5 rounded-lg shadow-md concept-card border-amber-400"}>
           {"\n                "}
           <h3 className={"text-xl font-semibold text-amber-800 mb-3"}>
-            {"مثال: تحويل 101101₂ إلى عشري"}
+            {t("legacy.7a214d2b2acc6bf1")}
           </h3>
           {"\n                "}
           <div className={"bg-white p-4 rounded-lg shadow-inner overflow-x-auto"}>
@@ -162,7 +169,7 @@ export default function NativePage() {
               <tbody>
                 <tr className={"border-b"}>
                   <td className={"p-2 font-bold"}>
-                    {"الرقم الثنائي"}
+                    {t("legacy.eb31a9f861fd5109")}
                   </td>
                   <td className={"p-2 mono-font ltr-text"}>
                     {"1"}
@@ -185,7 +192,7 @@ export default function NativePage() {
                 </tr>
                 <tr className={"border-b"}>
                   <td className={"p-2 font-bold"}>
-                    {"الأس (الموقع)"}
+                    {t("legacy.f4acf266f48064fe")}
                   </td>
                   <td className={"p-2 mono-font ltr-text"}>
                     {"2⁵"}
@@ -208,7 +215,7 @@ export default function NativePage() {
                 </tr>
                 <tr>
                   <td className={"p-2 font-bold"}>
-                    {"القيمة"}
+                    {t("legacy.4c49efecd6cbd7c2")}
                   </td>
                   <td className={"p-2 mono-font ltr-text"}>
                     {"32"}
@@ -251,21 +258,21 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M12 14l9-5-9-5-9 5 9 5zm0 7l-9-5 9-5 9 5-9 5z"}></path>
             {"\n                "}
           </svg>
-          {"\n                التحويل من عشري إلى ثنائي\n            "}
+          {t("legacy.9b884fe720440dc5")}
         </h2>
         {"\n            "}
         <p className={"text-gray-700 leading-loose mb-4"}>
-          {"\n                لتحويل عدد عشري إلى ثنائي، نستخدم "}
+          {t("legacy.d6f7ecd65a02b4ed")}
           <span className={"font-bold"}>
-            {"طريقة القسمة المتكررة على 2"}
+            {t("legacy.3cfcf54391a0fc5e")}
           </span>
-          {". نقسم العدد على 2 بشكل متكرر ونسجل الباقي (0 أو 1) في كل مرة، ثم نقرأ البواقي من الأسفل إلى الأعلى.\n            "}
+          {t("legacy.53bbe7108976e726")}
         </p>
         {"\n            "}
         <div className={"bg-purple-50 p-5 rounded-lg shadow-md concept-card border-purple-400"}>
           {"\n                "}
           <h3 className={"text-xl font-semibold text-purple-800 mb-3"}>
-            {"مثال: تحويل 45₁₀ إلى ثنائي"}
+            {t("legacy.a1ce151fa302c857")}
           </h3>
           {"\n                "}
           <div className={"bg-white p-4 rounded-lg shadow-inner overflow-x-auto"}>
@@ -274,13 +281,13 @@ export default function NativePage() {
               <tbody>
                 <tr className={"border-b bg-gray-100"}>
                   <th className={"p-2 font-bold"}>
-                    {"القسمة"}
+                    {t("legacy.3278cda232e6ef35")}
                   </th>
                   <th className={"p-2 font-bold"}>
-                    {"الناتج"}
+                    {t("legacy.bcbbba52e80ac255")}
                   </th>
                   <th className={"p-2 font-bold"}>
-                    {"الباقي"}
+                    {t("legacy.37bd31bf3892daee")}
                   </th>
                 </tr>
                 <tr className={"border-b"}>
@@ -355,7 +362,7 @@ export default function NativePage() {
           </div>
           {"\n                "}
           <p className={"mt-4 text-purple-800 font-bold text-lg text-center"}>
-            {"\n                    نقرأ البواقي من الأسفل إلى الأعلى: 101101₂\n                "}
+            {t("legacy.535670daab62090a")}
           </p>
           {"\n            "}
         </div>
@@ -371,19 +378,19 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7"}></path>
             {"\n                "}
           </svg>
-          {"\n                تحويل الأعداد الحقيقية (ذات الفاصلة)\n            "}
+          {t("legacy.7cc5c2110d5afffe")}
         </h2>
         {"\n            "}
         <p className={"text-gray-700 leading-loose mb-4"}>
-          {"\n                لتحويل عدد حقيقي (عدد عشري بفاصلة) إلى ثنائي، نقسم العدد إلى "}
+          {t("legacy.999617836e7a5dc4")}
           <span className={"font-bold"}>
-            {"جزء صحيح"}
+            {t("legacy.4a0def423378d210")}
           </span>
-          {" و "}
+          {t("legacy.6245b4d08f3f2a99")}
           <span className={"font-bold"}>
-            {"جزء كسري"}
+            {t("legacy.af9b7801c3e49c41")}
           </span>
-          {"، ونعالج كل جزء بطريقته.\n            "}
+          {t("legacy.5bfbcef355826b61")}
         </p>
         {"\n            "}
         <div className={"grid grid-cols-1 md:grid-cols-2 gap-6"}>
@@ -391,21 +398,21 @@ export default function NativePage() {
           <div className={"bg-blue-50 p-5 rounded-lg shadow-md concept-card border-blue-400"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-blue-800 mb-3"}>
-              {"الجزء الصحيح"}
+              {t("legacy.c677dd509a7d9f80")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700 mb-3"}>
-              {"يحول باستخدام "}
+              {t("legacy.491ef360eab8cf69")}
               <span className={"font-bold"}>
-                {"القسمة المتكررة على 2"}
+                {t("legacy.323a09462e6ae374")}
               </span>
-              {" (الطريقة نفسها السابقة)."}
+              {t("legacy.c27465e24be6cd0b")}
             </p>
             {"\n                    "}
             <div className={"bg-white p-3 rounded-lg shadow-inner text-sm"}>
               {"\n                        "}
               <p className={"text-gray-600"}>
-                {"مثال: الجزء الصحيح من 13.75 هو 13 → 1101₂"}
+                {t("legacy.cf7058064338e967")}
               </p>
               {"\n                    "}
             </div>
@@ -415,21 +422,21 @@ export default function NativePage() {
           <div className={"bg-amber-50 p-5 rounded-lg shadow-md concept-card border-amber-400"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-amber-800 mb-3"}>
-              {"الجزء الكسري"}
+              {t("legacy.c136b7bc9345c057")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700 mb-3"}>
-              {"يحول باستخدام "}
+              {t("legacy.491ef360eab8cf69")}
               <span className={"font-bold"}>
-                {"الضرب المتكرر في 2"}
+                {t("legacy.0b797af25bf095aa")}
               </span>
-              {". نضرب الجزء الكسري في 2 ونأخذ الجزء الصحيح الناتج."}
+              {t("legacy.95556e372836f0c7")}
             </p>
             {"\n                    "}
             <div className={"bg-white p-3 rounded-lg shadow-inner text-sm"}>
               {"\n                        "}
               <p className={"text-gray-600"}>
-                {"مثال: الجزء الكسري من 13.75 هو 0.75 → 11₂"}
+                {t("legacy.d74df16137479db8")}
               </p>
               {"\n                    "}
             </div>
@@ -441,31 +448,31 @@ export default function NativePage() {
         <div className={"bg-rose-50 p-5 rounded-lg shadow-md mt-4 concept-card border-rose-400"}>
           {"\n                "}
           <h3 className={"text-xl font-semibold text-rose-800 mb-3"}>
-            {"مثال كامل: تحويل 13.75₁₀ إلى ثنائي"}
+            {t("legacy.d39cfc2def2cb79e")}
           </h3>
           {"\n                "}
           <div className={"bg-white p-4 rounded-lg shadow-inner"}>
             {"\n                    "}
             <p className={"text-gray-700"}>
               <span className={"font-bold"}>
-                {"الجزء الصحيح 13:"}
+                {t("legacy.4033688f0e9c13ea")}
               </span>
             </p>
             {"\n                    "}
             <p className={"mono-font ltr-text text-gray-700 mr-4"}>
-              {"13 ÷ 2 = 6 الباقي 1"}
+              {t("legacy.49d38cf73c442b90")}
             </p>
             {"\n                    "}
             <p className={"mono-font ltr-text text-gray-700 mr-4"}>
-              {"6 ÷ 2 = 3 الباقي 0"}
+              {t("legacy.fdf72f1802a0ed36")}
             </p>
             {"\n                    "}
             <p className={"mono-font ltr-text text-gray-700 mr-4"}>
-              {"3 ÷ 2 = 1 الباقي 1"}
+              {t("legacy.b237b23bcfd94c02")}
             </p>
             {"\n                    "}
             <p className={"mono-font ltr-text text-gray-700 mr-4"}>
-              {"1 ÷ 2 = 0 الباقي 1"}
+              {t("legacy.12ff935b19f48863")}
             </p>
             {"\n                    "}
             <p className={"mono-font ltr-text text-gray-700 mr-4 mb-3"}>
@@ -474,16 +481,16 @@ export default function NativePage() {
             {"\n                    "}
             <p className={"text-gray-700"}>
               <span className={"font-bold"}>
-                {"الجزء الكسري 0.75:"}
+                {t("legacy.acdbc068157c8335")}
               </span>
             </p>
             {"\n                    "}
             <p className={"mono-font ltr-text text-gray-700 mr-4"}>
-              {"0.75 × 2 = 1.50 ← نأخذ 1"}
+              {t("legacy.6cf09c4926f57c25")}
             </p>
             {"\n                    "}
             <p className={"mono-font ltr-text text-gray-700 mr-4"}>
-              {"0.50 × 2 = 1.00 ← نأخذ 1"}
+              {t("legacy.4799e538a19d1b3a")}
             </p>
             {"\n                    "}
             <p className={"mono-font ltr-text text-gray-700 mr-4 mb-3"}>
@@ -509,7 +516,7 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"}></path>
             {"\n                "}
           </svg>
-          {"\n                جدول مقارن للأوزان والمكان\n            "}
+          {t("legacy.47436505044cb70e")}
         </h2>
         {"\n            "}
         <div className={"overflow-x-auto"}>
@@ -518,16 +525,16 @@ export default function NativePage() {
             <thead>
               <tr className={"bg-indigo-700 text-white"}>
                 <th className={"p-3 border border-indigo-600"}>
-                  {"الأس"}
+                  {t("legacy.34f42338684ff536")}
                 </th>
                 <th className={"p-3 border border-indigo-600"}>
                   {"2ⁿ"}
                 </th>
                 <th className={"p-3 border border-indigo-600"}>
-                  {"القيمة العشرية"}
+                  {t("legacy.b9802234ca14e5c2")}
                 </th>
                 <th className={"p-3 border border-indigo-600"}>
-                  {"الوصف"}
+                  {t("legacy.95023fc76e1b1460")}
                 </th>
               </tr>
             </thead>
@@ -650,7 +657,7 @@ export default function NativePage() {
         </div>
         {"\n            "}
         <p className={"text-gray-600 text-sm mt-4 text-center"}>
-          {"\n                كلما اتجهنا لليسار (زيادة الأس)، تضاعفت القيمة. هذا هو أساس النظام الثنائي: كل خانة تساوي ضعف الخانة التي تسبقها.\n            "}
+          {t("legacy.7db394af5be29833")}
         </p>
         {"\n        "}
       </section>
@@ -664,7 +671,7 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M8 9l4-4 4 4m0 6l-4 4-4-4"}></path>
             {"\n                "}
           </svg>
-          {"\n                انتقل إلى المحول التفاعلي\n            "}
+          {t("legacy.2fc730b07e17dc1b")}
         </a>
         {"\n        "}
       </div>

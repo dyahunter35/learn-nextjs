@@ -1,4 +1,11 @@
+"use client";
+
+import { useLanguage } from "@/components/LanguageProvider";
+import { translateLegacyText } from "@/data/legacy-english";
+
 export default function NativePage() {
+  const { language } = useLanguage();
+  const t = (text: string) => translateLegacyText(text, "huffman", language);
   return (
     <div className="native-legacy-body bg-gray-50">
     {"\n\n    \n    \n    \n\n    \n    \n\n    "}
@@ -12,7 +19,7 @@ export default function NativePage() {
         </span>
         {"\n            "}
         <h1 className={"text-4xl font-extrabold text-gray-900"}>
-          {"\n                خوارزمية هوفمان "}
+          {t("legacy.1c64760b7fbbb004")}
           <span className={"text-emerald-600"}>
             {"(Huffman Coding)"}
           </span>
@@ -20,7 +27,7 @@ export default function NativePage() {
         </h1>
         {"\n            "}
         <p className={"mt-2 text-lg text-gray-500"}>
-          {"\n                فهم آلية ضغط البيانات باستخدام ترميز هوفمان\n            "}
+          {t("legacy.20260ec511ec583b")}
         </p>
         {"\n        "}
       </header>
@@ -35,22 +42,22 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M12 8c1.657 0 3 .895 3 2s-1.343 2-3 2-3-.895-3-2 1.343-2 3-2zM9 14v1a3 3 0 003 3h4m-4-18H9a3 3 0 00-3 3v11a3 3 0 003 3h6a3 3 0 003-3V6a3 3 0 00-3-3z"}></path>
             {"\n                "}
           </svg>
-          {"\n                القوانين الرياضية لتقييم كفاءة الضغط\n            "}
+          {t("legacy.910a300e35e16ca2")}
         </h2>
         {"\n\n            "}
         <p className={"text-gray-700 leading-loose mb-4"}>
-          {"\n                تعتمد كفاءة ترميز هوفمان على مقياسين رئيسيين لملف الإخراج النهائي:\n            "}
+          {t("legacy.65411f3c61b29c94")}
         </p>
         {"\n            \n            "}
         {"\n            "}
         <div className={"bg-blue-50 p-5 rounded-lg shadow-md mb-6 concept-card border-blue-400"}>
           {"\n                "}
           <h3 className={"text-xl font-semibold text-blue-800 mb-3"}>
-            {"1. إجمالي عدد البتات المضغوطة (Total Bits)"}
+            {t("legacy.9d05cf7df8ea06d3")}
           </h3>
           {"\n                "}
           <p className={"text-gray-700 mb-3"}>
-            {"\n                    يمثل هذا القانون التكلفة الكلية للملف بعد ترميزه بالبتات. وهو مجموع حاصل ضرب تكرار كل حرف في طول رمزه الثنائي المخصص له:\n                "}
+            {t("legacy.1556be7e10484c03")}
           </p>
           {"\n                "}
           <div className={"ltr-text text-xl bg-gray-100 p-4 rounded-lg shadow-inner overflow-x-auto"}>
@@ -62,13 +69,13 @@ export default function NativePage() {
             <span className={"font-mono"}>
               {"Total Bits"}
             </span>
-            {": إجمالي عدد البتات في الملف المضغوط.\n                    "}
+            {t("legacy.8057817d749dc49d")}
             <br />
             {"\n                    "}
             <span className={"font-mono"}>
               {"n"}
             </span>
-            {": عدد الأحرف الفريدة في النص.\n                "}
+            {t("legacy.05752ee53ac6601e")}
           </p>
           {"\n            "}
         </div>
@@ -77,11 +84,11 @@ export default function NativePage() {
         <div className={"bg-green-50 p-5 rounded-lg shadow-md concept-card border-green-400"}>
           {"\n                "}
           <h3 className={"text-xl font-semibold text-green-800 mb-3"}>
-            {"2. متوسط طول الرمز (Average Code Length)"}
+            {t("legacy.602412a4ca72feaa")}
           </h3>
           {"\n                "}
           <p className={"text-gray-700 mb-3"}>
-            {"\n                    يشير هذا المقياس إلى متوسط عدد البتات اللازمة لتمثيل كل حرف في الملف المضغوط. كلما كانت هذه القيمة أصغر، كانت كفاءة الضغط أفضل:\n                "}
+            {t("legacy.3394e026a449c9d2")}
           </p>
           {"\n                "}
           <div className={"ltr-text text-xl bg-gray-100 p-4 rounded-lg shadow-inner overflow-x-auto"}>
@@ -93,13 +100,13 @@ export default function NativePage() {
             <span className={"font-mono"}>
               {"L_{avg}"}
             </span>
-            {": متوسط طول الرمز (بت/حرف).\n                    "}
+            {t("legacy.265485a233f65cf3")}
             <br />
             {"\n                    "}
             <span className={"font-mono"}>
               {"N"}
             </span>
-            {": العدد الكلي للأحرف في النص الأصلي.\n                "}
+            {t("legacy.9f1b12a5aa6cd46f")}
           </p>
           {"\n            "}
         </div>
@@ -116,11 +123,11 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M9 9l4-9"}></path>
             {"\n                "}
           </svg>
-          {"\n                الخطوات التفصيلية لخوارزمية بناء شجرة هوفمان\n            "}
+          {t("legacy.bee5d782e0c90fa2")}
         </h2>
         {"\n            "}
         <p className={"text-gray-700 mb-4"}>
-          {"\n                تعتمد الخوارزمية على بناء الشجرة من الأسفل إلى الأعلى (Bottom-Up Approach)، حيث يتم دمج العقد ذات التكرار الأقل باستمرار.\n            "}
+          {t("legacy.b20d645b1dc0f65e")}
         </p>
         {"\n            \n            "}
         <div className={"list-none p-0 counter-reset:step-counter"}>
@@ -128,11 +135,11 @@ export default function NativePage() {
           <div className={"step-item"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-amber-800"}>
-              {"حساب التكرارات (Frequency Calculation)"}
+              {t("legacy.4c46bc30a2461f42")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700 mr-10"}>
-              {"\n                        قم بحساب عدد مرات تكرار كل حرف فريد (ورقة) موجود في النص المدخل. هذا التكرار يمثل وزن (Weight) العقدة.\n                    "}
+              {t("legacy.0f6d1c9237614d0b")}
             </p>
             {"\n                "}
           </div>
@@ -140,11 +147,11 @@ export default function NativePage() {
           <div className={"step-item"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-amber-800"}>
-              {"بناء قائمة الانتظار (Priority Queue)"}
+              {t("legacy.a6060f038611fd81")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700 mr-10"}>
-              {"\n                        أنشئ مجموعة من عقد هوفمان الأولية، حيث تمثل كل عقدة حرفاً ووزنه. يتم ترتيب هذه المجموعة بشكل تصاعدي بناءً على الوزن (التكرار).\n                    "}
+              {t("legacy.28ba05c73e251673")}
             </p>
             {"\n                "}
           </div>
@@ -152,80 +159,80 @@ export default function NativePage() {
           <div className={"step-item"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-amber-800"}>
-              {"التكوين التكراري للشجرة (Iterative Tree Construction)"}
+              {t("legacy.693a2a0aedf365cc")}
             </h3>
             {"\n                    "}
-            <p className={"text-gray-700 mr-10"}>
-              {"\n                        استمر في تكرار العملية التالية حتى تتبقى عقدة واحدة فقط (وهي جذر الشجرة النهائية):\n                        "}
+            <div className={"text-gray-700 mr-10"}>
+              {t("legacy.b084cbb0fd4938fd")}
               <ul className={"list-disc list-inside mr-6 mt-2 space-y-1"}>
                 {"\n                            "}
                 <li>
                   <span className={"font-bold"}>
-                    {"الدمج:"}
+                    {t("legacy.ed6060907b205efb")}
                   </span>
-                  {" اختر وازل العقدتين الأقل وزناً (أقل تكراراً) من القائمة."}
+                  {t("legacy.4bd1a3da14792c69")}
                 </li>
                 {"\n                            "}
                 <li>
                   <span className={"font-bold"}>
-                    {"عقدة الأب:"}
+                    {t("legacy.9cf3a2e400d44174")}
                   </span>
-                  {" ادمج هاتين العقدتين في عقدة أب جديدة (داخلية)."}
+                  {t("legacy.61c1c7c2929e96b7")}
                 </li>
                 {"\n                            "}
                 <li>
                   <span className={"font-bold"}>
-                    {"تحديد الوزن:"}
+                    {t("legacy.7df91f706000aa6b")}
                   </span>
-                  {" اجعل وزن عقدة الأب الجديدة مساوياً لمجموع أوزان العقدتين الفرعيتين."}
+                  {t("legacy.eff9f411c8a4e760")}
                 </li>
                 {"\n                            "}
                 <li>
                   <span className={"font-bold"}>
-                    {"إعادة الإدراج:"}
+                    {t("legacy.cbecddb3d2acbda2")}
                   </span>
-                  {" أعد عقدة الأب الجديدة إلى القائمة المرتبة مع الحفاظ على الترتيب التصاعدي."}
+                  {t("legacy.49bc5e44a3b6aefc")}
                 </li>
                 {"\n                        "}
               </ul>
               {"\n                    "}
-            </p>
+            </div>
             {"\n                "}
           </div>
           {"\n\n                "}
           <div className={"step-item"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-amber-800"}>
-              {"توليد رموز التشفير (Code Generation)"}
+              {t("legacy.1b62b5104f588a68")}
             </h3>
             {"\n                    "}
-            <p className={"text-gray-700 mr-10"}>
-              {"\n                        بعد اكتمال الشجرة (بقاء عقدة الجذر فقط)، يتم توليد رموز هوفمان بالانتقال من الجذر إلى كل عقدة ورقية:\n                        "}
+            <div className={"text-gray-700 mr-10"}>
+              {t("legacy.daa699092c4ec8ba")}
               <ul className={"list-disc list-inside mr-6 mt-2 space-y-1"}>
                 {"\n                            "}
                 <li>
-                  {"خصص البت "}
+                  {t("legacy.1b800abbf0106462")}
                   <span className={"font-mono ltr-text bg-gray-200 p-1 rounded"}>
                     {"0"}
                   </span>
-                  {" لكل فرع يتجه لليسار."}
+                  {t("legacy.a55675c499db5bc0")}
                 </li>
                 {"\n                            "}
                 <li>
-                  {"خصص البت "}
+                  {t("legacy.1b800abbf0106462")}
                   <span className={"font-mono ltr-text bg-gray-200 p-1 rounded"}>
                     {"1"}
                   </span>
-                  {" لكل فرع يتجه لليمين."}
+                  {t("legacy.1017928db497ba94")}
                 </li>
                 {"\n                            "}
                 <li>
-                  {"سلسلة البتات المجمعة على طول المسار من الجذر إلى أي ورقة تمثل رمز هوفمان الفريد للحرف داخل تلك الورقة."}
+                  {t("legacy.c05aebe018f7ca5a")}
                 </li>
                 {"\n                        "}
               </ul>
               {"\n                    "}
-            </p>
+            </div>
             {"\n                "}
           </div>
           {"\n            "}
@@ -243,13 +250,13 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"}></path>
             {"\n                "}
           </svg>
-          {"\n                المبدأ: علاقة التكرار بطول الرمز\n            "}
+          {t("legacy.87dd6a0a2afe669b")}
         </h2>
         {"\n             "}
         <blockquote className={"mt-4 p-4 bg-purple-100 border-r-4 border-purple-400 text-purple-800 font-semibold italic text-lg"}>
           {"\n                "}
           <p>
-            {"\n                    يضمن المنهج التكراري لبناء الشجرة أن الرموز الأقل تكراراً هي التي يتم دفعها إلى أعمق مستويات الشجرة (الأوراق السفلية)، وبالتالي تحصل على **أطول رمز ثنائي (أكثر بتات)**. بينما تبقى الرموز الأعلى تكراراً قريبة من الجذر، فتحصل على **أقصر رمز ثنائي (أقل بتات)**.\n                "}
+            {t("legacy.bbac0fbcbbca8d48")}
           </p>
           {"\n            "}
         </blockquote>

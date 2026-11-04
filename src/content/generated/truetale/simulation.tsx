@@ -1,4 +1,11 @@
+"use client";
+
+import { useLanguage } from "@/components/LanguageProvider";
+import { translateLegacyText } from "@/data/legacy-english";
+
 export default function NativePage() {
+  const { language } = useLanguage();
+  const t = (text: string) => translateLegacyText(text, "truetale", language);
   return (
     <div className="native-legacy-body ">
     {"\n    "}
@@ -16,11 +23,11 @@ export default function NativePage() {
           </span>
           {"\n          "}
           <h1 className={"text-3xl md:text-4xl font-extrabold text-gray-900"}>
-            {"مولد جداول الصواب والخطأ المنطقية"}
+            {t("legacy.73d91237752bc7e6")}
           </h1>
           {"\n          "}
           <p className={"text-gray-500 mt-2"}>
-            {"أدخل عبارة منطقية واحصل على جدول الصواب الكامل"}
+            {t("legacy.a82f49f42694212b")}
           </p>
           {"\n        "}
         </div>
@@ -36,7 +43,7 @@ export default function NativePage() {
               <div className={"w-2 h-2 bg-indigo-500 rounded-full"}></div>
               {"\n              "}
               <h2 className={"text-lg font-bold text-gray-800"}>
-                {"أزرار الإدخال السريع"}
+                {t("legacy.c128bca32cae30d4")}
               </h2>
               {"\n            "}
             </div>
@@ -76,19 +83,19 @@ export default function NativePage() {
               </span>
               {"\n              "}
               <button className={"operator-btn bg-purple-50 hover:bg-purple-100 text-purple-700 border-purple-200"} data-value={"م١"}>
-                {"م١"}
+                {t("legacy.7c917e5a5ae55a0c")}
               </button>
               {"\n              "}
               <button className={"operator-btn bg-purple-50 hover:bg-purple-100 text-purple-700 border-purple-200"} data-value={"م٢"}>
-                {"م٢"}
+                {t("legacy.0cff98624e0d7b32")}
               </button>
               {"\n              "}
               <button className={"operator-btn bg-purple-50 hover:bg-purple-100 text-purple-700 border-purple-200"} data-value={"م٣"}>
-                {"م٣"}
+                {t("legacy.ecc02b661d49624d")}
               </button>
               {"\n              "}
               <button className={"operator-btn bg-purple-50 hover:bg-purple-100 text-purple-700 border-purple-200"} data-value={"م٤"}>
-                {"م٤"}
+                {t("legacy.9fd49e39bd7bb726")}
               </button>
               {"\n\n              "}
               <span className={"w-px h-6 bg-gray-200 mx-2"}></span>
@@ -109,7 +116,7 @@ export default function NativePage() {
                   <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"}></path>
                   {"\n                "}
                 </svg>
-                {"\n                مسح\n              "}
+                {t("legacy.308cf07fa826d118")}
               </button>
               {"\n            "}
             </div>
@@ -120,9 +127,9 @@ export default function NativePage() {
           <div className={"p-6 md:p-8 border-b border-gray-100"}>
             {"\n            "}
             <label htmlFor={"expression-input"} className={"block text-sm font-bold text-gray-700 mb-2"}>
-              {"\n              أدخل العبارة المنطقية\n              "}
+              {t("legacy.779444e2aa6f3bce")}
               <span className={"text-gray-400 font-normal text-xs mr-2"}>
-                {"(أقواس () ومتغيرات عربية مثل م١)"}
+                {t("legacy.98a6d4e7a2cb7b03")}
               </span>
               {"\n            "}
             </label>
@@ -147,7 +154,7 @@ export default function NativePage() {
                   <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"}></path>
                   {"\n                "}
                 </svg>
-                {"\n                يدعم حتى 5 متغيرات منطقية\n              "}
+                {t("legacy.52b0639b64a2f563")}
               </p>
               {"\n              "}
               <button id={"generate-btn"}>
@@ -157,7 +164,7 @@ export default function NativePage() {
                   <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"}></path>
                   {"\n                "}
                 </svg>
-                {"\n                توليد جدول الصواب والخطأ\n              "}
+                {t("legacy.b1111d341bd968b0")}
               </button>
               {"\n            "}
             </div>
@@ -194,11 +201,11 @@ export default function NativePage() {
               </svg>
               {"\n              "}
               <p className={"text-lg font-medium"}>
-                {"لم يتم توليد جدول بعد"}
+                {t("legacy.68d04c1a98a1054b")}
               </p>
               {"\n              "}
               <p className={"text-sm mt-1"}>
-                {"أدخل عبارة منطقية واضغط على زر التوليد"}
+                {t("legacy.31423ec6d4c65e89")}
               </p>
               {"\n            "}
             </div>

@@ -1,23 +1,30 @@
+"use client";
+
+import { useLanguage } from "@/components/LanguageProvider";
+import { translateLegacyText } from "@/data/legacy-english";
+
 export default function NativePage() {
+  const { language } = useLanguage();
+  const t = (text: string) => translateLegacyText(text, "truetale", language);
   return (
     <div className="native-legacy-body bg-gray-50 min-h-screen">
     {"\n  \n    \n    \n\n  "}
     <div className={"code-page"}>
       {"\n    "}
       <h1>
-        {"جداول الصواب المنطقية — الكود البرمجي"}
+        {t("legacy.4bb1deaf6e3562d1")}
       </h1>
       {"\n    "}
       <p className={"subtitle"}>
-        {"شرح مبسط مع أمثلة بلغات متعددة. يمكنك نسخ الكود واستخدامه."}
+        {t("legacy.f6641497577af02a")}
       </p>
       {"\n    \n    "}
       <div className={"algorithm-code-description"}>
         {"\n      "}
         <strong>
-          {"كيف تعمل:"}
+          {t("legacy.ef1c667af06fc25c")}
         </strong>
-        {" دوال العمليات المنطقية الأساسية: "}
+        {t("legacy.6899950019b5074e")}
         <strong>
           {"AND"}
         </strong>
@@ -45,11 +52,11 @@ export default function NativePage() {
         <strong>
           {"XNOR"}
         </strong>
-        {". ودالة "}
+        {t("legacy.c3bc6757fc8f898c")}
         <strong>
           {"generateTruthTable(variables, expression)"}
         </strong>
-        {" تولد جدول الصواب الكامل لأي تعبير منطقي.\n    "}
+        {t("legacy.094a862ec125510d")}
       </div>
       {"\n\n    "}
       <div className={"lang-tabs"}>
@@ -75,7 +82,7 @@ export default function NativePage() {
       <div className={"code-block active"} id={"code-cpp"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"cpp"} data-legacy-click={"copyCode('cpp')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>
@@ -89,7 +96,7 @@ export default function NativePage() {
       <div className={"code-block"} id={"code-java"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"java"} data-legacy-click={"copyCode('java')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>
@@ -103,7 +110,7 @@ export default function NativePage() {
       <div className={"code-block"} id={"code-js"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"js"} data-legacy-click={"copyCode('js')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>
@@ -117,7 +124,7 @@ export default function NativePage() {
       <div className={"code-block"} id={"code-php"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"php"} data-legacy-click={"copyCode('php')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>

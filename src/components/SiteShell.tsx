@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import type { Algorithm } from "@/data/algorithms";
 import { algorithms, groups } from "@/data/algorithms";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -15,7 +16,7 @@ export function SiteShell({ algorithm, pageKind, children }: { algorithm: Algori
       <SiteHeader />
       <div className="mobile-topic-nav" aria-label={en ? "Course topics" : "مواضيع المقرر"}>
         {algorithms.map((item) => (
-          <a key={item.slug} href={`/algorithms/${item.slug}`} aria-current={item.slug === algorithm.slug ? "page" : undefined}>{item.title}</a>
+          <Link key={item.slug} href={`/algorithms/${item.slug}`} aria-current={item.slug === algorithm.slug ? "page" : undefined}>{en ? item.english : item.title}</Link>
         ))}
       </div>
       <div className="workspace">
@@ -25,26 +26,26 @@ export function SiteShell({ algorithm, pageKind, children }: { algorithm: Algori
             <section className="sidebar-group" key={group}>
               <h3>{en ? ["Course basics", "Learning tools", "More topics"][index] : group}</h3>
               {algorithms.filter((item) => item.group === group).map((item) => (
-                <a key={item.slug} className="sidebar-link" href={`/algorithms/${item.slug}`} aria-current={item.slug === algorithm.slug ? "page" : undefined}>
-                  <span className="sidebar-dot" aria-hidden="true" />{item.title}
-                </a>
+                <Link key={item.slug} className="sidebar-link" href={`/algorithms/${item.slug}`} aria-current={item.slug === algorithm.slug ? "page" : undefined}>
+                  <span className="sidebar-dot" aria-hidden="true" />{en ? item.english : item.title}
+                </Link>
               ))}
             </section>
           ))}
         </aside>
         <main className="page-content" dir={en ? "ltr" : "rtl"}>
           <nav className="breadcrumbs" aria-label={en ? "Breadcrumb" : "مسار الصفحة"}>
-            <a href="/">{en ? "Home" : "الرئيسية"}</a><span aria-hidden="true">/</span>
-            <a href="/algorithms">{en ? "Library" : "المكتبة"}</a><span aria-hidden="true">/</span>
-            <a href={`/algorithms/${algorithm.slug}`}>{en ? algorithm.english : algorithm.title}</a><span aria-hidden="true">/</span>
+            <Link href="/">{en ? "Home" : "الرئيسية"}</Link><span aria-hidden="true">/</span>
+            <Link href="/algorithms">{en ? "Library" : "المكتبة"}</Link><span aria-hidden="true">/</span>
+            <Link href={`/algorithms/${algorithm.slug}`}>{en ? algorithm.english : algorithm.title}</Link><span aria-hidden="true">/</span>
             <span aria-current="page">{en ? ({ شرح: "Overview", محاكاة: "Simulation", "الكود البرمجي": "Code" } as Record<string,string>)[pageKind] : pageKind}</span>
           </nav>
           <nav className="lesson-tabs" aria-label={en ? "Topic pages" : "صفحات الموضوع"}>
             {([ ["شرح", ""], ["محاكاة", "/simulation"], ["الكود البرمجي", "/code"] ] as const).map(([label, suffix]) => (
-              <a key={label} href={`/algorithms/${algorithm.slug}${suffix}`} aria-current={pageKind === label ? "page" : undefined}>
+              <Link key={label} href={`/algorithms/${algorithm.slug}${suffix}`} aria-current={pageKind === label ? "page" : undefined}>
                 <SiteIcon className="topic-tab-icon" name={label === "شرح" ? "overview" : label === "محاكاة" ? "simulation" : "code"} />
                 {en ? ({ شرح: "Overview", محاكاة: "Simulation", "الكود البرمجي": "Code" } as Record<string, string>)[label] : label}
-              </a>
+              </Link>
             ))}
           </nav>
           {children}

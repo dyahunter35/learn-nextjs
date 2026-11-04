@@ -1,4 +1,11 @@
+"use client";
+
+import { useLanguage } from "@/components/LanguageProvider";
+import { translateLegacyText } from "@/data/legacy-english";
+
 export default function NativePage() {
+  const { language } = useLanguage();
+  const t = (text: string) => translateLegacyText(text, "recursion", language);
   return (
     <div className="native-legacy-body bg-gray-50">
     {"\n\n    \n    \n    \n\n    "}
@@ -11,7 +18,7 @@ export default function NativePage() {
         </span>
         {"\n            "}
         <h1 className={"text-4xl font-extrabold text-gray-900"}>
-          {"\n                الخوارزميات العودية "}
+          {t("legacy.d6516efe6f60db34")}
           <span className={"text-indigo-600"}>
             {"(Recursion)"}
           </span>
@@ -19,7 +26,7 @@ export default function NativePage() {
         </h1>
         {"\n            "}
         <p className={"mt-2 text-lg text-gray-500"}>
-          {"\n                فهم آلية الاستدعاء الذاتي للدوال: عندما تستدعي الدالة نفسها\n            "}
+          {t("legacy.0c1dad25dde5c66d")}
         </p>
         {"\n        "}
       </header>
@@ -33,21 +40,21 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"}></path>
             {"\n                "}
           </svg>
-          {"\n                مفهوم العودية\n            "}
+          {t("legacy.23e6f1506fd16d51")}
         </h2>
         {"\n            "}
         <p className={"text-gray-700 leading-loose mb-4"}>
-          {"\n                العودية (Recursion) هي تقنية برمجية تعتمد على قيام الدالة باستدعاء نفسها بشكل مباشر أو غير مباشر لحل مشكلة ما. الفكرة الأساسية هي تجزئة المشكلة الكبيرة إلى مشكلات فرعية أصغر مشابهة لها، ثم حل كل مشكلة فرعية بنفس الطريقة حتى نصل إلى حالة بسيطة يمكن حلها مباشرة (تسمى الحالة الأساسية).\n            "}
+          {t("legacy.e118429225e24bba")}
         </p>
         {"\n            "}
         <div className={"bg-purple-50 p-5 rounded-lg shadow-md mb-6 concept-card border-purple-400"}>
           {"\n                "}
           <h3 className={"text-xl font-semibold text-purple-800 mb-3"}>
-            {"مثال من الحياة اليومية"}
+            {t("legacy.7370773479f02ddf")}
           </h3>
           {"\n                "}
           <p className={"text-gray-700"}>
-            {"\n                    تخيل أنك تريد معرفة موقعك في ممر طويل. تسأل أول شخص: \"أين أنا؟\" فيجيب: \"اسأل الشخص الذي أمامي\". تسأل الثاني: \"أين أنا؟\" فيجيب: \"اسأل الشخص الذي أمامي\". يستمر هذا حتى تصل إلى آخر شخص يعرف الإجابة، فيقول: \"أنت على بعد 5 أمتار من الباب\". ثم يعود الجواب لكل شخص بالترتيب حتى يصل إليك. هذا هو مبدأ العودية: تقدم الاستعلام ثم تعود بالنتائج.\n                "}
+            {t("legacy.8b62fbeb47a9368b")}
           </p>
           {"\n            "}
         </div>
@@ -63,45 +70,45 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M13 10V3L4 14h7v7l9-11h-7z"}></path>
             {"\n                "}
           </svg>
-          {"\n                كيف تعمل العودية؟\n            "}
+          {t("legacy.7d9e135aa2d1f3b4")}
         </h2>
         {"\n            "}
         <p className={"text-gray-700 leading-loose mb-4"}>
-          {"\n                تعتمد العودية على عنصرين أساسيين: "}
+          {t("legacy.ce3c467504ac7f0e")}
           <strong>
-            {"الحالة الأساسية (Base Case)"}
+            {t("legacy.e272ed196625e6a9")}
           </strong>
-          {" و"}
+          {t("legacy.6245b4d08f3f2a99")}
           <strong>
-            {"الاستدعاء العودي (Recursive Call)"}
+            {t("legacy.0e6bd5648b572b28")}
           </strong>
-          {". الحالة الأساسية هي الشرط الذي يوقف العودية وتمنع الدالة من استدعاء نفسها إلى ما لا نهاية. الاستدعاء العودي هو استدعاء الدالة لنفسها بقيمة مختلفة (عادة أصغر) لحل المشكلة الفرعية.\n            "}
+          {t("legacy.a577187423769ced")}
         </p>
         {"\n            "}
         <div className={"bg-blue-50 p-5 rounded-lg shadow-md mb-6 concept-card border-blue-400"}>
           {"\n                "}
           <h3 className={"text-xl font-semibold text-blue-800 mb-3"}>
-            {"مكونات الدالة العودية"}
+            {t("legacy.49fde5d185ff27fc")}
           </h3>
           {"\n                "}
           <p className={"text-gray-700"}>
-            {"\n                    ١. "}
+            {t("legacy.6224c3b053c22635")}
             <strong>
-              {"الحالة الأساسية:"}
+              {t("legacy.158874071e9a3866")}
             </strong>
-            {" شرط بسيط ينهي العودية (مثل n = 0 أو n = 1)."}
+            {t("legacy.bba6a366f3f9033e")}
             <br />
-            {"\n                    ٢. "}
+            {t("legacy.94d535e89b87761d")}
             <strong>
-              {"الاستدعاء العودي:"}
+              {t("legacy.b3ff4bf4675e4af9")}
             </strong>
-            {" استدعاء الدالة نفسها بقيمة مختلفة تقترب من الحالة الأساسية."}
+            {t("legacy.17e1037103904776")}
             <br />
-            {"\n                    ٣. "}
+            {t("legacy.5c729ec0b0798ec6")}
             <strong>
-              {"الدمج (Optional):"}
+              {t("legacy.720df16d909fcd13")}
             </strong>
-            {" دمج نتائج الاستدعاءات العودية للحصول على النتيجة النهائية.\n                "}
+            {t("legacy.e8ace5f2491ab835")}
           </p>
           {"\n            "}
         </div>
@@ -117,7 +124,7 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M9 5l7 7-7 7"}></path>
             {"\n                "}
           </svg>
-          {"\n                أنواع العودية\n            "}
+          {t("legacy.562d1660bd53461a")}
         </h2>
         {"\n\n            "}
         <div className={"grid grid-cols-1 md:grid-cols-2 gap-4 mb-4"}>
@@ -125,11 +132,11 @@ export default function NativePage() {
           <div className={"bg-green-50 p-5 rounded-lg shadow-md border-green-400"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-green-800 mb-2"}>
-              {"العودية المباشرة"}
+              {t("legacy.5654ae84149b0f43")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700 text-sm"}>
-              {"عندما تستدعي الدالة نفسها مباشرة داخل جسمها. مثل دالة حساب المضروب (Factorial)."}
+              {t("legacy.bbcebc5abf33e0c6")}
             </p>
             {"\n                "}
           </div>
@@ -137,11 +144,11 @@ export default function NativePage() {
           <div className={"bg-orange-50 p-5 rounded-lg shadow-md border-orange-400"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-orange-800 mb-2"}>
-              {"العودية غير المباشرة"}
+              {t("legacy.29e46641e538893b")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700 text-sm"}>
-              {"عندما تستدعي الدالة A الدالة B التي تستدعي بدورها الدالة A، وهكذا."}
+              {t("legacy.9ef085bb5bc4555d")}
             </p>
             {"\n                "}
           </div>
@@ -149,11 +156,11 @@ export default function NativePage() {
           <div className={"bg-cyan-50 p-5 rounded-lg shadow-md border-cyan-400"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-cyan-800 mb-2"}>
-              {"العودية الخطية"}
+              {t("legacy.ec2dae103a3490bf")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700 text-sm"}>
-              {"عندما تقوم الدالة باستدعاء واحد فقط لنفسها في كل مرة (مثل Factorial)."}
+              {t("legacy.f031ba6a47077214")}
             </p>
             {"\n                "}
           </div>
@@ -161,11 +168,11 @@ export default function NativePage() {
           <div className={"bg-rose-50 p-5 rounded-lg shadow-md border-rose-400"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-rose-800 mb-2"}>
-              {"العودية المتفرعة"}
+              {t("legacy.b1265450509e3417")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700 text-sm"}>
-              {"عندما تقوم الدالة باستدعاء نفسها أكثر من مرة (مثل Fibonacci). تنتج شجرة عودية متفرعة."}
+              {t("legacy.c11769631b0eef38")}
             </p>
             {"\n                "}
           </div>
@@ -183,17 +190,17 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M12 6v6m0 0v6m0-6h6m-6 0H6"}></path>
             {"\n                "}
           </svg>
-          {"\n                أمثلة على العودية\n            "}
+          {t("legacy.ab46c87bd8f655de")}
         </h2>
         {"\n\n            "}
         <div className={"bg-indigo-50 p-5 rounded-lg shadow-md mb-6 concept-card border-indigo-400"}>
           {"\n                "}
           <h3 className={"text-xl font-semibold text-indigo-800 mb-3"}>
-            {"١. مضروب العدد (Factorial)"}
+            {t("legacy.86b543a5741e9f06")}
           </h3>
           {"\n                "}
           <p className={"text-gray-700 mb-2"}>
-            {"\n                    مضروب العدد n (يرمز له n!) هو حاصل ضرب جميع الأعداد الصحيحة الموجبة من 1 إلى n.\n                "}
+            {t("legacy.8ba58640c0a9692a")}
           </p>
           {"\n                "}
           <div className={"bg-white p-4 rounded-lg border border-indigo-200 font-mono text-sm mb-2 ltr-text"} dir={"ltr"}>
@@ -224,7 +231,7 @@ export default function NativePage() {
             <br />
             {"\n                    "}
             <span className={"text-green-600 font-bold"}>
-              {"مثال: fact(5)"}
+              {t("legacy.dbc09a043509fa55")}
             </span>
             {" = 5 × 4 × 3 × 2 × 1 = "}
             <span className={"text-amber-600 font-bold"}>
@@ -238,11 +245,11 @@ export default function NativePage() {
         <div className={"bg-teal-50 p-5 rounded-lg shadow-md concept-card border-teal-400"}>
           {"\n                "}
           <h3 className={"text-xl font-semibold text-teal-800 mb-3"}>
-            {"٢. متتالية فيبوناتشي (Fibonacci)"}
+            {t("legacy.aa3daa2278518c17")}
           </h3>
           {"\n                "}
           <p className={"text-gray-700 mb-2"}>
-            {"\n                    متتالية فيبوناتشي هي سلسلة من الأعداد حيث كل عدد هو مجموع العددين السابقين له.\n                "}
+            {t("legacy.bc6480ebe12545af")}
           </p>
           {"\n                "}
           <div className={"bg-white p-4 rounded-lg border border-teal-200 font-mono text-sm mb-2 ltr-text"} dir={"ltr"}>
@@ -273,7 +280,7 @@ export default function NativePage() {
             <br />
             {"\n                    "}
             <span className={"text-green-600 font-bold"}>
-              {"مثال: fib(6)"}
+              {t("legacy.99e579cd847193fe")}
             </span>
             {" = 0, 1, 1, 2, 3, 5, 8 → fib(6) = "}
             <span className={"text-amber-600 font-bold"}>
@@ -295,7 +302,7 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"}></path>
             {"\n                "}
           </svg>
-          {"\n                مميزات وعيوب العودية\n            "}
+          {t("legacy.bd55da92c831a523")}
         </h2>
         {"\n\n            "}
         <div className={"overflow-x-auto"}>
@@ -304,60 +311,60 @@ export default function NativePage() {
             <thead>
               <tr className={"bg-indigo-600 text-white"}>
                 <th className={"p-3 border border-indigo-500"}>
-                  {"المعيار"}
+                  {t("legacy.695ebc35ab262fcd")}
                 </th>
                 <th className={"p-3 border border-indigo-500"}>
-                  {"الشرح"}
+                  {t("legacy.e78e51fdadaf4568")}
                 </th>
               </tr>
             </thead>
             <tbody>
               <tr className={"even:bg-gray-100"}>
                 <td className={"p-3 border border-gray-300 font-bold text-green-700"}>
-                  {"مميز"}
+                  {t("legacy.73b9091bdadfbadb")}
                 </td>
                 <td className={"p-3 border border-gray-300"}>
-                  {"الكود أبسط وأسهل للقراءة والفهم — خاصة في المسائل الرياضية مثل فيبوناتشي والمضروب."}
+                  {t("legacy.837bd23a4f619b66")}
                 </td>
               </tr>
               <tr className={"even:bg-gray-100"}>
                 <td className={"p-3 border border-gray-300 font-bold text-green-700"}>
-                  {"مميز"}
+                  {t("legacy.73b9091bdadfbadb")}
                 </td>
                 <td className={"p-3 border border-gray-300"}>
-                  {"تقسيم المشكلة إلى أجزاء أصغر يسهل حلها بشكل منفصل (Divide & Conquer)."}
+                  {t("legacy.8db8156b9f8d8314")}
                 </td>
               </tr>
               <tr className={"even:bg-gray-100"}>
                 <td className={"p-3 border border-gray-300 font-bold text-green-700"}>
-                  {"مميز"}
+                  {t("legacy.73b9091bdadfbadb")}
                 </td>
                 <td className={"p-3 border border-gray-300"}>
-                  {"مناسبة جداً للمسائل التي لها بنية طبيعية عودية (مثل الأشجار والمتتاليات)."}
+                  {t("legacy.d8cf7e0b0a286a98")}
                 </td>
               </tr>
               <tr className={"even:bg-gray-100"}>
                 <td className={"p-3 border border-gray-300 font-bold text-red-700"}>
-                  {"عيب"}
+                  {t("legacy.16d0a77d1ff4b7dc")}
                 </td>
                 <td className={"p-3 border border-gray-300"}>
-                  {"استهلاك كبير للذاكرة (Stack Overflow) مع القيم الكبيرة بسبب تكديس الاستدعاءات."}
+                  {t("legacy.c26538dad0f9aa9c")}
                 </td>
               </tr>
               <tr className={"even:bg-gray-100"}>
                 <td className={"p-3 border border-gray-300 font-bold text-red-700"}>
-                  {"عيب"}
+                  {t("legacy.16d0a77d1ff4b7dc")}
                 </td>
                 <td className={"p-3 border border-gray-300"}>
-                  {"قد يكون أبطأ من الحلول التكرارية بسبب تكلفة استدعاء الدوال المتكرر."}
+                  {t("legacy.cff851049a4e4d0d")}
                 </td>
               </tr>
               <tr className={"even:bg-gray-100"}>
                 <td className={"p-3 border border-gray-300 font-bold text-red-700"}>
-                  {"عيب"}
+                  {t("legacy.16d0a77d1ff4b7dc")}
                 </td>
                 <td className={"p-3 border border-gray-300"}>
-                  {"قد تؤدي إلى تكرار حسابات كثيرة (كما في فيبوناتشي بدون تحسين)."}
+                  {t("legacy.31673896604d1062")}
                 </td>
               </tr>
             </tbody>
@@ -378,7 +385,7 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M21 12a9 9 0 11-18 0 9 9 0 0118 0z"}></path>
             {"\n                "}
           </svg>
-          {"\n                انتقل إلى المحاكاة التفاعلية\n            "}
+          {t("legacy.25a3659fbc955cd1")}
         </a>
         {"\n        "}
       </div>

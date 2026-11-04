@@ -1,4 +1,11 @@
+"use client";
+
+import { useLanguage } from "@/components/LanguageProvider";
+import { translateLegacyText } from "@/data/legacy-english";
+
 export default function NativePage() {
+  const { language } = useLanguage();
+  const t = (text: string) => translateLegacyText(text, "calculator", language);
   return (
     <div className="native-legacy-body min-h-screen bg-gradient-to-b from-slate-50 to-white">
     {"\n    \n    \n    \n\n    \n\n    "}
@@ -14,11 +21,11 @@ export default function NativePage() {
           </span>
           {"\n          "}
           <h1 className={"text-3xl md:text-4xl font-extrabold text-gray-900"}>
-            {"آلة حاسبة علمية متكاملة"}
+            {t("legacy.90fe4900ffc83dfa")}
           </h1>
           {"\n          "}
           <p className={"text-gray-500 mt-2"}>
-            {"حسابات علمية متقدمة مع واجهة سهلة ومباشرة"}
+            {t("legacy.ffe09d87ac796f4c")}
           </p>
           {"\n        "}
         </div>

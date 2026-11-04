@@ -1,35 +1,42 @@
+"use client";
+
+import { useLanguage } from "@/components/LanguageProvider";
+import { translateLegacyText } from "@/data/legacy-english";
+
 export default function NativePage() {
+  const { language } = useLanguage();
+  const t = (text: string) => translateLegacyText(text, "sorting", language);
   return (
     <div className="native-legacy-body bg-gray-50 min-h-screen">
     {"\n  \n    \n    \n\n  "}
     <div className={"code-page"}>
       {"\n    "}
       <h1>
-        {"خوارزميات الترتيب — الكود البرمجي"}
+        {t("legacy.9a1e0b986bcf8295")}
       </h1>
       {"\n    "}
       <p className={"subtitle"}>
-        {"شرح مبسط لخوارزميتي ترتيب الفقاعة وترتيب الاختيار مع أمثلة برمجية بلغات متعددة. يمكنك نسخ الكود واستخدامه مباشرة."}
+        {t("legacy.e773682266651916")}
       </p>
       {"\n    \n    "}
       <div className={"algorithm-code-description"}>
         {"\n      "}
         <strong>
-          {"كيف تعمل خوارزميات الترتيب:"}
+          {t("legacy.cab531fad469a64c")}
         </strong>
         <br />
         {"\n      "}
         <strong>
-          {"ترتيب الفقاعة (Bubble Sort):"}
+          {t("legacy.f166373a6ad938d2")}
         </strong>
-        {" تقارن الخوارزمية كل زوج من العناصر المتجاورة وتقوم بتبديلهما إذا كانا بترتيب خاطئ. تستمر العملية حتى يتم ترتيب المصفوفة بالكامل. في كل تمريرة، \"تطفو\" أكبر قيمة إلى نهاية المصفوفة."}
+        {t("legacy.89d3b20c4ec6ae3d")}
         <br />
         <br />
         {"\n      "}
         <strong>
-          {"ترتيب الاختيار (Selection Sort):"}
+          {t("legacy.157d737e9ca5b38d")}
         </strong>
-        {" تقوم الخوارزمية بتقسيم المصفوفة إلى جزئين: مرتب وغير مرتب. في كل خطوة، تبحث عن أصغر قيمة في الجزء غير المرتب وتضعها في نهاية الجزء المرتب. تستمر حتى يتم ترتيب جميع العناصر.\n    "}
+        {t("legacy.04eea5115bb7cdf9")}
       </div>
       {"\n\n    "}
       <div className={"lang-tabs"}>
@@ -55,7 +62,7 @@ export default function NativePage() {
       <div className={"code-block active"} id={"code-cpp"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"cpp"} data-legacy-click={"copyCode('cpp')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>
@@ -69,7 +76,7 @@ export default function NativePage() {
       <div className={"code-block"} id={"code-java"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"java"} data-legacy-click={"copyCode('java')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>
@@ -83,7 +90,7 @@ export default function NativePage() {
       <div className={"code-block"} id={"code-js"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"js"} data-legacy-click={"copyCode('js')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>
@@ -97,7 +104,7 @@ export default function NativePage() {
       <div className={"code-block"} id={"code-php"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"php"} data-legacy-click={"copyCode('php')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>

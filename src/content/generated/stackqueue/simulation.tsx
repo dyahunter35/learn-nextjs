@@ -1,4 +1,11 @@
+"use client";
+
+import { useLanguage } from "@/components/LanguageProvider";
+import { translateLegacyText } from "@/data/legacy-english";
+
 export default function NativePage() {
+  const { language } = useLanguage();
+  const t = (text: string) => translateLegacyText(text, "stackqueue", language);
   return (
     <div className="native-legacy-body ">
     {"\n    "}
@@ -16,11 +23,11 @@ export default function NativePage() {
           </span>
           {"\n          "}
           <h1 className={"text-3xl md:text-4xl font-extrabold text-gray-900"}>
-            {"محاكاة المكدس والطابور التفاعلية"}
+            {t("legacy.a2bbd40c7096c682")}
           </h1>
           {"\n          "}
           <p className={"text-gray-500 mt-2"}>
-            {"اختر هيكل البيانات، أضف عناصر، وشاهد التفاعل في الوقت الحقيقي"}
+            {t("legacy.3da1be93fdd6077a")}
           </p>
           {"\n        "}
         </div>
@@ -40,7 +47,7 @@ export default function NativePage() {
                   <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"}></path>
                   {"\n                "}
                 </svg>
-                {"\n                المكدس (Stack)\n              "}
+                {t("legacy.08e5fa6f4fae816f")}
               </button>
               {"\n              "}
               <button className={"tab-btn"} data-mode={"queue"} data-legacy-click={"setMode('queue')"}>
@@ -50,7 +57,7 @@ export default function NativePage() {
                   <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"}></path>
                   {"\n                "}
                 </svg>
-                {"\n                الطابور (Queue)\n              "}
+                {t("legacy.c39d743f5208ab83")}
               </button>
               {"\n            "}
             </div>
@@ -63,7 +70,7 @@ export default function NativePage() {
             <div className={"flex items-center justify-between mb-4"}>
               {"\n              "}
               <h2 className={"text-lg font-bold text-gray-800"}>
-                {"العرض البصري"}
+                {t("legacy.539aa7a0eca5e517")}
               </h2>
               {"\n              "}
               <div className={"flex items-center gap-2 text-sm text-gray-500"}>
@@ -75,7 +82,7 @@ export default function NativePage() {
                 </svg>
                 {"\n                "}
                 <span>
-                  {"الحجم: "}
+                  {t("legacy.2826516d67362b25")}
                   <strong id={"size-info"}>
                     {"0 / 7"}
                   </strong>
@@ -100,11 +107,11 @@ export default function NativePage() {
               </svg>
               {"\n              "}
               <p className={"text-lg font-medium text-gray-500"}>
-                {"الهيكل فارغ"}
+                {t("legacy.3f3abdf6054a913d")}
               </p>
               {"\n              "}
               <p className={"text-sm text-gray-400 mt-1"}>
-                {"أضف عنصراً لبدء المحاكاة"}
+                {t("legacy.c75d2211a9c0336d")}
               </p>
               {"\n            "}
             </div>
@@ -115,7 +122,7 @@ export default function NativePage() {
           <div className={"p-6 md:p-8 border-b border-gray-100"}>
             {"\n            "}
             <h2 className={"text-lg font-bold text-gray-800 mb-4"}>
-              {"لوحة التحكم"}
+              {t("legacy.336496c4f6853de9")}
             </h2>
             {"\n\n            "}
             <div className={"flex flex-col sm:flex-row gap-4 mb-4"}>
@@ -123,7 +130,7 @@ export default function NativePage() {
               <div className={"flex-1"}>
                 {"\n                "}
                 <label htmlFor={"value-input"} className={"block text-sm font-medium text-gray-600 mb-1.5"}>
-                  {"قيمة العنصر"}
+                  {t("legacy.1add2f0bf17816cd")}
                 </label>
                 {"\n                "}
                 <input type={"text"} id={"value-input"} className={"value-input"} placeholder={"أدخل قيمة..."} autoFocus={true} />
@@ -145,7 +152,7 @@ export default function NativePage() {
                   </span>
                   {"\n                  "}
                   <span id={"action-primary-text"}>
-                    {"Push (دفع)"}
+                    {t("legacy.915f6a701946fc32")}
                   </span>
                   {"\n                "}
                 </button>
@@ -153,7 +160,7 @@ export default function NativePage() {
                 <button className={"action-btn btn-pop"} id={"action-secondary"} data-legacy-click={"pop()"}>
                   {"\n                  "}
                   <span id={"action-secondary-text"}>
-                    {"Pop (حذف)"}
+                    {t("legacy.45d5a24411c7a6ea")}
                   </span>
                   {"\n                "}
                 </button>
@@ -165,7 +172,7 @@ export default function NativePage() {
                     <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"}></path>
                     {"\n                  "}
                   </svg>
-                  {"\n                  مسح\n                "}
+                  {t("legacy.308cf07fa826d118")}
                 </button>
                 {"\n              "}
               </div>
@@ -179,7 +186,7 @@ export default function NativePage() {
                 <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"}></path>
                 {"\n              "}
               </svg>
-              {"\n              اضغط Enter على لوحة المفاتيح للإضافة السريعة\n            "}
+              {t("legacy.4ca0f71b0a4ac4ea")}
             </div>
             {"\n          "}
           </div>
@@ -190,11 +197,11 @@ export default function NativePage() {
             <div className={"flex items-center justify-between mb-3"}>
               {"\n              "}
               <h2 className={"text-lg font-bold text-gray-800"}>
-                {"سجل العمليات"}
+                {t("legacy.3b94a4bfaecd9970")}
               </h2>
               {"\n              "}
               <button data-legacy-click={"document.getElementById('log-list').innerHTML = ''"} className={"text-xs text-gray-400 hover:text-gray-600 transition"}>
-                {"\n                مسح السجل\n              "}
+                {t("legacy.0cff3068a85b832a")}
               </button>
               {"\n            "}
             </div>
@@ -202,7 +209,7 @@ export default function NativePage() {
             <div id={"log-list"} className={"log-container"}>
               {"\n              "}
               <div className={"log-entry info"}>
-                {"مرحباً بك في محاكاة المكدس والطابور"}
+                {t("legacy.0e2d952206846d38")}
               </div>
               {"\n            "}
             </div>

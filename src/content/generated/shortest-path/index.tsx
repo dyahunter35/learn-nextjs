@@ -1,4 +1,11 @@
+"use client";
+
+import { useLanguage } from "@/components/LanguageProvider";
+import { translateLegacyText } from "@/data/legacy-english";
+
 export default function NativePage() {
+  const { language } = useLanguage();
+  const t = (text: string) => translateLegacyText(text, "shortest-path", language);
   return (
     <div className="native-legacy-body bg-gray-50">
     {"\n\n    \n    \n    \n\n    "}
@@ -11,7 +18,7 @@ export default function NativePage() {
         </span>
         {"\n            "}
         <h1 className={"text-4xl font-extrabold text-gray-900"}>
-          {"\n                خوارزمية أقصر مسار "}
+          {t("legacy.f7147658087a1cb6")}
           <span className={"text-indigo-600"}>
             {"(Dijkstra)"}
           </span>
@@ -19,7 +26,7 @@ export default function NativePage() {
         </h1>
         {"\n            "}
         <p className={"mt-2 text-lg text-gray-500"}>
-          {"\n                إيجاد أقصر الطرق في الرسوم البيانية الموزونة\n            "}
+          {t("legacy.f4fd3dde45ca9afd")}
         </p>
         {"\n        "}
       </header>
@@ -33,53 +40,53 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"}></path>
             {"\n                "}
           </svg>
-          {"\n                المفهوم\n            "}
+          {t("legacy.9d0e671ad254b897")}
         </h2>
         {"\n            "}
         <p className={"text-gray-700 leading-loose mb-4"}>
-          {"\n                خوارزمية "}
+          {t("legacy.970a4d6427ee8ebd")}
           <strong>
-            {"ديكسترا (Dijkstra)"}
+            {t("legacy.f5b6ac73da56a1f3")}
           </strong>
-          {" هي خوارزمية شهيرة لحل مشكلة "}
+          {t("legacy.8e3d6707f9f23d37")}
           <strong>
-            {"إيجاد أقصر مسار"}
+            {t("legacy.54d25b1868975a11")}
           </strong>
-          {" في الرسوم البيانية الموزونة ذات الأوزان الموجبة. طورها عالم الحاسوب الهولندي "}
+          {t("legacy.28e4d78418e23ae0")}
           <strong>
-            {"إدسخر ديكسترا"}
+            {t("legacy.78f06e6486320272")}
           </strong>
-          {" عام 1956.\n            "}
+          {t("legacy.0699dd4b89b9f0b7")}
         </p>
         {"\n            "}
         <p className={"text-gray-700 leading-loose mb-4"}>
-          {"\n                تهدف الخوارزمية إلى إيجاد أقل تكلفة (أقصر مسافة) من عقدة بداية محددة إلى جميع العقد الأخرى في الرسم البياني. تعمل الخوارزمية عن طريق اختيار العقدة ذات أقل مسافة معروفة بشكل متكرر، ثم تحديث المسافات إلى جيرانها.\n            "}
+          {t("legacy.3f48e1463352bf05")}
         </p>
         {"\n            "}
         <div className={"bg-blue-50 p-5 rounded-lg shadow-md mb-6 concept-card border-blue-400"}>
           {"\n                "}
           <h3 className={"text-xl font-semibold text-blue-800 mb-3"}>
-            {"المبادئ الأساسية"}
+            {t("legacy.8636316490eaa433")}
           </h3>
           {"\n                "}
           <p className={"text-gray-700"}>
             {"\n                    "}
             <strong>
-              {"الرسم البياني الموزون:"}
+              {t("legacy.07d14dfd74f5dbb5")}
             </strong>
-            {" كل حافة لها وزن (تكلفة) يمثل المسافة أو الزمن أو المال."}
+            {t("legacy.dcdbe211a4b4f03a")}
             <br />
             {"\n                    "}
             <strong>
-              {"أقصر مسار:"}
+              {t("legacy.7e42ffcd6d174942")}
             </strong>
-            {" المسار الذي له أقل مجموع أوزان للحواف من المصدر إلى الهدف."}
+            {t("legacy.218bd049dc2686ec")}
             <br />
             {"\n                    "}
             <strong>
-              {"تسامح الاسترخاء (Relaxation):"}
+              {t("legacy.bbfaa7a39d09c23b")}
             </strong>
-            {" عملية تحديث مسافة العقدة إذا تم إيجاد مسار أقصر إليها.\n                "}
+            {t("legacy.8f75e1d003e25c8e")}
           </p>
           {"\n            "}
         </div>
@@ -95,67 +102,67 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"}></path>
             {"\n                "}
           </svg>
-          {"\n                كيف تعمل؟\n            "}
+          {t("legacy.b0c6e7806ac16125")}
         </h2>
         {"\n            "}
         <p className={"text-gray-700 leading-loose mb-4"}>
-          {"\n                تستخدم خوارزمية ديكسترا أسلوب "}
+          {t("legacy.297cb5dc5e2e0dea")}
           <strong>
-            {"الجشع (Greedy)"}
+            {t("legacy.2faccdac372c9b15")}
           </strong>
-          {" لاختيار العقدة ذات أقل مسافة في كل خطوة. تحتفظ الخوارزمية بمصفوفة للمسافات، وطابور أولوية (Priority Queue) لتتبع العقد التي تنتظر المعالجة.\n            "}
+          {t("legacy.dba72e1918b1d2da")}
         </p>
         {"\n            "}
         <div className={"bg-indigo-50 p-5 rounded-lg shadow-md mb-6 concept-card border-indigo-400"}>
           {"\n                "}
           <h3 className={"text-xl font-semibold text-indigo-800 mb-3"}>
-            {"آلية العمل خطوة بخطوة"}
+            {t("legacy.f06ee310f4d98120")}
           </h3>
           {"\n                "}
           <ol className={"list-decimal list-inside text-gray-700 space-y-2"}>
             {"\n                    "}
             <li>
-              {"حدد عقدة البداية واجعل مسافتها "}
+              {t("legacy.3e20c11b7459c12b")}
               <strong>
-                {"صفراً"}
+                {t("legacy.376fd01c0f2aacc6")}
               </strong>
-              {" وجميع العقد الأخرى "}
+              {t("legacy.010837c91f6b7bf5")}
               <strong>
-                {"مالانهاية"}
+                {t("legacy.97e705f0a77800ab")}
               </strong>
               {"."}
             </li>
             {"\n                    "}
             <li>
-              {"ضع عقدة البداية في طابور الأولوية."}
+              {t("legacy.a60e953f8a95221f")}
             </li>
             {"\n                    "}
             <li>
-              {"اسحب العقدة ذات "}
+              {t("legacy.6f031a2adf29f449")}
               <strong>
-                {"أقل مسافة"}
+                {t("legacy.3c30b913c5c4b58a")}
               </strong>
-              {" من طابور الأولوية — هذه هي العقدة الحالية."}
+              {t("legacy.28d23d6dbd986460")}
             </li>
             {"\n                    "}
             <li>
-              {"إذا كانت العقدة قد زرت سابقاً، تجاهلها وانتقل للخطوة ٣."}
+              {t("legacy.b2a5e74e041a56bc")}
             </li>
             {"\n                    "}
             <li>
-              {"قم بتحديث مسافات الجيران غير المُزارة: إذا كانت المسافة الجديدة (مسافة العقدة الحالية + وزن الحافة) "}
+              {t("legacy.aef0405e69686c5b")}
               <strong>
-                {"أقل"}
+                {t("legacy.9bab402084d6f661")}
               </strong>
-              {" من المسافة المسجلة، قم بتحديثها."}
+              {t("legacy.74d2f8dbf059ec88")}
             </li>
             {"\n                    "}
             <li>
-              {"أضف الجيران المحدثين إلى طابور الأولوية."}
+              {t("legacy.ce632b93f7eba740")}
             </li>
             {"\n                    "}
             <li>
-              {"كرر الخطوات ٣–٦ حتى يصبح الطابور فارغاً."}
+              {t("legacy.ceb9d073f64fe40b")}
             </li>
             {"\n                "}
           </ol>
@@ -165,16 +172,16 @@ export default function NativePage() {
         <div className={"bg-green-50 p-5 rounded-lg shadow-md border-green-400"}>
           {"\n                "}
           <h3 className={"text-xl font-semibold text-green-800 mb-3"}>
-            {"التعقيد الحسابي"}
+            {t("legacy.1b29b192688f3da3")}
           </h3>
           {"\n                "}
           <p className={"text-gray-700"}>
-            {"\n                    باستخدام طابور أولوية (كومة ثنائية): "}
+            {t("legacy.4886c729fd8190d7")}
             <span className={"font-mono ltr-text bg-gray-200 p-1 rounded"}>
               {"O((V + E) log V)"}
             </span>
             <br />
-            {"\n                    حيث V عدد العقد و E عدد الحواف.\n                "}
+            {t("legacy.e1654fc8a42e54a7")}
           </p>
           {"\n            "}
         </div>
@@ -190,21 +197,21 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"}></path>
             {"\n                "}
           </svg>
-          {"\n                مثال توضيحي\n            "}
+          {t("legacy.24a0c1a8b29299a0")}
         </h2>
         {"\n            "}
         <p className={"text-gray-700 leading-loose mb-4"}>
-          {"\n                لنفترض أن لدينا الرسم البياني التالي المكون من ٦ عقد (A إلى F) مع الأوزان المبينة على الحواف. نريد إيجاد أقصر المسارات من العقدة "}
+          {t("legacy.e33b7bd678d81a2b")}
           <strong>
             {"A"}
           </strong>
-          {" إلى جميع العقد الأخرى.\n            "}
+          {t("legacy.7b67ca9db4ab7588")}
         </p>
         {"\n\n            "}
         <div className={"bg-gray-50 p-6 rounded-xl border border-gray-200 mb-6"}>
           {"\n                "}
           <h4 className={"text-lg font-bold text-gray-800 mb-3 text-center"}>
-            {"الرسم البياني الموزون"}
+            {t("legacy.f853dc4fb981e4ab")}
           </h4>
           {"\n                "}
           <div className={"flex justify-center"}>
@@ -310,7 +317,7 @@ export default function NativePage() {
         <div className={"bg-amber-50 p-5 rounded-lg shadow-md border-amber-400"}>
           {"\n                "}
           <h3 className={"text-xl font-semibold text-amber-800 mb-3"}>
-            {"نتائج التطبيق (بداية من A):"}
+            {t("legacy.a223778f8524d347")}
           </h3>
           {"\n                "}
           <div className={"overflow-x-auto"}>
@@ -319,13 +326,13 @@ export default function NativePage() {
               <thead>
                 <tr className={"bg-amber-200 text-amber-900"}>
                   <th className={"p-2 border"}>
-                    {"الوجهة"}
+                    {t("legacy.8b068efc0421860c")}
                   </th>
                   <th className={"p-2 border"}>
-                    {"المسافة"}
+                    {t("legacy.dd00b654ef3ca369")}
                   </th>
                   <th className={"p-2 border"}>
-                    {"المسار"}
+                    {t("legacy.d31165f301357253")}
                   </th>
                 </tr>
               </thead>
@@ -335,7 +342,7 @@ export default function NativePage() {
                     {"A"}
                   </td>
                   <td className={"p-2 border"}>
-                    {"٠"}
+                    {t("legacy.f01f2e7542ce05d6")}
                   </td>
                   <td className={"p-2 border font-mono"}>
                     {"A"}
@@ -346,7 +353,7 @@ export default function NativePage() {
                     {"B"}
                   </td>
                   <td className={"p-2 border"}>
-                    {"٣"}
+                    {t("legacy.1a4fd527b171239a")}
                   </td>
                   <td className={"p-2 border font-mono"}>
                     {"A ← C ← B"}
@@ -357,7 +364,7 @@ export default function NativePage() {
                     {"C"}
                   </td>
                   <td className={"p-2 border"}>
-                    {"٢"}
+                    {t("legacy.537dcdbcaa60087c")}
                   </td>
                   <td className={"p-2 border font-mono"}>
                     {"A ← C"}
@@ -368,7 +375,7 @@ export default function NativePage() {
                     {"D"}
                   </td>
                   <td className={"p-2 border"}>
-                    {"٨"}
+                    {t("legacy.ca8c93db97a53554")}
                   </td>
                   <td className={"p-2 border font-mono"}>
                     {"A ← C ← B ← D"}
@@ -379,7 +386,7 @@ export default function NativePage() {
                     {"E"}
                   </td>
                   <td className={"p-2 border"}>
-                    {"١٠"}
+                    {t("legacy.3b72441409fbba79")}
                   </td>
                   <td className={"p-2 border font-mono"}>
                     {"A ← C ← B ← D ← E"}
@@ -390,7 +397,7 @@ export default function NativePage() {
                     {"F"}
                   </td>
                   <td className={"p-2 border"}>
-                    {"١٣"}
+                    {t("legacy.f2fe57bb1708022d")}
                   </td>
                   <td className={"p-2 border font-mono"}>
                     {"A ← C ← B ← D ← E ← F"}
@@ -414,7 +421,7 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"}></path>
             {"\n                "}
           </svg>
-          {"\n                خطوات الخوارزمية\n            "}
+          {t("legacy.065b4a33559a439b")}
         </h2>
         {"\n            "}
         <div className={"space-y-4"}>
@@ -422,11 +429,11 @@ export default function NativePage() {
           <div className={"bg-white p-5 rounded-lg shadow-md border-r-4 border-indigo-500"}>
             {"\n                    "}
             <h3 className={"text-lg font-bold text-indigo-700 mb-1"}>
-              {"١. التهيئة (Initialization)"}
+              {t("legacy.abe9888be9a3ae74")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700 text-sm"}>
-              {"ضع مسافة عقدة البداية = ٠، وجميع العقد الأخرى = ∞. أضف عقدة البداية إلى طابور الأولوية."}
+              {t("legacy.daf13f2b71041b4a")}
             </p>
             {"\n                "}
           </div>
@@ -434,11 +441,11 @@ export default function NativePage() {
           <div className={"bg-white p-5 rounded-lg shadow-md border-r-4 border-amber-500"}>
             {"\n                    "}
             <h3 className={"text-lg font-bold text-amber-700 mb-1"}>
-              {"٢. الاستخراج (Extract Min)"}
+              {t("legacy.3cbc4dd5d2fa6392")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700 text-sm"}>
-              {"اسحب العقدة ذات أقل مسافة من طابور الأولوية. هذه هي العقدة التي سنزورها حالياً."}
+              {t("legacy.f286731b608eed87")}
             </p>
             {"\n                "}
           </div>
@@ -446,11 +453,11 @@ export default function NativePage() {
           <div className={"bg-white p-5 rounded-lg shadow-md border-r-4 border-emerald-500"}>
             {"\n                    "}
             <h3 className={"text-lg font-bold text-emerald-700 mb-1"}>
-              {"٣. الاسترخاء (Relaxation)"}
+              {t("legacy.3482ee87d1fbf997")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700 text-sm"}>
-              {"لكل جار غير مزار للعقدة الحالية: احسب المسافة الجديدة = مسافة العقدة الحالية + وزن الحافة. إذا كانت أقل من المسافة الحالية للجار، قم بتحديثها وأضف الجار إلى طابور الأولوية."}
+              {t("legacy.a7e0888157feb3ca")}
             </p>
             {"\n                "}
           </div>
@@ -458,11 +465,11 @@ export default function NativePage() {
           <div className={"bg-white p-5 rounded-lg shadow-md border-r-4 border-rose-500"}>
             {"\n                    "}
             <h3 className={"text-lg font-bold text-rose-700 mb-1"}>
-              {"٤. التكرار (Iteration)"}
+              {t("legacy.1d10f22ac06958cb")}
             </h3>
             {"\n                    "}
             <p className={"text-gray-700 text-sm"}>
-              {"كرر الخطوتين ٢ و ٣ حتى يصبح طابور الأولوية فارغاً. عندها نكون قد وجدنا أقصر المسارات إلى جميع العقد التي يمكن الوصول إليها."}
+              {t("legacy.8c20bc421964292e")}
             </p>
             {"\n                "}
           </div>
@@ -480,7 +487,7 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"}></path>
             {"\n                "}
           </svg>
-          {"\n                التطبيقات\n            "}
+          {t("legacy.6d30bb0c3d9bd942")}
         </h2>
         {"\n            "}
         <div className={"grid grid-cols-1 md:grid-cols-2 gap-4"}>
@@ -488,25 +495,25 @@ export default function NativePage() {
           <div className={"bg-blue-50 p-5 rounded-lg shadow-md border-blue-400"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-blue-800 mb-2"}>
-              {"خرائط وتوجيه"}
+              {t("legacy.2a7071e9e7774f63")}
             </h3>
             {"\n                    "}
             <ul className={"list-disc list-inside text-gray-700 space-y-1 text-sm"}>
               {"\n                        "}
               <li>
-                {"خرائط Google — إيجاد أقصر طريق بين موقعين"}
+                {t("legacy.52c3c02b8e15616d")}
               </li>
               {"\n                        "}
               <li>
-                {"أنظمة GPS والملاحة"}
+                {t("legacy.e3b0e18a8781651b")}
               </li>
               {"\n                        "}
               <li>
-                {"توجيه شبكات الحاسوب (OSPF, IS-IS)"}
+                {t("legacy.f65f77b394eca518")}
               </li>
               {"\n                        "}
               <li>
-                {"تخطيط طرق النقل والشحن"}
+                {t("legacy.54763db23cf34459")}
               </li>
               {"\n                    "}
             </ul>
@@ -516,25 +523,25 @@ export default function NativePage() {
           <div className={"bg-purple-50 p-5 rounded-lg shadow-md border-purple-400"}>
             {"\n                    "}
             <h3 className={"text-xl font-semibold text-purple-800 mb-2"}>
-              {"شبكات وذكاء اصطناعي"}
+              {t("legacy.adefd89aec97c8da")}
             </h3>
             {"\n                    "}
             <ul className={"list-disc list-inside text-gray-700 space-y-1 text-sm"}>
               {"\n                        "}
               <li>
-                {"تحليل الشبكات الاجتماعية (درجات البعد)"}
+                {t("legacy.27762671b0226b58")}
               </li>
               {"\n                        "}
               <li>
-                {"التخطيط الحضري وتوزيع الخدمات"}
+                {t("legacy.95f549e0c897228d")}
               </li>
               {"\n                        "}
               <li>
-                {"الذكاء الاصطناعي — إيجاد المسارات في الألعاب"}
+                {t("legacy.0ecce2e53dbfa316")}
               </li>
               {"\n                        "}
               <li>
-                {"إدارة سلاسل الإمداد والخدمات اللوجستية"}
+                {t("legacy.9b07698e870bc1c8")}
               </li>
               {"\n                    "}
             </ul>
@@ -556,7 +563,7 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M21 12a9 9 0 11-18 0 9 9 0 0118 0z"}></path>
             {"\n                "}
           </svg>
-          {"\n                انتقل إلى المحاكاة التفاعلية\n            "}
+          {t("legacy.25a3659fbc955cd1")}
         </a>
         {"\n        "}
       </div>

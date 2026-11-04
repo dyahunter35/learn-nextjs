@@ -1,4 +1,11 @@
+"use client";
+
+import { useLanguage } from "@/components/LanguageProvider";
+import { translateLegacyText } from "@/data/legacy-english";
+
 export default function NativePage() {
+  const { language } = useLanguage();
+  const t = (text: string) => translateLegacyText(text, "shortest-path", language);
   return (
     <div className="native-legacy-body min-h-screen bg-gradient-to-b from-slate-50 to-white">
     {"\n\n    \n    \n    \n\n    \n\n    "}
@@ -11,11 +18,11 @@ export default function NativePage() {
         </span>
         {"\n            "}
         <h1 className={"text-3xl md:text-4xl font-extrabold text-gray-900"}>
-          {"محاكاة خوارزمية أقصر مسار"}
+          {t("legacy.bf6d928c1916b87b")}
         </h1>
         {"\n            "}
         <p className={"text-gray-500 mt-2"}>
-          {"Dijkstra — خطوة بخطوة على رسم بياني موزون مع رسوم متحركة"}
+          {t("legacy.f5647839403623f9")}
         </p>
         {"\n        "}
       </div>
@@ -29,7 +36,7 @@ export default function NativePage() {
             <div className={"w-3 h-3 bg-indigo-500 rounded-full animate-pulse"}></div>
             {"\n                    "}
             <h2 className={"text-lg font-bold text-gray-800"}>
-              {"إعدادات المحاكاة والتحكم"}
+              {t("legacy.4f27a849caa92554")}
             </h2>
             {"\n                "}
           </div>
@@ -39,7 +46,7 @@ export default function NativePage() {
             <div>
               {"\n                        "}
               <label htmlFor={"startNodeSelect"} className={"block text-sm font-bold text-gray-700 mb-2"}>
-                {"عقدة البداية:"}
+                {t("legacy.03e9c027a613ca6c")}
               </label>
               {"\n                        "}
               <select id={"startNodeSelect"} className={"w-full px-4 py-3.5 bg-gray-50 text-gray-900 border-2 border-gray-200 rounded-xl focus:border-indigo-400 transition-all appearance-none cursor-pointer"} data-legacy-change={"resetSimulation()"}>
@@ -75,7 +82,7 @@ export default function NativePage() {
             <div>
               {"\n                        "}
               <label className={"block text-sm font-bold text-gray-700 mb-2"}>
-                {"الرسم البياني:"}
+                {t("legacy.67eb8a4e9b299bf0")}
               </label>
               {"\n                        "}
               <div className={"flex items-center gap-2 h-[50px]"}>
@@ -89,7 +96,7 @@ export default function NativePage() {
                   </svg>
                   {"\n                                "}
                   <span>
-                    {"٦ عقد — ٩ حواف موزونة"}
+                    {t("legacy.6a3f0f58beeb2047")}
                   </span>
                   {"\n                            "}
                 </div>
@@ -103,19 +110,19 @@ export default function NativePage() {
           <div className={"flex flex-wrap gap-3 mt-4"}>
             {"\n                    "}
             <button data-legacy-click={"startSimulation()"} id={"startButton"} className={"flex-1 min-w-[100px] px-5 py-3.5 bg-gradient-to-l from-indigo-600 to-indigo-700 text-white font-bold rounded-xl shadow-lg shadow-indigo-200 hover:shadow-xl hover:shadow-indigo-300 hover:-translate-y-0.5 transition-all duration-200 text-sm disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-lg"}>
-              {"\n                        ▶ ابدأ\n                    "}
+              {t("legacy.cdcdb088305e072a")}
             </button>
             {"\n                    "}
             <button data-legacy-click={"nextStep()"} id={"nextButton"} className={"flex-1 min-w-[100px] px-5 py-3.5 bg-gradient-to-l from-emerald-500 to-emerald-600 text-white font-bold rounded-xl shadow-lg shadow-emerald-200 hover:shadow-xl hover:shadow-emerald-300 hover:-translate-y-0.5 transition-all duration-200 text-sm disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-lg"} disabled={true}>
-              {"\n                        ← الخطوة التالية\n                    "}
+              {t("legacy.0103ac838415af8b")}
             </button>
             {"\n                    "}
             <button data-legacy-click={"previousStep()"} id={"prevButton"} className={"flex-1 min-w-[100px] px-5 py-3.5 bg-gradient-to-l from-gray-500 to-gray-600 text-white font-bold rounded-xl shadow-lg shadow-gray-200 hover:shadow-xl hover:shadow-gray-300 hover:-translate-y-0.5 transition-all duration-200 text-sm disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-lg"} disabled={true}>
-              {"\n                        → الخطوة السابقة\n                    "}
+              {t("legacy.c0fa11616338a947")}
             </button>
             {"\n                    "}
             <button data-legacy-click={"resetSimulation()"} id={"resetButton"} className={"flex-1 min-w-[100px] px-5 py-3.5 bg-gradient-to-l from-rose-500 to-rose-600 text-white font-bold rounded-xl shadow-lg shadow-rose-200 hover:shadow-xl hover:shadow-rose-300 hover:-translate-y-0.5 transition-all duration-200 text-sm"}>
-              {"\n                        ↺ إعادة الضبط\n                    "}
+              {t("legacy.d1c2eaaa776c5219")}
             </button>
             {"\n                "}
           </div>
@@ -129,7 +136,7 @@ export default function NativePage() {
             <div className={"w-3 h-3 bg-emerald-500 rounded-full animate-pulse"}></div>
             {"\n                    "}
             <h2 className={"text-lg font-bold text-gray-800"}>
-              {"تمثيل الرسم البياني الموزون"}
+              {t("legacy.68d77a5035b58f38")}
             </h2>
             {"\n                "}
           </div>
@@ -138,32 +145,32 @@ export default function NativePage() {
             {"\n                    "}
             <span className={"legend-item"}>
               <span className={"legend-dot bg-gray-200 border border-gray-400"}></span>
-              {" غير مزارة"}
+              {t("legacy.4d2c16eb54d7b301")}
             </span>
             {"\n                    "}
             <span className={"legend-item"}>
               <span className={"legend-dot bg-[#fbbf24] border border-[#d97706]"}></span>
-              {" في طابور الأولوية"}
+              {t("legacy.08855f37da4d8839")}
             </span>
             {"\n                    "}
             <span className={"legend-item"}>
               <span className={"legend-dot bg-[#34d399] border border-[#059669]"}></span>
-              {" الحالية"}
+              {t("legacy.58d0e21f45f82a9a")}
             </span>
             {"\n                    "}
             <span className={"legend-item"}>
               <span className={"legend-dot bg-[#6366f1] border border-[#4f46e5]"}></span>
-              {" تمت زيارتها"}
+              {t("legacy.f25f23580e1520f2")}
             </span>
             {"\n                    "}
             <span className={"legend-item"}>
               <span className={"legend-dot bg-transparent border-2 border-dashed border-[#f59e0b]"}></span>
-              {" حافة مرخاة"}
+              {t("legacy.bb0c5b6e84253ac9")}
             </span>
             {"\n                    "}
             <span className={"legend-item"}>
               <span className={"legend-dot bg-transparent border-2 border-[#34d399]"}></span>
-              {" المسار الأقصر"}
+              {t("legacy.dfdc0c47fc5c357f")}
             </span>
             {"\n                "}
           </div>
@@ -183,13 +190,13 @@ export default function NativePage() {
             <div className={"w-3 h-3 bg-amber-500 rounded-full animate-pulse"}></div>
             {"\n                    "}
             <h2 className={"text-lg font-bold text-gray-800"}>
-              {"معلومات الخطوات والنتائج"}
+              {t("legacy.a181fa5fa09ce847")}
             </h2>
             {"\n                "}
           </div>
           {"\n\n                "}
           <div id={"statusMessage"} className={"status-message mb-4"}>
-            {"\n                    اختر عقدة البداية، ثم اضغط \"ابدأ\".\n                "}
+            {t("legacy.d5da8f55cca6bb8d")}
           </div>
           {"\n\n                "}
           <div className={"grid grid-cols-1 md:grid-cols-2 gap-4 mb-4"}>
@@ -197,7 +204,7 @@ export default function NativePage() {
             <div className={"info-panel"}>
               {"\n                        "}
               <h3 className={"text-sm font-bold text-gray-700 mb-2"}>
-                {"جدول المسافات"}
+                {t("legacy.aa661115a952f7bb")}
               </h3>
               {"\n                        "}
               <div className={"overflow-x-auto"}>
@@ -206,13 +213,13 @@ export default function NativePage() {
                   <thead>
                     <tr>
                       <th>
-                        {"العقدة"}
+                        {t("legacy.b70ebc064d026402")}
                       </th>
                       <th>
-                        {"المسافة"}
+                        {t("legacy.dd00b654ef3ca369")}
                       </th>
                       <th>
-                        {"المسار"}
+                        {t("legacy.d31165f301357253")}
                       </th>
                     </tr>
                   </thead>
@@ -226,7 +233,7 @@ export default function NativePage() {
             <div className={"info-panel"}>
               {"\n                        "}
               <h3 className={"text-sm font-bold text-gray-700 mb-2"}>
-                {"سجل الخطوات"}
+                {t("legacy.b8ed5556a18721a0")}
               </h3>
               {"\n                        "}
               <div id={"stepsLog"} className={"steps-log-container"}></div>
@@ -246,7 +253,7 @@ export default function NativePage() {
                   <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"}></path>
                   {"\n                            "}
                 </svg>
-                {"\n                            أقصر المسارات — اضغط على وجهة لتظليل المسار\n                        "}
+                {t("legacy.f1adabd05578e84d")}
               </h3>
               {"\n                        "}
               <div id={"finalPathsContainer"} className={"grid grid-cols-1 sm:grid-cols-2 gap-2"}></div>

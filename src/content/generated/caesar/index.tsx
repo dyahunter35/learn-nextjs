@@ -1,4 +1,11 @@
+"use client";
+
+import { useLanguage } from "@/components/LanguageProvider";
+import { translateLegacyText } from "@/data/legacy-english";
+
 export default function NativePage() {
+  const { language } = useLanguage();
+  const t = (text: string) => translateLegacyText(text, "caesar", language);
   return (
     <div className="native-legacy-body bg-gray-50">
     {"\n\n    \n    \n    \n\n    \n\n    "}
@@ -11,7 +18,7 @@ export default function NativePage() {
         </span>
         {"\n            "}
         <h1 className={"text-4xl font-extrabold text-gray-900"}>
-          {"\n                خوارزمية يوليوس قيصر "}
+          {t("legacy.64fe805edfdaf7c7")}
           <span className={"text-green-600"}>
             {"(Caesar Cipher)"}
           </span>
@@ -19,7 +26,7 @@ export default function NativePage() {
         </h1>
         {"\n            "}
         <p className={"mt-2 text-lg text-gray-500"}>
-          {"\n                فهم آلية التشفير والتحليل: تشفير قيصر\n            "}
+          {t("legacy.ac7566d05267c43a")}
         </p>
         {"\n        "}
       </header>
@@ -33,15 +40,15 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"}></path>
             {"\n                "}
           </svg>
-          {"\n                ما هو تشفير قيصر؟\n            "}
+          {t("legacy.f7e70215d75f50a5")}
         </h2>
         {"\n            "}
         <p className={"text-gray-700 leading-loose mb-4"}>
-          {"\n                تشفير قيصر (Caesar Cipher) هو أحد أقدم وأبسط أساليب التشفير المعروفة في التاريخ. سُمي بهذا الاسم نسبةً إلى القائد الروماني يوليوس قيصر (Julius Caesar) الذي استخدمه للتواصل مع جنرالاته بشكل آمن.\n            "}
+          {t("legacy.9067c0ef6ceed642")}
         </p>
         {"\n            "}
         <p className={"text-gray-700 leading-loose mb-4"}>
-          {"\n                تعتمد الفكرة على إزاحة (Shift) كل حرف في النص الأصلي بعدد ثابت من المواضع في الأبجدية، مما ينتج نصاً مشفراً لا يمكن قراءته إلا من قبل الشخص الذي يعرف قيمة الإزاحة (المفتاح).\n            "}
+          {t("legacy.a9bbe5a9a6c4c34e")}
         </p>
         {"\n            "}
         <div className={"bg-yellow-50 p-5 rounded-lg shadow-md border-r-4 border-yellow-400"}>
@@ -51,7 +58,7 @@ export default function NativePage() {
             <span className={"text-lg"}>
               {"🏛️"}
             </span>
-            {" يُقال إن يوليوس قيصر كان يستخدم إزاحة بمقدار 3 أحرف (Key = 3) في مراسلاته العسكرية.\n                "}
+            {t("legacy.b8db69ff22634b50")}
           </p>
           {"\n            "}
         </div>
@@ -69,17 +76,17 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M15 12a3 3 0 11-6 0 3 3 0 016 0z"}></path>
             {"\n                "}
           </svg>
-          {"\n                كيفية عمله: شرح عملية الإزاحة\n            "}
+          {t("legacy.b35d2db3fee43dd9")}
         </h2>
         {"\n            "}
         <p className={"text-gray-700 leading-loose mb-4"}>
-          {"\n                تعتمد الفكرة على ترقيم الأحرف الأبجدية العربية (28 حرفاً) بأرقام من 1 إلى 28، ثم إزاحة رقم كل حرف بمقدار ثابت يسمى المفتاح (Key).\n            "}
+          {t("legacy.9c8d042476f41c5b")}
         </p>
         {"\n            "}
         <div className={"bg-blue-50 p-5 rounded-lg shadow-md mb-6"}>
           {"\n                "}
           <h3 className={"text-xl font-semibold text-blue-800 mb-3"}>
-            {"الأبجدية العربية (28 حرفاً)"}
+            {t("legacy.1e3d04973b7e8855")}
           </h3>
           {"\n                "}
           <div className={"overflow-x-auto"}>
@@ -88,28 +95,28 @@ export default function NativePage() {
               <thead>
                 <tr>
                   <th className={"bg-indigo-600 text-white"}>
-                    {"الفهرس"}
+                    {t("legacy.9871307f09d9e9d0")}
                   </th>
                   <th className={"bg-indigo-600 text-white"}>
-                    {"الحرف"}
+                    {t("legacy.fdfdf3a018085c1f")}
                   </th>
                   <th className={"bg-indigo-600 text-white"}>
-                    {"الفهرس"}
+                    {t("legacy.9871307f09d9e9d0")}
                   </th>
                   <th className={"bg-indigo-600 text-white"}>
-                    {"الحرف"}
+                    {t("legacy.fdfdf3a018085c1f")}
                   </th>
                   <th className={"bg-indigo-600 text-white"}>
-                    {"الفهرس"}
+                    {t("legacy.9871307f09d9e9d0")}
                   </th>
                   <th className={"bg-indigo-600 text-white"}>
-                    {"الحرف"}
+                    {t("legacy.fdfdf3a018085c1f")}
                   </th>
                   <th className={"bg-indigo-600 text-white"}>
-                    {"الفهرس"}
+                    {t("legacy.9871307f09d9e9d0")}
                   </th>
                   <th className={"bg-indigo-600 text-white"}>
-                    {"الحرف"}
+                    {t("legacy.fdfdf3a018085c1f")}
                   </th>
                 </tr>
               </thead>
@@ -119,25 +126,25 @@ export default function NativePage() {
                     {"1"}
                   </td>
                   <td>
-                    {"ا"}
+                    {t("legacy.be0fa08bb8f12a37")}
                   </td>
                   <td>
                     {"8"}
                   </td>
                   <td>
-                    {"د"}
+                    {t("legacy.b15aa8e25eddf663")}
                   </td>
                   <td>
                     {"15"}
                   </td>
                   <td>
-                    {"ض"}
+                    {t("legacy.892f5fc72c8aceba")}
                   </td>
                   <td>
                     {"22"}
                   </td>
                   <td>
-                    {"ك"}
+                    {t("legacy.854a312a1a019aaa")}
                   </td>
                 </tr>
                 <tr>
@@ -145,25 +152,25 @@ export default function NativePage() {
                     {"2"}
                   </td>
                   <td>
-                    {"ب"}
+                    {t("legacy.cb22e4a914210546")}
                   </td>
                   <td>
                     {"9"}
                   </td>
                   <td>
-                    {"ذ"}
+                    {t("legacy.29b50a05e8dc1b4a")}
                   </td>
                   <td>
                     {"16"}
                   </td>
                   <td>
-                    {"ط"}
+                    {t("legacy.a55da129540086ad")}
                   </td>
                   <td>
                     {"23"}
                   </td>
                   <td>
-                    {"ل"}
+                    {t("legacy.6ddaa72eed069591")}
                   </td>
                 </tr>
                 <tr>
@@ -171,25 +178,25 @@ export default function NativePage() {
                     {"3"}
                   </td>
                   <td>
-                    {"ت"}
+                    {t("legacy.6a9b00bf691bdfd2")}
                   </td>
                   <td>
                     {"10"}
                   </td>
                   <td>
-                    {"ر"}
+                    {t("legacy.36a9d753b0bdc5e7")}
                   </td>
                   <td>
                     {"17"}
                   </td>
                   <td>
-                    {"ظ"}
+                    {t("legacy.ac850b0dfe00607a")}
                   </td>
                   <td>
                     {"24"}
                   </td>
                   <td>
-                    {"م"}
+                    {t("legacy.988ada1c5b979ec6")}
                   </td>
                 </tr>
                 <tr>
@@ -197,25 +204,25 @@ export default function NativePage() {
                     {"4"}
                   </td>
                   <td>
-                    {"ث"}
+                    {t("legacy.e57c96ba8aea7ea0")}
                   </td>
                   <td>
                     {"11"}
                   </td>
                   <td>
-                    {"ز"}
+                    {t("legacy.a83185c0fe218172")}
                   </td>
                   <td>
                     {"18"}
                   </td>
                   <td>
-                    {"ع"}
+                    {t("legacy.a0f49047a7ffbc61")}
                   </td>
                   <td>
                     {"25"}
                   </td>
                   <td>
-                    {"ن"}
+                    {t("legacy.cb92a8b00c6956fd")}
                   </td>
                 </tr>
                 <tr>
@@ -223,25 +230,25 @@ export default function NativePage() {
                     {"5"}
                   </td>
                   <td>
-                    {"ج"}
+                    {t("legacy.51c9a584ad13b9d2")}
                   </td>
                   <td>
                     {"12"}
                   </td>
                   <td>
-                    {"س"}
+                    {t("legacy.861183a44bf3c1f1")}
                   </td>
                   <td>
                     {"19"}
                   </td>
                   <td>
-                    {"غ"}
+                    {t("legacy.d6f7c01d455fe141")}
                   </td>
                   <td>
                     {"26"}
                   </td>
                   <td>
-                    {"ه"}
+                    {t("legacy.517d335897807109")}
                   </td>
                 </tr>
                 <tr>
@@ -249,25 +256,25 @@ export default function NativePage() {
                     {"6"}
                   </td>
                   <td>
-                    {"ح"}
+                    {t("legacy.56750292f58ce336")}
                   </td>
                   <td>
                     {"13"}
                   </td>
                   <td>
-                    {"ش"}
+                    {t("legacy.119c5451ad7c3fae")}
                   </td>
                   <td>
                     {"20"}
                   </td>
                   <td>
-                    {"ف"}
+                    {t("legacy.6e6a73ade56e964f")}
                   </td>
                   <td>
                     {"27"}
                   </td>
                   <td>
-                    {"و"}
+                    {t("legacy.6245b4d08f3f2a99")}
                   </td>
                 </tr>
                 <tr>
@@ -275,25 +282,25 @@ export default function NativePage() {
                     {"7"}
                   </td>
                   <td>
-                    {"خ"}
+                    {t("legacy.84d816dcc5339ad7")}
                   </td>
                   <td>
                     {"14"}
                   </td>
                   <td>
-                    {"ص"}
+                    {t("legacy.1f6940369a9cd852")}
                   </td>
                   <td>
                     {"21"}
                   </td>
                   <td>
-                    {"ق"}
+                    {t("legacy.c67f042db9cc1f17")}
                   </td>
                   <td>
                     {"28"}
                   </td>
                   <td>
-                    {"ي"}
+                    {t("legacy.68a74b81692467b8")}
                   </td>
                 </tr>
               </tbody>
@@ -304,7 +311,7 @@ export default function NativePage() {
         </div>
         {"\n            "}
         <p className={"text-gray-700 leading-loose"}>
-          {"\n                عند تشفير رسالة، يتم استبدال كل حرف بالحرف الذي يليه بمقدار المفتاح في الأبجدية. مثلاً، إذا كان المفتاح = 3، فإن الحرف \"أ\" يُستبدل بالحرف \"د\"، والحرف \"ب\" يُستبدل بالحرف \"هـ\"، وهكذا.\n            "}
+          {t("legacy.5fc5f6039539cba6")}
         </p>
         {"\n        "}
       </section>
@@ -318,13 +325,13 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"}></path>
             {"\n                "}
           </svg>
-          {"\n                قانون التشفير (Encryption)\n            "}
+          {t("legacy.559f15234be0c4b1")}
         </h2>
         {"\n            "}
         <div className={"bg-green-50 p-5 rounded-lg shadow-md border-green-400"}>
           {"\n                "}
           <p className={"text-gray-700 mb-3 text-lg"}>
-            {"\n                    يتم تشفير الحرف عن طريق إضافة قيمة المفتاح إلى رقم الحرف الأصلي، ثم أخذ باقي القسمة على 28:\n                "}
+            {t("legacy.156c7836fbee330f")}
           </p>
           {"\n                "}
           <div className={"formula text-2xl bg-gray-100 p-4 rounded-lg shadow-inner overflow-x-auto text-center font-bold text-green-700"}>
@@ -336,19 +343,19 @@ export default function NativePage() {
             <span className={"font-mono"}>
               {"x"}
             </span>
-            {": رقم الحرف الأصلي في الأبجدية (1-28).\n                    "}
+            {t("legacy.788f9ad0f3784b43")}
             <br />
             {"\n                    "}
             <span className={"font-mono"}>
               {"Key"}
             </span>
-            {": مفتاح الإزاحة (عدد صحيح بين 1 و 27).\n                    "}
+            {t("legacy.9ee1eb1950389f81")}
             <br />
             {"\n                    "}
             <span className={"font-mono"}>
               {"mod 28"}
             </span>
-            {": عملية modulo للحفاظ على النتيجة ضمن نطاق 1-28.\n                "}
+            {t("legacy.a707fc9bd7e67032")}
           </p>
           {"\n            "}
         </div>
@@ -364,13 +371,13 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"}></path>
             {"\n                "}
           </svg>
-          {"\n                قانون فك التشفير (Decryption)\n            "}
+          {t("legacy.f2de41f8c444c34f")}
         </h2>
         {"\n            "}
         <div className={"bg-purple-50 p-5 rounded-lg shadow-md border-purple-400"}>
           {"\n                "}
           <p className={"text-gray-700 mb-3 text-lg"}>
-            {"\n                    يتم فك التشفير بعكس العملية، وذلك بطرح قيمة المفتاح من رقم الحرف المشفر، ثم أخذ باقي القسمة على 28:\n                "}
+            {t("legacy.07b4178a7b809093")}
           </p>
           {"\n                "}
           <div className={"formula text-2xl bg-gray-100 p-4 rounded-lg shadow-inner overflow-x-auto text-center font-bold text-purple-700"}>
@@ -382,19 +389,19 @@ export default function NativePage() {
             <span className={"font-mono"}>
               {"x"}
             </span>
-            {": رقم الحرف المشفر في الأبجدية (1-28).\n                    "}
+            {t("legacy.3d141f90ae9e9bc4")}
             <br />
             {"\n                    "}
             <span className={"font-mono"}>
               {"Key"}
             </span>
-            {": نفس المفتاح الذي استُخدم في التشفير.\n                    "}
+            {t("legacy.f5df385bb6620b64")}
             <br />
             {"\n                    "}
             <span className={"font-mono"}>
-              {"ملاحظة"}
+              {t("legacy.0be7afd7e65f5b5e")}
             </span>
-            {": في حال كانت نتيجة الطرح سالبة، نضيف 28 للحصول على رقم موجب.\n                "}
+            {t("legacy.a5a2aa82c37627fa")}
           </p>
           {"\n            "}
         </div>
@@ -410,13 +417,13 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"}></path>
             {"\n                "}
           </svg>
-          {"\n                مثال توضيحي\n            "}
+          {t("legacy.24a0c1a8b29299a0")}
         </h2>
         {"\n            "}
         <p className={"text-gray-700 leading-loose mb-4"}>
-          {"\n                لنفترض أن المفتاح (Key) = 3، ونريد تشفير الكلمة "}
+          {t("legacy.728d38d2adcc498f")}
           <span className={"font-bold text-indigo-700 cipher-text"}>
-            {"مرحبا"}
+            {t("legacy.80eff1a750bb5400")}
           </span>
           {":\n            "}
         </p>
@@ -427,26 +434,26 @@ export default function NativePage() {
             <thead>
               <tr>
                 <th>
-                  {"الحرف الأصلي"}
+                  {t("legacy.c7cd08b72f807595")}
                 </th>
                 <th>
-                  {"رقمه (x)"}
+                  {t("legacy.248b0811ebad9261")}
                 </th>
                 <th>
-                  {"عملية التشفير"}
+                  {t("legacy.2b0e950468250da8")}
                 </th>
                 <th>
-                  {"الرقم الجديد"}
+                  {t("legacy.8323a1f92297c8ee")}
                 </th>
                 <th>
-                  {"الحرف المشفر"}
+                  {t("legacy.428252867f830e89")}
                 </th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td className={"cipher-text text-xl"}>
-                  {"م"}
+                  {t("legacy.988ada1c5b979ec6")}
                 </td>
                 <td>
                   {"24"}
@@ -458,12 +465,12 @@ export default function NativePage() {
                   {"27"}
                 </td>
                 <td className={"cipher-text text-xl text-green-700 font-bold"}>
-                  {"و"}
+                  {t("legacy.6245b4d08f3f2a99")}
                 </td>
               </tr>
               <tr>
                 <td className={"cipher-text text-xl"}>
-                  {"ر"}
+                  {t("legacy.36a9d753b0bdc5e7")}
                 </td>
                 <td>
                   {"10"}
@@ -475,12 +482,12 @@ export default function NativePage() {
                   {"13"}
                 </td>
                 <td className={"cipher-text text-xl text-green-700 font-bold"}>
-                  {"ش"}
+                  {t("legacy.119c5451ad7c3fae")}
                 </td>
               </tr>
               <tr>
                 <td className={"cipher-text text-xl"}>
-                  {"ح"}
+                  {t("legacy.56750292f58ce336")}
                 </td>
                 <td>
                   {"6"}
@@ -492,12 +499,12 @@ export default function NativePage() {
                   {"9"}
                 </td>
                 <td className={"cipher-text text-xl text-green-700 font-bold"}>
-                  {"ذ"}
+                  {t("legacy.29b50a05e8dc1b4a")}
                 </td>
               </tr>
               <tr>
                 <td className={"cipher-text text-xl"}>
-                  {"ب"}
+                  {t("legacy.cb22e4a914210546")}
                 </td>
                 <td>
                   {"2"}
@@ -509,12 +516,12 @@ export default function NativePage() {
                   {"5"}
                 </td>
                 <td className={"cipher-text text-xl text-green-700 font-bold"}>
-                  {"ج"}
+                  {t("legacy.51c9a584ad13b9d2")}
                 </td>
               </tr>
               <tr>
                 <td className={"cipher-text text-xl"}>
-                  {"ا"}
+                  {t("legacy.be0fa08bb8f12a37")}
                 </td>
                 <td>
                   {"1"}
@@ -526,7 +533,7 @@ export default function NativePage() {
                   {"4"}
                 </td>
                 <td className={"cipher-text text-xl text-green-700 font-bold"}>
-                  {"ث"}
+                  {t("legacy.e57c96ba8aea7ea0")}
                 </td>
               </tr>
             </tbody>
@@ -541,27 +548,27 @@ export default function NativePage() {
             <span className={"text-xl"}>
               {"🔐"}
             </span>
-            {" النتيجة: كلمة "}
+            {t("legacy.69e4e631905aeb3f")}
             <span className={"cipher-text text-xl font-bold"}>
-              {"مرحبا"}
+              {t("legacy.80eff1a750bb5400")}
             </span>
-            {" تُصبح "}
+            {t("legacy.c204f3d4f4571b96")}
             <span className={"cipher-text text-xl font-bold text-teal-700"}>
-              {"وشذجث"}
+              {t("legacy.84530ccee35a62e5")}
             </span>
-            {" بعد التشفير بمفتاح 3.\n                "}
+            {t("legacy.9178fe02b94d70c4")}
           </p>
           {"\n            "}
         </div>
         {"\n            "}
         <p className={"text-gray-700 leading-loose mt-4"}>
-          {"\n                وللتحقق من صحة العملية، يمكن تطبيق قانون فك التشفير على النص المشفر "}
+          {t("legacy.c89af59b93e3a25a")}
           <span className={"cipher-text font-bold"}>
-            {"وشذجث"}
+            {t("legacy.84530ccee35a62e5")}
           </span>
-          {" بنفس المفتاح (3) لاسترجاع النص الأصلي "}
+          {t("legacy.70a03bd92d8c82ae")}
           <span className={"cipher-text font-bold"}>
-            {"مرحبا"}
+            {t("legacy.80eff1a750bb5400")}
           </span>
           {".\n            "}
         </p>
@@ -579,11 +586,11 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"}></path>
             {"\n                "}
           </svg>
-          {"\n                مفهوم المفتاح (Key) وأهميته\n            "}
+          {t("legacy.c9e1d919d95e0764")}
         </h2>
         {"\n            "}
         <p className={"text-gray-700 leading-loose mb-4"}>
-          {"\n                المفتاح (Key) هو الرقم السري الذي يحدد مقدار الإزاحة. يجب أن يتفق عليه كل من المُرسِل والمُستقبِل مسبقاً ليتمكن المُستقبِل من فك تشفير الرسالة بنجاح.\n            "}
+          {t("legacy.4ca645c7d9ac3ce5")}
         </p>
         {"\n            "}
         <div className={"grid grid-cols-1 md:grid-cols-2 gap-4 mb-4"}>
@@ -591,21 +598,21 @@ export default function NativePage() {
           <div className={"bg-blue-50 p-5 rounded-lg shadow-md"}>
             {"\n                    "}
             <h3 className={"text-lg font-bold text-blue-800 mb-2"}>
-              {"أهمية المفتاح"}
+              {t("legacy.a4f8a1d1f1cc83aa")}
             </h3>
             {"\n                    "}
             <ul className={"list-disc list-inside space-y-1 text-gray-700"}>
               {"\n                        "}
               <li>
-                {"بدون المفتاح الصحيح، لا يمكن فك تشفير الرسالة."}
+                {t("legacy.381e9fda09a66135")}
               </li>
               {"\n                        "}
               <li>
-                {"كلما كان المفتاح معقداً، زادت صعوبة اختراق التشفير."}
+                {t("legacy.c145e93f6c185511")}
               </li>
               {"\n                        "}
               <li>
-                {"يجب حفظ المفتاح بشكل آمن وعدم مشاركته مع أطراف غير موثوقة."}
+                {t("legacy.2706aab49d391a63")}
               </li>
               {"\n                    "}
             </ul>
@@ -615,21 +622,21 @@ export default function NativePage() {
           <div className={"bg-amber-50 p-5 rounded-lg shadow-md"}>
             {"\n                    "}
             <h3 className={"text-lg font-bold text-amber-800 mb-2"}>
-              {"نقاط الضعف"}
+              {t("legacy.f70b95fa29639ee9")}
             </h3>
             {"\n                    "}
             <ul className={"list-disc list-inside space-y-1 text-gray-700"}>
               {"\n                        "}
               <li>
-                {"عدد المفاتيح المحتملة محدود (27 مفتاحاً فقط للأبجدية العربية)."}
+                {t("legacy.d588783e48889ae6")}
               </li>
               {"\n                        "}
               <li>
-                {"يمكن اختراق التشفير بسهولة باستخدام هجوم القوة العمياء (Brute Force Attack)."}
+                {t("legacy.ad31e2cb78c48dbf")}
               </li>
               {"\n                        "}
               <li>
-                {"تحليل التكرار (Frequency Analysis) يمكنه كسر التشفير بسهولة."}
+                {t("legacy.d48e3f566617fbaa")}
               </li>
               {"\n                    "}
             </ul>
@@ -641,7 +648,7 @@ export default function NativePage() {
         <div className={"bg-gradient-to-r from-indigo-50 to-purple-50 p-5 rounded-lg shadow-md border border-indigo-200"}>
           {"\n                "}
           <p className={"text-indigo-800 font-semibold text-center"}>
-            {"\n                    على الرغم من بساطته وضعفه أمام الهجمات الحديثة، يُعد تشفير قيصر نقطة انطلاق ممتازة لفهم مبادئ التشفير الأساسية.\n                "}
+            {t("legacy.1b5e4ba8d372b462")}
           </p>
           {"\n            "}
         </div>
@@ -659,7 +666,7 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M21 12a9 9 0 11-18 0 9 9 0 0118 0z"}></path>
             {"\n                "}
           </svg>
-          {"\n                انتقل إلى التطبيق التفاعلي\n            "}
+          {t("legacy.751b85011f5ec3cf")}
         </a>
         {"\n        "}
       </div>

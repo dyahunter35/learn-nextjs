@@ -1,4 +1,11 @@
+"use client";
+
+import { useLanguage } from "@/components/LanguageProvider";
+import { translateLegacyText } from "@/data/legacy-english";
+
 export default function NativePage() {
+  const { language } = useLanguage();
+  const t = (text: string) => translateLegacyText(text, "dp", language);
   return (
     <div className="native-legacy-body min-h-screen bg-gradient-to-b from-slate-50 to-white">
     {"\n    \n    \n    \n\n    \n\n    "}
@@ -11,11 +18,11 @@ export default function NativePage() {
         </span>
         {"\n        "}
         <h1 className={"text-3xl md:text-4xl font-extrabold text-gray-900"}>
-          {"محاكاة بصرية تفاعلية للبرمجة الديناميكية"}
+          {t("legacy.dece5d6dcc691de5")}
         </h1>
         {"\n        "}
         <p className={"text-gray-500 mt-2"}>
-          {"شاهد كيف تملأ خوارزمية DP المصفوفة خطوة بخطوة — مع مقارنة العودية الساذجة"}
+          {t("legacy.aaacd88827888f28")}
         </p>
         {"\n      "}
       </div>
@@ -30,7 +37,7 @@ export default function NativePage() {
             <div className={"w-3 h-3 bg-indigo-500 rounded-full animate-pulse"}></div>
             {"\n            "}
             <h2 className={"text-lg font-bold text-gray-800"}>
-              {"إعدادات المحاكاة"}
+              {t("legacy.4ba81b973cc839b0")}
             </h2>
             {"\n          "}
           </div>
@@ -40,17 +47,17 @@ export default function NativePage() {
             <div>
               {"\n              "}
               <label htmlFor={"exampleSelect"} className={"block text-sm font-bold text-gray-700 mb-2"}>
-                {"اختر مثال DP:"}
+                {t("legacy.b9b5f0176426da7e")}
               </label>
               {"\n              "}
               <select id={"exampleSelect"} className={"gradient-select"} data-legacy-change={"updateExample(this.value)"}>
                 {"\n                "}
                 <option value={"fibonacci"}>
-                  {"🌀 متتالية فيبوناتشي (Fibonacci)"}
+                  {t("legacy.5fb7c61b4ef801c0")}
                 </option>
                 {"\n                "}
                 <option value={"coinchange"}>
-                  {"💰 مشكلة العملات المعدنية (Coin Change)"}
+                  {t("legacy.686deb15cb77a601")}
                 </option>
                 {"\n              "}
               </select>
@@ -60,7 +67,7 @@ export default function NativePage() {
             <div id={"fibonacciConfig"}>
               {"\n              "}
               <label htmlFor={"nInput"} className={"block text-sm font-bold text-gray-700 mb-2"}>
-                {"أدخل n (1 - 20):"}
+                {t("legacy.5439d4792475880b")}
               </label>
               {"\n              "}
               <input type={"number"} id={"nInput"} className={"num-input"} defaultValue={"6"} min={"0"} max={"20"} step={"1"} />
@@ -72,7 +79,7 @@ export default function NativePage() {
               <div className={"mb-3"}>
                 {"\n                "}
                 <label className={"block text-sm font-bold text-gray-700 mb-2"}>
-                  {"المبلغ المستهدف (1 - 50):"}
+                  {t("legacy.6e1530d184810f77")}
                 </label>
                 {"\n                "}
                 <input type={"number"} id={"amountInput"} className={"num-input coin-input"} defaultValue={"6"} min={"1"} max={"50"} step={"1"} />
@@ -82,7 +89,7 @@ export default function NativePage() {
               <div>
                 {"\n                "}
                 <label className={"block text-sm font-bold text-gray-700 mb-2"}>
-                  {"قيم العملات المتاحة:"}
+                  {t("legacy.a162e32beea7020e")}
                 </label>
                 {"\n                "}
                 <div className={"coin-input-group mb-2"}>
@@ -90,7 +97,7 @@ export default function NativePage() {
                   <input type={"number"} id={"newCoinInput"} className={"num-input coin-input"} placeholder={"أدخل قيمة"} min={"1"} max={"100"} />
                   {"\n                  "}
                   <button data-legacy-click={"addCoin()"} className={"bg-indigo-100 hover:bg-indigo-200 text-indigo-700 font-bold px-4 py-2.5 rounded-lg text-sm transition"}>
-                    {"\n                    ＋ إضافة\n                  "}
+                    {t("legacy.b121e33084cc337d")}
                   </button>
                   {"\n                "}
                 </div>
@@ -121,7 +128,7 @@ export default function NativePage() {
                 </div>
                 {"\n                "}
                 <p className={"text-xs text-gray-400 mt-1.5"}>
-                  {"أضف عملات ثم اختر المبلغ المستهدف"}
+                  {t("legacy.8e51d11c4d3fb806")}
                 </p>
                 {"\n              "}
               </div>
@@ -133,19 +140,19 @@ export default function NativePage() {
           <div className={"flex flex-col sm:flex-row gap-3 mt-4"}>
             {"\n            "}
             <button data-legacy-click={"startSimulation()"} id={"startButton"} className={"gradient-btn btn-start flex-1"}>
-              {"\n              ▶ ابدأ المحاكاة\n            "}
+              {t("legacy.576f6d941cc9c53c")}
             </button>
             {"\n            "}
             <button data-legacy-click={"nextStep()"} id={"nextButton"} className={"gradient-btn btn-next flex-1"} disabled={true}>
-              {"\n              ← الخطوة التالية\n            "}
+              {t("legacy.0103ac838415af8b")}
             </button>
             {"\n            "}
             <button data-legacy-click={"previousStep()"} id={"prevButton"} className={"gradient-btn btn-prev flex-1"} disabled={true}>
-              {"\n              → الخطوة السابقة\n            "}
+              {t("legacy.c0fa11616338a947")}
             </button>
             {"\n            "}
             <button data-legacy-click={"resetSimulation()"} className={"gradient-btn btn-reset"}>
-              {"\n              ↺ إعادة الضبط\n            "}
+              {t("legacy.d1c2eaaa776c5219")}
             </button>
             {"\n          "}
           </div>
@@ -160,7 +167,7 @@ export default function NativePage() {
             <div className={"w-3 h-3 bg-amber-500 rounded-full animate-pulse"}></div>
             {"\n            "}
             <h2 className={"text-lg font-bold text-gray-800"}>
-              {"جدول DP — طريقة الملء التصاعدي (Bottom-up)"}
+              {t("legacy.7787359ee4463345")}
             </h2>
             {"\n          "}
           </div>
@@ -176,11 +183,11 @@ export default function NativePage() {
               </svg>
               {"\n              "}
               <p className={"text-lg font-medium text-gray-500"}>
-                {"لم تبدأ المحاكاة بعد"}
+                {t("legacy.52ed02f4996c233e")}
               </p>
               {"\n              "}
               <p className={"text-sm text-gray-400 mt-1"}>
-                {"اختر مثالاً وأدخل القيمة ثم اضغط \"ابدأ المحاكاة\""}
+                {t("legacy.c4bffdc73d499040")}
               </p>
               {"\n            "}
             </div>
@@ -191,22 +198,22 @@ export default function NativePage() {
             {"\n            "}
             <span className={"legend-item"}>
               <span className={"legend-swatch legend-swatch-empty"}></span>
-              {" غير محسوب"}
+              {t("legacy.f1aa9c3e2ebf1d8a")}
             </span>
             {"\n            "}
             <span className={"legend-item"}>
               <span className={"legend-swatch legend-swatch-computing"}></span>
-              {" جاري الحساب"}
+              {t("legacy.28ff3131006f3ce2")}
             </span>
             {"\n            "}
             <span className={"legend-item"}>
               <span className={"legend-swatch legend-swatch-done"}></span>
-              {" تم الحساب"}
+              {t("legacy.6cf6694c7cafd188")}
             </span>
             {"\n            "}
             <span className={"legend-item"}>
               <span className={"legend-swatch legend-swatch-final"}></span>
-              {" الإجابة النهائية"}
+              {t("legacy.915a4e731709d69f")}
             </span>
             {"\n          "}
           </div>
@@ -221,7 +228,7 @@ export default function NativePage() {
             <div className={"w-3 h-3 bg-red-400 rounded-full animate-pulse"}></div>
             {"\n            "}
             <h2 className={"text-lg font-bold text-gray-800"}>
-              {"مقارنة: العودية الساذجة (Naive) vs DP"}
+              {t("legacy.b0191e80a339e0cb")}
             </h2>
             {"\n          "}
           </div>
@@ -231,7 +238,7 @@ export default function NativePage() {
             <div className={"empty-state"} style={{"padding":"0.5rem"}}>
               {"\n              "}
               <p className={"text-sm text-gray-400"}>
-                {"ابدأ المحاكاة لمشاهدة شجرة العودية الساذجة مقابل DP الخطي"}
+                {t("legacy.76a8be8e401ba25e")}
               </p>
               {"\n            "}
             </div>
@@ -248,13 +255,13 @@ export default function NativePage() {
             <div className={"w-3 h-3 bg-amber-500 rounded-full animate-pulse"}></div>
             {"\n            "}
             <h2 className={"text-lg font-bold text-gray-800"}>
-              {"سجل الخطوات والنتائج"}
+              {t("legacy.a07b7854cf797c7f")}
             </h2>
             {"\n          "}
           </div>
           {"\n          "}
           <div id={"statusMessage"} className={"status-message info mb-4"}>
-            {"\n            المحاكاة جاهزة. اختر مثالاً وأدخل القيمة.\n          "}
+            {t("legacy.ce84e65a4bffcb0a")}
           </div>
           {"\n          "}
           <div id={"stepsLog"} className={"steps-log-container"}></div>
@@ -269,7 +276,7 @@ export default function NativePage() {
             <div className={"w-3 h-3 bg-emerald-500 rounded-full animate-pulse"}></div>
             {"\n            "}
             <h2 className={"text-lg font-bold text-gray-800"}>
-              {"النتيجة النهائية"}
+              {t("legacy.b57298672357447b")}
             </h2>
             {"\n          "}
           </div>

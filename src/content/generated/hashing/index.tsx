@@ -1,4 +1,11 @@
+"use client";
+
+import { useLanguage } from "@/components/LanguageProvider";
+import { translateLegacyText } from "@/data/legacy-english";
+
 export default function NativePage() {
+  const { language } = useLanguage();
+  const t = (text: string) => translateLegacyText(text, "hashing", language);
   return (
     <div className="native-legacy-body bg-gray-50 font-sans">
     {"\n\n  "}
@@ -8,7 +15,7 @@ export default function NativePage() {
     <main className={"max-w-4xl mx-auto px-4 py-8"}>
       {"\n\n    "}
       <h1 className={"text-3xl font-bold text-indigo-900 mb-6"}>
-        {"التجزئة (Hashing)"}
+        {t("legacy.1a8eb085d6e7cdbd")}
       </h1>
       {"\n\n    "}
       {"\n    "}
@@ -17,15 +24,15 @@ export default function NativePage() {
         <h2 className={"text-xl font-bold text-indigo-800 mb-4 flex items-center gap-2"}>
           {"\n        "}
           <span className={"w-2 h-8 bg-indigo-600 rounded inline-block"}></span>
-          {"\n        المفهوم\n      "}
+          {t("legacy.9d0e671ad254b897")}
         </h2>
         {"\n      "}
         <p className={"text-gray-700 leading-8 mb-3"}>
-          {"\n        التجزئة (بالإنجليزية: Hashing) هي عملية تحويل بيانات ذات حجم عشوائي إلى قيمة ذات حجم ثابت باستخدام دالة رياضية تُسمى دالة التجزئة (Hash Function). تُستخدم هذه التقنية على نطاق واسع في علوم الحاسوب لتسريع عمليات البحث والإدراج والحذف.\n      "}
+          {t("legacy.894084b34093de25")}
         </p>
         {"\n      "}
         <p className={"text-gray-700 leading-8"}>
-          {"\n        الفكرة الأساسية هي تعيين كل مفتاح (Key) إلى موقع في مصفوفة (Bucket Array) باستخدام دالة التجزئة، مما يسمح بالوصول المباشر إلى البيانات دون الحاجة إلى البحث الخطي.\n      "}
+          {t("legacy.9d86d2f520b32610")}
         </p>
         {"\n    "}
       </section>
@@ -36,11 +43,11 @@ export default function NativePage() {
         <h2 className={"text-xl font-bold text-indigo-800 mb-4 flex items-center gap-2"}>
           {"\n        "}
           <span className={"w-2 h-8 bg-indigo-600 rounded inline-block"}></span>
-          {"\n        دوال التجزئة (Hash Functions)\n      "}
+          {t("legacy.d5c14aa9ad9f8a4e")}
         </h2>
         {"\n      "}
         <p className={"text-gray-700 leading-8 mb-3"}>
-          {"\n        دالة التجزئة هي دالة رياضية تأخذ مفتاحاً وتُرجع له فهرساً في جدول التجزئة. من أبسط دوال التجزئة وأكثرها شيوعاً:\n      "}
+          {t("legacy.84fa2c07d19cff6a")}
         </p>
         {"\n      "}
         <ul className={"list-disc list-inside text-gray-700 leading-8 mr-4 mb-3 space-y-1"}>
@@ -53,12 +60,12 @@ export default function NativePage() {
             <code className={"bg-gray-100 px-2 py-0.5 rounded text-indigo-700"}>
               {"hash(key) = key % table_size"}
             </code>
-            {" — الأكثر استخداماً للقيم الصحيحة."}
+            {t("legacy.3fee3aceb56d6ecc")}
           </li>
           {"\n        "}
           <li>
             <strong>
-              {"الضرب (Multiplication):"}
+              {t("legacy.a7b9765545668ca7")}
             </strong>
             {" "}
             <code className={"bg-gray-100 px-2 py-0.5 rounded text-indigo-700"}>
@@ -68,15 +75,15 @@ export default function NativePage() {
           {"\n        "}
           <li>
             <strong>
-              {"المتعددة (Polynomial):"}
+              {t("legacy.d29c12296c8fc618")}
             </strong>
-            {" للسلاسل النصية، تُحسب كمجموع مرجح لقيم الأحرف."}
+            {t("legacy.ef4d57fc5726caef")}
           </li>
           {"\n      "}
         </ul>
         {"\n      "}
         <p className={"text-gray-700 leading-8"}>
-          {"\n        اختيار دالة تجزئة جيدة يُقلل من التصادمات ويُوزع المفاتيح بالتساوي عبر الجدول.\n      "}
+          {t("legacy.2c4c5591a30226dc")}
         </p>
         {"\n    "}
       </section>
@@ -87,11 +94,11 @@ export default function NativePage() {
         <h2 className={"text-xl font-bold text-indigo-800 mb-4 flex items-center gap-2"}>
           {"\n        "}
           <span className={"w-2 h-8 bg-indigo-600 rounded inline-block"}></span>
-          {"\n        معالجة التصادمات (Collision Resolution)\n      "}
+          {t("legacy.07157886f1e9f166")}
         </h2>
         {"\n      "}
         <p className={"text-gray-700 leading-8 mb-3"}>
-          {"\n        يحدث التصادم (Collision) عندما يُعطي مفتاحان مختلفان نفس قيمة التجزئة (أي نفس فهرس الجدول). هناك عدة استراتيجيات لمعالجة ذلك:\n      "}
+          {t("legacy.6eb078a1f376fdc3")}
         </p>
         {"\n      "}
         <div className={"grid md:grid-cols-2 gap-4 mb-3"}>
@@ -99,11 +106,11 @@ export default function NativePage() {
           <div className={"bg-indigo-50 rounded-lg p-4 border border-indigo-100"}>
             {"\n          "}
             <h3 className={"font-bold text-indigo-800 mb-2"}>
-              {"التسلسل (Chaining)"}
+              {t("legacy.1aa64667ddc107d8")}
             </h3>
             {"\n          "}
             <p className={"text-gray-700 text-sm leading-7"}>
-              {"كل خلية في الجدول تحتوي على قائمة مرتبطة (Linked List). عند حدوث تصادم، يُضاف المفتاح الجديد إلى نهاية القائمة في نفس الخلية. هذه هي الطريقة المستخدمة في المحاكاة التفاعلية."}
+              {t("legacy.4bfd93818ccecb00")}
             </p>
             {"\n        "}
           </div>
@@ -111,11 +118,11 @@ export default function NativePage() {
           <div className={"bg-indigo-50 rounded-lg p-4 border border-indigo-100"}>
             {"\n          "}
             <h3 className={"font-bold text-indigo-800 mb-2"}>
-              {"العنونة المفتوحة (Open Addressing)"}
+              {t("legacy.b0d99929165cd452")}
             </h3>
             {"\n          "}
             <p className={"text-gray-700 text-sm leading-7"}>
-              {"عند حدوث تصادم، يتم البحث عن خلية فارغة أخرى في الجدول باستخدام تقنيات مثل التحقيق الخطي (Linear Probing) أو التحقيق التربيعي (Quadratic Probing)."}
+              {t("legacy.7f89d0640480a01e")}
             </p>
             {"\n        "}
           </div>
@@ -130,44 +137,44 @@ export default function NativePage() {
         <h2 className={"text-xl font-bold text-indigo-800 mb-4 flex items-center gap-2"}>
           {"\n        "}
           <span className={"w-2 h-8 bg-indigo-600 rounded inline-block"}></span>
-          {"\n        التطبيقات (Applications)\n      "}
+          {t("legacy.fce1894bf54c20af")}
         </h2>
         {"\n      "}
         <ul className={"list-disc list-inside text-gray-700 leading-8 mr-4 space-y-2"}>
           {"\n        "}
           <li>
             <strong>
-              {"قواعد البيانات:"}
+              {t("legacy.43721ec6f3949049")}
             </strong>
-            {" الفهرسة (Indexing) لتسريع استعلامات البحث."}
+            {t("legacy.0dcdff68f813ada9")}
           </li>
           {"\n        "}
           <li>
             <strong>
-              {"الذاكرة المخبأة (Caching):"}
+              {t("legacy.6813f3ff1c273ead")}
             </strong>
-            {" تخزين البيانات المؤقتة للوصول السريع إليها."}
+            {t("legacy.0f25ad5daa8c44d4")}
           </li>
           {"\n        "}
           <li>
             <strong>
-              {"جداول الرموز (Symbol Tables):"}
+              {t("legacy.59de13cb2cd21486")}
             </strong>
-            {" في المترجمات (Compilers) لتخزين أسماء المتغيرات والدوال."}
+            {t("legacy.f1a8390fd7eabc9a")}
           </li>
           {"\n        "}
           <li>
             <strong>
-              {"التواقيع الرقمية:"}
+              {t("legacy.6b55f5fe4335d55a")}
             </strong>
-            {" خوارزميات مثل SHA وMD5 للتحقق من سلامة البيانات."}
+            {t("legacy.7a1ee4698993392d")}
           </li>
           {"\n        "}
           <li>
             <strong>
-              {"تطبيقات الواقع:"}
+              {t("legacy.a4591661247ff1ca")}
             </strong>
-            {" عناوين URLs المختصرة، والبحث عن الملفات المكررة."}
+            {t("legacy.b7bc9f0aecddd25f")}
           </li>
           {"\n      "}
         </ul>
@@ -183,7 +190,7 @@ export default function NativePage() {
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"}></path>
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M21 12a9 9 0 11-18 0 9 9 0 0118 0z"}></path>
           </svg>
-          {"\n        جرب المحاكاة التفاعلية\n      "}
+          {t("legacy.7d91d62bef824acb")}
         </a>
         {"\n      "}
         <a href={"/algorithms/hashing/code"} className={"inline-flex items-center gap-2 bg-indigo-700 hover:bg-indigo-800 text-white font-bold px-8 py-4 rounded-xl shadow-lg transition-all transform hover:scale-105"}>
@@ -191,7 +198,7 @@ export default function NativePage() {
           <svg className={"w-5 h-5"} fill={"none"} stroke={"currentColor"} viewBox={"0 0 24 24"}>
             <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={"2"} d={"M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"}></path>
           </svg>
-          {"\n        الكود البرمجي\n      "}
+          {t("legacy.fa7bf4299597d9fa")}
         </a>
         {"\n    "}
       </div>

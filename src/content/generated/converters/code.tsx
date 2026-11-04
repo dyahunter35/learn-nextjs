@@ -1,47 +1,54 @@
+"use client";
+
+import { useLanguage } from "@/components/LanguageProvider";
+import { translateLegacyText } from "@/data/legacy-english";
+
 export default function NativePage() {
+  const { language } = useLanguage();
+  const t = (text: string) => translateLegacyText(text, "converters", language);
   return (
     <div className="native-legacy-body bg-gray-50 min-h-screen">
     {"\n  \n    \n    \n\n  "}
     <div className={"code-page"}>
       {"\n    "}
       <h1>
-        {"محول الأنظمة العددية — الكود البرمجي"}
+        {t("legacy.239a002f8ff045bc")}
       </h1>
       {"\n    "}
       <p className={"subtitle"}>
-        {"شرح مبسط مع أمثلة بلغات متعددة. يمكنك نسخ الكود واستخدامه."}
+        {t("legacy.f6641497577af02a")}
       </p>
       {"\n    \n    "}
       <div className={"algorithm-code-description"}>
         {"\n      "}
         <strong>
-          {"كيف تعمل:"}
+          {t("legacy.ef1c667af06fc25c")}
         </strong>
-        {" دوال التحويل بين الأنظمة العددية: "}
+        {t("legacy.a3151686b8287852")}
         <strong>
           {"decToBin"}
         </strong>
-        {" (عشري ← ثنائي)، "}
+        {t("legacy.994b59471165a725")}
         <strong>
           {"binToDec"}
         </strong>
-        {" (ثنائي ← عشري)، "}
+        {t("legacy.8af1814f61c66933")}
         <strong>
           {"decToHex"}
         </strong>
-        {" (عشري ← سداسي عشري)، "}
+        {t("legacy.2b1e0f181e7a656c")}
         <strong>
           {"hexToDec"}
         </strong>
-        {" (سداسي عشري ← عشري)، "}
+        {t("legacy.80db4e63d2ec69e0")}
         <strong>
           {"decToOct"}
         </strong>
-        {" (عشري ← ثماني)، "}
+        {t("legacy.4f36b093fb8e93d5")}
         <strong>
           {"octToDec"}
         </strong>
-        {" (ثماني ← عشري). تستخدم القسمة المتكررة للأساس المطلوب.\n    "}
+        {t("legacy.443af1dba53511af")}
       </div>
       {"\n\n    "}
       <div className={"lang-tabs"}>
@@ -67,7 +74,7 @@ export default function NativePage() {
       <div className={"code-block active"} id={"code-cpp"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"cpp"} data-legacy-click={"copyCode('cpp')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>
@@ -81,7 +88,7 @@ export default function NativePage() {
       <div className={"code-block"} id={"code-java"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"java"} data-legacy-click={"copyCode('java')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>
@@ -95,7 +102,7 @@ export default function NativePage() {
       <div className={"code-block"} id={"code-js"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"js"} data-legacy-click={"copyCode('js')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>
@@ -109,7 +116,7 @@ export default function NativePage() {
       <div className={"code-block"} id={"code-php"}>
         {"\n      "}
         <button className={"copy-btn"} data-lang={"php"} data-legacy-click={"copyCode('php')"}>
-          {"نسخ"}
+          {t("legacy.29a0e2739a92fa8e")}
         </button>
         {"\n      "}
         <pre>

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Generate React element trees from the preserved legacy page source."""
 from html.parser import HTMLParser
+from hashlib import sha256
 from pathlib import Path
 import json
 import re
@@ -8,6 +9,10 @@ import re
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "src/legacy/algorithms"
 OUTPUT = ROOT / "src/content/generated"
+ARABIC_CATALOG = ROOT / "src/locales/ar.json"
+ENGLISH_CATALOG = ROOT / "src/locales/en.json"
+ALL_ARABIC_TEXT = set()
+INVALID_PARAGRAPH_CHILDREN = {"address", "article", "aside", "blockquote", "div", "dl", "fieldset", "figure", "footer", "form", "h1", "h2", "h3", "h4", "h5", "h6", "header", "hr", "main", "nav", "ol", "p", "pre", "section", "table", "ul"}
 VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"}
 RENAMES = {"class": "className", "for": "htmlFor", "tabindex": "tabIndex", "colspan": "colSpan", "rowspan": "rowSpan", "maxlength": "maxLength", "readonly": "readOnly", "crossorigin": "crossOrigin", "inputmode": "inputMode", "autofocus": "autoFocus", "viewbox": "viewBox", "fill-rule": "fillRule", "clip-rule": "clipRule", "stroke-width": "strokeWidth", "stroke-linecap": "strokeLinecap", "stroke-linejoin": "strokeLinejoin", "stroke-dasharray": "strokeDasharray", "stroke-dashoffset": "strokeDashoffset", "font-family": "fontFamily", "font-size": "fontSize", "text-anchor": "textAnchor", "dominant-baseline": "dominantBaseline", "preserveaspectratio": "preserveAspectRatio", "xlink:href": "xlinkHref", "http-equiv": "httpEquiv"}
 
@@ -93,8 +98,15 @@ def props_for(attrs, tag):
 def jsx_expression(node, depth=0):
     pad = "  " * depth
     if isinstance(node, str):
-        return f"{pad}{{{json.dumps(node, ensure_ascii=False)}}}"
+        literal = json.dumps(node, ensure_ascii=False)
+        if node.strip() and re.search(r"[\u0600-\u06ff]", node):
+            key = "legacy." + sha256(node.strip().encode("utf-8")).hexdigest()[:16]
+            ALL_ARABIC_TEXT.add(node.strip())
+            return f"{pad}{{t({json.dumps(key)})}}"
+        return f"{pad}{{{literal}}}"
     tag = node["tag"]
+    if tag == "p" and contains_block_content(node):
+        tag = "div"
     props = []
     for key, value, *raw_value in props_for(node["attrs"], tag):
         is_raw = raw_value[0] if raw_value else False
@@ -113,6 +125,14 @@ def jsx_expression(node, depth=0):
         children_nodes = [child for child in children_nodes if not isinstance(child, str) or child.strip()]
     children = "\n".join(jsx_expression(child, depth + 1) for child in children_nodes)
     return f"{pad}{opening}>\n{children}\n{pad}</{tag}>"
+
+
+def contains_block_content(node):
+    return any(
+        isinstance(child, dict)
+        and (child["tag"] in INVALID_PARAGRAPH_CHILDREN or contains_block_content(child))
+        for child in node["children"]
+    )
 
 
 def page_html(slug, kind):
@@ -139,6 +159,8 @@ def page_html(slug, kind):
 
 
 def main():
+    global ALL_ARABIC_TEXT
+    ALL_ARABIC_TEXT = set()
     page_map = []
     for folder in sorted(path for path in SOURCE.iterdir() if path.is_dir()):
         for kind in ("index", "simulation", "code"):
@@ -147,7 +169,8 @@ def main():
             file.parent.mkdir(parents=True, exist_ok=True)
             body = "\n".join(jsx_expression(node, 2) for node in tree)
             file.write_text(
-                'export default function NativePage() {\n  return (\n'
+                '"use client";\n\nimport { useLanguage } from "@/components/LanguageProvider";\nimport { translateLegacyText } from "@/data/legacy-english";\n\n'
+                f'export default function NativePage() {{\n  const {{ language }} = useLanguage();\n  const t = (text: string) => translateLegacyText(text, {json.dumps(folder.name)}, language);\n  return (\n'
                 f'    <div className={json.dumps("native-legacy-body " + body_class, ensure_ascii=False)}>\n'
                 f'{body}\n'
                 '    </div>\n  );\n}\n',
@@ -168,6 +191,14 @@ def main():
         "  return Page ? <Page /> : null;\n}\n",
         encoding="utf-8",
     )
+    arabic = json.loads(ARABIC_CATALOG.read_text(encoding="utf-8")) if ARABIC_CATALOG.exists() else {}
+    english = json.loads(ENGLISH_CATALOG.read_text(encoding="utf-8")) if ENGLISH_CATALOG.exists() else {}
+    for source in ALL_ARABIC_TEXT:
+        key = "legacy." + sha256(source.encode("utf-8")).hexdigest()[:16]
+        arabic[key] = source
+        english.setdefault(key, source)
+    for filename, values in ((ARABIC_CATALOG, arabic), (ENGLISH_CATALOG, english)):
+        filename.write_text(json.dumps(values, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
 if __name__ == "__main__":
