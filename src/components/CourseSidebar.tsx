@@ -376,7 +376,7 @@ export function CourseSidebar({
         )}
       </div>
 
-      {/* Sidebar Footer Stats */}
+      {/* Sidebar Footer Stats & Developer Link */}
       <div className="sidebar-bottom-bar">
         <div className="flex items-center justify-between text-[11px] text-[var(--muted)]">
           <Link
@@ -384,11 +384,16 @@ export function CourseSidebar({
             onClick={onCloseMobileDrawer}
             className="hover:text-[var(--indigo)] transition-colors font-medium"
           >
-            {en ? "← All Algorithms" : "← كل الخوارزميات"}
+            {en ? "← All Topics" : "← كل الموضوعات"}
           </Link>
-          <span className="font-mono text-[10px] opacity-75">
-            {filteredAlgorithms.length} / {algorithms.length}
-          </span>
+          <Link
+            href="/#developer"
+            onClick={onCloseMobileDrawer}
+            className="hover:text-amber-500 dark:hover:text-amber-400 transition-colors font-medium flex items-center gap-1"
+          >
+            <span>👨‍💻</span>
+            <span>{en ? "Developer" : "المطور"}</span>
+          </Link>
         </div>
       </div>
     </aside>

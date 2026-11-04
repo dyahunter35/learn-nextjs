@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { Catalogue } from "@/components/Catalogue";
 import { SiteHeader } from "@/components/SiteHeader";
+import { DeveloperCard } from "@/components/DeveloperCard";
 import { algorithms } from "@/data/algorithms";
 import { useLanguage } from "@/components/LanguageProvider";
 
@@ -46,8 +47,24 @@ export default function HomePage() {
           </div>
         </section>
         <div className="catalog-section"><Catalogue /></div>
+        <DeveloperCard />
       </main>
-      <footer className="site-footer">{en ? <>Computer Science · Learn by exploring each idea <strong>step by step</strong></> : <>مقرر الحاسوب · صُمّم ليساعدك على فهم الفكرة بتجربتها <strong>خطوةً خطوة</strong></>}</footer>
+      <footer className="site-footer">
+        <div>
+          {en ? (
+            <>Computer Science · Learn by exploring each idea <strong>step by step</strong></>
+          ) : (
+            <>مقرر الحاسوب · صُمّم ليساعدك على فهم الفكرة بتجربتها <strong>خطوةً خطوة</strong></>
+          )}
+        </div>
+        <div className="mt-2 text-xs text-slate-500">
+          {en ? (
+            <>Designed & Developed by <a href="#developer" className="text-amber-500 font-semibold hover:underline">Deyaa Albushra Mohamed</a> &copy; 2026</>
+          ) : (
+            <>تم تصميم وتطوير هذه المنصة بواسطة <a href="#developer" className="text-amber-500 font-semibold hover:underline">ضياء البشرى محمد</a> &copy; 2026</>
+          )}
+        </div>
+      </footer>
     </>
   );
 }
