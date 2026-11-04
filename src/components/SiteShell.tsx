@@ -3,6 +3,7 @@ import type { Algorithm } from "@/data/algorithms";
 import { algorithms, groups } from "@/data/algorithms";
 import { SiteHeader } from "@/components/SiteHeader";
 import { useLanguage } from "@/components/LanguageProvider";
+import { SiteIcon } from "@/components/SiteIcon";
 
 type PageKind = "شرح" | "محاكاة" | "الكود البرمجي";
 
@@ -41,6 +42,7 @@ export function SiteShell({ algorithm, pageKind, children }: { algorithm: Algori
           <nav className="lesson-tabs" aria-label={en ? "Topic pages" : "صفحات الموضوع"}>
             {([ ["شرح", ""], ["محاكاة", "/simulation"], ["الكود البرمجي", "/code"] ] as const).map(([label, suffix]) => (
               <a key={label} href={`/algorithms/${algorithm.slug}${suffix}`} aria-current={pageKind === label ? "page" : undefined}>
+                <SiteIcon className="topic-tab-icon" name={label === "شرح" ? "overview" : label === "محاكاة" ? "simulation" : "code"} />
                 {en ? ({ شرح: "Overview", محاكاة: "Simulation", "الكود البرمجي": "Code" } as Record<string, string>)[label] : label}
               </a>
             ))}
