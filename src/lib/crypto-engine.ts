@@ -61,6 +61,64 @@ export function caesarDecrypt(text: string, shift: number): string {
 }
 
 // ==========================================
+// 1b. ARABIC CAESAR CIPHER (Mod 28)
+// ==========================================
+export const ARABIC_ALPHABET = [
+  "أ", "ب", "ت", "ث", "ج", "ح", "خ", "د", "ذ", "ر",
+  "ز", "س", "ش", "ص", "ض", "ط", "ظ", "ع", "غ", "ف",
+  "ق", "ك", "ل", "م", "ن", "هـ", "و", "ي",
+];
+
+export function cleanAndNormalizeArabicText(text: string): string {
+  return text
+    .replace(/[ى]/g, "ي")
+    .replace(/[ة]/g, "هـ")
+    .replace(/[أآإئؤ]/g, "أ")
+    .replace(/[ـ]/g, "")
+    .replace(/[^ \u0621-\u064A]/g, "");
+}
+
+export function caesarArabicEncrypt(text: string, shift: number): string {
+  const k = mod(shift, 28);
+  return text
+    .split("")
+    .map((char) => {
+      let norm = char;
+      if (char === "ى") norm = "ي";
+      else if (char === "ة") norm = "هـ";
+      else if ("أآإئؤ".includes(char)) norm = "أ";
+
+      const idx = ARABIC_ALPHABET.indexOf(norm);
+      if (idx !== -1) {
+        const shifted = (idx + k) % 28;
+        return ARABIC_ALPHABET[shifted];
+      }
+      return char;
+    })
+    .join("");
+}
+
+export function caesarArabicDecrypt(text: string, shift: number): string {
+  const k = mod(shift, 28);
+  return text
+    .split("")
+    .map((char) => {
+      let norm = char;
+      if (char === "ى") norm = "ي";
+      else if (char === "ة") norm = "هـ";
+      else if ("أآإئؤ".includes(char)) norm = "أ";
+
+      const idx = ARABIC_ALPHABET.indexOf(norm);
+      if (idx !== -1) {
+        const shifted = mod(idx - k, 28);
+        return ARABIC_ALPHABET[shifted];
+      }
+      return char;
+    })
+    .join("");
+}
+
+// ==========================================
 // 2. MONOALPHABETIC SUBSTITUTION CIPHER
 // ==========================================
 export function generateRandomSubstitutionKey(): string {
@@ -325,9 +383,19 @@ export function hillProcess2x2(text: string, matrix: Matrix2x2, decrypt = false)
   valid: boolean;
   error?: string;
 } {
+  const det = det2x2(matrix);
+  if (gcd(det, 26) !== 1) {
+    return {
+      output: "",
+      steps: [],
+      valid: false,
+      error: `محدد مصفوفة هيل (det=${det}) غير أولي نسبياً مع 26 (gcd=${gcd(det, 26)}). يجب أن يكون المحدد قابلاً للعكس موديلو 26`,
+    };
+  }
+
   const effectiveMatrix = decrypt ? invertMatrix2x2(matrix) : matrix;
   if (!effectiveMatrix) {
-    return { output: "", steps: [], valid: false, error: `محدد المصفوفة (det=${det2x2(matrix)}) غير قابل للقلب بموديلو 26` };
+    return { output: "", steps: [], valid: false, error: `محدد المصفوفة (det=${det}) غير قابل للقلب بموديلو 26` };
   }
 
   const clean = text.toUpperCase().replace(/[^A-Z]/g, "");
