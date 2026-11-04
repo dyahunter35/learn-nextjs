@@ -38,6 +38,13 @@ export function SiteShell({ algorithm, pageKind, children }: { algorithm: Algori
             <a href={`/algorithms/${algorithm.slug}`}>{en ? algorithm.english : algorithm.title}</a><span aria-hidden="true">/</span>
             <span aria-current="page">{en ? ({ شرح: "Overview", محاكاة: "Simulation", "الكود البرمجي": "Code" } as Record<string,string>)[pageKind] : pageKind}</span>
           </nav>
+          <nav className="lesson-tabs" aria-label={en ? "Topic pages" : "صفحات الموضوع"}>
+            {([ ["شرح", ""], ["محاكاة", "/simulation"], ["الكود البرمجي", "/code"] ] as const).map(([label, suffix]) => (
+              <a key={label} href={`/algorithms/${algorithm.slug}${suffix}`} aria-current={pageKind === label ? "page" : undefined}>
+                {en ? ({ شرح: "Overview", محاكاة: "Simulation", "الكود البرمجي": "Code" } as Record<string, string>)[label] : label}
+              </a>
+            ))}
+          </nav>
           {children}
         </main>
       </div>

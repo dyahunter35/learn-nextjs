@@ -88,6 +88,7 @@ a { color: inherit; }
 .lesson-eyebrow { color: var(--indigo); font-size: 12px; font-weight: 800; letter-spacing: .12em; }
 .lesson-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
 .lesson-tabs a, .sim-controls button { padding: 9px 15px; border: 1px solid var(--line); border-radius: 9px; background: var(--surface); color: var(--ink); text-decoration: none; cursor: pointer; }
+.lesson-tabs a[aria-current="page"] { border-color: var(--indigo); background: var(--indigo); color: #fff; }
 .lesson-panel h2 { margin-top: 0; }
 .lesson-panel li { margin-block: 8px; }
 .complexity-card { margin-top: 24px; padding: 18px; border-inline-start: 4px solid var(--indigo); border-radius: 9px; background: var(--paper); }
@@ -191,7 +192,6 @@ a { color: inherit; }
 .page-intro h1 { margin: 0; font-size: clamp(27px, 3vw, 38px); line-height: 1.35; }
 .page-intro p { margin: 4px 0 0; color: var(--muted); }
 .mobile-topic-nav { display: none; }
-.legacy-frame { width: 100%; min-height: 70vh; border: 0; border-radius: 14px; background: var(--surface); }
 .site-footer { padding: 30px 24px; background: var(--navy); color: #cbd5e1; text-align: center; font-size: 13px; }
 .site-footer strong { color: #fbbf24; }
 
@@ -225,7 +225,6 @@ a { color: inherit; }
   .mobile-topic-nav a[aria-current="page"] { border-color: var(--indigo); background: #eef2ff; color: #3730a3; }
   .page-content { padding: 22px 14px 46px; }
   .page-intro h1 { font-size: 27px; }
-  .legacy-frame { min-height: 68vh; border-radius: 10px; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }

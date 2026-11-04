@@ -1,0 +1,27 @@
+type ControllerLoader = () => Promise<unknown>;
+
+export const controllerLoaders: Record<string, ControllerLoader> = {
+  "backtracking.js": () => import("@/content/controllers/backtracking"),
+  "caesar.js": () => import("@/content/controllers/caesar"),
+  "calculator.js": () => import("@/content/controllers/calculator"),
+  "code-tabs.js": () => import("@/content/controllers/code-tabs"),
+  "converter.js": () => import("@/content/controllers/converter"),
+  "divide-conquer.js": () => import("@/content/controllers/divide-conquer"),
+  "dp.js": () => import("@/content/controllers/dp"),
+  "graphs.js": () => import("@/content/controllers/graphs"),
+  "greedy.js": () => import("@/content/controllers/greedy"),
+  "hashing.js": () => import("@/content/controllers/hashing"),
+  "huffman-code.js": () => import("@/content/controllers/huffman-code"),
+  "huffman-index.js": () => import("@/content/controllers/huffman-index"),
+  "index.js": () => import("@/content/controllers/legacy-index"),
+  "linkedlist.js": () => import("@/content/controllers/linkedlist"),
+  "mst.js": () => import("@/content/controllers/mst"),
+  "recursion.js": () => import("@/content/controllers/recursion"),
+  "searching.js": () => import("@/content/controllers/searching"),
+  "shortest-path.js": () => import("@/content/controllers/shortest-path"),
+  "sorting.js": () => import("@/content/controllers/sorting"),
+  "stackqueue.js": () => import("@/content/controllers/stackqueue"),
+  "string-matching.js": () => import("@/content/controllers/string-matching"),
+  "theme-toggle.js": () => import("@/content/controllers/theme-toggle"),
+  "truetale.js": () => import("@/content/controllers/truetale"),
+};

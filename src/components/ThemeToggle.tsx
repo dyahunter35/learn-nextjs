@@ -25,9 +25,6 @@ export function ThemeToggle() {
     window.localStorage.setItem("opencode-theme", next);
     window.dispatchEvent(new Event("course-theme-change"));
     document.documentElement.dataset.theme = next;
-    document.querySelectorAll<HTMLIFrameElement>("iframe.legacy-frame").forEach((frame) => {
-      frame.contentWindow?.postMessage({ type: "legacy-theme", theme: next }, window.location.origin);
-    });
   }
 
   return (

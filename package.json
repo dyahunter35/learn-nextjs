@@ -7,11 +7,13 @@
   },
   "scripts": {
     "dev": "next dev",
-    "predev": "npm run build:legacy-css",
-    "build": "npm run build:legacy-css && next build",
+    "predev": "npm run generate:legacy-react && npm run generate:legacy-controllers && npm run build:legacy-css",
+    "build": "npm run generate:legacy-react && npm run generate:legacy-controllers && npm run build:legacy-css && next build --webpack",
     "start": "next start",
     "lint": "eslint .",
-    "build:legacy-css": "tailwindcss -i ./src/legacy/legacy-tailwind.css -o ./public/legacy/tailwind.css --minify"
+    "build:legacy-css": "tailwindcss -i ./src/legacy/legacy-tailwind.css -o ./public/legacy/tailwind.css --minify",
+    "generate:legacy-react": "python3 scripts/generate-native-pages.py",
+    "generate:legacy-controllers": "python3 scripts/generate-native-controllers.py"
   },
   "dependencies": {
     "next": "16.4.5",

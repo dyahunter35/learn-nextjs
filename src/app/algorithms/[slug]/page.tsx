@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { LegacyContent } from "@/components/LegacyContent";
+import { NativePageEffects } from "@/components/NativePageEffects";
 import { SiteShell } from "@/components/SiteShell";
 import { getAlgorithm } from "@/data/algorithms";
 import { algorithmStaticParams } from "@/data/algorithms";
-import { getLegacyDocument } from "@/lib/legacy-pages";
+import { getPageAssets } from "@/lib/legacy-pages";
+import { getNativePage } from "@/content/generated";
 
 export const dynamicParams = false;
 export function generateStaticParams() { return algorithmStaticParams(); }
@@ -19,6 +20,6 @@ export default async function AlgorithmPage({ params }: { params: Promise<{ slug
   const { slug } = await params;
   const algorithm = getAlgorithm(slug);
   if (!algorithm) notFound();
-  const document = await getLegacyDocument(slug, "index");
-  return <SiteShell algorithm={algorithm} pageKind="شرح"><LegacyContent {...document} /></SiteShell>;
+  const document = await getPageAssets(slug, "index");
+  return <SiteShell algorithm={algorithm} pageKind="شرح"><NativePageEffects scripts={document.scripts} stylesheets={document.stylesheets}>{getNativePage(slug, "index")}</NativePageEffects></SiteShell>;
 }
