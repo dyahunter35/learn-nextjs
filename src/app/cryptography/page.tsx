@@ -70,6 +70,16 @@ export default function CryptographyOverviewPage() {
       desc: "محرر كانفاس لتعديل بتات LSB الأقل أهمية لقنوات RGB للصور بدون أي أثر بصري، مستعرض المستويات البتية، وأحجية المفتش مورس لإخفاء الرسائل داخل الخطابات.",
       items: ["LSB Image Bit Shift", "Bit-Plane Visualizer", "Inspector Morse Text Puzzle"],
     },
+    {
+      num: "06",
+      title: "دوال التجزئة وتأثير الانهيار",
+      enTitle: "Cryptographic Hashing Lab",
+      href: "/cryptography/hashing",
+      color: "rose",
+      badge: "SHA-256 & Avalanche",
+      desc: "تحليل بتي لخوارزمية SHA-256، قياس تأثير الانهيار الجليدي (SAC) عبر مصفوفة بتات 16×16، ومولد التوقيع المشفر HMAC-SHA256.",
+      items: ["SHA-256 Engine", "16x16 Bit Flip Matrix", "Avalanche Effect Gauge", "HMAC-SHA256 Signatures"],
+    },
   ];
 
   return (

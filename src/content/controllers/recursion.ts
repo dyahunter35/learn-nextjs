@@ -128,7 +128,13 @@ function nextStep() {
     return;
   }
   state.currentStep++;
-  state.simulationHistory.push(state.steps[state.currentStep]);
+  const step = state.steps[state.currentStep];
+  if (!step) {
+    state.currentStep = Math.max(0, state.steps.length - 1);
+    updateControls();
+    return;
+  }
+  state.simulationHistory.push(step);
   renderVisualization();
   updateControls();
 }
@@ -197,12 +203,14 @@ function updateExample(choice) {
 }
 function renderVisualization() {
   const history = state.simulationHistory;
-  if (history.length === 0) return;
-  renderTree(history);
-  renderCallStack(history);
-  renderStepsTable(history);
-  updateNodeCount(history);
-  const lastStep = history[history.length - 1];
+  if (!history || history.length === 0) return;
+  state.simulationHistory = history.filter(Boolean);
+  const safeHistory = state.simulationHistory;
+  renderTree(safeHistory);
+  renderCallStack(safeHistory);
+  renderStepsTable(safeHistory);
+  updateNodeCount(safeHistory);
+  const lastStep = safeHistory[safeHistory.length - 1];
   if (lastStep.type === 'call') {
     showMessage(translateLegacyRuntime(`🔵 استدعاء: ${lastStep.name}(${lastStep.args}) - العمق ${lastStep.depth}`, "legacy.91890a1ab6ba84da", "\uD83D\uDD35 \u0627\u0633\u062A\u062F\u0639\u0627\u0621: ${lastStep.name}(${lastStep.args}) - \u0627\u0644\u0639\u0645\u0642 ${lastStep.depth}"), 'info');
   } else if (lastStep.type === 'return') {
@@ -212,15 +220,17 @@ function renderVisualization() {
 }
 function renderTree(history) {
   const container = document.getElementById('treeContainer');
+  if (!container) return;
   container.innerHTML = '';
-  const callNodes = history.filter(s => s.type === 'call');
-  const returnNodes = history.filter(s => s.type === 'return');
+  const safeHistory = (history || []).filter(Boolean);
+  const callNodes = safeHistory.filter(s => s.type === 'call');
+  const returnNodes = safeHistory.filter(s => s.type === 'return');
   if (callNodes.length === 0) return;
-  const nodeW = 90;
-  const nodeH = 60;
-  const levelGapY = 100;
-  const paddingX = 60;
-  const paddingY = 40;
+  const nodeW = 104;
+  const nodeH = 68;
+  const levelGapY = 120;
+  const paddingX = 48;
+  const paddingY = 32;
   const levelMap = {};
   callNodes.forEach(n => {
     if (!levelMap[n.depth]) levelMap[n.depth] = [];
@@ -232,7 +242,7 @@ function renderTree(history) {
     const count = levelMap[d].length;
     if (count > maxLeafCount) maxLeafCount = count;
   });
-  const treeWidth = Math.max(paddingX * 2 + nodeW, paddingX * 2 + maxLeafCount * (nodeW + 30));
+  const treeWidth = Math.max(paddingX * 2 + nodeW, paddingX * 2 + maxLeafCount * (nodeW + 28));
   const treeHeight = depths.length * levelGapY + paddingY * 2;
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   svg.setAttribute('viewBox', `0 0 ${treeWidth} ${treeHeight}`);
@@ -280,10 +290,10 @@ function renderTree(history) {
   const positions = {};
   depths.forEach((depth, di) => {
     const nodes = levelMap[depth];
-    const totalWidth = nodes.length * nodeW + (nodes.length - 1) * 30;
+    const totalWidth = nodes.length * nodeW + (nodes.length - 1) * 36;
     const startX = (treeWidth - totalWidth) / 2;
     nodes.forEach((n, ni) => {
-      const x = startX + ni * (nodeW + 30);
+      const x = startX + ni * (nodeW + 36);
       const y = paddingY + di * levelGapY;
       positions[n.id] = {
         x,
@@ -329,19 +339,19 @@ function renderTree(history) {
     }
     const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
     line.setAttribute('x1', parent.x + nodeW / 2);
-    line.setAttribute('y1', parent.y + nodeH / 2);
+    line.setAttribute('y1', parent.y + nodeH + 2);
     line.setAttribute('x2', child.x + nodeW / 2);
-    line.setAttribute('y2', child.y + nodeH / 2);
+    line.setAttribute('y2', child.y - 4);
     line.setAttribute('class', connectorClass);
     line.setAttribute('marker-end', arrowId);
     svg.appendChild(line);
     if (labelText) {
       const midX = (parent.x + child.x) / 2 + nodeW / 2;
-      const midY = (parent.y + child.y) / 2 + nodeH / 2;
+      const midY = (parent.y + nodeH + child.y) / 2;
       const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-      label.setAttribute('x', midX);
-      label.setAttribute('y', midY - 8);
-      label.setAttribute('text-anchor', 'middle');
+      label.setAttribute('x', midX + 18);
+      label.setAttribute('y', midY + 4);
+      label.setAttribute('text-anchor', 'start');
       label.setAttribute('class', 'rec-edge-label');
       label.setAttribute('fill', labelColor);
       label.textContent = labelText;

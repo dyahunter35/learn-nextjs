@@ -218,8 +218,31 @@ export function CourseSidebar({
         </div>
       </div>
 
-      {/* Cryptography Special Lab Banner Card */}
-      <div className="my-3 px-1">
+      {/* Special Labs Banners (AI & Cryptography) */}
+      <div className="my-3 px-1 space-y-2">
+        <Link
+          href="/ai/"
+          onClick={onCloseMobileDrawer}
+          className="group block p-2.5 rounded-xl border border-violet-500/30 bg-gradient-to-r from-violet-500/15 via-indigo-500/10 to-transparent hover:border-violet-500/50 hover:from-violet-500/25 transition-all text-decoration-none"
+        >
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2">
+              <span className="text-base">🤖</span>
+              <div>
+                <p className="m-0 text-xs font-bold text-violet-600 dark:text-violet-400 group-hover:text-violet-500 leading-tight">
+                  {en ? "AI & Machine Learning" : "معمل الذكاء الاصطناعي"}
+                </p>
+                <p className="m-0 text-[11px] text-[var(--muted)] leading-tight mt-0.5">
+                  {en ? "A* Search, Minimax & Neural Nets" : "البحث الذكي A*، Minimax والشبكات"}
+                </p>
+              </div>
+            </div>
+            <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-md bg-violet-500/20 text-violet-700 dark:text-violet-300 shrink-0">
+              {en ? "AI Lab" : "ذكاء"}
+            </span>
+          </div>
+        </Link>
+
         <Link
           href="/cryptography/"
           onClick={onCloseMobileDrawer}
@@ -374,6 +397,55 @@ export function CourseSidebar({
             );
           })
         )}
+      </div>
+
+      {/* Interactive Labs Section */}
+      <div className="px-3 py-2 border-t border-[var(--border)] bg-[var(--surface-subtle)]/40">
+        <span className="text-[10px] font-bold uppercase tracking-wider text-[var(--muted)] mb-1.5 block">
+          {en ? "🧪 Interactive Labs" : "🧪 المعامل التفاعلية"}
+        </span>
+        <div className="grid grid-cols-2 gap-1 text-[11px]">
+          <Link
+            href="/trees/"
+            onClick={onCloseMobileDrawer}
+            className="px-2 py-1 rounded bg-[var(--surface)] hover:bg-[var(--surface-hover)] text-[var(--foreground)] border border-[var(--border)] transition-colors flex items-center gap-1.5 truncate"
+          >
+            <span>🌳</span>
+            <span className="truncate">{en ? "Trees" : "الأشجار"}</span>
+          </Link>
+          <Link
+            href="/compression/"
+            onClick={onCloseMobileDrawer}
+            className="px-2 py-1 rounded bg-[var(--surface)] hover:bg-[var(--surface-hover)] text-[var(--foreground)] border border-[var(--border)] transition-colors flex items-center gap-1.5 truncate"
+          >
+            <span>🗜️</span>
+            <span className="truncate">{en ? "Compression" : "الضغط"}</span>
+          </Link>
+          <Link
+            href="/geometry/"
+            onClick={onCloseMobileDrawer}
+            className="px-2 py-1 rounded bg-[var(--surface)] hover:bg-[var(--surface-hover)] text-[var(--foreground)] border border-[var(--border)] transition-colors flex items-center gap-1.5 truncate"
+          >
+            <span>📐</span>
+            <span className="truncate">{en ? "Geometry" : "الهندسة"}</span>
+          </Link>
+          <Link
+            href="/cryptography/hashing/"
+            onClick={onCloseMobileDrawer}
+            className="px-2 py-1 rounded bg-[var(--surface)] hover:bg-[var(--surface-hover)] text-[var(--foreground)] border border-[var(--border)] transition-colors flex items-center gap-1.5 truncate"
+          >
+            <span>🔐</span>
+            <span className="truncate">{en ? "Hashing" : "التجزئة"}</span>
+          </Link>
+          <Link
+            href="/ai/"
+            onClick={onCloseMobileDrawer}
+            className="col-span-2 px-2 py-1 rounded bg-violet-500/10 hover:bg-violet-500/20 text-violet-400 border border-violet-500/30 transition-colors flex items-center justify-center gap-1.5 font-bold"
+          >
+            <span>🤖</span>
+            <span>{en ? "AI & ML Lab" : "معمل الذكاء الاصطناعي"}</span>
+          </Link>
+        </div>
       </div>
 
       {/* Sidebar Footer Stats & Developer Link */}

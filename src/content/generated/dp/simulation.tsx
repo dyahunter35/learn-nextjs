@@ -137,21 +137,21 @@ export default function NativePage() {
             {"\n          "}
           </div>
           {"\n\n          "}
-          <div className={"flex flex-col sm:flex-row gap-3 mt-4"}>
+          <div className={"grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 mt-4"}>
             {"\n            "}
-            <button data-legacy-click={"startSimulation()"} id={"startButton"} className={"gradient-btn btn-start flex-1"}>
+            <button data-legacy-click={"startSimulation()"} id={"startButton"} className={"gradient-btn btn-start w-full justify-center"}>
               {t("legacy.576f6d941cc9c53c")}
             </button>
             {"\n            "}
-            <button data-legacy-click={"nextStep()"} id={"nextButton"} className={"gradient-btn btn-next flex-1"} disabled={true}>
+            <button data-legacy-click={"nextStep()"} id={"nextButton"} className={"gradient-btn btn-next w-full justify-center"} disabled={true}>
               {t("legacy.0103ac838415af8b")}
             </button>
             {"\n            "}
-            <button data-legacy-click={"previousStep()"} id={"prevButton"} className={"gradient-btn btn-prev flex-1"} disabled={true}>
+            <button data-legacy-click={"previousStep()"} id={"prevButton"} className={"gradient-btn btn-prev w-full justify-center"} disabled={true}>
               {t("legacy.c0fa11616338a947")}
             </button>
             {"\n            "}
-            <button data-legacy-click={"resetSimulation()"} className={"gradient-btn btn-reset"}>
+            <button data-legacy-click={"resetSimulation()"} className={"gradient-btn btn-reset w-full justify-center"}>
               {t("legacy.d1c2eaaa776c5219")}
             </button>
             {"\n          "}

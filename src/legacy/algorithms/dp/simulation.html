@@ -123,18 +123,18 @@
             </div>
           </div>
 
-          <div class="flex flex-col sm:flex-row gap-3 mt-4">
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 mt-4">
             <button
               onclick="startSimulation()"
               id="startButton"
-              class="gradient-btn btn-start flex-1"
+              class="gradient-btn btn-start w-full justify-center"
             >
               ▶ ابدأ المحاكاة
             </button>
             <button
               onclick="nextStep()"
               id="nextButton"
-              class="gradient-btn btn-next flex-1"
+              class="gradient-btn btn-next w-full justify-center"
               disabled
             >
               ← الخطوة التالية
@@ -142,14 +142,14 @@
             <button
               onclick="previousStep()"
               id="prevButton"
-              class="gradient-btn btn-prev flex-1"
+              class="gradient-btn btn-prev w-full justify-center"
               disabled
             >
               → الخطوة السابقة
             </button>
             <button
               onclick="resetSimulation()"
-              class="gradient-btn btn-reset"
+              class="gradient-btn btn-reset w-full justify-center"
             >
               ↺ إعادة الضبط
             </button>

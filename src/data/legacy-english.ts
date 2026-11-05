@@ -32,12 +32,15 @@ export function translateLegacyRuntime(text: string, key?: string, pattern?: str
   if (key?.startsWith("legacy.")) {
     const isEnglish = typeof document !== "undefined" && document.documentElement.lang === "en";
     const translated = isEnglish ? en[key] ?? ar[key] ?? text : ar[key] ?? text;
-    if (!pattern || !isEnglish) return translated;
+    if (!pattern) return translated;
     const parts = pattern.split(/(\$\{[^}]+\})/g);
     const expression = new RegExp(`^${parts.map((part) => part.startsWith("${") ? "([\\s\\S]+?)" : part.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("")}$`);
     const match = text.match(expression);
     let capture = 1;
-    return match ? translated.replace(/\$\{[^}]+\}/g, () => match[capture++] ?? "") : translated;
+    if (match) {
+      return translated.replace(/\$\{[^}]+\}/g, () => match[capture++] ?? "");
+    }
+    return isEnglish ? translated : text;
   }
   return text;
 }

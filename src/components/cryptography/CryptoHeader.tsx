@@ -13,6 +13,7 @@ export function CryptoHeader() {
     { label: "المحاكي الميكانيكي (إنيجما)", href: "/cryptography/enigma", icon: "cpu" },
     { label: "مسرح المعارك والقصص", href: "/cryptography/history", icon: "scroll" },
     { label: "مختبر الإخفاء", href: "/cryptography/steganography", icon: "eye-off" },
+    { label: "دوال التجزئة (SHA-256)", href: "/cryptography/hashing", icon: "hash" },
   ];
 
   return (

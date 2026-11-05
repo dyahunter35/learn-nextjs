@@ -196,3 +196,158 @@
 :root:not([data-theme="dark"]) .native-legacy-body .text-yellow-600 {
   color: #1e293b !important;
 }
+
+/* ==========================================================================
+   Comprehensive Interactive Simulations Theme & Contrast Improvements
+   ========================================================================== */
+
+/* 1. Simulation Playground Containers */
+[data-theme="dark"] .array-container,
+[data-theme="dark"] .structure-container,
+[data-theme="dark"] .graph-container,
+[data-theme="dark"] .rec-tree-container,
+[data-theme="dark"] .callstack-container {
+  background: #0d131f !important;
+  border-color: #1e293b !important;
+  color: #f1f5f9;
+}
+
+/* 2. Interactive Action Buttons & Disabled States */
+[data-theme="dark"] .gradient-btn:disabled,
+[data-theme="dark"] .action-btn:disabled,
+[data-theme="dark"] button:disabled:not(.theme-button) {
+  opacity: 0.55 !important;
+  background: #1e2433 !important;
+  color: #64748b !important;
+  border: 1px solid #334155 !important;
+  box-shadow: none !important;
+  cursor: not-allowed !important;
+}
+
+:root:not([data-theme="dark"]) .gradient-btn:disabled,
+:root:not([data-theme="dark"]) .action-btn:disabled {
+  opacity: 0.65 !important;
+  background: #e2e8f0 !important;
+  color: #94a3b8 !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: none !important;
+  cursor: not-allowed !important;
+}
+
+/* 3. Tab Buttons */
+[data-theme="dark"] .tab-btn.inactive,
+[data-theme="dark"] .tab-btn:not(.active):not(.active-stack):not(.active-queue):not(.active-head):not(.active-tail) {
+  background: #171d2b !important;
+  color: #94a3b8 !important;
+  border-color: #273346 !important;
+}
+
+:root:not([data-theme="dark"]) .tab-btn.inactive {
+  background: #f1f5f9 !important;
+  color: #475569 !important;
+  border-color: #cbd5e1 !important;
+}
+
+/* 4. Inputs, Selects, & Controls */
+[data-theme="dark"] .num-input,
+[data-theme="dark"] .gradient-select,
+[data-theme="dark"] input[type="number"],
+[data-theme="dark"] input[type="text"],
+[data-theme="dark"] select {
+  background: #171d2b !important;
+  color: #f8fafc !important;
+  border-color: #334155 !important;
+}
+
+[data-theme="dark"] .num-input:focus,
+[data-theme="dark"] .gradient-select:focus,
+[data-theme="dark"] input:focus,
+[data-theme="dark"] select:focus {
+  border-color: #6366f1 !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25) !important;
+}
+
+/* 5. Index & Marker Labels */
+[data-theme="dark"] .index-label {
+  background: #171d2b !important;
+  color: #94a3b8 !important;
+  border-color: #334155 !important;
+}
+
+:root:not([data-theme="dark"]) .index-label {
+  background: #f1f5f9 !important;
+  color: #334155 !important;
+  border-color: #94a3b8 !important;
+}
+
+/* 6. Status Messages in Simulation Pages */
+[data-theme="dark"] .status-message.info {
+  background: rgba(99, 102, 241, 0.16) !important;
+  color: #a5b4fc !important;
+  border-right-color: #6366f1 !important;
+}
+
+[data-theme="dark"] .status-message.success {
+  background: rgba(16, 185, 129, 0.16) !important;
+  color: #6ee7b7 !important;
+  border-right-color: #10b981 !important;
+}
+
+[data-theme="dark"] .status-message.error {
+  background: rgba(239, 68, 68, 0.16) !important;
+  color: #fca5a5 !important;
+  border-right-color: #ef4444 !important;
+}
+
+/* 7. Graph Elements */
+[data-theme="dark"] .graph-edge {
+  stroke: #475569 !important;
+}
+
+[data-theme="dark"] .graph-node-unvisited circle {
+  fill: #1e2433 !important;
+  stroke: #475569 !important;
+}
+
+[data-theme="dark"] .info-panel {
+  background: #171d2b !important;
+  border-color: #273346 !important;
+  color: #f1f5f9 !important;
+}
+
+/* 8. Tables & Tracing Logs */
+[data-theme="dark"] .steps-table th,
+[data-theme="dark"] .alphabet-table th {
+  background-color: #1e2433 !important;
+  color: #818cf8 !important;
+  border-color: #334155 !important;
+}
+
+[data-theme="dark"] .steps-table td,
+[data-theme="dark"] .alphabet-table td {
+  border-color: #273346 !important;
+  color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] .steps-table tr:nth-child(even),
+[data-theme="dark"] .alphabet-table tr:nth-child(even) {
+  background-color: #141a27 !important;
+}
+
+[data-theme="dark"] .steps-log-container {
+  background: #0d131f !important;
+  border-color: #1e293b !important;
+}
+
+/* 9. Linked List Nodes & Pointers */
+[data-theme="dark"] .ll-null {
+  background: #171d2b !important;
+  border-color: #334155 !important;
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .concept-card {
+  background: #171d2b !important;
+  border-color: #273346 !important;
+}
+
